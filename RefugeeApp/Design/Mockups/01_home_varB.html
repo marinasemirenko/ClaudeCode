@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RefugeeGuide — Варіант B (екстрена як категорія)</title>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --blue:      #0057B7;
+      --blue-dark: #003DA6;
+      --blue-soft: #E8F0FF;
+      --yellow:    #FCD400;
+      --bg:        #F0EDE6;
+      --card:      #FFFFFF;
+      --text:      #111827;
+      --muted:     #6B7280;
+      --border:    #DDD9D0;
+      --red:       #B91C1C;
+      --red-soft:  #FFF1F1;
+    }
+    body {
+      font-family: 'Manrope', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      max-width: 390px;
+      margin: 0 auto;
+      min-height: 100vh;
+    }
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      line-height: 1;
+      display: inline-flex;
+      align-items: center;
+    }
+    .filled { font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+
+    .flag-bar { height: 3px; background: linear-gradient(90deg, var(--blue) 50%, var(--yellow) 50%); }
+
+    .variant-label {
+      background: #1F2937; color: #FCD400;
+      text-align: center; font-size: 11px; font-weight: 800;
+      letter-spacing: 0.12em; text-transform: uppercase; padding: 6px;
+    }
+
+    header {
+      background: var(--card);
+      padding: 13px 18px;
+      display: flex; align-items: center; justify-content: space-between;
+      border-bottom: 1px solid var(--border);
+      position: sticky; top: 0; z-index: 50;
+    }
+    .logo { font-size: 18px; font-weight: 900; color: var(--blue); letter-spacing: -0.5px; }
+    .logo em { color: #B89900; font-style: normal; }
+    .header-right { display: flex; align-items: center; gap: 8px; }
+    .lang-btn {
+      display: flex; align-items: center; gap: 4px;
+      padding: 6px 11px; border-radius: 100px;
+      background: var(--bg); border: 1px solid var(--border);
+      font-size: 11px; font-weight: 700; color: var(--muted);
+      cursor: pointer; font-family: inherit;
+    }
+    .lang-btn .material-symbols-outlined { font-size: 15px; }
+    .search-btn {
+      width: 38px; height: 38px; border-radius: 50%;
+      background: var(--bg); border: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer; color: var(--muted);
+    }
+    .search-btn .material-symbols-outlined { font-size: 18px; }
+
+    main { padding-bottom: 100px; }
+    .section { padding: 0 18px; }
+    .mt16 { margin-top: 16px; }
+    .mt20 { margin-top: 20px; }
+
+    .greeting { padding: 16px 18px 0; display: flex; align-items: center; gap: 10px; }
+    .greeting-text { font-size: 15px; font-weight: 600; color: var(--text); }
+    .greeting-text span { color: var(--blue); font-weight: 800; }
+
+    .label {
+      font-size: 11px; font-weight: 800;
+      text-transform: uppercase; letter-spacing: 0.12em;
+      color: var(--muted); margin-bottom: 12px;
+    }
+
+    /* ── GRID ── */
+    .cat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+
+    .cat-card {
+      background: var(--card);
+      border-radius: 20px;
+      padding: 18px 16px 16px;
+      border: 1.5px solid transparent;
+      cursor: pointer; text-decoration: none; color: inherit;
+      display: flex; flex-direction: column; gap: 16px;
+      transition: all 0.18s ease;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    }
+    .cat-card:hover {
+      border-color: var(--blue);
+      box-shadow: 0 8px 24px rgba(0,87,183,0.15);
+      transform: translateY(-2px);
+    }
+    .cat-card:active { transform: scale(0.96); box-shadow: none; }
+
+    /* ── VOLUMETRIC ICON ── */
+    .cat-icon {
+      width: 52px; height: 52px; border-radius: 16px;
+      display: flex; align-items: center; justify-content: center;
+      position: relative;
+    }
+    .cat-icon .material-symbols-outlined { font-size: 26px; }
+
+    .ic-blue   { background: linear-gradient(145deg,#BFDBFE,#93C5FD); box-shadow:0 4px 10px rgba(59,130,246,0.25),inset 0 1px 1px rgba(255,255,255,0.7); color:#1D4ED8; }
+    .ic-green  { background: linear-gradient(145deg,#BBF7D0,#86EFAC); box-shadow:0 4px 10px rgba(34,197,94,0.25),inset 0 1px 1px rgba(255,255,255,0.7); color:#15803D; }
+    .ic-amber  { background: linear-gradient(145deg,#FDE68A,#FCD34D); box-shadow:0 4px 10px rgba(245,158,11,0.25),inset 0 1px 1px rgba(255,255,255,0.7); color:#B45309; }
+    .ic-teal   { background: linear-gradient(145deg,#99F6E4,#5EEAD4); box-shadow:0 4px 10px rgba(20,184,166,0.25),inset 0 1px 1px rgba(255,255,255,0.7); color:#0F766E; }
+    .ic-purple { background: linear-gradient(145deg,#DDD6FE,#C4B5FD); box-shadow:0 4px 10px rgba(139,92,246,0.25),inset 0 1px 1px rgba(255,255,255,0.7); color:#7C3AED; }
+    .ic-rose   { background: linear-gradient(145deg,#FECDD3,#FDA4AF); box-shadow:0 4px 10px rgba(244,63,94,0.2),inset 0 1px 1px rgba(255,255,255,0.7); color:#BE123C; }
+    .ic-sky    { background: linear-gradient(145deg,#BAE6FD,#7DD3FC); box-shadow:0 4px 10px rgba(14,165,233,0.25),inset 0 1px 1px rgba(255,255,255,0.7); color:#0369A1; }
+    .ic-red    { background: linear-gradient(145deg,#FCA5A5,#F87171); box-shadow:0 4px 10px rgba(239,68,68,0.3),inset 0 1px 1px rgba(255,255,255,0.6); color:#991B1B; }
+
+    .cat-bottom { display:flex; align-items:flex-end; justify-content:space-between; }
+    .cat-name { font-size:14px; font-weight:800; line-height:1.25; letter-spacing:-0.2px; }
+
+    .cat-arrow {
+      width:28px; height:28px; border-radius:50%;
+      background:var(--bg);
+      display:flex; align-items:center; justify-content:center; flex-shrink:0;
+    }
+    .cat-arrow .material-symbols-outlined { font-size:15px; color:var(--muted); }
+
+    /* full-width */
+    .cat-card.full {
+      grid-column: span 2; flex-direction: row;
+      align-items: center; padding: 16px 18px; gap: 14px;
+    }
+    .cat-card.full .cat-name-wrap { flex:1; }
+    .cat-card.full .cat-name { font-size:15px; }
+    .cat-card.full .cat-arrow { background:var(--blue-soft); }
+    .cat-card.full .cat-arrow .material-symbols-outlined { color:var(--blue); }
+
+    /* ── EMERGENCY CARD (styled as full-width category) ── */
+    .cat-card.emergency-card {
+      grid-column: span 2;
+      background: linear-gradient(135deg, #7F1D1D, var(--red));
+      border-color: transparent;
+      flex-direction: row;
+      align-items: center;
+      padding: 16px 18px;
+      gap: 14px;
+      box-shadow: 0 4px 16px rgba(185,28,28,0.3);
+    }
+    .cat-card.emergency-card:hover {
+      border-color: #FCA5A5;
+      box-shadow: 0 8px 24px rgba(185,28,28,0.4);
+    }
+    .cat-card.emergency-card .cat-name-wrap { flex:1; }
+    .cat-card.emergency-card .cat-name { color: #fff; font-size:15px; }
+    .cat-card.emergency-card .cat-sub {
+      font-size:11px; color:rgba(255,255,255,0.6); font-weight:500; margin-top:2px;
+    }
+    .cat-card.emergency-card .num-badge {
+      background: var(--yellow);
+      border-radius: 100px;
+      padding: 4px 12px;
+      font-size: 15px;
+      font-weight: 900;
+      color: #5A3800;
+    }
+
+    /* quick start */
+    .qs-banner {
+      background: var(--blue); border-radius:16px; padding:14px 16px;
+      display:flex; align-items:center; gap:12px;
+      cursor:pointer; transition:opacity 0.15s;
+    }
+    .qs-banner:active { opacity:0.88; }
+    .qs-icon { width:42px; height:42px; border-radius:13px; background:rgba(255,255,255,0.12); display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+    .qs-icon .material-symbols-outlined { color:var(--yellow); font-size:22px; }
+    .qs-text { flex:1; }
+    .qs-title { font-size:14px; font-weight:800; color:#fff; margin-bottom:2px; }
+    .qs-sub { font-size:11px; color:rgba(255,255,255,0.6); font-weight:500; }
+    .qs-badge { background:var(--yellow); border-radius:100px; padding:3px 9px; font-size:10px; font-weight:800; color:#5A3800; white-space:nowrap; }
+
+    /* hotline */
+    .hotline { background:var(--card); border:1px solid var(--border); border-radius:100px; padding:11px 16px; display:flex; align-items:center; gap:10px; box-shadow:0 1px 4px rgba(0,0,0,0.05); }
+    .hl-dot { width:7px; height:7px; border-radius:50%; background:#22C55E; flex-shrink:0; animation:blink 2s infinite; }
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
+    .hl-label { flex:1; font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.07em; color:var(--muted); }
+    .hl-num { display:flex; align-items:center; gap:5px; font-size:14px; font-weight:900; color:var(--blue); }
+    .hl-num .material-symbols-outlined { font-size:16px; }
+
+    /* nav */
+    nav {
+      position:fixed; bottom:0; left:50%; transform:translateX(-50%);
+      width:100%; max-width:390px;
+      background:rgba(255,255,255,0.97); backdrop-filter:blur(20px);
+      border-top:1px solid var(--border); border-radius:22px 22px 0 0;
+      padding:10px 8px 22px; display:flex; justify-content:space-around; z-index:50;
+    }
+    .nav-item { display:flex; flex-direction:column; align-items:center; gap:3px; text-decoration:none; cursor:pointer; flex:1; }
+    .nav-pill { padding:5px 16px; border-radius:100px; display:flex; align-items:center; justify-content:center; }
+    .nav-item.active .nav-pill { background:var(--blue-soft); }
+    .nav-item.active .material-symbols-outlined { color:var(--blue); font-size:22px; font-variation-settings:'FILL' 1,'wght' 500,'GRAD' 0,'opsz' 24; }
+    .nav-item:not(.active) .material-symbols-outlined { color:var(--muted); font-size:22px; }
+    .nav-lbl { font-size:9px; font-weight:700; text-transform:uppercase; letter-spacing:0.06em; }
+    .nav-item.active .nav-lbl { color:var(--blue); }
+    .nav-item:not(.active) .nav-lbl { color:var(--muted); }
+
+    .fab {
+      position:fixed; bottom:86px; right:calc(50% - 185px);
+      width:50px; height:50px; background:var(--blue); border-radius:16px;
+      display:flex; align-items:center; justify-content:center;
+      box-shadow:0 4px 18px rgba(0,87,183,0.4); cursor:pointer; z-index:40;
+    }
+    .fab .material-symbols-outlined { color:#fff; font-size:22px; font-variation-settings:'FILL' 1,'wght' 400,'GRAD' 0,'opsz' 24; }
+  </style>
+</head>
+<body>
+
+  <div class="flag-bar"></div>
+  <div class="variant-label">🏠 Варіант B — Екстрена як картка в категоріях</div>
+
+  <header>
+    <div class="logo">Refugee<em>Guide</em></div>
+    <div class="header-right">
+      <button class="lang-btn"><span class="material-symbols-outlined">language</span>УКР</button>
+      <button class="search-btn"><span class="material-symbols-outlined">search</span></button>
+    </div>
+  </header>
+
+  <main>
+    <div class="greeting">
+      <span>👋</span>
+      <div class="greeting-text">Добрий день, <span>Марино</span></div>
+    </div>
+
+    <div class="section mt20">
+      <div class="label">Категорії</div>
+      <div class="cat-grid">
+
+        <!-- Emergency — first, full width, red -->
+        <a href="#" class="cat-card emergency-card">
+          <div class="cat-icon ic-red"><span class="material-symbols-outlined filled">emergency</span></div>
+          <div class="cat-name-wrap">
+            <div class="cat-name">Екстрена допомога</div>
+            <div class="cat-sub">Поліція · Лікар · Пожежна</div>
+          </div>
+          <div class="num-badge">112</div>
+        </a>
+
+        <a href="#" class="cat-card">
+          <div class="cat-icon ic-blue"><span class="material-symbols-outlined filled">gavel</span></div>
+          <div class="cat-bottom">
+            <div class="cat-name">Закони<br>та права</div>
+            <div class="cat-arrow"><span class="material-symbols-outlined">arrow_forward</span></div>
+          </div>
+        </a>
+
+        <a href="#" class="cat-card">
+          <div class="cat-icon ic-green"><span class="material-symbols-outlined filled">medical_services</span></div>
+          <div class="cat-bottom">
+            <div class="cat-name">Охорона<br>здоров'я</div>
+            <div class="cat-arrow"><span class="material-symbols-outlined">arrow_forward</span></div>
+          </div>
+        </a>
+
+        <a href="#" class="cat-card">
+          <div class="cat-icon ic-teal"><span class="material-symbols-outlined filled">school</span></div>
+          <div class="cat-bottom">
+            <div class="cat-name">Освіта</div>
+            <div class="cat-arrow"><span class="material-symbols-outlined">arrow_forward</span></div>
+          </div>
+        </a>
+
+        <a href="#" class="cat-card">
+          <div class="cat-icon ic-amber"><span class="material-symbols-outlined filled">work</span></div>
+          <div class="cat-bottom">
+            <div class="cat-name">Робота</div>
+            <div class="cat-arrow"><span class="material-symbols-outlined">arrow_forward</span></div>
+          </div>
+        </a>
+
+        <a href="#" class="cat-card full">
+          <div class="cat-icon ic-purple"><span class="material-symbols-outlined filled">home_work</span></div>
+          <div class="cat-name-wrap"><div class="cat-name">Житло</div></div>
+          <div class="cat-arrow"><span class="material-symbols-outlined">arrow_forward</span></div>
+        </a>
+
+        <a href="#" class="cat-card">
+          <div class="cat-icon ic-rose"><span class="material-symbols-outlined filled">lightbulb</span></div>
+          <div class="cat-bottom">
+            <div class="cat-name">Поради</div>
+            <div class="cat-arrow"><span class="material-symbols-outlined">arrow_forward</span></div>
+          </div>
+        </a>
+
+        <a href="#" class="cat-card">
+          <div class="cat-icon ic-sky"><span class="material-symbols-outlined filled">link</span></div>
+          <div class="cat-bottom">
+            <div class="cat-name">Посилання</div>
+            <div class="cat-arrow"><span class="material-symbols-outlined">arrow_forward</span></div>
+          </div>
+        </a>
+
+      </div>
+    </div>
+
+    <!-- QUICK START (compact) -->
+    <div class="section mt16">
+      <div class="qs-banner">
+        <div class="qs-icon"><span class="material-symbols-outlined filled">checklist</span></div>
+        <div class="qs-text">
+          <div class="qs-title">Перші кроки в Нідерландах</div>
+          <div class="qs-sub">BSN, gemeente, лікар — з чого почати</div>
+        </div>
+        <div class="qs-badge">Гайд</div>
+      </div>
+    </div>
+
+    <!-- HOTLINE -->
+    <div class="section mt16">
+      <div class="hotline">
+        <div class="hl-dot"></div>
+        <div class="hl-label">Медична гаряча лінія 24/7</div>
+        <div class="hl-num"><span class="material-symbols-outlined filled">call</span>0900-8844</div>
+      </div>
+    </div>
+  </main>
+
+  <div class="fab"><span class="material-symbols-outlined">chat_bubble</span></div>
+
+  <nav>
+    <a href="#" class="nav-item active">
+      <div class="nav-pill"><span class="material-symbols-outlined">home</span></div>
+      <span class="nav-lbl">Головна</span>
+    </a>
+    <a href="#" class="nav-item">
+      <div class="nav-pill"><span class="material-symbols-outlined">explore</span></div>
+      <span class="nav-lbl">Огляд</span>
+    </a>
+    <a href="#" class="nav-item">
+      <div class="nav-pill"><span class="material-symbols-outlined">bookmark</span></div>
+      <span class="nav-lbl">Збережені</span>
+    </a>
+    <a href="#" class="nav-item">
+      <div class="nav-pill"><span class="material-symbols-outlined">person</span></div>
+      <span class="nav-lbl">Профіль</span>
+    </a>
+  </nav>
+
+</body>
+</html>

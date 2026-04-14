@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Тема 4 — Тепла земля</title>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing:border-box; margin:0; padding:0; }
+
+    /* ── WARM EARTH THEME — terracotta, sage, warm gold ── */
+    :root {
+      --bg:      #F5F0E8;
+      --card:    #FEFCF8;
+      --text:    #2C1810;
+      --muted:   #8B7355;
+      --border:  #E8DFD0;
+      --primary: #C4500A;   /* warm terracotta */
+      --accent:  #FCD400;
+      --red:     #9B1C1C;
+    }
+
+    body { font-family:'Manrope',sans-serif; background:var(--bg); color:var(--text); max-width:390px; margin:0 auto; min-height:100vh; }
+    .material-symbols-outlined { font-variation-settings:'FILL' 1,'wght' 400,'GRAD' 0,'opsz' 24; line-height:1; display:inline-flex; align-items:center; }
+
+    .theme-badge { background:#2C1810; color:#FCD400; text-align:center; font-size:11px; font-weight:800; letter-spacing:0.1em; text-transform:uppercase; padding:7px; }
+    /* Warm sunflower stripe instead of flag */
+    .flag-bar { height:3px; background:linear-gradient(90deg, #C4500A 33%, #FCD400 33%, #FCD400 66%, #2C7A3E 66%); }
+
+    header { background:var(--card); padding:13px 18px; display:flex; align-items:center; justify-content:space-between; border-bottom:1px solid var(--border); position:sticky; top:0; z-index:50; }
+    .logo { font-size:18px; font-weight:900; color:#C4500A; letter-spacing:-0.5px; }
+    .logo em { color:#2C7A3E; font-style:normal; }
+    .hdr-right { display:flex; gap:8px; align-items:center; }
+    .lang-btn { display:flex; align-items:center; gap:4px; padding:6px 11px; border-radius:100px; background:var(--bg); border:1px solid var(--border); font-size:11px; font-weight:700; color:var(--muted); cursor:pointer; font-family:inherit; }
+    .lang-btn .material-symbols-outlined { font-size:15px; }
+    .search-btn { width:38px; height:38px; border-radius:50%; background:var(--bg); border:1px solid var(--border); display:flex; align-items:center; justify-content:center; cursor:pointer; color:var(--muted); }
+
+    .emergency-strip { background:var(--red); padding:11px 18px; display:flex; align-items:center; gap:10px; cursor:pointer; }
+    .es-icon .material-symbols-outlined { color:#FCA5A5; font-size:18px; }
+    .es-text { flex:1; font-size:13px; font-weight:700; color:#fff; }
+    .es-num { font-size:15px; font-weight:900; color:#FCD400; }
+
+    main { padding-bottom:100px; }
+    .section { padding:0 18px; }
+    .mt14 { margin-top:14px; }
+    .mt20 { margin-top:20px; }
+
+    .greeting { padding:16px 18px 0; display:flex; align-items:center; gap:10px; }
+    .greeting-text { font-size:15px; font-weight:600; }
+    .greeting-text span { color:#C4500A; font-weight:800; }
+
+    .label { font-size:11px; font-weight:800; text-transform:uppercase; letter-spacing:0.12em; color:var(--muted); margin-bottom:14px; }
+
+    .cat-grid { display:grid; grid-template-columns:1fr 1fr; gap:11px; }
+
+    .cat-card {
+      background:var(--card); border-radius:20px;
+      padding:22px 14px 18px;
+      display:flex; flex-direction:column; align-items:center; gap:12px;
+      text-decoration:none; color:inherit; cursor:pointer;
+      box-shadow:0 2px 8px rgba(100,60,20,0.08), 0 1px 0 rgba(100,60,20,0.04);
+      border:1px solid var(--border);
+      transition:all 0.18s ease; text-align:center;
+    }
+    .cat-card:hover { transform:translateY(-3px); box-shadow:0 8px 24px rgba(100,60,20,0.14); }
+    .cat-card:active { transform:scale(0.96); }
+
+    .cat-card.wide { grid-column:span 2; flex-direction:row; padding:16px 20px; gap:16px; text-align:left; align-items:center; }
+    .cat-card.wide .cat-name { font-size:15px; flex:1; }
+
+    .cat-icon { width:62px; height:62px; border-radius:18px; display:flex; align-items:center; justify-content:center; }
+    .cat-icon .material-symbols-outlined { font-size:30px; }
+
+    /* WARM EARTH ICON COLORS */
+    .ic-terra  { background:#FFE0CC; color:#C4500A; box-shadow:0 3px 8px rgba(196,80,10,0.18),inset 0 1px 2px rgba(255,255,255,0.8); }
+    .ic-sage   { background:#D8F0DF; color:#2C7A3E; box-shadow:0 3px 8px rgba(44,122,62,0.18),inset 0 1px 2px rgba(255,255,255,0.8); }
+    .ic-gold   { background:#FFF2C8; color:#9A6E00; box-shadow:0 3px 8px rgba(154,110,0,0.18),inset 0 1px 2px rgba(255,255,255,0.8); }
+    .ic-denim  { background:#D8E8FF; color:#1A4D9E; box-shadow:0 3px 8px rgba(26,77,158,0.18),inset 0 1px 2px rgba(255,255,255,0.8); }
+    .ic-plum   { background:#EED8F0; color:#7A2A8A; box-shadow:0 3px 8px rgba(122,42,138,0.18),inset 0 1px 2px rgba(255,255,255,0.8); }
+    .ic-rust   { background:#FFE4D8; color:#A03A10; box-shadow:0 3px 8px rgba(160,58,16,0.18),inset 0 1px 2px rgba(255,255,255,0.8); }
+    .ic-forest { background:#CCEAD8; color:#1A6035; box-shadow:0 3px 8px rgba(26,96,53,0.18),inset 0 1px 2px rgba(255,255,255,0.8); }
+
+    .cat-name { font-size:13px; font-weight:700; line-height:1.3; color:var(--text); }
+
+    /* Quick start — terracotta */
+    .qs-banner { background:#C4500A; border-radius:16px; padding:14px 16px; display:flex; align-items:center; gap:12px; cursor:pointer; box-shadow:0 4px 16px rgba(196,80,10,0.3); }
+    .qs-icon { width:44px; height:44px; border-radius:14px; background:rgba(255,255,255,0.15); display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+    .qs-icon .material-symbols-outlined { color:#FFF2C8; font-size:24px; }
+    .qs-text { flex:1; }
+    .qs-title { font-size:14px; font-weight:800; color:#fff; margin-bottom:2px; }
+    .qs-sub { font-size:11px; color:rgba(255,255,255,0.55); }
+    .qs-pill { background:#FFF2C8; border-radius:100px; padding:4px 10px; font-size:10px; font-weight:800; color:#7A5000; white-space:nowrap; }
+
+    .hotline { background:var(--card); border:1px solid var(--border); border-radius:100px; padding:12px 16px; display:flex; align-items:center; gap:10px; box-shadow:0 1px 4px rgba(100,60,20,0.06); }
+    .hl-dot { width:7px; height:7px; border-radius:50%; background:#22C55E; flex-shrink:0; animation:blink 2s infinite; }
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
+    .hl-label { flex:1; font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.07em; color:var(--muted); }
+    .hl-num { display:flex; align-items:center; gap:5px; font-size:14px; font-weight:900; color:#C4500A; }
+    .hl-num .material-symbols-outlined { font-size:16px; }
+
+    nav { position:fixed; bottom:0; left:50%; transform:translateX(-50%); width:100%; max-width:390px; background:rgba(254,252,248,0.97); backdrop-filter:blur(20px); border-top:1px solid var(--border); border-radius:22px 22px 0 0; padding:10px 8px 22px; display:flex; justify-content:space-around; z-index:50; }
+    .nav-item { display:flex; flex-direction:column; align-items:center; gap:3px; text-decoration:none; flex:1; }
+    .nav-pill { padding:5px 14px; border-radius:100px; display:flex; align-items:center; justify-content:center; }
+    .nav-item.active .nav-pill { background:#FFE0CC; }
+    .nav-item.active .material-symbols-outlined { color:#C4500A; font-size:22px; }
+    .nav-item:not(.active) .material-symbols-outlined { color:var(--muted); font-size:22px; font-variation-settings:'FILL' 0,'wght' 400,'GRAD' 0,'opsz' 24; }
+    .nav-lbl { font-size:9px; font-weight:700; text-transform:uppercase; letter-spacing:0.06em; }
+    .nav-item.active .nav-lbl { color:#C4500A; }
+    .nav-item:not(.active) .nav-lbl { color:var(--muted); }
+
+    .fab { position:fixed; bottom:86px; right:calc(50% - 185px); width:50px; height:50px; background:#C4500A; border-radius:16px; display:flex; align-items:center; justify-content:center; box-shadow:0 4px 18px rgba(196,80,10,0.4); cursor:pointer; z-index:40; }
+    .fab .material-symbols-outlined { color:#fff; font-size:22px; }
+  </style>
+</head>
+<body>
+  <div class="flag-bar"></div>
+  <div class="theme-badge">🌻 Тема 4 — Тепла земля (теракота + зелень + золото)</div>
+
+  <header>
+    <div class="logo">Refugee<em>Guide</em></div>
+    <div class="hdr-right">
+      <button class="lang-btn"><span class="material-symbols-outlined">language</span>УКР</button>
+      <button class="search-btn"><span class="material-symbols-outlined" style="font-size:18px;font-variation-settings:'FILL' 0,'wght' 400,'GRAD' 0,'opsz' 24">search</span></button>
+    </div>
+  </header>
+
+  <div class="emergency-strip">
+    <div class="es-icon"><span class="material-symbols-outlined">emergency</span></div>
+    <div class="es-text">Екстрена допомога</div>
+    <div class="es-num">112</div>
+  </div>
+
+  <main>
+    <div class="greeting"><span style="font-size:20px">👋</span><div class="greeting-text">Добрий день, <span>Марино</span></div></div>
+
+    <div class="section mt20">
+      <div class="label">Категорії</div>
+      <div class="cat-grid">
+        <a href="#" class="cat-card"><div class="cat-icon ic-terra"><span class="material-symbols-outlined">gavel</span></div><div class="cat-name">Закони<br>та права</div></a>
+        <a href="#" class="cat-card"><div class="cat-icon ic-sage"><span class="material-symbols-outlined">medical_services</span></div><div class="cat-name">Охорона<br>здоров'я</div></a>
+        <a href="#" class="cat-card"><div class="cat-icon ic-denim"><span class="material-symbols-outlined">school</span></div><div class="cat-name">Освіта</div></a>
+        <a href="#" class="cat-card"><div class="cat-icon ic-gold"><span class="material-symbols-outlined">work</span></div><div class="cat-name">Робота</div></a>
+        <a href="#" class="cat-card"><div class="cat-icon ic-plum"><span class="material-symbols-outlined">lightbulb</span></div><div class="cat-name">Поради</div></a>
+        <a href="#" class="cat-card"><div class="cat-icon ic-rust"><span class="material-symbols-outlined">link</span></div><div class="cat-name">Посилання</div></a>
+        <a href="#" class="cat-card wide"><div class="cat-icon ic-forest"><span class="material-symbols-outlined">home_work</span></div><div class="cat-name">Житло</div></a>
+      </div>
+    </div>
+
+    <div class="section mt20">
+      <div class="qs-banner">
+        <div class="qs-icon"><span class="material-symbols-outlined">checklist</span></div>
+        <div class="qs-text"><div class="qs-title">Перші кроки в Нідерландах</div><div class="qs-sub">BSN, gemeente, лікар — з чого почати</div></div>
+        <div class="qs-pill">Гайд</div>
+      </div>
+    </div>
+
+    <div class="section mt14">
+      <div class="hotline">
+        <div class="hl-dot"></div>
+        <div class="hl-label">Медична гаряча лінія 24/7</div>
+        <div class="hl-num"><span class="material-symbols-outlined">call</span>0900-8844</div>
+      </div>
+    </div>
+  </main>
+
+  <div class="fab"><span class="material-symbols-outlined">chat_bubble</span></div>
+
+  <nav>
+    <a href="#" class="nav-item active"><div class="nav-pill"><span class="material-symbols-outlined">home</span></div><span class="nav-lbl">Головна</span></a>
+    <a href="#" class="nav-item"><div class="nav-pill"><span class="material-symbols-outlined">explore</span></div><span class="nav-lbl">Огляд</span></a>
+    <a href="#" class="nav-item"><div class="nav-pill"><span class="material-symbols-outlined">bookmark</span></div><span class="nav-lbl">Збережені</span></a>
+    <a href="#" class="nav-item"><div class="nav-pill"><span class="material-symbols-outlined">person</span></div><span class="nav-lbl">Профіль</span></a>
+  </nav>
+</body>
+</html>
