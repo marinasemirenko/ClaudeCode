@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Сімейний лікар (Huisarts)</title>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --blue: #0057B7; --blue-dark: #003DA6; --blue-soft: #E8F0FF;
+      --yellow: #FCD400; --bg: #EFECE5; --card: #fff;
+      --text: #111827; --muted: #6B7280; --border: #DDD9D0;
+      --red: #B91C1C; --green: #15803D; --green-soft: #DCFCE7;
+      --amber: #B45309; --amber-soft: #FEF3C7;
+      --premium: #7C3AED; --premium-soft: #EDE9FE;
+    }
+    body { font-family: 'Manrope', sans-serif; background: var(--bg); color: var(--text); max-width: 390px; margin: 0 auto; min-height: 100vh; }
+    .msym { font-family: 'Material Symbols Outlined'; font-variation-settings: 'FILL' 1,'wght' 400,'GRAD' 0,'opsz' 24; font-size: 22px; line-height: 1; }
+    .msym.o { font-variation-settings: 'FILL' 0,'wght' 400,'GRAD' 0,'opsz' 24; }
+
+    .flag-bar { height: 3px; background: linear-gradient(90deg, var(--blue) 50%, var(--yellow) 50%); }
+
+    /* HEADER */
+    header {
+      background: var(--card); padding: 13px 18px;
+      display: flex; align-items: center; gap: 12px;
+      border-bottom: 1px solid var(--border);
+      position: sticky; top: 0; z-index: 50;
+    }
+    .back-btn {
+      width: 36px; height: 36px; border-radius: 50%;
+      background: var(--bg); border: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer; text-decoration: none; color: var(--text); flex-shrink: 0;
+    }
+    .header-title { font-size: 15px; font-weight: 800; color: var(--text); flex: 1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .bookmark-btn {
+      width: 36px; height: 36px; border-radius: 50%;
+      background: var(--bg); border: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer; color: var(--muted); flex-shrink: 0;
+    }
+
+    main { padding-bottom: 100px; }
+
+    /* HERO */
+    .hero { background: var(--blue-dark); padding: 28px 20px 32px; position: relative; overflow: hidden; }
+    .hero-pattern {
+      position: absolute; inset: 0; pointer-events: none;
+      background-image: url("data:image/svg+xml,%3Csvg width='32' height='32' viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M16 0l4 4h-8l4-4zM0 16l4-4v8l-4-4zM32 16l-4-4v8l4-4zM16 32l-4-4h8l-4 4z' fill='%23ffffff' fill-opacity='0.04'/%3E%3C/svg%3E");
+      background-size: 32px;
+    }
+    .hero-breadcrumb {
+      display: flex; align-items: center; gap: 6px;
+      font-size: 11px; font-weight: 700; color: rgba(255,255,255,0.45);
+      margin-bottom: 14px;
+    }
+    .hero-breadcrumb .msym { font-size: 14px; }
+    .hero-icon {
+      width: 56px; height: 56px; border-radius: 18px;
+      background: rgba(255,255,255,0.12);
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 14px;
+    }
+    .hero-icon .msym { font-size: 30px; color: #fff; }
+    .hero-title { font-size: 26px; font-weight: 900; color: #fff; letter-spacing: -0.7px; line-height: 1.2; margin-bottom: 8px; }
+    .hero-sub { font-size: 13px; color: rgba(255,255,255,0.55); font-weight: 500; line-height: 1.5; }
+    .hero-badge { display: inline-flex; align-items: center; gap: 5px; background: var(--green-soft); border-radius: 100px; padding: 4px 10px; font-size: 10px; font-weight: 800; color: var(--green); margin-top: 12px; }
+    .hero-badge .msym { font-size: 13px; }
+
+    /* CONTENT WRAPPER */
+    .content { padding: 0 18px; }
+    .mt16 { margin-top: 16px; }
+    .mt20 { margin-top: 20px; }
+    .mt24 { margin-top: 24px; }
+
+    /* IMPORTANT INFO BOX */
+    .alert-box {
+      background: #FFF7ED; border: 1px solid #FDE68A;
+      border-radius: 14px; padding: 14px 16px;
+      display: flex; gap: 12px;
+    }
+    .alert-box .msym { color: var(--amber); font-size: 20px; flex-shrink: 0; margin-top: 1px; }
+    .alert-text { font-size: 13px; color: #78350F; font-weight: 600; line-height: 1.5; }
+    .alert-text strong { font-weight: 800; color: #92400E; }
+
+    /* SECTION LABEL */
+    .sec-label {
+      font-size: 11px; font-weight: 800;
+      text-transform: uppercase; letter-spacing: 0.12em;
+      color: var(--muted); margin-bottom: 12px;
+    }
+
+    /* STEP LIST */
+    .steps { display: flex; flex-direction: column; gap: 0; }
+    .step {
+      display: flex; gap: 14px; align-items: flex-start;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .step:last-child { border-bottom: none; }
+    .step-num {
+      width: 30px; height: 30px; border-radius: 10px;
+      background: var(--blue); color: #fff;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 13px; font-weight: 900; flex-shrink: 0; margin-top: 1px;
+    }
+    .step-body { flex: 1; }
+    .step-title { font-size: 14px; font-weight: 800; margin-bottom: 3px; }
+    .step-desc { font-size: 12px; color: var(--muted); font-weight: 500; line-height: 1.5; }
+    .step-desc a { color: var(--blue); text-decoration: none; font-weight: 700; }
+
+    /* INFO CARD */
+    .info-card { background: var(--card); border-radius: 16px; padding: 16px; box-shadow: 0 1px 3px rgba(0,0,0,0.06); border: 1px solid var(--border); }
+    .info-card-title { font-size: 13px; font-weight: 800; margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
+    .info-card-title .msym { font-size: 18px; color: var(--blue); }
+
+    /* TABLE */
+    .table-wrap { overflow: hidden; border-radius: 14px; border: 1px solid var(--border); }
+    .tbl { width: 100%; border-collapse: collapse; font-size: 12px; }
+    .tbl thead { background: var(--blue-soft); }
+    .tbl th { padding: 10px 12px; text-align: left; font-weight: 800; color: var(--blue-dark); font-size: 11px; text-transform: uppercase; letter-spacing: 0.07em; }
+    .tbl td { padding: 11px 12px; border-top: 1px solid var(--border); font-weight: 500; color: var(--text); vertical-align: top; line-height: 1.4; }
+    .tbl tr:hover td { background: #F9F8F6; }
+    .tbl .highlight { font-weight: 700; }
+    .tbl .chip { display: inline-flex; padding: 2px 8px; border-radius: 100px; font-size: 10px; font-weight: 800; }
+    .chip-red { background: #FEE2E2; color: var(--red); }
+    .chip-amber { background: var(--amber-soft); color: var(--amber); }
+    .chip-green { background: var(--green-soft); color: var(--green); }
+
+    /* TIP */
+    .tip {
+      display: flex; gap: 12px; align-items: flex-start;
+      background: var(--blue-soft); border-radius: 14px; padding: 14px 16px;
+    }
+    .tip .msym { color: var(--blue); font-size: 20px; flex-shrink: 0; margin-top: 1px; }
+    .tip-text { font-size: 12px; color: var(--blue-dark); font-weight: 600; line-height: 1.5; }
+    .tip-text strong { font-weight: 800; }
+
+    /* DIVIDER */
+    .divider { height: 1px; background: var(--border); margin: 8px 0; }
+
+    /* PREMIUM GATE */
+    .premium-gate {
+      border-radius: 20px;
+      overflow: hidden;
+      position: relative;
+    }
+    .premium-blur {
+      padding: 20px 16px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      filter: blur(3px);
+      pointer-events: none;
+      user-select: none;
+    }
+    .premium-blur .pitem {
+      display: flex; gap: 12px; align-items: center;
+      padding: 12px 0; border-bottom: 1px solid var(--border);
+    }
+    .premium-blur .pitem:last-child { border-bottom: none; padding-bottom: 0; }
+    .pitem-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--premium); flex-shrink: 0; }
+    .pitem-text { font-size: 13px; font-weight: 600; color: var(--text); line-height: 1.4; }
+
+    .premium-overlay {
+      position: absolute; inset: 0;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      padding: 24px;
+      text-align: center;
+      background: rgba(255,255,255,0.85);
+      backdrop-filter: blur(2px);
+      border-radius: 20px;
+    }
+    .premium-icon {
+      width: 56px; height: 56px; border-radius: 18px;
+      background: var(--premium-soft);
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 14px;
+    }
+    .premium-icon .msym { color: var(--premium); font-size: 28px; }
+    .premium-title { font-size: 17px; font-weight: 900; color: var(--text); margin-bottom: 6px; }
+    .premium-sub { font-size: 12px; color: var(--muted); font-weight: 500; line-height: 1.5; margin-bottom: 18px; }
+    .premium-btn {
+      background: var(--premium); color: #fff;
+      border: none; border-radius: 14px;
+      padding: 13px 28px; font-family: inherit;
+      font-size: 14px; font-weight: 800; cursor: pointer;
+      width: 100%; margin-bottom: 10px;
+      box-shadow: 0 4px 16px rgba(124,58,237,0.35);
+    }
+    .premium-price { font-size: 11px; color: var(--muted); font-weight: 600; }
+    .premium-price strong { color: var(--premium); }
+
+    /* NAV */
+    nav {
+      position: fixed; bottom: 0; left: 50%; transform: translateX(-50%);
+      width: 100%; max-width: 390px;
+      background: rgba(255,255,255,0.97); backdrop-filter: blur(20px);
+      border-top: 1px solid var(--border); border-radius: 22px 22px 0 0;
+      padding: 10px 8px 22px; display: flex; justify-content: space-around; z-index: 50;
+    }
+    .nav-item { display: flex; flex-direction: column; align-items: center; gap: 3px; text-decoration: none; flex: 1; }
+    .nav-pill { padding: 5px 14px; border-radius: 100px; display: flex; align-items: center; justify-content: center; }
+    .nav-item.active .nav-pill { background: var(--blue-soft); }
+    .nav-item.active .msym { color: var(--blue); }
+    .nav-item:not(.active) .msym { color: var(--muted); font-variation-settings: 'FILL' 0,'wght' 400,'GRAD' 0,'opsz' 24; }
+    .nav-lbl { font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; }
+    .nav-item.active .nav-lbl { color: var(--blue); }
+    .nav-item:not(.active) .nav-lbl { color: var(--muted); }
+  </style>
+</head>
+<body>
+  <div class="flag-bar"></div>
+
+  <header>
+    <a href="screen_02_healthcare.html" class="back-btn">
+      <span class="msym o" style="font-size:20px">arrow_back</span>
+    </a>
+    <div class="header-title">Сімейний лікар (Huisarts)</div>
+    <button class="bookmark-btn"><span class="msym o" style="font-size:20px">bookmark</span></button>
+  </header>
+
+  <main>
+
+    <!-- HERO -->
+    <div class="hero">
+      <div class="hero-pattern"></div>
+      <div class="hero-breadcrumb">
+        <span class="msym" style="font-size:13px">medical_services</span>
+        Охорона здоров'я
+        <span class="msym o" style="font-size:13px">chevron_right</span>
+        Huisarts
+      </div>
+      <div class="hero-icon"><span class="msym">stethoscope</span></div>
+      <div class="hero-title">Сімейний лікар<br>(Huisarts)</div>
+      <div class="hero-sub">Основа нідерландської медицини — всі питання починаються тут</div>
+      <div class="hero-badge"><span class="msym" style="font-size:13px">check_circle</span> Безкоштовний контент</div>
+    </div>
+
+    <!-- IMPORTANT ALERT -->
+    <div class="content mt20">
+      <div class="alert-box">
+        <span class="msym">warning</span>
+        <div class="alert-text"><strong>Важливо знати:</strong> Без реєстрації у huisarts ти фактично без медичної допомоги в Нідерландах. Зроби це одним з перших кроків після приїзду.</div>
+      </div>
+    </div>
+
+    <!-- SYSTEM EXPLANATION -->
+    <div class="content mt24">
+      <div class="sec-label">Як працює система</div>
+      <div class="info-card">
+        <div class="info-card-title"><span class="msym">account_tree</span>Принцип "спочатку huisarts"</div>
+        <div class="divider"></div>
+
+        <div class="table-wrap" style="margin-top: 12px;">
+          <table class="tbl">
+            <thead>
+              <tr>
+                <th>Куди звертатись</th>
+                <th>Коли</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="highlight">Huisarts (ти)</td>
+                <td>Будь-яке питання зі здоров'ям — завжди першим</td>
+              </tr>
+              <tr>
+                <td class="highlight">Спеціаліст</td>
+                <td>Лише з направленням від huisarts</td>
+              </tr>
+              <tr>
+                <td><span class="chip chip-amber">HAP</span></td>
+                <td>Терміново ввечері/вночі, коли huisarts недоступний</td>
+              </tr>
+              <tr>
+                <td><span class="chip chip-red">112</span></td>
+                <td>Тільки небезпека для життя</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- STEPS -->
+    <div class="content mt24">
+      <div class="sec-label">Як знайти і зареєструватись</div>
+      <div class="info-card">
+        <div class="steps">
+
+          <div class="step">
+            <div class="step-num">1</div>
+            <div class="step-body">
+              <div class="step-title">Знайди клініку поблизу</div>
+              <div class="step-desc">Відкрий <a href="#">zorgkiezer.nl</a> або Google Maps та знайди "huisartspraktijk" у своєму районі. Обери 2–3 варіанти на випадок, якщо в одному немає місць.</div>
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="step-num">2</div>
+            <div class="step-body">
+              <div class="step-title">Зателефонуй або напиши</div>
+              <div class="step-desc">Запитай: "Heeft u plek voor een nieuwe patiënt?" (Чи є місця для нового пацієнта?). Більшість персоналу розуміє англійську.</div>
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="step-num">3</div>
+            <div class="step-body">
+              <div class="step-title">Принеси документи</div>
+              <div class="step-desc">Паспорт + медична страховка (zorgpas) або підтвердження страховки. Якщо ти в COA — принеси їхній документ.</div>
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="step-num">4</div>
+            <div class="step-body">
+              <div class="step-title">Ти зареєстрований!</div>
+              <div class="step-desc">Після реєстрації ти офіційний пацієнт. Тепер можеш телефонувати та записуватись на прийом.</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- TIP: problem with places -->
+    <div class="content mt16">
+      <div class="tip">
+        <span class="msym">lightbulb</span>
+        <div class="tip-text"><strong>Немає місць у великих містах?</strong> Спробуй клініки в сусідніх районах або менших містечках поблизу. Амстердам та Роттердам — найважчі. У менших містах зазвичай легше.</div>
+      </div>
+    </div>
+
+    <!-- EMERGENCY TABLE -->
+    <div class="content mt24">
+      <div class="sec-label">Екстрені ситуації</div>
+      <div class="table-wrap">
+        <table class="tbl">
+          <thead>
+            <tr><th>Ситуація</th><th>Номер</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Небезпека для життя</td>
+              <td><span class="chip chip-red">112</span></td>
+            </tr>
+            <tr>
+              <td>Терміново ввечері/вночі</td>
+              <td><span class="chip chip-amber">HAP</span></td>
+            </tr>
+            <tr>
+              <td>Чергова лінія huisarts</td>
+              <td><span class="chip chip-green">0900-8844</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- PREMIUM GATE -->
+    <div class="content mt24">
+      <div class="sec-label">Преміум контент</div>
+
+      <div class="premium-gate">
+        <!-- Blurred preview of what's inside -->
+        <div class="premium-blur">
+          <div class="pitem">
+            <div class="pitem-dot"></div>
+            <div class="pitem-text">Покроковий гайд: що говорити, якщо немає місць — скрипт розмови нідерландською</div>
+          </div>
+          <div class="pitem">
+            <div class="pitem-dot"></div>
+            <div class="pitem-text">Шаблон листа до huisarts нідерландською (copy-paste)</div>
+          </div>
+          <div class="pitem">
+            <div class="pitem-dot"></div>
+            <div class="pitem-text">Що робити, якщо лікар ігнорує симптоми — твої права та дії</div>
+          </div>
+          <div class="pitem">
+            <div class="pitem-dot"></div>
+            <div class="pitem-text">Як перевести медичні документи з України — де знайти перекладача</div>
+          </div>
+        </div>
+
+        <!-- Overlay -->
+        <div class="premium-overlay">
+          <div class="premium-icon"><span class="msym">lock</span></div>
+          <div class="premium-title">Преміум контент</div>
+          <div class="premium-sub">Отримай шаблони листів, скрипти розмов та детальні гайди</div>
+          <button class="premium-btn">Відкрити за €4.99/міс</button>
+          <div class="premium-price">Перший місяць безкоштовно · <strong>Скасувати будь-коли</strong></div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <nav>
+    <a href="final_with_label.html" class="nav-item"><div class="nav-pill"><span class="msym">home</span></div><span class="nav-lbl">Головна</span></a>
+    <a href="#" class="nav-item"><div class="nav-pill"><span class="msym">explore</span></div><span class="nav-lbl">Огляд</span></a>
+    <a href="#" class="nav-item"><div class="nav-pill"><span class="msym">bookmark</span></div><span class="nav-lbl">Збережені</span></a>
+    <a href="#" class="nav-item active"><div class="nav-pill"><span class="msym">person</span></div><span class="nav-lbl">Профіль</span></a>
+  </nav>
+
+</body>
+</html>

@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Аптека (Apotheek)</title>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --blue: #0057B7; --blue-dark: #003DA6; --blue-soft: #E8F0FF;
+      --yellow: #FCD400; --bg: #EFECE5; --card: #fff;
+      --text: #111827; --muted: #6B7280; --border: #DDD9D0;
+      --red: #B91C1C; --green: #15803D; --green-soft: #DCFCE7;
+      --amber: #B45309; --amber-soft: #FEF3C7;
+      --premium: #7C3AED; --premium-soft: #EDE9FE;
+    }
+    body { font-family: 'Manrope', sans-serif; background: var(--bg); color: var(--text); max-width: 390px; margin: 0 auto; min-height: 100vh; }
+    .msym { font-family: 'Material Symbols Outlined'; font-variation-settings: 'FILL' 1,'wght' 400,'GRAD' 0,'opsz' 24; font-size: 22px; line-height: 1; }
+    .msym.o { font-variation-settings: 'FILL' 0,'wght' 400,'GRAD' 0,'opsz' 24; }
+    .flag-bar { height: 3px; background: linear-gradient(90deg, var(--blue) 50%, var(--yellow) 50%); }
+    header { background: var(--card); padding: 13px 18px; display: flex; align-items: center; gap: 12px; border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 50; }
+    .back-btn { width: 36px; height: 36px; border-radius: 50%; background: var(--bg); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; cursor: pointer; text-decoration: none; color: var(--text); flex-shrink: 0; }
+    .header-title { font-size: 15px; font-weight: 800; color: var(--text); flex: 1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .bookmark-btn { width: 36px; height: 36px; border-radius: 50%; background: var(--bg); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; cursor: pointer; color: var(--muted); flex-shrink: 0; }
+    main { padding-bottom: 100px; }
+    .hero { background: #14532D; padding: 28px 20px 32px; position: relative; overflow: hidden; }
+    .hero-pattern { position: absolute; inset: 0; pointer-events: none; background-image: url("data:image/svg+xml,%3Csvg width='32' height='32' viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M16 0l4 4h-8l4-4zM0 16l4-4v8l-4-4zM32 16l-4-4v8l4-4zM16 32l-4-4h8l-4 4z' fill='%23ffffff' fill-opacity='0.05'/%3E%3C/svg%3E"); background-size: 32px; }
+    .hero-breadcrumb { display: flex; align-items: center; gap: 6px; font-size: 11px; font-weight: 700; color: rgba(255,255,255,0.45); margin-bottom: 14px; }
+    .hero-icon { width: 56px; height: 56px; border-radius: 18px; background: rgba(255,255,255,0.12); display: flex; align-items: center; justify-content: center; margin-bottom: 14px; }
+    .hero-icon .msym { font-size: 30px; color: #fff; }
+    .hero-title { font-size: 26px; font-weight: 900; color: #fff; letter-spacing: -0.7px; line-height: 1.2; margin-bottom: 8px; }
+    .hero-sub { font-size: 13px; color: rgba(255,255,255,0.55); font-weight: 500; line-height: 1.5; }
+    .hero-badge { display: inline-flex; align-items: center; gap: 5px; background: var(--green-soft); border-radius: 100px; padding: 4px 10px; font-size: 10px; font-weight: 800; color: var(--green); margin-top: 12px; }
+    .content { padding: 0 18px; }
+    .mt16 { margin-top: 16px; }
+    .mt20 { margin-top: 20px; }
+    .mt24 { margin-top: 24px; }
+    .alert-box { background: #FFF7ED; border: 1px solid #FDE68A; border-radius: 14px; padding: 14px 16px; display: flex; gap: 12px; }
+    .alert-box .msym { color: var(--amber); font-size: 20px; flex-shrink: 0; margin-top: 1px; }
+    .alert-text { font-size: 13px; color: #78350F; font-weight: 600; line-height: 1.5; }
+    .alert-text strong { font-weight: 800; color: #92400E; }
+    .sec-label { font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.12em; color: var(--muted); margin-bottom: 12px; }
+    .info-card { background: var(--card); border-radius: 16px; padding: 16px; box-shadow: 0 1px 3px rgba(0,0,0,0.06); border: 1px solid var(--border); }
+    .info-card-title { font-size: 13px; font-weight: 800; margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
+    .info-card-title .msym { font-size: 18px; color: var(--blue); }
+    .compare-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .compare-card { border-radius: 16px; padding: 16px; border: 1px solid var(--border); }
+    .compare-card.apotheek { background: #EFF6FF; border-color: #BFDBFE; }
+    .compare-card.drogist { background: #F0FDF4; border-color: #BBF7D0; }
+    .compare-title { font-size: 13px; font-weight: 900; margin-bottom: 8px; }
+    .compare-card.apotheek .compare-title { color: var(--blue-dark); }
+    .compare-card.drogist .compare-title { color: #14532D; }
+    .compare-item { font-size: 11px; font-weight: 600; color: var(--muted); padding: 4px 0; border-bottom: 1px solid rgba(0,0,0,0.06); line-height: 1.4; }
+    .compare-item:last-child { border-bottom: none; }
+    .steps { display: flex; flex-direction: column; gap: 0; }
+    .step { display: flex; gap: 14px; align-items: flex-start; padding: 14px 0; border-bottom: 1px solid var(--border); }
+    .step:last-child { border-bottom: none; }
+    .step-num { width: 30px; height: 30px; border-radius: 10px; background: var(--blue); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 900; flex-shrink: 0; margin-top: 1px; }
+    .step-body { flex: 1; }
+    .step-title { font-size: 14px; font-weight: 800; margin-bottom: 3px; }
+    .step-desc { font-size: 12px; color: var(--muted); font-weight: 500; line-height: 1.5; }
+    .table-wrap { overflow: hidden; border-radius: 14px; border: 1px solid var(--border); }
+    .tbl { width: 100%; border-collapse: collapse; font-size: 12px; }
+    .tbl thead { background: var(--blue-soft); }
+    .tbl th { padding: 10px 12px; text-align: left; font-weight: 800; color: var(--blue-dark); font-size: 11px; text-transform: uppercase; letter-spacing: 0.07em; }
+    .tbl td { padding: 11px 12px; border-top: 1px solid var(--border); font-weight: 500; color: var(--text); vertical-align: top; line-height: 1.4; }
+    .tbl tr:hover td { background: #F9F8F6; }
+    .chip { display: inline-flex; padding: 2px 8px; border-radius: 100px; font-size: 10px; font-weight: 800; }
+    .chip-red { background: #FEE2E2; color: var(--red); }
+    .chip-amber { background: var(--amber-soft); color: var(--amber); }
+    .chip-green { background: var(--green-soft); color: var(--green); }
+    .tip { display: flex; gap: 12px; align-items: flex-start; background: var(--blue-soft); border-radius: 14px; padding: 14px 16px; }
+    .tip .msym { color: var(--blue); font-size: 20px; flex-shrink: 0; margin-top: 1px; }
+    .tip-text { font-size: 12px; color: var(--blue-dark); font-weight: 600; line-height: 1.5; }
+    .tip-text strong { font-weight: 800; }
+    .premium-gate { border-radius: 20px; overflow: hidden; position: relative; }
+    .premium-blur { padding: 20px 16px; background: var(--card); border: 1px solid var(--border); border-radius: 20px; filter: blur(3px); pointer-events: none; user-select: none; }
+    .premium-blur .pitem { display: flex; gap: 12px; align-items: center; padding: 12px 0; border-bottom: 1px solid var(--border); }
+    .premium-blur .pitem:last-child { border-bottom: none; padding-bottom: 0; }
+    .pitem-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--premium); flex-shrink: 0; }
+    .pitem-text { font-size: 13px; font-weight: 600; color: var(--text); line-height: 1.4; }
+    .premium-overlay { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 24px; text-align: center; background: rgba(255,255,255,0.85); backdrop-filter: blur(2px); border-radius: 20px; }
+    .premium-icon { width: 56px; height: 56px; border-radius: 18px; background: var(--premium-soft); display: flex; align-items: center; justify-content: center; margin-bottom: 14px; }
+    .premium-icon .msym { color: var(--premium); font-size: 28px; }
+    .premium-title { font-size: 17px; font-weight: 900; color: var(--text); margin-bottom: 6px; }
+    .premium-sub { font-size: 12px; color: var(--muted); font-weight: 500; line-height: 1.5; margin-bottom: 18px; }
+    .premium-btn { background: var(--premium); color: #fff; border: none; border-radius: 14px; padding: 13px 28px; font-family: inherit; font-size: 14px; font-weight: 800; cursor: pointer; width: 100%; margin-bottom: 10px; box-shadow: 0 4px 16px rgba(124,58,237,0.35); }
+    .premium-price { font-size: 11px; color: var(--muted); font-weight: 600; }
+    .premium-price strong { color: var(--premium); }
+    nav { position: fixed; bottom: 0; left: 50%; transform: translateX(-50%); width: 100%; max-width: 390px; background: rgba(255,255,255,0.97); backdrop-filter: blur(20px); border-top: 1px solid var(--border); border-radius: 22px 22px 0 0; padding: 10px 8px 22px; display: flex; justify-content: space-around; z-index: 50; }
+    .nav-item { display: flex; flex-direction: column; align-items: center; gap: 3px; text-decoration: none; flex: 1; }
+    .nav-pill { padding: 5px 14px; border-radius: 100px; display: flex; align-items: center; justify-content: center; }
+    .nav-item.active .nav-pill { background: var(--blue-soft); }
+    .nav-item.active .msym { color: var(--blue); }
+    .nav-item:not(.active) .msym { color: var(--muted); font-variation-settings: 'FILL' 0,'wght' 400,'GRAD' 0,'opsz' 24; }
+    .nav-lbl { font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; }
+    .nav-item.active .nav-lbl { color: var(--blue); }
+    .nav-item:not(.active) .nav-lbl { color: var(--muted); }
+  </style>
+</head>
+<body>
+  <div class="flag-bar"></div>
+  <header>
+    <a href="screen_02_healthcare.html" class="back-btn"><span class="msym o" style="font-size:20px">arrow_back</span></a>
+    <div class="header-title">Аптека (Apotheek)</div>
+    <button class="bookmark-btn"><span class="msym o" style="font-size:20px">bookmark</span></button>
+  </header>
+  <main>
+    <div class="hero">
+      <div class="hero-pattern"></div>
+      <div class="hero-breadcrumb">
+        <span class="msym" style="font-size:13px">medical_services</span>
+        Охорона здоров'я
+        <span class="msym o" style="font-size:13px">chevron_right</span>
+        Аптека
+      </div>
+      <div class="hero-icon"><span class="msym">local_pharmacy</span></div>
+      <div class="hero-title">Аптека<br>(Apotheek)</div>
+      <div class="hero-sub">Ліки за рецептом і без — де купити і скільки коштує</div>
+      <div class="hero-badge"><span class="msym" style="font-size:13px">check_circle</span> Безкоштовний контент</div>
+    </div>
+
+    <div class="content mt20">
+      <div class="alert-box">
+        <span class="msym">info</span>
+        <div class="alert-text"><strong>Важливо знати:</strong> Більшість ліків в Нідерландах продається лише за рецептом від huisarts. Без рецепту в аптеці ти отримаєш лише обмежений список ліків.</div>
+      </div>
+    </div>
+
+    <div class="content mt24">
+      <div class="sec-label">Apotheek vs Drogist — яка різниця?</div>
+      <div class="compare-grid">
+        <div class="compare-card apotheek">
+          <div class="compare-title">🏥 Apotheek</div>
+          <div class="compare-item">Рецептурні ліки</div>
+          <div class="compare-item">Консультація аптекаря</div>
+          <div class="compare-item">Ліки за страховкою</div>
+          <div class="compare-item">Дорожчі OTC-ліки</div>
+        </div>
+        <div class="compare-card drogist">
+          <div class="compare-title">🛒 Drogist</div>
+          <div class="compare-item">Kruidvat, Etos, DA</div>
+          <div class="compare-item">Без рецепту</div>
+          <div class="compare-item">У 2–3 рази дешевше</div>
+          <div class="compare-item">Косметика, вітаміни</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="content mt24">
+      <div class="sec-label">Ліки без рецепту — у drogist дешевше</div>
+      <div class="table-wrap">
+        <table class="tbl">
+          <thead><tr><th>Ліки</th><th>Drogist</th><th>Apotheek</th></tr></thead>
+          <tbody>
+            <tr><td>Paracetamol 500mg (50 шт)</td><td>~€1.50</td><td>~€4</td></tr>
+            <tr><td>Ibuprofen 400mg (24 шт)</td><td>~€2</td><td>~€5</td></tr>
+            <tr><td>Антигістамін (loratadine)</td><td>~€3</td><td>~€8</td></tr>
+            <tr><td>Краплі від нежитю</td><td>~€4</td><td>~€7</td></tr>
+            <tr><td>Антибіотики</td><td><span class="chip chip-red">Тільки рецепт</span></td><td>З рецептом</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="content mt16">
+      <div class="tip">
+        <span class="msym">savings</span>
+        <div class="tip-text"><strong>Економій порада:</strong> Paracetamol, ibuprofen та більшість базових ліків купуй у Kruidvat або Etos — там вони у 2–4 рази дешевші, ніж в аптеці.</div>
+      </div>
+    </div>
+
+    <div class="content mt24">
+      <div class="sec-label">Як отримати ліки за рецептом</div>
+      <div class="info-card">
+        <div class="steps">
+          <div class="step">
+            <div class="step-num">1</div>
+            <div class="step-body">
+              <div class="step-title">Запишись до huisarts</div>
+              <div class="step-desc">Лише huisarts може виписати рецепт. Позвони та опиши симптоми — іноді рецепт видають і по телефону.</div>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">2</div>
+            <div class="step-body">
+              <div class="step-title">Рецепт надходить електронно</div>
+              <div class="step-desc">В Нідерландах більшість рецептів надсилаються напряму в аптеку електронно. Тобі не потрібен паперовий рецепт.</div>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">3</div>
+            <div class="step-body">
+              <div class="step-title">Забери в аптеці</div>
+              <div class="step-desc">Назви своє ім'я та дату народження. Якщо ліки входять до бази страховки — eigen risico покриває вартість після €385.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="content mt24">
+      <div class="sec-label">Преміум контент</div>
+      <div class="premium-gate">
+        <div class="premium-blur">
+          <div class="pitem"><div class="pitem-dot"></div><div class="pitem-text">Словник ліків: українські назви ↔ нідерландські аналоги (150+ препаратів)</div></div>
+          <div class="pitem"><div class="pitem-dot"></div><div class="pitem-text">Які ліки з України можна взяти і легально провезти до Нідерландів</div></div>
+          <div class="pitem"><div class="pitem-dot"></div><div class="pitem-text">Як замовити ліки онлайн легально — перевірені ресурси</div></div>
+        </div>
+        <div class="premium-overlay">
+          <div class="premium-icon"><span class="msym">lock</span></div>
+          <div class="premium-title">Преміум контент</div>
+          <div class="premium-sub">Словник ліків, інструкції та перевірені ресурси</div>
+          <button class="premium-btn">Відкрити за €4.99/міс</button>
+          <div class="premium-price">Перший місяць безкоштовно · <strong>Скасувати будь-коли</strong></div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <nav>
+    <a href="final_colorful.html" class="nav-item active"><div class="nav-pill"><span class="msym">home</span></div><span class="nav-lbl">Головна</span></a>
+    <a href="#" class="nav-item"><div class="nav-pill"><span class="msym">explore</span></div><span class="nav-lbl">Огляд</span></a>
+    <a href="#" class="nav-item"><div class="nav-pill"><span class="msym">bookmark</span></div><span class="nav-lbl">Збережені</span></a>
+    <a href="#" class="nav-item"><div class="nav-pill"><span class="msym">person</span></div><span class="nav-lbl">Профіль</span></a>
+  </nav>
+</body>
+</html>
