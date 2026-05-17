@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DigiD — Цифровий ID</title>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --blue: #0057B7; --blue-dark: #003DA6; --blue-soft: #EDF4FF;
+      --yellow: #FCD400; --bg: #EFECE5; --card: #fff;
+      --text: #111827; --muted: #6B7280; --border: #DDD9D0;
+      --green: #15803D; --green-soft: #DCFCE7;
+      --amber: #B45309; --amber-soft: #FEF3C7;
+      --navy: #1E40AF; --navy-soft: #DBEAFE;
+      --premium: #7C3AED; --premium-soft: #EDE9FE;
+    }
+    body { font-family: 'Manrope', sans-serif; background: var(--bg); color: var(--text); max-width: 390px; margin: 0 auto; min-height: 100vh; }
+    .msym { font-family: 'Material Symbols Outlined'; font-variation-settings: 'FILL' 1,'wght' 400,'GRAD' 0,'opsz' 24; font-size: 22px; line-height: 1; }
+    .ua-bar { height: 4px; background: linear-gradient(90deg, #0057B7 50%, #FCD400 50%); }
+
+    .sticky-header { position: sticky; top: 0; z-index: 50; background: white; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 10px; padding: 12px 16px; }
+    .back-btn { width: 36px; height: 36px; border-radius: 12px; background: var(--bg); border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; color: var(--text); text-decoration: none; }
+    .header-title { font-size: 14px; font-weight: 700; flex: 1; }
+    .header-badge { font-size: 10px; font-weight: 700; padding: 4px 9px; border-radius: 20px; background: var(--green-soft); color: var(--green); }
+
+    .hero { background: linear-gradient(150deg, #0C1A56 0%, #1D4ED8 55%, #3B82F6 100%); padding: 24px 20px 36px; position: relative; overflow: hidden; }
+    .hero::before { content: ''; position: absolute; inset: 0; background-image: radial-gradient(circle, rgba(255,255,255,0.07) 1px, transparent 1px); background-size: 18px 18px; }
+    .hero-step { display: inline-flex; align-items: center; gap: 7px; background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.25); color: rgba(255,255,255,0.9); font-size: 11px; font-weight: 700; border-radius: 20px; padding: 4px 12px; margin-bottom: 12px; position: relative; }
+    .hero h1 { color: white; font-size: 22px; font-weight: 900; line-height: 1.2; position: relative; }
+    .hero p { color: rgba(255,255,255,0.72); font-size: 13px; margin-top: 8px; line-height: 1.55; position: relative; }
+
+    .section { margin: 12px 16px 0; }
+    .sec-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); margin-bottom: 8px; display: flex; align-items: center; gap: 6px; }
+    .sec-label::before { content: ''; display: block; width: 3px; height: 14px; background: var(--navy); border-radius: 2px; }
+
+    .alert { padding: 12px 14px; border-radius: 14px; display: flex; gap: 10px; align-items: flex-start; }
+    .alert.yellow { background: var(--amber-soft); border: 1px solid #FCD34D; }
+    .alert.green { background: var(--green-soft); border: 1px solid #86EFAC; }
+    .alert.blue { background: var(--navy-soft); border: 1px solid #93C5FD; }
+    .alert-icon { font-size: 18px; flex-shrink: 0; }
+    .alert p { font-size: 12.5px; font-weight: 600; line-height: 1.55; }
+    .alert.yellow p { color: #92400E; }
+    .alert.green p { color: #14532D; }
+    .alert.blue p { color: #1E3A8A; }
+
+    /* DigiD phone mockup */
+    .phone-mockup { background: white; border-radius: 18px; padding: 16px; box-shadow: 0 1px 6px rgba(0,0,0,0.07); }
+    .phone-wrap { background: linear-gradient(160deg, #1E3A8A, #1D4ED8); border-radius: 24px; padding: 20px 16px 24px; text-align: center; margin-bottom: 14px; position: relative; overflow: hidden; }
+    .phone-wrap::before { content: ''; position: absolute; top: -20px; right: -20px; width: 100px; height: 100px; background: rgba(255,255,255,0.08); border-radius: 50%; }
+    .digid-logo { font-size: 28px; font-weight: 900; color: white; letter-spacing: 1px; }
+    .digid-sub { font-size: 11px; color: rgba(255,255,255,0.65); margin-top: 4px; }
+    .digid-icon { font-size: 48px; margin: 12px 0 8px; }
+    .digid-user { font-size: 13px; font-weight: 700; color: white; }
+    .digid-level { display: inline-block; background: rgba(255,255,255,0.15); color: rgba(255,255,255,0.9); font-size: 10px; font-weight: 700; padding: 3px 10px; border-radius: 20px; margin-top: 6px; }
+
+    .uses-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+    .use-item { background: var(--navy-soft); border-radius: 12px; padding: 10px 12px; display: flex; align-items: center; gap: 8px; }
+    .use-icon { font-size: 18px; flex-shrink: 0; }
+    .use-text { font-size: 11.5px; font-weight: 600; color: #1E3A8A; line-height: 1.3; }
+
+    /* Levels */
+    .level-card { background: white; border-radius: 16px; padding: 14px; margin-bottom: 8px; box-shadow: 0 1px 4px rgba(0,0,0,0.06); border-left: 4px solid #E5E7EB; display: flex; gap: 12px; align-items: flex-start; }
+    .level-card.laag { border-left-color: #94A3B8; }
+    .level-card.midden { border-left-color: var(--blue); }
+    .level-card.hoog { border-left-color: #16A34A; }
+    .level-badge { font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; padding: 3px 8px; border-radius: 6px; white-space: nowrap; margin-top: 2px; }
+    .lb-laag { background: #F1F5F9; color: #64748B; }
+    .lb-midden { background: var(--navy-soft); color: var(--navy); }
+    .lb-hoog { background: var(--green-soft); color: var(--green); }
+    .level-body { flex: 1; }
+    .level-name { font-size: 13px; font-weight: 700; }
+    .level-desc { font-size: 11.5px; color: var(--muted); margin-top: 3px; line-height: 1.45; }
+    .level-uses { font-size: 11px; color: var(--text); margin-top: 5px; font-weight: 600; }
+
+    /* Steps */
+    .steps { background: white; border-radius: 18px; overflow: hidden; box-shadow: 0 1px 6px rgba(0,0,0,0.07); }
+    .step { display: flex; gap: 14px; padding: 14px 16px; border-bottom: 1px solid #F9FAFB; align-items: flex-start; }
+    .step:last-child { border-bottom: none; }
+    .step-num { width: 32px; height: 32px; background: var(--navy); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 800; flex-shrink: 0; }
+    .step-body { flex: 1; }
+    .step-title { font-size: 13.5px; font-weight: 700; }
+    .step-desc { font-size: 12px; color: var(--muted); margin-top: 4px; line-height: 1.55; }
+    .step-tip { margin-top: 6px; font-size: 11.5px; background: var(--amber-soft); color: var(--amber); padding: 5px 9px; border-radius: 8px; display: inline-block; font-weight: 600; }
+    .step-link { display: inline-block; margin-top: 5px; font-size: 12px; color: var(--blue); font-weight: 700; text-decoration: none; }
+
+    .tip-card { background: var(--amber-soft); border: 1px solid #FCD34D; border-radius: 14px; padding: 14px; display: flex; gap: 10px; align-items: flex-start; }
+    .tip-text { font-size: 12.5px; color: #78350F; font-weight: 600; line-height: 1.55; }
+
+    .faq-item { background: white; border-radius: 14px; padding: 14px; margin-bottom: 8px; box-shadow: 0 1px 4px rgba(0,0,0,0.05); }
+    .faq-q { font-size: 13px; font-weight: 700; display: flex; gap: 8px; align-items: flex-start; }
+    .faq-q::before { content: 'Q'; background: var(--navy); color: white; font-size: 10px; font-weight: 800; padding: 2px 6px; border-radius: 5px; flex-shrink: 0; margin-top: 2px; }
+    .faq-a { font-size: 12px; color: var(--muted); margin-top: 7px; line-height: 1.6; padding-left: 26px; }
+
+    .premium-gate { border-radius: 18px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.08); position: relative; }
+    .gate-blur { filter: blur(3px); pointer-events: none; user-select: none; background: white; padding: 16px; }
+    .gate-blur .fake-row { height: 44px; background: #F3F4F6; border-radius: 10px; margin-bottom: 8px; }
+    .gate-overlay { position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0.95) 40%); display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 20px; text-align: center; }
+    .lock-circle { width: 52px; height: 52px; background: var(--premium-soft); border-radius: 18px; display: flex; align-items: center; justify-content: center; margin-bottom: 10px; }
+    .gate-title { font-size: 15px; font-weight: 800; }
+    .gate-desc { font-size: 12px; color: var(--muted); margin-top: 5px; line-height: 1.5; }
+    .gate-btn { margin-top: 14px; background: var(--premium); color: white; font-size: 13px; font-weight: 700; border: none; border-radius: 14px; padding: 12px 24px; cursor: pointer; width: 100%; }
+    .gate-price { font-size: 11px; color: var(--muted); margin-top: 7px; }
+
+    nav { position: fixed; bottom: 0; left: 50%; transform: translateX(-50%); width: 100%; max-width: 390px; background: white; border-top: 1px solid var(--border); display: flex; justify-content: space-around; padding: 6px 0 14px; z-index: 100; }
+    .nav-item { display: flex; flex-direction: column; align-items: center; gap: 3px; text-decoration: none; color: var(--muted); font-size: 10px; font-weight: 600; }
+    .nav-pill { width: 52px; height: 32px; display: flex; align-items: center; justify-content: center; border-radius: 20px; }
+    .nav-item.active .nav-pill { background: var(--navy-soft); }
+    .nav-item.active { color: var(--navy); }
+    .pb { padding-bottom: 90px; }
+    .fab { position: fixed; bottom: 76px; right: calc(50% - 195px + 16px); width: 50px; height: 50px; background: var(--navy); border-radius: 18px; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(29,78,216,0.4); z-index: 90; text-decoration: none; }
+  </style>
+</head>
+<body>
+<div class="ua-bar"></div>
+
+<div class="sticky-header">
+  <a href="screen_firststeps.html" class="back-btn"><span class="msym" style="font-size:20px;">arrow_back</span></a>
+  <span class="header-title">DigiD — Цифровий ID</span>
+  <span class="header-badge">✓ Безкоштовно</span>
+</div>
+
+<div class="hero">
+  <div class="hero-step">📱 Крок 5 з 8</div>
+  <h1>DigiD — ваш ключ до всіх держпослуг</h1>
+  <p>DigiD — це цифровий підпис для входу на всі урядові сайти Нідерландів. Без нього неможливо подати на zorgtoeslag, переглянути податки або записатися до лікаря онлайн.</p>
+</div>
+
+<div class="pb">
+
+<div class="section" style="margin-top:12px;">
+  <div class="alert yellow">
+    <span class="alert-icon">⚠️</span>
+    <p>DigiD прив'язаний до вашої адреси в BRP. Спочатку зареєструйтеся в муніципалітеті — тільки потім подавайте заяву на DigiD.</p>
+  </div>
+</div>
+
+<!-- What is DigiD -->
+<div class="section" style="margin-top:16px;">
+  <div class="sec-label">Для чого потрібен DigiD</div>
+  <div class="phone-mockup">
+    <div class="phone-wrap">
+      <div class="digid-logo">DigiD</div>
+      <div class="digid-sub">Veilig inloggen bij de overheid</div>
+      <div class="digid-icon">🔐</div>
+      <div class="digid-user">Шевченко Оксана</div>
+      <div class="digid-level">★ Niveau: Substantieel</div>
+    </div>
+    <div class="uses-grid">
+      <div class="use-item"><span class="use-icon">💰</span><span class="use-text">Zorgtoeslag (toeslagen.nl)</span></div>
+      <div class="use-item"><span class="use-icon">📋</span><span class="use-text">Belastingdienst (податки)</span></div>
+      <div class="use-item"><span class="use-icon">🏛️</span><span class="use-text">MijnOverheid (держпослуги)</span></div>
+      <div class="use-item"><span class="use-icon">🏥</span><span class="use-text">MijnGezondheid (здоров'я)</span></div>
+      <div class="use-item"><span class="use-icon">🎓</span><span class="use-text">DUO (освіта, inburgering)</span></div>
+      <div class="use-item"><span class="use-icon">🏠</span><span class="use-text">Woningcorporaties (житло)</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- 3 levels -->
+<div class="section" style="margin-top:16px;">
+  <div class="sec-label">3 рівні DigiD — починайте з Midden</div>
+
+  <div class="level-card laag">
+    <span class="level-badge lb-laag">Laag</span>
+    <div class="level-body">
+      <div class="level-name">Базовий рівень (SMS)</div>
+      <div class="level-desc">Логін + SMS-код. Найпростіший варіант, підходить для базових дій.</div>
+      <div class="level-uses">✓ Toeslagen, MijnOverheid</div>
+    </div>
+  </div>
+
+  <div class="level-card midden">
+    <span class="level-badge lb-midden">Midden ★</span>
+    <div class="level-body">
+      <div class="level-name">Середній рівень (App)</div>
+      <div class="level-desc">Додаток DigiD + сканування обличчя або PIN. Рекомендовано для всіх.</div>
+      <div class="level-uses">✓ Toeslagen, Belastingdienst, DUO, більшість сайтів</div>
+    </div>
+  </div>
+
+  <div class="level-card hoog">
+    <span class="level-badge lb-hoog">Hoog</span>
+    <div class="level-body">
+      <div class="level-name">Вищий рівень (Paspoort scan)</div>
+      <div class="level-desc">Сканування паспорту через NFC в додатку. Для банків та медичних записів.</div>
+      <div class="level-uses">✓ Alle diensten inclusief zorgdossier</div>
+    </div>
+  </div>
+</div>
+
+<!-- Steps -->
+<div class="section" style="margin-top:16px;">
+  <div class="sec-label">Як отримати DigiD — крок за кроком</div>
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-body">
+        <div class="step-title">Перейдіть на сайт DigiD</div>
+        <div class="step-desc">Оберіть "DigiD aanvragen". Потрібні: BSN-номер, ваша адреса (як в BRP), email.</div>
+        <a class="step-link" href="https://www.digid.nl/aanvragen" target="_blank">→ digid.nl/aanvragen</a>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-body">
+        <div class="step-title">Заповніть анкету онлайн</div>
+        <div class="step-desc">Введіть BSN, адресу реєстрації та виберіть спосіб верифікації. Оберіть "per brief" (лист на адресу).</div>
+        <div class="step-tip">💡 Весь процес займає 5–10 хвилин</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-body">
+        <div class="step-title">Очікуйте лист з активаційним кодом</div>
+        <div class="step-desc">На вашу адресу прийде лист протягом 5–10 робочих днів. В ньому буде одноразовий код.</div>
+        <div class="step-tip">⚠️ Лист дійсний 20 днів — активуйте швидко!</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">4</div>
+      <div class="step-body">
+        <div class="step-title">Активуйте DigiD на сайті</div>
+        <div class="step-desc">Введіть код з листа на digid.nl. Придумайте пароль. DigiD активовано на базовому рівні (SMS).</div>
+        <a class="step-link" href="https://www.digid.nl/activeren" target="_blank">→ digid.nl/activeren</a>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">5</div>
+      <div class="step-body">
+        <div class="step-title">Завантажте додаток DigiD та підвищте рівень</div>
+        <div class="step-desc">App Store або Google Play. У додатку підключіть аккаунт і пройдіть верифікацію обличчя — це підвищить рівень до "Substantieel" (Midden). Більшість сайтів вимагають саме цей рівень.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Tip -->
+<div class="section" style="margin-top:14px;">
+  <div class="tip-card">
+    <span style="font-size:20px;">💡</span>
+    <span class="tip-text">Одразу після активації — увійдіть на toeslagen.nl та подайте заяву на zorgtoeslag. Це компенсація за страховку до €127/місяць, і її можна отримати retroactief за минулі місяці.</span>
+  </div>
+</div>
+
+<!-- FAQ -->
+<div class="section" style="margin-top:16px;">
+  <div class="sec-label">Часті запитання</div>
+  <div class="faq-item">
+    <div class="faq-q">Чи можна отримати DigiD з українським номером телефону?</div>
+    <div class="faq-a">Так. Для SMS-верифікації підходить будь-який номер. Але для вищого рівня (додаток) потрібне підключення до нідерландської або EU SIM-картки.</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q">Я не отримала лист. Що робити?</div>
+    <div class="faq-a">Зачекайте 10 робочих днів. Якщо лист не прийшов — перевірте адресу в BRP (має збігатися з тією, що вказали при заявці). Потім подайте нову заяву на digid.nl.</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q">Чи потрібен DigiD дітям?</div>
+    <div class="faq-a">Дітям до 14 років — ні. Батьки можуть діяти від їхнього імені. З 14 років діти можуть мати власний DigiD.</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q">Я живу в AZC — чи прийде лист туди?</div>
+    <div class="faq-a">Так, якщо ваша адреса в BRP — адреса AZC. Попросіть персонал COA допомогти відстежити лист.</div>
+  </div>
+</div>
+
+<!-- Premium gate -->
+<div class="section" style="margin-top:16px;">
+  <div class="premium-gate">
+    <div class="gate-blur">
+      <div class="fake-row"></div>
+      <div class="fake-row"></div>
+      <div class="fake-row" style="height:32px;"></div>
+    </div>
+    <div class="gate-overlay">
+      <div class="lock-circle">
+        <span class="msym" style="color:var(--premium);font-size:26px;">lock</span>
+      </div>
+      <div class="gate-title">Преміум матеріали</div>
+      <div class="gate-desc">Покроковий гайд підключення DigiD App (з скріншотами) · Що робити якщо DigiD заблоковано · Як сканувати паспорт для рівня Hoog</div>
+      <button class="gate-btn">Отримати доступ — €4.99/міс</button>
+      <div class="gate-price">Перші 7 днів безкоштовно · Відмінити будь-коли</div>
+    </div>
+  </div>
+</div>
+
+<!-- Next step -->
+<div class="section" style="margin-top:16px;">
+  <div class="alert green">
+    <span class="alert-icon">✅</span>
+    <p><strong>Маєте DigiD?</strong> Одразу подайте на zorgtoeslag на toeslagen.nl — це до €127 на місяць компенсації за страховку.</p>
+  </div>
+  <div style="margin-top:8px;">
+    <a href="firststeps_language.html" style="display:flex;align-items:center;justify-content:space-between;background:white;border-radius:14px;padding:14px 16px;text-decoration:none;color:inherit;box-shadow:0 1px 4px rgba(0,0,0,0.06);">
+      <div>
+        <div style="font-size:13px;font-weight:700;">→ Наступний крок: Курси нідерландської</div>
+        <div style="font-size:11.5px;color:var(--muted);margin-top:3px;">Крок 6 · Inburgering та мовні курси</div>
+      </div>
+      <span style="font-family:'Material Symbols Outlined';font-size:20px;color:#D1D5DB;">chevron_right</span>
+    </a>
+  </div>
+</div>
+
+</div>
+
+<a href="#" class="fab"><span class="msym" style="color:white;font-size:22px;">chat</span></a>
+<nav>
+  <a href="final_colorful.html" class="nav-item"><div class="nav-pill"><span class="msym">home</span></div><span style="font-size:10px;font-weight:600;">Головна</span></a>
+  <a href="screen_firststeps.html" class="nav-item active"><div class="nav-pill"><span class="msym">explore</span></div><span style="font-size:10px;font-weight:600;">Огляд</span></a>
+  <a href="#" class="nav-item"><div class="nav-pill"><span class="msym">bookmark</span></div><span style="font-size:10px;font-weight:600;">Збережені</span></a>
+  <a href="#" class="nav-item"><div class="nav-pill"><span class="msym">person</span></div><span style="font-size:10px;font-weight:600;">Профіль</span></a>
+</nav>
+</body>
+</html>

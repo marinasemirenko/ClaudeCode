@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Курси нідерландської мови</title>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --blue: #0057B7; --blue-soft: #EDF4FF;
+      --yellow: #FCD400; --bg: #EFECE5; --card: #fff;
+      --text: #111827; --muted: #6B7280; --border: #DDD9D0;
+      --green: #15803D; --green-soft: #DCFCE7;
+      --amber: #B45309; --amber-soft: #FEF3C7;
+      --emerald: #065F46; --emerald-mid: #059669; --emerald-soft: #D1FAE5;
+      --premium: #7C3AED; --premium-soft: #EDE9FE;
+    }
+    body { font-family: 'Manrope', sans-serif; background: var(--bg); color: var(--text); max-width: 390px; margin: 0 auto; min-height: 100vh; }
+    .msym { font-family: 'Material Symbols Outlined'; font-variation-settings: 'FILL' 1,'wght' 400,'GRAD' 0,'opsz' 24; font-size: 22px; line-height: 1; }
+    .ua-bar { height: 4px; background: linear-gradient(90deg, #0057B7 50%, #FCD400 50%); }
+
+    .sticky-header { position: sticky; top: 0; z-index: 50; background: white; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 10px; padding: 12px 16px; }
+    .back-btn { width: 36px; height: 36px; border-radius: 12px; background: var(--bg); border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; color: var(--text); text-decoration: none; }
+    .header-title { font-size: 14px; font-weight: 700; flex: 1; }
+    .header-badge { font-size: 10px; font-weight: 700; padding: 4px 9px; border-radius: 20px; background: var(--green-soft); color: var(--green); }
+
+    .hero { background: linear-gradient(150deg, #022C22 0%, #065F46 55%, #10B981 100%); padding: 24px 20px 36px; position: relative; overflow: hidden; }
+    .hero::before { content: ''; position: absolute; inset: 0; background-image: radial-gradient(circle, rgba(255,255,255,0.07) 1px, transparent 1px); background-size: 18px 18px; }
+    .hero-step { display: inline-flex; align-items: center; gap: 7px; background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.25); color: rgba(255,255,255,0.9); font-size: 11px; font-weight: 700; border-radius: 20px; padding: 4px 12px; margin-bottom: 12px; position: relative; }
+    .hero h1 { color: white; font-size: 22px; font-weight: 900; line-height: 1.2; position: relative; }
+    .hero p { color: rgba(255,255,255,0.72); font-size: 13px; margin-top: 8px; line-height: 1.55; position: relative; }
+
+    .section { margin: 12px 16px 0; }
+    .sec-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); margin-bottom: 8px; display: flex; align-items: center; gap: 6px; }
+    .sec-label::before { content: ''; display: block; width: 3px; height: 14px; background: var(--emerald-mid); border-radius: 2px; }
+
+    .alert { padding: 12px 14px; border-radius: 14px; display: flex; gap: 10px; align-items: flex-start; }
+    .alert.yellow { background: var(--amber-soft); border: 1px solid #FCD34D; }
+    .alert.green { background: var(--green-soft); border: 1px solid #86EFAC; }
+    .alert.emerald { background: var(--emerald-soft); border: 1px solid #6EE7B7; }
+    .alert-icon { font-size: 18px; flex-shrink: 0; }
+    .alert p { font-size: 12.5px; font-weight: 600; line-height: 1.55; }
+    .alert.yellow p { color: #92400E; }
+    .alert.green p { color: #14532D; }
+    .alert.emerald p { color: #064E3B; }
+
+    /* Phrase of the day */
+    .phrase-hero { background: linear-gradient(135deg, #065F46, #059669); border-radius: 18px; padding: 18px; margin-bottom: 0; }
+    .phrase-label { font-size: 10px; font-weight: 700; color: rgba(255,255,255,0.6); text-transform: uppercase; letter-spacing: 0.07em; margin-bottom: 8px; }
+    .phrase-nl { font-size: 20px; font-weight: 900; color: white; line-height: 1.2; }
+    .phrase-ua { font-size: 13px; color: rgba(255,255,255,0.75); margin-top: 6px; }
+    .phrase-pron { display: inline-block; background: rgba(255,255,255,0.15); color: rgba(255,255,255,0.9); font-size: 11px; font-weight: 600; padding: 4px 10px; border-radius: 8px; margin-top: 8px; font-style: italic; }
+
+    /* Route cards */
+    .route-card { background: white; border-radius: 16px; padding: 14px 16px; margin-bottom: 8px; box-shadow: 0 1px 4px rgba(0,0,0,0.06); border-top: 3px solid #E5E7EB; }
+    .route-card.b1 { border-top-color: var(--emerald-mid); }
+    .route-card.z { border-top-color: var(--blue); }
+    .route-card.z2 { border-top-color: var(--amber); }
+    .route-tag { display: inline-flex; align-items: center; gap: 4px; font-size: 10px; font-weight: 800; padding: 3px 9px; border-radius: 6px; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.04em; }
+    .rt-b1 { background: var(--emerald-soft); color: var(--emerald); }
+    .rt-z { background: var(--blue-soft); color: var(--blue); }
+    .rt-z2 { background: var(--amber-soft); color: var(--amber); }
+    .route-name { font-size: 14px; font-weight: 800; }
+    .route-for { font-size: 11.5px; color: var(--muted); margin-top: 2px; }
+    .route-details { margin-top: 10px; }
+    .route-row { display: flex; justify-content: space-between; font-size: 12px; margin-bottom: 5px; }
+    .rr-key { color: var(--muted); }
+    .rr-val { font-weight: 700; }
+
+    /* Course options */
+    .course-card { background: white; border-radius: 16px; padding: 14px 16px; margin-bottom: 8px; box-shadow: 0 1px 4px rgba(0,0,0,0.06); display: flex; gap: 12px; align-items: flex-start; }
+    .course-icon { width: 44px; height: 44px; border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 22px; flex-shrink: 0; }
+    .course-body { flex: 1; }
+    .course-name { font-size: 13.5px; font-weight: 700; }
+    .course-desc { font-size: 12px; color: var(--muted); margin-top: 3px; line-height: 1.45; }
+    .course-tag { display: inline-block; font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 5px; margin-top: 6px; }
+    .ct-free { background: var(--green-soft); color: var(--green); }
+    .ct-paid { background: #F1F5F9; color: #64748B; }
+    .course-link { display: inline-block; margin-top: 5px; font-size: 12px; color: var(--blue); font-weight: 700; text-decoration: none; }
+
+    /* Levels progression */
+    .levels-bar { background: white; border-radius: 16px; padding: 16px; box-shadow: 0 1px 4px rgba(0,0,0,0.06); }
+    .levels-track { display: flex; align-items: center; gap: 0; margin-bottom: 10px; }
+    .lvl-node { display: flex; flex-direction: column; align-items: center; flex: 1; }
+    .lvl-circle { width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 800; }
+    .lvl-label { font-size: 9px; font-weight: 700; color: var(--muted); margin-top: 4px; }
+    .lvl-connector { flex: 1; height: 2px; background: #E5E7EB; margin-bottom: 20px; }
+    .lvl-circle.done { background: var(--emerald-mid); color: white; }
+    .lvl-circle.current { background: var(--blue); color: white; box-shadow: 0 0 0 3px rgba(29,78,216,0.2); }
+    .lvl-circle.future { background: #E5E7EB; color: var(--muted); }
+    .levels-desc { font-size: 12px; color: var(--muted); line-height: 1.5; }
+
+    /* Apps row */
+    .apps-row { display: flex; gap: 8px; flex-wrap: wrap; }
+    .app-chip { background: white; border-radius: 14px; padding: 10px 12px; display: flex; align-items: center; gap: 8px; box-shadow: 0 1px 4px rgba(0,0,0,0.06); flex: 1; min-width: 140px; }
+    .app-icon { font-size: 24px; flex-shrink: 0; }
+    .app-body { }
+    .app-name { font-size: 12.5px; font-weight: 700; }
+    .app-sub { font-size: 10.5px; color: var(--muted); margin-top: 1px; }
+
+    .tip-card { background: var(--amber-soft); border: 1px solid #FCD34D; border-radius: 14px; padding: 14px; display: flex; gap: 10px; align-items: flex-start; }
+    .tip-text { font-size: 12.5px; color: #78350F; font-weight: 600; line-height: 1.55; }
+
+    /* Steps */
+    .steps { background: white; border-radius: 18px; overflow: hidden; box-shadow: 0 1px 6px rgba(0,0,0,0.07); }
+    .step { display: flex; gap: 14px; padding: 14px 16px; border-bottom: 1px solid #F9FAFB; align-items: flex-start; }
+    .step:last-child { border-bottom: none; }
+    .step-num { width: 32px; height: 32px; background: var(--emerald-mid); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 800; flex-shrink: 0; }
+    .step-body { flex: 1; }
+    .step-title { font-size: 13.5px; font-weight: 700; }
+    .step-desc { font-size: 12px; color: var(--muted); margin-top: 4px; line-height: 1.55; }
+    .step-link { display: inline-block; margin-top: 5px; font-size: 12px; color: var(--blue); font-weight: 700; text-decoration: none; }
+
+    .premium-gate { border-radius: 18px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.08); position: relative; }
+    .gate-blur { filter: blur(3px); pointer-events: none; user-select: none; background: white; padding: 16px; }
+    .gate-blur .fake-row { height: 44px; background: #F3F4F6; border-radius: 10px; margin-bottom: 8px; }
+    .gate-overlay { position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0.95) 40%); display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 20px; text-align: center; }
+    .lock-circle { width: 52px; height: 52px; background: var(--premium-soft); border-radius: 18px; display: flex; align-items: center; justify-content: center; margin-bottom: 10px; }
+    .gate-title { font-size: 15px; font-weight: 800; }
+    .gate-desc { font-size: 12px; color: var(--muted); margin-top: 5px; line-height: 1.5; }
+    .gate-btn { margin-top: 14px; background: var(--premium); color: white; font-size: 13px; font-weight: 700; border: none; border-radius: 14px; padding: 12px 24px; cursor: pointer; width: 100%; }
+    .gate-price { font-size: 11px; color: var(--muted); margin-top: 7px; }
+
+    nav { position: fixed; bottom: 0; left: 50%; transform: translateX(-50%); width: 100%; max-width: 390px; background: white; border-top: 1px solid var(--border); display: flex; justify-content: space-around; padding: 6px 0 14px; z-index: 100; }
+    .nav-item { display: flex; flex-direction: column; align-items: center; gap: 3px; text-decoration: none; color: var(--muted); font-size: 10px; font-weight: 600; }
+    .nav-pill { width: 52px; height: 32px; display: flex; align-items: center; justify-content: center; border-radius: 20px; }
+    .nav-item.active .nav-pill { background: var(--emerald-soft); }
+    .nav-item.active { color: var(--emerald); }
+    .pb { padding-bottom: 90px; }
+    .fab { position: fixed; bottom: 76px; right: calc(50% - 195px + 16px); width: 50px; height: 50px; background: var(--emerald-mid); border-radius: 18px; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(5,150,105,0.4); z-index: 90; text-decoration: none; }
+  </style>
+</head>
+<body>
+<div class="ua-bar"></div>
+
+<div class="sticky-header">
+  <a href="screen_firststeps.html" class="back-btn"><span class="msym" style="font-size:20px;">arrow_back</span></a>
+  <span class="header-title">Курси нідерландської</span>
+  <span class="header-badge">✓ Безкоштовно</span>
+</div>
+
+<div class="hero">
+  <div class="hero-step">📚 Крок 6 з 8</div>
+  <h1>Нідерландська мова — ваш найкращий інструмент</h1>
+  <p>Знання нідерландської відкриває роботу, нових знайомих і впевненість у повсякденному житті. Для біженців з України є безкоштовні курси.</p>
+</div>
+
+<div class="pb">
+
+<!-- Phrase of the day -->
+<div class="section" style="margin-top:14px;">
+  <div class="phrase-hero">
+    <div class="phrase-label">Фраза дня</div>
+    <div class="phrase-nl">Goedemorgen, hoe gaat het?</div>
+    <div class="phrase-ua">Доброго ранку, як справи?</div>
+    <div class="phrase-pron">[ху́-де-мо́р-хен, ху хат ет]</div>
+  </div>
+</div>
+
+<!-- Alert -->
+<div class="section" style="margin-top:12px;">
+  <div class="alert emerald">
+    <span class="alert-icon">🎓</span>
+    <p>Українські біженці мають право на безкоштовний inburgering-курс за кошти DUO. Не потрібно платити самостійно — все покривається державою.</p>
+  </div>
+</div>
+
+<!-- Language level progression -->
+<div class="section" style="margin-top:16px;">
+  <div class="sec-label">Рівні мови — ваш шлях</div>
+  <div class="levels-bar">
+    <div class="levels-track">
+      <div class="lvl-node">
+        <div class="lvl-circle done">A1</div>
+        <div class="lvl-label">Початок</div>
+      </div>
+      <div class="lvl-connector"></div>
+      <div class="lvl-node">
+        <div class="lvl-circle done">A2</div>
+        <div class="lvl-label">Базовий</div>
+      </div>
+      <div class="lvl-connector"></div>
+      <div class="lvl-node">
+        <div class="lvl-circle current">B1</div>
+        <div class="lvl-label">Середній</div>
+      </div>
+      <div class="lvl-connector"></div>
+      <div class="lvl-node">
+        <div class="lvl-circle future">B2</div>
+        <div class="lvl-label">Вищий</div>
+      </div>
+      <div class="lvl-connector"></div>
+      <div class="lvl-node">
+        <div class="lvl-circle future">C1</div>
+        <div class="lvl-label">Вільне</div>
+      </div>
+    </div>
+    <div class="levels-desc">Мета inburgering — досягти рівня <strong>B1</strong>. Це достатньо для роботи, спілкування та самостійного життя. Терміни: зазвичай 2–3 роки, залежно від темпу.</div>
+  </div>
+</div>
+
+<!-- Inburgering routes -->
+<div class="section" style="margin-top:16px;">
+  <div class="sec-label">3 маршрути Inburgering — оберіть свій</div>
+
+  <div class="route-card b1">
+    <span class="route-tag rt-b1">B1-Route ★ Рекомендовано</span>
+    <div class="route-name">B1-Route (Werk en Studie)</div>
+    <div class="route-for">Для тих хто хоче працювати або навчатися</div>
+    <div class="route-details">
+      <div class="route-row"><span class="rr-key">Цільовий рівень</span><span class="rr-val">B1 (NT2)</span></div>
+      <div class="route-row"><span class="rr-key">Тривалість</span><span class="rr-val">2–3 роки</span></div>
+      <div class="route-row"><span class="rr-key">Вартість</span><span class="rr-val" style="color:var(--green);">Безкоштовно (DUO)</span></div>
+      <div class="route-row"><span class="rr-key">Включає</span><span class="rr-val">Мова + ONA + MAP</span></div>
+    </div>
+  </div>
+
+  <div class="route-card z">
+    <span class="route-tag rt-z">Z-Route</span>
+    <div class="route-name">Z-Route (Zelfredzaamheid)</div>
+    <div class="route-for">Для тих, кому B1 важко досягти (вік, здоров'я)</div>
+    <div class="route-details">
+      <div class="route-row"><span class="rr-key">Цільовий рівень</span><span class="rr-val">A2 (базовий)</span></div>
+      <div class="route-row"><span class="rr-key">Тривалість</span><span class="rr-val">1.5–2 роки</span></div>
+      <div class="route-row"><span class="rr-key">Вартість</span><span class="rr-val" style="color:var(--green);">Безкоштовно (DUO)</span></div>
+    </div>
+  </div>
+
+  <div class="route-card z2">
+    <span class="route-tag rt-z2">Onderwijs-Route</span>
+    <div class="route-name">Onderwijsroute (Diploma)</div>
+    <div class="route-for">Для молоді до 28 років, які хочуть отримати диплом в NL</div>
+    <div class="route-details">
+      <div class="route-row"><span class="rr-key">Цільовий рівень</span><span class="rr-val">B1–B2</span></div>
+      <div class="route-row"><span class="rr-key">Шлях</span><span class="rr-val">MBO / HBO / WO</span></div>
+      <div class="route-row"><span class="rr-key">Вартість</span><span class="rr-val" style="color:var(--green);">Безкоштовно (DUO)</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- How to start -->
+<div class="section" style="margin-top:16px;">
+  <div class="sec-label">Як записатися на курс</div>
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-body">
+        <div class="step-title">Зверніться до gemeente</div>
+        <div class="step-desc">Gemeente направить вас до ROC або taalschool у вашому місті та визначить маршрут inburgering.</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-body">
+        <div class="step-title">Пройдіть тест рівня мови</div>
+        <div class="step-desc">Перед зарахуванням на курс буде короткий тест, щоб визначити ваш поточний рівень і підібрати групу.</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-body">
+        <div class="step-title">Отримайте PIP (Persoonlijk Inburgering Plan)</div>
+        <div class="step-desc">Разом із консультантом DUO складете особистий план навчання з цілями і термінами.</div>
+        <a class="step-link" href="https://www.duo.nl" target="_blank">→ duo.nl</a>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">4</div>
+      <div class="step-body">
+        <div class="step-title">Починайте заняття</div>
+        <div class="step-desc">Зазвичай 3–5 разів на тиждень по 2–3 години. Багато шкіл також пропонують вечірні заняття.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Free resources -->
+<div class="section" style="margin-top:16px;">
+  <div class="sec-label">Курси та ресурси — де вчити зараз</div>
+
+  <div class="course-card">
+    <div class="course-icon" style="background:#FFF0E6;">🏫</div>
+    <div class="course-body">
+      <div class="course-name">ROC (Regionaal Opleidingscentrum)</div>
+      <div class="course-desc">Державний навчальний центр. Є у кожному великому місті. Офіційні NT2-курси, сертифікати.</div>
+      <span class="course-tag ct-free">✓ Безкоштовно для bijenkomers</span>
+    </div>
+  </div>
+
+  <div class="course-card">
+    <div class="course-icon" style="background:#E0F2FE;">🌐</div>
+    <div class="course-body">
+      <div class="course-name">NT2.nl — онлайн платформа</div>
+      <div class="course-desc">Офіційна платформа для вивчення нідерландської. Вправи, відео, тести — безкоштовно.</div>
+      <span class="course-tag ct-free">✓ Безкоштовно</span>
+      <a class="course-link" href="https://www.nt2.nl" target="_blank">→ nt2.nl</a>
+    </div>
+  </div>
+
+  <div class="course-card">
+    <div class="course-icon" style="background:#F0FDF4;">🤝</div>
+    <div class="course-body">
+      <div class="course-name">Vluchtelingenwerk Taal</div>
+      <div class="course-desc">Практика мови з волонтерами-носіями. Неформальне навчання, розмовна практика.</div>
+      <span class="course-tag ct-free">✓ Безкоштовно</span>
+      <a class="course-link" href="https://www.vluchtelingenwerk.nl" target="_blank">→ vluchtelingenwerk.nl</a>
+    </div>
+  </div>
+
+  <div class="course-card">
+    <div class="course-icon" style="background:#FEF3C7;">🏘️</div>
+    <div class="course-body">
+      <div class="course-name">Buurtaal (сусідська мова)</div>
+      <div class="course-desc">Локальні групи розмовної практики. Зустрічаються в кафе, бібліотеках. Дуже розслаблена атмосфера.</div>
+      <span class="course-tag ct-free">✓ Безкоштовно</span>
+    </div>
+  </div>
+</div>
+
+<!-- Apps -->
+<div class="section" style="margin-top:16px;">
+  <div class="sec-label">Додатки для самостійного навчання</div>
+  <div class="apps-row">
+    <div class="app-chip">
+      <span class="app-icon">🦉</span>
+      <div class="app-body">
+        <div class="app-name">Duolingo</div>
+        <div class="app-sub">Гейміфіковане навчання</div>
+      </div>
+    </div>
+    <div class="app-chip">
+      <span class="app-icon">🎧</span>
+      <div class="app-body">
+        <div class="app-name">Pimsleur</div>
+        <div class="app-sub">Аудіо-курс (A1–B1)</div>
+      </div>
+    </div>
+  </div>
+  <div class="apps-row" style="margin-top:8px;">
+    <div class="app-chip">
+      <span class="app-icon">📺</span>
+      <div class="app-body">
+        <div class="app-name">NPO Start</div>
+        <div class="app-sub">Нідерландське ТБ з субтитрами</div>
+      </div>
+    </div>
+    <div class="app-chip">
+      <span class="app-icon">📖</span>
+      <div class="app-body">
+        <div class="app-name">Anki</div>
+        <div class="app-sub">Флеш-картки — слова швидко</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Tip -->
+<div class="section" style="margin-top:14px;">
+  <div class="tip-card">
+    <span style="font-size:20px;">💡</span>
+    <span class="tip-text">Не чекайте початку офіційного курсу — починайте вивчати зараз. Навіть 20 хвилин Duolingo щодня за 3 місяці дають базу для розуміння повсякденних фраз.</span>
+  </div>
+</div>
+
+<!-- Premium gate -->
+<div class="section" style="margin-top:16px;">
+  <div class="premium-gate">
+    <div class="gate-blur">
+      <div class="fake-row"></div>
+      <div class="fake-row"></div>
+      <div class="fake-row" style="height:32px;"></div>
+    </div>
+    <div class="gate-overlay">
+      <div class="lock-circle">
+        <span class="msym" style="color:var(--premium);font-size:26px;">lock</span>
+      </div>
+      <div class="gate-title">Преміум матеріали</div>
+      <div class="gate-desc">Список безкоштовних taalscholen по містах з контактами · Розклад груп для початківців · 500 найважливіших слів нідерландської для побуту</div>
+      <button class="gate-btn">Отримати доступ — €4.99/міс</button>
+      <div class="gate-price">Перші 7 днів безкоштовно · Відмінити будь-коли</div>
+    </div>
+  </div>
+</div>
+
+<!-- Next step -->
+<div class="section" style="margin-top:16px;">
+  <div class="alert green">
+    <span class="alert-icon">✅</span>
+    <p><strong>Маєте дітей?</strong> Записуйте їх до школи паралельно з мовними курсами — діти вивчають нідерландську набагато швидше дорослих.</p>
+  </div>
+  <div style="margin-top:8px;">
+    <a href="firststeps_school.html" style="display:flex;align-items:center;justify-content:space-between;background:white;border-radius:14px;padding:14px 16px;text-decoration:none;color:inherit;box-shadow:0 1px 4px rgba(0,0,0,0.06);">
+      <div>
+        <div style="font-size:13px;font-weight:700;">→ Наступний крок: Школа для дітей</div>
+        <div style="font-size:11.5px;color:var(--muted);margin-top:3px;">Крок 7 · Leerplicht та ISK-клас</div>
+      </div>
+      <span style="font-family:'Material Symbols Outlined';font-size:20px;color:#D1D5DB;">chevron_right</span>
+    </a>
+  </div>
+</div>
+
+</div>
+
+<a href="#" class="fab"><span class="msym" style="color:white;font-size:22px;">chat</span></a>
+<nav>
+  <a href="final_colorful.html" class="nav-item"><div class="nav-pill"><span class="msym">home</span></div><span style="font-size:10px;font-weight:600;">Головна</span></a>
+  <a href="screen_firststeps.html" class="nav-item active"><div class="nav-pill"><span class="msym">explore</span></div><span style="font-size:10px;font-weight:600;">Огляд</span></a>
+  <a href="#" class="nav-item"><div class="nav-pill"><span class="msym">bookmark</span></div><span style="font-size:10px;font-weight:600;">Збережені</span></a>
+  <a href="#" class="nav-item"><div class="nav-pill"><span class="msym">person</span></div><span style="font-size:10px;font-weight:600;">Профіль</span></a>
+</nav>
+</body>
+</html>

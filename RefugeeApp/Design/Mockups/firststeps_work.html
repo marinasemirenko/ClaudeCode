@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Пошук роботи в Нідерландах</title>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --blue: #0057B7; --blue-soft: #EDF4FF;
+      --yellow: #FCD400; --bg: #EFECE5; --card: #fff;
+      --text: #111827; --muted: #6B7280; --border: #DDD9D0;
+      --green: #15803D; --green-soft: #DCFCE7;
+      --amber: #B45309; --amber-soft: #FEF3C7;
+      --slate: #334155; --slate-soft: #F1F5F9;
+      --premium: #7C3AED; --premium-soft: #EDE9FE;
+    }
+    body { font-family: 'Manrope', sans-serif; background: var(--bg); color: var(--text); max-width: 390px; margin: 0 auto; min-height: 100vh; }
+    .msym { font-family: 'Material Symbols Outlined'; font-variation-settings: 'FILL' 1,'wght' 400,'GRAD' 0,'opsz' 24; font-size: 22px; line-height: 1; }
+    .ua-bar { height: 4px; background: linear-gradient(90deg, #0057B7 50%, #FCD400 50%); }
+
+    .sticky-header { position: sticky; top: 0; z-index: 50; background: white; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 10px; padding: 12px 16px; }
+    .back-btn { width: 36px; height: 36px; border-radius: 12px; background: var(--bg); border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; color: var(--text); text-decoration: none; }
+    .header-title { font-size: 14px; font-weight: 700; flex: 1; }
+    .header-badge-prem { font-size: 10px; font-weight: 700; padding: 4px 9px; border-radius: 20px; background: var(--premium-soft); color: var(--premium); }
+
+    .hero { background: linear-gradient(150deg, #0F172A 0%, #334155 55%, #64748B 100%); padding: 24px 20px 36px; position: relative; overflow: hidden; }
+    .hero::before { content: ''; position: absolute; inset: 0; background-image: radial-gradient(circle, rgba(255,255,255,0.07) 1px, transparent 1px); background-size: 18px 18px; }
+    .hero-step { display: inline-flex; align-items: center; gap: 7px; background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.25); color: rgba(255,255,255,0.9); font-size: 11px; font-weight: 700; border-radius: 20px; padding: 4px 12px; margin-bottom: 12px; position: relative; }
+    .hero h1 { color: white; font-size: 22px; font-weight: 900; line-height: 1.2; position: relative; }
+    .hero p { color: rgba(255,255,255,0.72); font-size: 13px; margin-top: 8px; line-height: 1.55; position: relative; }
+
+    .section { margin: 12px 16px 0; }
+    .sec-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); margin-bottom: 8px; display: flex; align-items: center; gap: 6px; }
+    .sec-label::before { content: ''; display: block; width: 3px; height: 14px; background: var(--slate); border-radius: 2px; }
+
+    .alert { padding: 12px 14px; border-radius: 14px; display: flex; gap: 10px; align-items: flex-start; }
+    .alert.yellow { background: var(--amber-soft); border: 1px solid #FCD34D; }
+    .alert.green { background: var(--green-soft); border: 1px solid #86EFAC; }
+    .alert.blue { background: var(--blue-soft); border: 1px solid #BFDBFE; }
+    .alert.slate { background: var(--slate-soft); border: 1px solid #CBD5E1; }
+    .alert-icon { font-size: 18px; flex-shrink: 0; }
+    .alert p { font-size: 12.5px; font-weight: 600; line-height: 1.55; }
+    .alert.yellow p { color: #92400E; }
+    .alert.green p { color: #14532D; }
+    .alert.blue p { color: #1E40AF; }
+    .alert.slate p { color: var(--slate); }
+
+    /* Rights big card */
+    .right-banner { background: linear-gradient(135deg, #0F172A, #1E293B); border-radius: 18px; padding: 18px; color: white; }
+    .rb-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: rgba(255,255,255,0.5); margin-bottom: 8px; }
+    .rb-title { font-size: 18px; font-weight: 900; line-height: 1.3; }
+    .rb-sub { font-size: 12px; color: rgba(255,255,255,0.65); margin-top: 6px; line-height: 1.5; }
+    .rb-check { display: flex; align-items: center; gap: 8px; margin-top: 10px; }
+    .rb-check-item { display: flex; align-items: center; gap: 5px; font-size: 11px; font-weight: 700; color: rgba(255,255,255,0.85); }
+    .rb-check-item::before { content: '✓'; color: #4ADE80; font-weight: 900; }
+
+    /* Platform cards */
+    .platform-card { background: white; border-radius: 16px; padding: 14px 16px; margin-bottom: 8px; box-shadow: 0 1px 4px rgba(0,0,0,0.06); display: flex; gap: 12px; align-items: flex-start; }
+    .plat-icon { width: 44px; height: 44px; border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 22px; flex-shrink: 0; }
+    .plat-body { flex: 1; }
+    .plat-name { font-size: 13.5px; font-weight: 700; }
+    .plat-desc { font-size: 12px; color: var(--muted); margin-top: 3px; line-height: 1.45; }
+    .plat-link { display: inline-block; margin-top: 5px; font-size: 12px; color: var(--blue); font-weight: 700; text-decoration: none; }
+    .plat-tag { display: inline-block; font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 5px; margin-top: 5px; }
+    .t-free { background: var(--green-soft); color: var(--green); }
+    .t-recommended { background: var(--amber-soft); color: var(--amber); }
+
+    /* Steps */
+    .steps { background: white; border-radius: 18px; overflow: hidden; box-shadow: 0 1px 6px rgba(0,0,0,0.07); }
+    .step { display: flex; gap: 14px; padding: 14px 16px; border-bottom: 1px solid #F9FAFB; align-items: flex-start; }
+    .step:last-child { border-bottom: none; }
+    .step-num { width: 32px; height: 32px; background: var(--slate); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 800; flex-shrink: 0; }
+    .step-body { flex: 1; }
+    .step-title { font-size: 13.5px; font-weight: 700; }
+    .step-desc { font-size: 12px; color: var(--muted); margin-top: 4px; line-height: 1.55; }
+    .step-tip { margin-top: 6px; font-size: 11.5px; background: var(--amber-soft); color: var(--amber); padding: 5px 9px; border-radius: 8px; display: inline-block; font-weight: 600; }
+    .step-link { display: inline-block; margin-top: 5px; font-size: 12px; color: var(--blue); font-weight: 700; text-decoration: none; }
+
+    /* Bijstand card */
+    .bijstand-card { background: white; border-radius: 18px; padding: 16px; box-shadow: 0 1px 6px rgba(0,0,0,0.07); }
+    .bij-amount { font-size: 32px; font-weight: 900; color: var(--slate); }
+    .bij-period { font-size: 12px; color: var(--muted); }
+    .bij-divider { height: 1px; background: #F3F4F6; margin: 12px 0; }
+    .bij-row { display: flex; justify-content: space-between; align-items: center; font-size: 12px; margin-bottom: 6px; }
+    .bij-key { color: var(--muted); }
+    .bij-val { font-weight: 700; }
+
+    /* Diploma table */
+    .tbl { width: 100%; border-collapse: collapse; font-size: 12px; }
+    .tbl th { background: #F3F4F6; padding: 8px 10px; text-align: left; font-size: 10px; font-weight: 700; color: var(--muted); text-transform: uppercase; }
+    .tbl td { padding: 9px 10px; border-bottom: 1px solid #F9FAFB; vertical-align: middle; }
+    .tbl tr:last-child td { border-bottom: none; }
+
+    /* Volunteer section */
+    .volunteer-box { background: var(--slate-soft); border-radius: 16px; padding: 14px 16px; border: 1px solid #CBD5E1; }
+    .vb-title { font-size: 13.5px; font-weight: 700; margin-bottom: 6px; }
+    .vb-desc { font-size: 12px; color: var(--muted); line-height: 1.55; margin-bottom: 10px; }
+    .vb-benefits { display: flex; flex-direction: column; gap: 5px; }
+    .vb-item { display: flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 600; }
+    .vb-item::before { content: '→'; color: var(--slate); font-weight: 900; }
+
+    .tip-card { background: var(--amber-soft); border: 1px solid #FCD34D; border-radius: 14px; padding: 14px; display: flex; gap: 10px; align-items: flex-start; }
+    .tip-text { font-size: 12.5px; color: #78350F; font-weight: 600; line-height: 1.55; }
+
+    .faq-item { background: white; border-radius: 14px; padding: 14px; margin-bottom: 8px; box-shadow: 0 1px 4px rgba(0,0,0,0.05); }
+    .faq-q { font-size: 13px; font-weight: 700; display: flex; gap: 8px; align-items: flex-start; }
+    .faq-q::before { content: 'Q'; background: var(--slate); color: white; font-size: 10px; font-weight: 800; padding: 2px 6px; border-radius: 5px; flex-shrink: 0; margin-top: 2px; }
+    .faq-a { font-size: 12px; color: var(--muted); margin-top: 7px; line-height: 1.6; padding-left: 26px; }
+
+    /* Premium gate */
+    .premium-gate { border-radius: 18px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.08); position: relative; }
+    .gate-blur { filter: blur(3px); pointer-events: none; user-select: none; background: white; padding: 16px; }
+    .gate-blur .fake-row { height: 44px; background: #F3F4F6; border-radius: 10px; margin-bottom: 8px; }
+    .gate-overlay { position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0.95) 40%); display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 20px; text-align: center; }
+    .lock-circle { width: 52px; height: 52px; background: var(--premium-soft); border-radius: 18px; display: flex; align-items: center; justify-content: center; margin-bottom: 10px; }
+    .gate-title { font-size: 15px; font-weight: 800; }
+    .gate-desc { font-size: 12px; color: var(--muted); margin-top: 5px; line-height: 1.5; }
+    .gate-btn { margin-top: 14px; background: var(--premium); color: white; font-size: 13px; font-weight: 700; border: none; border-radius: 14px; padding: 12px 24px; cursor: pointer; width: 100%; }
+    .gate-price { font-size: 11px; color: var(--muted); margin-top: 7px; }
+
+    /* Completed banner */
+    .completed-banner { background: linear-gradient(135deg, #14532D, #15803D); border-radius: 18px; padding: 20px; text-align: center; color: white; }
+    .cb-icon { font-size: 44px; margin-bottom: 10px; }
+    .cb-title { font-size: 18px; font-weight: 900; }
+    .cb-sub { font-size: 12.5px; color: rgba(255,255,255,0.75); margin-top: 6px; line-height: 1.5; }
+    .cb-btn { display: block; margin-top: 14px; background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.3); color: white; font-size: 13px; font-weight: 700; border-radius: 14px; padding: 12px; text-decoration: none; }
+
+    nav { position: fixed; bottom: 0; left: 50%; transform: translateX(-50%); width: 100%; max-width: 390px; background: white; border-top: 1px solid var(--border); display: flex; justify-content: space-around; padding: 6px 0 14px; z-index: 100; }
+    .nav-item { display: flex; flex-direction: column; align-items: center; gap: 3px; text-decoration: none; color: var(--muted); font-size: 10px; font-weight: 600; }
+    .nav-pill { width: 52px; height: 32px; display: flex; align-items: center; justify-content: center; border-radius: 20px; }
+    .nav-item.active .nav-pill { background: var(--slate-soft); }
+    .nav-item.active { color: var(--slate); }
+    .pb { padding-bottom: 90px; }
+    .fab { position: fixed; bottom: 76px; right: calc(50% - 195px + 16px); width: 50px; height: 50px; background: var(--slate); border-radius: 18px; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(51,65,85,0.4); z-index: 90; text-decoration: none; }
+  </style>
+</head>
+<body>
+<div class="ua-bar"></div>
+
+<div class="sticky-header">
+  <a href="screen_firststeps.html" class="back-btn"><span class="msym" style="font-size:20px;">arrow_back</span></a>
+  <span class="header-title">Пошук роботи</span>
+  <span class="header-badge-prem">★ Частково преміум</span>
+</div>
+
+<div class="hero">
+  <div class="hero-step">💼 Крок 8 з 8</div>
+  <h1>Пошук роботи в Нідерландах</h1>
+  <p>Як власник UID ви маєте повне право працювати в Нідерландах без додаткових дозволів. Ринок праці відкритий для вас з першого дня.</p>
+</div>
+
+<div class="pb">
+
+<!-- Right to work -->
+<div class="section" style="margin-top:14px;">
+  <div class="right-banner">
+    <div class="rb-label">Ваше право</div>
+    <div class="rb-title">Повний доступ до ринку праці Нідерландів</div>
+    <div class="rb-sub">Власники UID-документа (тимчасовий захист) можуть працювати без TWV (tewerkstellingsvergunning). Роботодавець не потребує окремого дозволу для найму.</div>
+    <div class="rb-check">
+      <span class="rb-check-item">Повна зайнятість</span>
+      <span class="rb-check-item">Часткова зайнятість</span>
+      <span class="rb-check-item">Freelance</span>
+    </div>
+  </div>
+</div>
+
+<!-- Bijstand safety net -->
+<div class="section" style="margin-top:16px;">
+  <div class="sec-label">Якщо немає роботи — Bijstand (соціальна допомога)</div>
+  <div class="bijstand-card">
+    <div style="display:flex;align-items:baseline;gap:6px;">
+      <div class="bij-amount">~€1 200</div>
+      <div class="bij-period">на місяць (одинак, 2025)</div>
+    </div>
+    <div class="bij-divider"></div>
+    <div class="bij-row"><span class="bij-key">Хто має право</span><span class="bij-val">UID-тримачі, зареєстровані в BRP</span></div>
+    <div class="bij-row"><span class="bij-key">Подача</span><span class="bij-val">Через gemeente (sociale dienst)</span></div>
+    <div class="bij-row"><span class="bij-key">Умова</span><span class="bij-val">Реєстрація як werkzoekende у UWV</span></div>
+    <div class="bij-row"><span class="bij-key">Разом з</span><span class="bij-val">Zorgtoeslag, kinderbijslag</span></div>
+    <div style="margin-top:10px;background:var(--amber-soft);border-radius:10px;padding:9px 12px;">
+      <span style="font-size:12px;color:#92400E;font-weight:600;">💡 Bijstand тимчасовий — при влаштуванні на роботу припиняється. При частковій зайнятості — частково виплачується.</span>
+    </div>
+  </div>
+</div>
+
+<!-- First steps to get job -->
+<div class="section" style="margin-top:16px;">
+  <div class="sec-label">Перші кроки на ринку праці</div>
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-body">
+        <div class="step-title">Зареєструйтеся в UWV як werkzoekende</div>
+        <div class="step-desc">UWV — державна служба зайнятості. Реєстрація дає доступ до Werk.nl, вакансій та потенційно WW (uitkering). Потрібен DigiD.</div>
+        <a class="step-link" href="https://www.werk.nl" target="_blank">→ werk.nl</a>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-body">
+        <div class="step-title">Складіть CV нідерландського формату</div>
+        <div class="step-desc">Нідерландське CV: максимум 1–2 сторінки, фото (необов'язково але прийнято), досвід в хронологічному порядку, без дат народження та сімейного стану.</div>
+        <div class="step-tip">💡 LinkedIn-профіль важливіший ніж CV — більшість голландських рекрутерів шукають там</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-body">
+        <div class="step-title">Зверніться до Vluchtelingenwerk Werk-traject</div>
+        <div class="step-desc">Безкоштовний сервіс для біженців: допомога з CV, пошуком вакансій, підготовкою до інтерв'ю та контакти з роботодавцями.</div>
+        <a class="step-link" href="https://www.vluchtelingenwerk.nl/werk" target="_blank">→ vluchtelingenwerk.nl/werk</a>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">4</div>
+      <div class="step-body">
+        <div class="step-title">Перевірте визнання вашого диплому</div>
+        <div class="step-desc">IDW (Informatiepunt Diploma Waardering) — безкоштовний сервіс, який пояснює де стоїть ваш диплом на нідерландській шкалі.</div>
+        <a class="step-link" href="https://www.idw.nl" target="_blank">→ idw.nl (безкоштовно)</a>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">5</div>
+      <div class="step-body">
+        <div class="step-title">Розглядайте uitzendbureau (кадрові агентства)</div>
+        <div class="step-desc">Randstad, Adecco, Manpower, Start People — наймають тимчасово. Добрий старт для набуття досвіду в NL та вивчення мови.</div>
+        <div class="step-tip">⚡ Не потрібне CVvluchtelingenwerk — просто прийдіть особисто або подайте онлайн</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Job platforms -->
+<div class="section" style="margin-top:16px;">
+  <div class="sec-label">Платформи для пошуку роботи</div>
+
+  <div class="platform-card">
+    <div class="plat-icon" style="background:#EFF6FF;">💼</div>
+    <div class="plat-body">
+      <div class="plat-name">Werk.nl</div>
+      <div class="plat-desc">Офіційний сайт UWV. Вакансії від великих компаній, держсектор, реєстрація як werkzoekende.</div>
+      <span class="plat-tag t-free">✓ Безкоштовно</span>
+      <a class="plat-link" href="https://www.werk.nl" target="_blank">→ werk.nl</a>
+    </div>
+  </div>
+
+  <div class="platform-card">
+    <div class="plat-icon" style="background:#F0FDF4;">🔍</div>
+    <div class="plat-body">
+      <div class="plat-name">Indeed.nl</div>
+      <div class="plat-desc">Найбільша пошукова система вакансій. Можна шукати за галуззю, містом, рівнем мови.</div>
+      <span class="plat-tag t-free">✓ Безкоштовно</span>
+      <span class="plat-tag t-recommended" style="margin-left:4px;">★ Рекомендовано</span>
+    </div>
+  </div>
+
+  <div class="platform-card">
+    <div class="plat-icon" style="background:#EFF6FF;">🔵</div>
+    <div class="plat-body">
+      <div class="plat-name">LinkedIn</div>
+      <div class="plat-desc">Обов'язково для білого комірця. Заповніть профіль і додавайте нідерландських колег та рекрутерів.</div>
+      <span class="plat-tag t-free">✓ Базово безкоштовно</span>
+    </div>
+  </div>
+
+  <div class="platform-card">
+    <div class="plat-icon" style="background:#FFF7ED;">🇳🇱</div>
+    <div class="plat-body">
+      <div class="plat-name">Jobbird.nl & Monsterboard</div>
+      <div class="plat-desc">Нідерландські агрегатори вакансій. Багато позицій de Dutch companies що не публікують на LinkedIn.</div>
+      <span class="plat-tag t-free">✓ Безкоштовно</span>
+    </div>
+  </div>
+</div>
+
+<!-- Diploma recognition -->
+<div class="section" style="margin-top:16px;">
+  <div class="sec-label">Визнання українського диплому</div>
+  <div style="background:white;border-radius:18px;overflow:hidden;box-shadow:0 1px 6px rgba(0,0,0,0.07);">
+    <table class="tbl">
+      <thead><tr><th>Профессія</th><th>Потрібно</th><th>Де</th></tr></thead>
+      <tbody>
+        <tr><td style="font-weight:700;">Лікар/медсестра</td><td>BIG-registratie</td><td>bigregister.nl</td></tr>
+        <tr><td style="font-weight:700;">Юрист</td><td>Erkenning NOvA</td><td>nova.nl</td></tr>
+        <tr><td style="font-weight:700;">Вчитель</td><td>Перевірка diploma</td><td>DUO.nl</td></tr>
+        <tr><td style="font-weight:700;">IT / Маркетинг</td><td>Як правило не потрібно</td><td>—</td></tr>
+        <tr><td style="font-weight:700;">Будівельник</td><td>VCA-certifikaat</td><td>Lokaal cursus</td></tr>
+        <tr><td style="font-weight:700;">Водій вантажівки</td><td>Обмін водійських прав</td><td>RDW.nl</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div style="margin-top:8px;padding:10px 12px;background:var(--blue-soft);border-radius:12px;font-size:12px;color:#1E40AF;font-weight:600;">
+    IDW — безкоштовний сервіс для перевірки диплому: <a href="https://www.idw.nl" style="color:#1D4ED8;" target="_blank">idw.nl</a>
+  </div>
+</div>
+
+<!-- Volunteer work -->
+<div class="section" style="margin-top:16px;">
+  <div class="sec-label">Волонтерство — шлях до першої роботи</div>
+  <div class="volunteer-box">
+    <div class="vb-title">🤝 Vrijwilligerswerk — чому варто</div>
+    <div class="vb-desc">Якщо важко знайти роботу одразу — волонтерство допомагає отримати нідерландський досвід у CV, вивчити мову і побудувати мережу знайомств.</div>
+    <div class="vb-benefits">
+      <div class="vb-item">Нідерландський досвід у резюме</div>
+      <div class="vb-item">Практика мови в реальних ситуаціях</div>
+      <div class="vb-item">Рекомендаційні листи від організацій</div>
+      <div class="vb-item">Знайомства з потенційними роботодавцями</div>
+      <div class="vb-item">Не впливає на bijstand-виплати</div>
+    </div>
+  </div>
+</div>
+
+<!-- Tip -->
+<div class="section" style="margin-top:14px;">
+  <div class="tip-card">
+    <span style="font-size:20px;">💡</span>
+    <span class="tip-text">Нідерландці цінують ініціативу. Якщо хочете в компанію — напишіть "open sollicitatie" (відкриту заяву) навіть без вакансії. Багато рекрутерів реагують позитивно.</span>
+  </div>
+</div>
+
+<!-- FAQ -->
+<div class="section" style="margin-top:16px;">
+  <div class="sec-label">Часті запитання</div>
+  <div class="faq-item">
+    <div class="faq-q">Чи можу я відкрити власний бізнес (ZZP)?</div>
+    <div class="faq-a">Так. UID-тримачі можуть реєструватися як ZZP (самозайнятий) через KvK (Kamer van Koophandel). Реєстрація коштує €50. При ZZP bijstand зазвичай не виплачується.</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q">Чи обов'язково знати нідерландську для роботи?</div>
+    <div class="faq-a">Залежить від роботи. IT, логістика, сільське господарство, прибирання — часто достатньо англійської або навіть без мови. Офіс, обслуговування, держсектор — нідерландська потрібна.</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q">Скільки можна заробляти на bijstand паралельно з роботою?</div>
+    <div class="faq-a">До певної межі — можна. Gemeente розраховує суму bijstand мінус дохід. Повідомляйте gemeente про будь-який заробіток — приховування вважається fraude.</div>
+  </div>
+</div>
+
+<!-- Premium gate -->
+<div class="section" style="margin-top:16px;">
+  <div class="premium-gate">
+    <div class="gate-blur">
+      <div class="fake-row"></div>
+      <div class="fake-row"></div>
+      <div class="fake-row"></div>
+      <div class="fake-row" style="height:32px;"></div>
+    </div>
+    <div class="gate-overlay">
+      <div class="lock-circle">
+        <span class="msym" style="color:var(--premium);font-size:26px;">lock</span>
+      </div>
+      <div class="gate-title">Преміум матеріали</div>
+      <div class="gate-desc">Готовий шаблон CV нідерландською · Список 50+ компаній, що активно наймають українців · Гайд "Як пройти голландське інтерв'ю" · Скрипт cover letter</div>
+      <button class="gate-btn">Отримати доступ — €4.99/міс</button>
+      <div class="gate-price">Перші 7 днів безкоштовно · Відмінити будь-коли</div>
+    </div>
+  </div>
+</div>
+
+<!-- Completion banner -->
+<div class="section" style="margin-top:16px;">
+  <div class="completed-banner">
+    <div class="cb-icon">🎉</div>
+    <div class="cb-title">Вітаємо! Всі 8 кроків пройдено</div>
+    <div class="cb-sub">Ви ознайомилися з усіма основними кроками для старту в Нідерландах. Пам'ятайте — ви не самотні. RefugeeApp завжди поруч.</div>
+    <a href="screen_firststeps.html" class="cb-btn">← Повернутися до всіх кроків</a>
+  </div>
+</div>
+
+</div>
+
+<a href="#" class="fab"><span class="msym" style="color:white;font-size:22px;">chat</span></a>
+<nav>
+  <a href="final_colorful.html" class="nav-item"><div class="nav-pill"><span class="msym">home</span></div><span style="font-size:10px;font-weight:600;">Головна</span></a>
+  <a href="screen_firststeps.html" class="nav-item active"><div class="nav-pill"><span class="msym">explore</span></div><span style="font-size:10px;font-weight:600;">Огляд</span></a>
+  <a href="#" class="nav-item"><div class="nav-pill"><span class="msym">bookmark</span></div><span style="font-size:10px;font-weight:600;">Збережені</span></a>
+  <a href="#" class="nav-item"><div class="nav-pill"><span class="msym">person</span></div><span style="font-size:10px;font-weight:600;">Профіль</span></a>
+</nav>
+</body>
+</html>

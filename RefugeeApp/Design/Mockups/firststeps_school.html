@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Школа для дітей</title>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --blue: #0057B7; --blue-soft: #EDF4FF;
+      --yellow: #FCD400; --bg: #EFECE5; --card: #fff;
+      --text: #111827; --muted: #6B7280; --border: #DDD9D0;
+      --green: #15803D; --green-soft: #DCFCE7;
+      --amber: #B45309; --amber-soft: #FEF3C7;
+      --violet: #6D28D9; --violet-soft: #EDE9FE;
+      --rose: #9F1239; --rose-soft: #FFE4E6;
+      --premium: #7C3AED; --premium-soft: #EDE9FE;
+    }
+    body { font-family: 'Manrope', sans-serif; background: var(--bg); color: var(--text); max-width: 390px; margin: 0 auto; min-height: 100vh; }
+    .msym { font-family: 'Material Symbols Outlined'; font-variation-settings: 'FILL' 1,'wght' 400,'GRAD' 0,'opsz' 24; font-size: 22px; line-height: 1; }
+    .ua-bar { height: 4px; background: linear-gradient(90deg, #0057B7 50%, #FCD400 50%); }
+
+    .sticky-header { position: sticky; top: 0; z-index: 50; background: white; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 10px; padding: 12px 16px; }
+    .back-btn { width: 36px; height: 36px; border-radius: 12px; background: var(--bg); border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; color: var(--text); text-decoration: none; }
+    .header-title { font-size: 14px; font-weight: 700; flex: 1; }
+    .header-badge { font-size: 10px; font-weight: 700; padding: 4px 9px; border-radius: 20px; background: var(--green-soft); color: var(--green); }
+
+    .hero { background: linear-gradient(150deg, #2E1065 0%, #6D28D9 55%, #A78BFA 100%); padding: 24px 20px 36px; position: relative; overflow: hidden; }
+    .hero::before { content: ''; position: absolute; inset: 0; background-image: radial-gradient(circle, rgba(255,255,255,0.07) 1px, transparent 1px); background-size: 18px 18px; }
+    .hero-step { display: inline-flex; align-items: center; gap: 7px; background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.25); color: rgba(255,255,255,0.9); font-size: 11px; font-weight: 700; border-radius: 20px; padding: 4px 12px; margin-bottom: 12px; position: relative; }
+    .hero h1 { color: white; font-size: 22px; font-weight: 900; line-height: 1.2; position: relative; }
+    .hero p { color: rgba(255,255,255,0.72); font-size: 13px; margin-top: 8px; line-height: 1.55; position: relative; }
+
+    .section { margin: 12px 16px 0; }
+    .sec-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); margin-bottom: 8px; display: flex; align-items: center; gap: 6px; }
+    .sec-label::before { content: ''; display: block; width: 3px; height: 14px; background: var(--violet); border-radius: 2px; }
+
+    .alert { padding: 12px 14px; border-radius: 14px; display: flex; gap: 10px; align-items: flex-start; }
+    .alert.yellow { background: var(--amber-soft); border: 1px solid #FCD34D; }
+    .alert.green { background: var(--green-soft); border: 1px solid #86EFAC; }
+    .alert.violet { background: var(--violet-soft); border: 1px solid #C4B5FD; }
+    .alert.red { background: var(--rose-soft); border: 1px solid #FECDD3; }
+    .alert-icon { font-size: 18px; flex-shrink: 0; }
+    .alert p { font-size: 12.5px; font-weight: 600; line-height: 1.55; }
+    .alert.yellow p { color: #92400E; }
+    .alert.green p { color: #14532D; }
+    .alert.violet p { color: #4C1D95; }
+    .alert.red p { color: #881337; }
+
+    /* Age path */
+    .age-path { background: white; border-radius: 18px; padding: 16px; box-shadow: 0 1px 6px rgba(0,0,0,0.07); }
+    .age-row { display: flex; gap: 12px; margin-bottom: 10px; align-items: flex-start; }
+    .age-row:last-child { margin-bottom: 0; }
+    .age-badge { min-width: 52px; height: 32px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 800; flex-shrink: 0; }
+    .ab-baby { background: #FCE7F3; color: #9D174D; }
+    .ab-kleuter { background: #FEF3C7; color: #92400E; }
+    .ab-basisschool { background: var(--blue-soft); color: #1E40AF; }
+    .ab-middelbaar { background: var(--violet-soft); color: var(--violet); }
+    .ab-mbo { background: var(--green-soft); color: var(--green); }
+    .age-body { flex: 1; }
+    .age-type { font-size: 13px; font-weight: 700; }
+    .age-desc { font-size: 11.5px; color: var(--muted); margin-top: 2px; line-height: 1.45; }
+    .age-free { display: inline-block; font-size: 10px; font-weight: 700; color: var(--green); background: var(--green-soft); padding: 2px 7px; border-radius: 5px; margin-top: 4px; }
+
+    /* ISK box */
+    .isk-box { background: linear-gradient(135deg, #EDE9FE, #DDD6FE); border-radius: 18px; padding: 16px; border: 1px solid #C4B5FD; }
+    .isk-title { font-size: 16px; font-weight: 900; color: var(--violet); margin-bottom: 6px; }
+    .isk-sub { font-size: 12px; color: #5B21B6; line-height: 1.5; margin-bottom: 12px; }
+    .isk-facts { display: flex; flex-direction: column; gap: 6px; }
+    .isk-fact { display: flex; gap: 8px; align-items: flex-start; }
+    .isk-dot { width: 6px; height: 6px; background: var(--violet); border-radius: 50%; flex-shrink: 0; margin-top: 5px; }
+    .isk-text { font-size: 12px; color: #3B0764; font-weight: 600; line-height: 1.45; }
+
+    /* Steps */
+    .steps { background: white; border-radius: 18px; overflow: hidden; box-shadow: 0 1px 6px rgba(0,0,0,0.07); }
+    .step { display: flex; gap: 14px; padding: 14px 16px; border-bottom: 1px solid #F9FAFB; align-items: flex-start; }
+    .step:last-child { border-bottom: none; }
+    .step-num { width: 32px; height: 32px; background: var(--violet); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 800; flex-shrink: 0; }
+    .step-body { flex: 1; }
+    .step-title { font-size: 13.5px; font-weight: 700; }
+    .step-desc { font-size: 12px; color: var(--muted); margin-top: 4px; line-height: 1.55; }
+    .step-tip { margin-top: 6px; font-size: 11.5px; background: var(--amber-soft); color: var(--amber); padding: 5px 9px; border-radius: 8px; display: inline-block; font-weight: 600; }
+    .step-link { display: inline-block; margin-top: 5px; font-size: 12px; color: var(--blue); font-weight: 700; text-decoration: none; }
+
+    /* Docs */
+    .docs-card { background: white; border-radius: 18px; padding: 16px; box-shadow: 0 1px 6px rgba(0,0,0,0.07); }
+    .doc-row { display: flex; align-items: flex-start; gap: 10px; padding: 8px 0; border-bottom: 1px solid #F3F4F6; }
+    .doc-row:last-child { border-bottom: none; }
+    .doc-check { width: 22px; height: 22px; background: var(--green-soft); border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px; }
+    .doc-check span { color: var(--green); font-size: 12px; font-weight: 800; }
+    .doc-text { font-size: 13px; font-weight: 600; }
+    .doc-note { font-size: 11px; color: var(--muted); margin-top: 2px; }
+
+    /* School types table */
+    .tbl { width: 100%; border-collapse: collapse; font-size: 12px; }
+    .tbl th { background: #F3F4F6; padding: 8px 10px; text-align: left; font-size: 10px; font-weight: 700; color: var(--muted); text-transform: uppercase; }
+    .tbl td { padding: 9px 10px; border-bottom: 1px solid #F9FAFB; vertical-align: middle; }
+    .tbl tr:last-child td { border-bottom: none; }
+    .td-k { font-weight: 700; }
+
+    .tip-card { background: var(--amber-soft); border: 1px solid #FCD34D; border-radius: 14px; padding: 14px; display: flex; gap: 10px; align-items: flex-start; }
+    .tip-text { font-size: 12.5px; color: #78350F; font-weight: 600; line-height: 1.55; }
+
+    .faq-item { background: white; border-radius: 14px; padding: 14px; margin-bottom: 8px; box-shadow: 0 1px 4px rgba(0,0,0,0.05); }
+    .faq-q { font-size: 13px; font-weight: 700; display: flex; gap: 8px; align-items: flex-start; }
+    .faq-q::before { content: 'Q'; background: var(--violet); color: white; font-size: 10px; font-weight: 800; padding: 2px 6px; border-radius: 5px; flex-shrink: 0; margin-top: 2px; }
+    .faq-a { font-size: 12px; color: var(--muted); margin-top: 7px; line-height: 1.6; padding-left: 26px; }
+
+    .premium-gate { border-radius: 18px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.08); position: relative; }
+    .gate-blur { filter: blur(3px); pointer-events: none; user-select: none; background: white; padding: 16px; }
+    .gate-blur .fake-row { height: 44px; background: #F3F4F6; border-radius: 10px; margin-bottom: 8px; }
+    .gate-overlay { position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0.95) 40%); display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 20px; text-align: center; }
+    .lock-circle { width: 52px; height: 52px; background: var(--premium-soft); border-radius: 18px; display: flex; align-items: center; justify-content: center; margin-bottom: 10px; }
+    .gate-title { font-size: 15px; font-weight: 800; }
+    .gate-desc { font-size: 12px; color: var(--muted); margin-top: 5px; line-height: 1.5; }
+    .gate-btn { margin-top: 14px; background: var(--premium); color: white; font-size: 13px; font-weight: 700; border: none; border-radius: 14px; padding: 12px 24px; cursor: pointer; width: 100%; }
+    .gate-price { font-size: 11px; color: var(--muted); margin-top: 7px; }
+
+    nav { position: fixed; bottom: 0; left: 50%; transform: translateX(-50%); width: 100%; max-width: 390px; background: white; border-top: 1px solid var(--border); display: flex; justify-content: space-around; padding: 6px 0 14px; z-index: 100; }
+    .nav-item { display: flex; flex-direction: column; align-items: center; gap: 3px; text-decoration: none; color: var(--muted); font-size: 10px; font-weight: 600; }
+    .nav-pill { width: 52px; height: 32px; display: flex; align-items: center; justify-content: center; border-radius: 20px; }
+    .nav-item.active .nav-pill { background: var(--violet-soft); }
+    .nav-item.active { color: var(--violet); }
+    .pb { padding-bottom: 90px; }
+    .fab { position: fixed; bottom: 76px; right: calc(50% - 195px + 16px); width: 50px; height: 50px; background: var(--violet); border-radius: 18px; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(109,40,217,0.4); z-index: 90; text-decoration: none; }
+  </style>
+</head>
+<body>
+<div class="ua-bar"></div>
+
+<div class="sticky-header">
+  <a href="screen_firststeps.html" class="back-btn"><span class="msym" style="font-size:20px;">arrow_back</span></a>
+  <span class="header-title">Школа для дітей</span>
+  <span class="header-badge">✓ Безкоштовно</span>
+</div>
+
+<div class="hero">
+  <div class="hero-step">🏫 Крок 7 з 8</div>
+  <h1>Школа для дітей в Нідерландах</h1>
+  <p>Діти мають право і обов'язок вчитися. У Нідерландах є спеціальні ISK-класи для новоприбулих — з нуля нідерландської до рівня однолітків за 1–2 роки.</p>
+</div>
+
+<div class="pb">
+
+<div class="section" style="margin-top:12px;">
+  <div class="alert red">
+    <span class="alert-icon">📌</span>
+    <p><strong>Leerplicht (обов'язкова освіта):</strong> Всі діти 5–18 років зобов'язані відвідувати школу. Штраф для батьків за прогули — до €3 900.</p>
+  </div>
+</div>
+
+<!-- Free box -->
+<div class="section" style="margin-top:12px;">
+  <div class="alert green">
+    <span class="alert-icon">✅</span>
+    <p>Бasisschool (початкова) і middelbare school (середня) повністю <strong>безкоштовні</strong>. Підручники, ISK-підтримка, шкільне харчування (іноді) — за державний кошт.</p>
+  </div>
+</div>
+
+<!-- Age path -->
+<div class="section" style="margin-top:16px;">
+  <div class="sec-label">Яка школа для якого віку</div>
+  <div class="age-path">
+    <div class="age-row">
+      <span class="age-badge ab-baby">0–4 р.</span>
+      <div class="age-body">
+        <div class="age-type">Kinderopvang / Peuterspeelzaal</div>
+        <div class="age-desc">Дитячий садок. Частково субсидується через kinderopvangtoeslag.</div>
+      </div>
+    </div>
+    <div class="age-row">
+      <span class="age-badge ab-kleuter">4–5 р.</span>
+      <div class="age-body">
+        <div class="age-type">Kleutergroep (Basisschool groep 1–2)</div>
+        <div class="age-desc">Перші класи початкової школи. З 5 років — обов'язково.</div>
+        <span class="age-free">Безкоштовно</span>
+      </div>
+    </div>
+    <div class="age-row">
+      <span class="age-badge ab-basisschool">5–12 р.</span>
+      <div class="age-body">
+        <div class="age-type">Basisschool (Groep 1–8)</div>
+        <div class="age-desc">Початкова школа. ISK-підтримка доступна в багатьох школах.</div>
+        <span class="age-free">Безкоштовно</span>
+      </div>
+    </div>
+    <div class="age-row">
+      <span class="age-badge ab-middelbaar">12–18 р.</span>
+      <div class="age-body">
+        <div class="age-type">Middelbare school (VMBO / HAVO / VWO)</div>
+        <div class="age-desc">Середня школа. Рівень визначається після початкової школи. ISK-клас для новоприбулих.</div>
+        <span class="age-free">Безкоштовно</span>
+      </div>
+    </div>
+    <div class="age-row">
+      <span class="age-badge ab-mbo">18+ р.</span>
+      <div class="age-body">
+        <div class="age-type">MBO / HBO (Університет прикладних наук)</div>
+        <div class="age-desc">Вища та профтехнічна освіта. Для старших — з DUO-фінансуванням.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ISK class -->
+<div class="section" style="margin-top:16px;">
+  <div class="sec-label">ISK — спеціальний клас для новоприбулих</div>
+  <div class="isk-box">
+    <div class="isk-title">🌍 ISK — Internationale Schakelklas</div>
+    <div class="isk-sub">Перехідний клас для дітей, які не знають нідерландської. Є при більшості шкіл у великих містах.</div>
+    <div class="isk-facts">
+      <div class="isk-fact"><div class="isk-dot"></div><span class="isk-text">Діти вчаться разом з іншими новоприбулими з різних країн</span></div>
+      <div class="isk-fact"><div class="isk-dot"></div><span class="isk-text">Інтенсивне вивчення нідерландської 4–5 годин на день</span></div>
+      <div class="isk-fact"><div class="isk-dot"></div><span class="isk-text">Після 1–2 років — переводять до звичайного класу з однолітками</span></div>
+      <div class="isk-fact"><div class="isk-dot"></div><span class="isk-text">Безкоштовно. Є у великих містах: Amsterdam, Rotterdam, Den Haag, Utrecht, Eindhoven</span></div>
+      <div class="isk-fact"><div class="isk-dot"></div><span class="isk-text">Діти без ISK-місця можуть записатися до звичайного класу — школи зобов'язані прийняти</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- Documents -->
+<div class="section" style="margin-top:16px;">
+  <div class="sec-label">Документи для реєстрації в школі</div>
+  <div class="docs-card">
+    <div class="doc-row">
+      <div class="doc-check"><span>✓</span></div>
+      <div>
+        <div class="doc-text">Паспорт або UID-документ дитини</div>
+        <div class="doc-note">Оригінал + копія</div>
+      </div>
+    </div>
+    <div class="doc-row">
+      <div class="doc-check"><span>✓</span></div>
+      <div>
+        <div class="doc-text">Свідоцтво про народження</div>
+        <div class="doc-note">Якщо є — з перекладом (або без, школи часто приймають)</div>
+      </div>
+    </div>
+    <div class="doc-row">
+      <div class="doc-check"><span>✓</span></div>
+      <div>
+        <div class="doc-text">BSN-номер дитини</div>
+        <div class="doc-note">Отримується разом з батьківською реєстрацією BRP</div>
+      </div>
+    </div>
+    <div class="doc-row">
+      <div class="doc-check"><span>✓</span></div>
+      <div>
+        <div class="doc-text">Попереднє шкільне свідоцтво (якщо є)</div>
+        <div class="doc-note">Допомагає визначити рівень і клас. Не обов'язково.</div>
+      </div>
+    </div>
+    <div class="doc-row">
+      <div class="doc-check"><span>✓</span></div>
+      <div>
+        <div class="doc-text">Картка щеплень (якщо є)</div>
+        <div class="doc-note">Не обов'язково, але корисно для GGD-реєстрації</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Steps -->
+<div class="section" style="margin-top:16px;">
+  <div class="sec-label">Як записати дитину до школи</div>
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-body">
+        <div class="step-title">Зверніться до gemeente</div>
+        <div class="step-desc">Gemeente education department направить вас до найближчої школи з ISK-місцями. Або зателефонуйте напряму до шкіл.</div>
+        <div class="step-tip">💡 У великих містах є спеціальні "loket" — єдиний вхід для новоприбулих дітей</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-body">
+        <div class="step-title">Відвідайте школу з документами</div>
+        <div class="step-desc">Директор або coordinatор ISK проведе зустріч, поспілкується з дитиною та визначить рівень і підходящий клас.</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-body">
+        <div class="step-title">Підпишіть inschrijfformulier</div>
+        <div class="step-desc">Заповніть форму реєстрації. Дитина може починати вже наступного дня або через тиждень залежно від наявності місць.</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">4</div>
+      <div class="step-body">
+        <div class="step-title">Шкільне приладдя — через gemeente або school</div>
+        <div class="step-desc">Більшість шкіл надають базове приладдя безкоштовно для нових учнів. Якщо немає — зверніться до Stichting Leergeld (допомога малозабезпеченим).</div>
+        <a class="step-link" href="https://www.leergeld.nl" target="_blank">→ leergeld.nl</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Types of secondary school -->
+<div class="section" style="margin-top:16px;">
+  <div class="sec-label">Типи середньої школи (12–18 р.)</div>
+  <div style="background:white;border-radius:18px;overflow:hidden;box-shadow:0 1px 6px rgba(0,0,0,0.07);">
+    <table class="tbl">
+      <thead><tr><th>Тип</th><th>Рівень</th><th>Після</th></tr></thead>
+      <tbody>
+        <tr><td class="td-k">VMBO</td><td>Практичний</td><td>MBO (проф. освіта)</td></tr>
+        <tr><td class="td-k">HAVO</td><td>Середній</td><td>HBO (прикл. університет)</td></tr>
+        <tr><td class="td-k">VWO / Gymnasium</td><td>Академічний</td><td>Universiteit (WO)</td></tr>
+        <tr><td class="td-k">ISK</td><td>Перехідний</td><td>→ VMBO / HAVO / VWO</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- Tip -->
+<div class="section" style="margin-top:14px;">
+  <div class="tip-card">
+    <span style="font-size:20px;">💡</span>
+    <span class="tip-text">Не чекайте вересня! У Нідерландах можна записати дитину до школи в будь-який час року. Чим раніше — тим краще для адаптації та мови.</span>
+  </div>
+</div>
+
+<!-- FAQ -->
+<div class="section" style="margin-top:16px;">
+  <div class="sec-label">Часті запитання</div>
+  <div class="faq-item">
+    <div class="faq-q">Що якщо школа каже, що немає місць?</div>
+    <div class="faq-a">Школи зобов'язані прийняти дитину незалежно від наявності місць. Якщо відмовляють — зверніться до gemeente education loket або Inspectie Onderwijs (onderwijsinspectie.nl).</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q">До якого класу запишуть мою дитину?</div>
+    <div class="faq-a">Для ISK: за віком та рівнем мови. Для звичайних класів: зазвичай за віком, інколи на клас нижче якщо є мовний бар'єр. Після ISK рівень оцінюється заново.</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q">Чи є допомога для дітей з особливими потребами?</div>
+    <div class="faq-a">Так. Спеціальне onderwijs (speciaal onderwijs) доступне безкоштовно. Зверніться до gemeente для направлення. Potlood (pedagogisch consulent) може допомогти знайти підходящу школу.</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q">Дитина відмовляється йти до школи. Що робити?</div>
+    <div class="faq-a">Це нормально — стрес після переїзду. Поговоріть зі шкільним consulent або зверніться до Centrum voor Jeugd en Gezin (CJG) — безкоштовна підтримка для дітей та родин.</div>
+  </div>
+</div>
+
+<!-- Premium gate -->
+<div class="section" style="margin-top:16px;">
+  <div class="premium-gate">
+    <div class="gate-blur">
+      <div class="fake-row"></div>
+      <div class="fake-row"></div>
+      <div class="fake-row" style="height:32px;"></div>
+    </div>
+    <div class="gate-overlay">
+      <div class="lock-circle">
+        <span class="msym" style="color:var(--premium);font-size:26px;">lock</span>
+      </div>
+      <div class="gate-title">Преміум матеріали</div>
+      <div class="gate-desc">Список шкіл з ISK-класами по всіх містах · Шаблон листа до школи нідерландською · Контакти Stichting Leergeld по регіонах</div>
+      <button class="gate-btn">Отримати доступ — €4.99/міс</button>
+      <div class="gate-price">Перші 7 днів безкоштовно · Відмінити будь-коли</div>
+    </div>
+  </div>
+</div>
+
+<!-- Next step -->
+<div class="section" style="margin-top:16px;">
+  <div class="alert green">
+    <span class="alert-icon">🎉</span>
+    <p>Майже готово! Залишився останній крок — пошук роботи та ваші права на ринку праці Нідерландів.</p>
+  </div>
+  <div style="margin-top:8px;">
+    <a href="firststeps_work.html" style="display:flex;align-items:center;justify-content:space-between;background:white;border-radius:14px;padding:14px 16px;text-decoration:none;color:inherit;box-shadow:0 1px 4px rgba(0,0,0,0.06);">
+      <div>
+        <div style="font-size:13px;font-weight:700;">→ Наступний крок: Пошук роботи</div>
+        <div style="font-size:11.5px;color:var(--muted);margin-top:3px;">Крок 8 · Право на роботу, UWV, bijstand</div>
+      </div>
+      <span style="font-family:'Material Symbols Outlined';font-size:20px;color:#D1D5DB;">chevron_right</span>
+    </a>
+  </div>
+</div>
+
+</div>
+
+<a href="#" class="fab"><span class="msym" style="color:white;font-size:22px;">chat</span></a>
+<nav>
+  <a href="final_colorful.html" class="nav-item"><div class="nav-pill"><span class="msym">home</span></div><span style="font-size:10px;font-weight:600;">Головна</span></a>
+  <a href="screen_firststeps.html" class="nav-item active"><div class="nav-pill"><span class="msym">explore</span></div><span style="font-size:10px;font-weight:600;">Огляд</span></a>
+  <a href="#" class="nav-item"><div class="nav-pill"><span class="msym">bookmark</span></div><span style="font-size:10px;font-weight:600;">Збережені</span></a>
+  <a href="#" class="nav-item"><div class="nav-pill"><span class="msym">person</span></div><span style="font-size:10px;font-weight:600;">Профіль</span></a>
+</nav>
+</body>
+</html>
