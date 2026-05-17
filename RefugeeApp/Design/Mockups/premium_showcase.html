@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Преміум — Охорона здоров'я</title>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --blue: #0057B7; --blue-dark: #003DA6; --blue-soft: #E8F0FF;
+      --yellow: #FCD400; --bg: #EFECE5; --card: #fff;
+      --text: #111827; --muted: #6B7280; --border: #DDD9D0;
+      --red: #B91C1C; --green: #15803D; --green-soft: #DCFCE7;
+      --amber: #B45309; --amber-soft: #FEF3C7;
+      --premium: #7C3AED; --premium-soft: #EDE9FE;
+    }
+    body { font-family: 'Manrope', sans-serif; background: var(--bg); color: var(--text); max-width: 390px; margin: 0 auto; min-height: 100vh; }
+    .msym { font-family: 'Material Symbols Outlined'; font-variation-settings: 'FILL' 1,'wght' 400,'GRAD' 0,'opsz' 24; font-size: 22px; line-height: 1; }
+    .ua-bar { height: 4px; background: linear-gradient(90deg, #0057B7 50%, #FCD400 50%); }
+
+    /* ── Header ── */
+    .sticky-header {
+      position: sticky; top: 0; z-index: 50;
+      background: white; border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; gap: 12px;
+      padding: 12px 16px;
+    }
+    .back-btn {
+      width: 36px; height: 36px; border-radius: 12px;
+      background: var(--bg); border: none; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--text); text-decoration: none;
+    }
+    .header-title { font-size: 15px; font-weight: 700; }
+    .header-badge {
+      margin-left: auto;
+      background: linear-gradient(135deg, #7C3AED, #A855F7);
+      color: white; font-size: 11px; font-weight: 700;
+      border-radius: 20px; padding: 4px 10px;
+      display: flex; align-items: center; gap: 4px;
+    }
+
+    /* ── Premium Hero ── */
+    .premium-hero {
+      background: linear-gradient(135deg, #3B0764 0%, #6D28D9 50%, #A855F7 100%);
+      padding: 32px 20px 28px;
+      text-align: center; position: relative; overflow: hidden;
+    }
+    .premium-hero::before {
+      content: ''; position: absolute; inset: 0;
+      background-image: radial-gradient(circle, rgba(255,255,255,0.08) 1px, transparent 1px);
+      background-size: 20px 20px;
+    }
+    .crown-wrap { font-size: 44px; display: block; margin-bottom: 10px; position: relative; }
+    .premium-hero h1 { color: white; font-size: 20px; font-weight: 800; position: relative; }
+    .premium-hero p { color: rgba(255,255,255,0.7); font-size: 13px; margin-top: 6px; position: relative; }
+    .active-pill {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: rgba(255,215,0,0.2); border: 1px solid rgba(255,215,0,0.4);
+      color: #FCD400; font-size: 12px; font-weight: 700;
+      border-radius: 20px; padding: 5px 14px; margin-top: 14px; position: relative;
+    }
+    .categories-row {
+      display: flex; gap: 6px; overflow-x: auto;
+      padding: 14px 16px 0; scrollbar-width: none;
+    }
+    .categories-row::-webkit-scrollbar { display: none; }
+    .cat-chip {
+      white-space: nowrap; font-size: 11px; font-weight: 600;
+      padding: 6px 12px; border-radius: 20px;
+      background: white; border: 1px solid var(--border); color: var(--muted);
+      text-decoration: none; cursor: pointer; flex-shrink: 0;
+    }
+    .cat-chip.active { background: var(--premium-soft); border-color: var(--premium); color: var(--premium); }
+
+    /* ── Category sections ── */
+    .sticky-cat {
+      position: sticky; top: 61px; z-index: 10;
+      padding: 8px 16px;
+      font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.07em;
+      color: var(--muted); background: var(--bg);
+    }
+    .cat-section { margin: 0 16px 4px; border-radius: 20px; overflow: hidden; box-shadow: 0 2px 10px rgba(0,0,0,0.07); }
+    .cat-header { padding: 14px 18px; display: flex; align-items: center; gap: 12px; }
+    .cat-icon-wrap {
+      width: 42px; height: 42px; border-radius: 13px;
+      background: rgba(255,255,255,0.18);
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    }
+    .cat-header-text h2 { color: white; font-size: 15px; font-weight: 700; }
+    .cat-header-text p { color: rgba(255,255,255,0.65); font-size: 11px; margin-top: 2px; }
+    .premium-count {
+      margin-left: auto; background: rgba(255,255,255,0.2);
+      color: white; font-size: 10px; font-weight: 700;
+      border-radius: 20px; padding: 3px 9px; flex-shrink: 0;
+    }
+    .cat-body { background: white; padding: 16px; }
+
+    /* ── Content atoms ── */
+    .prem-label {
+      font-size: 11px; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.05em; color: var(--premium);
+      margin-bottom: 10px; display: flex; align-items: center; gap: 6px;
+    }
+    .prem-label::before {
+      content: ''; display: block; width: 3px; height: 14px;
+      background: var(--premium); border-radius: 2px;
+    }
+    .divider { height: 1px; background: #F3F4F6; margin: 14px 0; }
+
+    /* Table */
+    table.pt { width: 100%; border-collapse: collapse; font-size: 12px; margin-bottom: 4px; border-radius: 12px; overflow: hidden; }
+    .pt th { background: #F3F4F6; padding: 8px 10px; text-align: left; font-size: 10px; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 0.04em; }
+    .pt td { padding: 8px 10px; border-bottom: 1px solid #F9FAFB; vertical-align: middle; font-size: 12px; }
+    .pt tr:last-child td { border-bottom: none; }
+    .td-city { font-weight: 700; }
+    .td-link { color: var(--blue); font-weight: 600; text-decoration: none; }
+
+    /* Script */
+    .script-card { background: #F9FAFB; border: 1px solid #E5E7EB; border-radius: 14px; padding: 14px; }
+    .script-row { display: grid; grid-template-columns: 36px 1fr; gap: 8px; margin-bottom: 10px; align-items: start; }
+    .script-row:last-child { margin-bottom: 0; }
+    .who { font-size: 9px; font-weight: 800; padding: 3px 5px; border-radius: 5px; text-align: center; margin-top: 2px; line-height: 1.2; }
+    .who-you { background: #DBEAFE; color: #1D4ED8; }
+    .who-doc { background: #F3F4F6; color: #374151; }
+    .script-nl { font-weight: 600; color: var(--text); font-size: 12.5px; line-height: 1.4; }
+    .script-ua { color: var(--muted); font-size: 11.5px; margin-top: 2px; line-height: 1.4; }
+
+    /* Insurers */
+    .insurer-card { border: 1px solid #E5E7EB; border-radius: 13px; padding: 12px 14px; margin-bottom: 8px; }
+    .insurer-card:last-child { margin-bottom: 0; }
+    .insurer-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px; }
+    .insurer-name { font-size: 14px; font-weight: 800; }
+    .insurer-sub { font-size: 11px; color: var(--muted); margin-top: 1px; }
+    .insurer-price { font-size: 17px; font-weight: 900; color: var(--blue); }
+    .insurer-row { display: flex; justify-content: space-between; align-items: center; font-size: 12px; margin-bottom: 4px; }
+    .insurer-key { color: var(--muted); }
+    .stars { color: #FBBF24; font-size: 12px; letter-spacing: -1px; }
+    .i-tag { display: inline-flex; align-items: center; gap: 4px; font-size: 10px; font-weight: 700; padding: 3px 9px; border-radius: 20px; margin-top: 6px; }
+    .t-rec { background: var(--green-soft); color: var(--green); }
+    .t-cheap { background: var(--amber-soft); color: var(--amber); }
+
+    /* Steps */
+    .zstep { display: flex; gap: 12px; margin-bottom: 12px; align-items: flex-start; }
+    .zstep:last-child { margin-bottom: 0; }
+    .znum { width: 28px; height: 28px; background: var(--blue); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 800; flex-shrink: 0; margin-top: 1px; }
+    .zstep-body { flex: 1; }
+    .zstep-title { font-size: 13px; font-weight: 700; }
+    .zstep-desc { font-size: 12px; color: var(--muted); margin-top: 3px; line-height: 1.5; }
+    .zstep-link { display: inline-block; margin-top: 4px; font-size: 12px; color: var(--blue); font-weight: 600; text-decoration: none; }
+
+    /* Phrases */
+    .phrase-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; margin-bottom: 4px; }
+    .phr-nl { background: #EFF6FF; border-radius: 8px; padding: 8px 10px; font-size: 12px; font-weight: 600; color: #1D4ED8; line-height: 1.4; }
+    .phr-ua { background: #F9FAFB; border-radius: 8px; padding: 8px 10px; font-size: 12px; color: var(--text); line-height: 1.4; }
+    .phrase-hdr { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; margin-bottom: 6px; }
+    .phrase-hdr span { font-size: 10px; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 0.04em; padding: 0 10px; }
+
+    /* HAP list */
+    .hap-list { background: #FEF2F2; border: 1px solid #FECACA; border-radius: 12px; overflow: hidden; }
+    .hap-row { display: flex; align-items: center; justify-content: space-between; padding: 9px 12px; border-bottom: 1px solid rgba(254,202,202,0.5); }
+    .hap-row:last-child { border-bottom: none; }
+    .hap-city { font-size: 12px; font-weight: 700; min-width: 80px; }
+    .hap-phone { font-size: 12px; font-weight: 600; color: #DC2626; text-decoration: none; }
+    .hap-hours { font-size: 10px; font-weight: 600; color: #15803D; background: #DCFCE7; padding: 2px 7px; border-radius: 10px; }
+
+    /* Psychologists */
+    .psycho-card { border: 1px solid #E5E7EB; border-radius: 12px; padding: 12px; margin-bottom: 8px; display: flex; align-items: flex-start; gap: 10px; }
+    .psycho-card:last-child { margin-bottom: 0; }
+    .psycho-av { width: 38px; height: 38px; border-radius: 50%; background: linear-gradient(135deg, #EDE9FE, #C4B5FD); display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
+    .psycho-name { font-size: 13px; font-weight: 700; }
+    .psycho-city { font-size: 11px; color: var(--muted); margin-top: 2px; }
+    .tag { display: inline-flex; align-items: center; font-size: 10px; font-weight: 600; padding: 2px 7px; border-radius: 5px; margin-top: 5px; margin-right: 3px; }
+    .t-online { background: #DCFCE7; color: #15803D; }
+    .t-lang { background: #DBEAFE; color: #1D4ED8; }
+    .t-price { background: var(--amber-soft); color: var(--amber); }
+
+    /* Clinics */
+    .clinic-card { border: 1px solid #E5E7EB; border-left: 3px solid #0D9488; border-radius: 10px; padding: 12px; margin-bottom: 8px; }
+    .clinic-card:last-child { margin-bottom: 0; }
+    .clinic-top { display: flex; justify-content: space-between; align-items: flex-start; }
+    .clinic-name { font-size: 13px; font-weight: 700; }
+    .clinic-meta { font-size: 11px; color: var(--muted); margin-top: 2px; }
+    .clinic-price { font-size: 14px; font-weight: 800; color: #0D9488; }
+    .clinic-note { font-size: 11px; color: var(--muted); margin-top: 6px; line-height: 1.5; }
+    .clinic-phone { display: inline-block; margin-top: 5px; font-size: 12px; color: var(--blue); font-weight: 600; text-decoration: none; }
+
+    /* Medicine dictionary */
+    .med-hdr { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 4px; margin-bottom: 6px; }
+    .med-hdr span { font-size: 10px; font-weight: 700; color: var(--muted); text-transform: uppercase; padding: 0 8px; }
+    .med-row { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 4px; margin-bottom: 4px; }
+    .med-ua { background: #EFF6FF; color: #1D4ED8; font-weight: 600; font-size: 11px; padding: 7px 8px; border-radius: 7px; }
+    .med-nl { background: #F0FDF4; color: #15803D; font-weight: 600; font-size: 11px; padding: 7px 8px; border-radius: 7px; }
+    .med-en { background: #F9FAFB; color: var(--muted); font-size: 11px; padding: 7px 8px; border-radius: 7px; }
+    .med-more { text-align: center; padding: 8px; font-size: 12px; color: var(--muted); font-weight: 600; }
+
+    /* Vaccine */
+    .vac-hdr { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; margin-bottom: 6px; }
+    .vac-hdr span { font-size: 10px; font-weight: 700; color: var(--muted); text-transform: uppercase; padding: 0 8px; }
+    .vac-row { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; margin-bottom: 4px; }
+    .vac-ua { background: #FFF7ED; color: #C2410C; font-weight: 600; font-size: 11.5px; padding: 7px 8px; border-radius: 7px; }
+    .vac-nl { background: #F0FDF4; color: #15803D; font-weight: 600; font-size: 11.5px; padding: 7px 8px; border-radius: 7px; }
+
+    /* Letter */
+    .letter { background: #FFFBEB; border: 1.5px dashed #FCD34D; border-radius: 14px; padding: 16px; font-size: 12.5px; line-height: 1.75; color: var(--text); }
+    .letter-meta { color: var(--muted); font-size: 11px; margin-bottom: 10px; }
+
+    /* Nav */
+    nav { position: fixed; bottom: 0; left: 50%; transform: translateX(-50%); width: 100%; max-width: 390px; background: white; border-top: 1px solid var(--border); display: flex; justify-content: space-around; padding: 6px 0 14px; z-index: 100; }
+    .nav-item { display: flex; flex-direction: column; align-items: center; gap: 3px; text-decoration: none; color: var(--muted); font-size: 10px; font-weight: 600; }
+    .nav-pill { width: 52px; height: 32px; display: flex; align-items: center; justify-content: center; border-radius: 20px; }
+    .nav-item.active .nav-pill { background: var(--premium-soft); }
+    .nav-item.active { color: var(--premium); }
+    .pb { padding-bottom: 80px; }
+  </style>
+</head>
+<body>
+<div class="ua-bar"></div>
+
+<!-- Sticky header -->
+<div class="sticky-header">
+  <a href="screen_02_healthcare.html" class="back-btn">
+    <span class="msym" style="font-size:20px;">arrow_back</span>
+  </a>
+  <span class="header-title">Преміум контент</span>
+  <div class="header-badge">
+    <span style="font-size:13px;">★</span> Активна
+  </div>
+</div>
+
+<!-- Hero -->
+<div class="premium-hero">
+  <span class="crown-wrap">👑</span>
+  <h1>Преміум активовано</h1>
+  <p>Охорона здоров'я — всі 7 категорій відкрито</p>
+  <div class="active-pill">⚡ Підписка активна · €4.99/міс</div>
+</div>
+
+<!-- Quick nav chips -->
+<div class="categories-row">
+  <a href="#cat1" class="cat-chip active">👨‍⚕️ Лікар</a>
+  <a href="#cat2" class="cat-chip">🛡️ Страховка</a>
+  <a href="#cat3" class="cat-chip">🚨 Екстрена</a>
+  <a href="#cat4" class="cat-chip">🧠 Психологія</a>
+  <a href="#cat5" class="cat-chip">🦷 Стоматологія</a>
+  <a href="#cat6" class="cat-chip">💊 Аптека</a>
+  <a href="#cat7" class="cat-chip">💉 Вакцинація</a>
+</div>
+
+<div class="pb" style="padding-top:12px;">
+
+<!-- ═══ 1. СІМЕЙНИЙ ЛІКАР ═══ -->
+<div id="cat1" class="sticky-cat">01 — Сімейний лікар (Huisarts)</div>
+<div class="cat-section">
+  <div class="cat-header" style="background:#003DA6;">
+    <div class="cat-icon-wrap">
+      <svg width="26" height="26" viewBox="0 0 28 28" fill="none">
+        <path d="M9 7C9 4.8 11.2 3 14 3C16.8 3 19 4.8 19 7V13C19 16.3 16.9 19 14 20C11.1 19 9 16.3 9 13V7Z" fill="rgba(255,255,255,0.25)" stroke="white" stroke-width="1.7"/>
+        <path d="M14 20V24" stroke="white" stroke-width="1.7" stroke-linecap="round"/>
+        <path d="M10 24H18" stroke="white" stroke-width="1.7" stroke-linecap="round"/>
+        <path d="M11 10H13M15 10H17" stroke="white" stroke-width="1.7" stroke-linecap="round"/>
+        <path d="M12 8V12" stroke="white" stroke-width="1.7" stroke-linecap="round"/>
+      </svg>
+    </div>
+    <div class="cat-header-text">
+      <h2>Сімейний лікар</h2>
+      <p>Список лікарів + скрипт дзвінка</p>
+    </div>
+    <div class="premium-count">2 розділи</div>
+  </div>
+  <div class="cat-body">
+
+    <div class="prem-label">Лікарі, які приймають UID-тримачів</div>
+    <table class="pt">
+      <thead><tr><th>Місто</th><th>Клініка</th><th>Телефон</th></tr></thead>
+      <tbody>
+        <tr><td class="td-city">Amsterdam</td><td>Huisartspraktijk De Pijp</td><td><a class="td-link" href="tel:0204445566">020 444 5566</a></td></tr>
+        <tr><td class="td-city">Rotterdam</td><td>GC Bospolder-Tussendijken</td><td><a class="td-link" href="tel:0104456789">010 445 6789</a></td></tr>
+        <tr><td class="td-city">Den Haag</td><td>Huisartspraktijk van Dijk</td><td><a class="td-link" href="tel:0703334455">070 333 4455</a></td></tr>
+        <tr><td class="td-city">Utrecht</td><td>MC Overvecht</td><td><a class="td-link" href="tel:0302223344">030 222 3344</a></td></tr>
+        <tr><td class="td-city">Eindhoven</td><td>Huisarts Woensel</td><td><a class="td-link" href="tel:0402221133">040 222 1133</a></td></tr>
+        <tr><td class="td-city">Tilburg</td><td>GC Tilburg Noord</td><td><a class="td-link" href="tel:0135566778">013 556 6778</a></td></tr>
+        <tr><td class="td-city">Groningen</td><td>Huisartsenpraktijk Paddepoel</td><td><a class="td-link" href="tel:0505243300">050 524 3300</a></td></tr>
+      </tbody>
+    </table>
+
+    <div class="divider"></div>
+    <div class="prem-label">Скрипт для запису по телефону</div>
+    <div class="script-card">
+      <div class="script-row">
+        <span class="who who-doc">Лікар</span>
+        <div>
+          <div class="script-nl">Goedemiddag, u spreekt met de praktijk.</div>
+          <div class="script-ua">Добрий день, ви телефонуєте до практики.</div>
+        </div>
+      </div>
+      <div class="script-row">
+        <span class="who who-you">Ви</span>
+        <div>
+          <div class="script-nl">Goedemiddag, ik zou graag een nieuwe patiënt willen worden. Ik kom uit Oekraïne en heb een tijdelijk BSN.</div>
+          <div class="script-ua">Добрий день, я хочу стати новим пацієнтом. Я з України, маю тимчасовий BSN.</div>
+        </div>
+      </div>
+      <div class="script-row">
+        <span class="who who-doc">Лікар</span>
+        <div>
+          <div class="script-nl">Heeft u al een zorgverzekering?</div>
+          <div class="script-ua">У вас вже є медична страховка?</div>
+        </div>
+      </div>
+      <div class="script-row">
+        <span class="who who-you">Ви</span>
+        <div>
+          <div class="script-nl">Ja, ik ben verzekerd bij [Menzis / CZ / VGZ]. Mijn BSN is [номер]. Kan ik mij inschrijven?</div>
+          <div class="script-ua">Так, я застрахована в [Menzis / CZ / VGZ]. Мій BSN [номер]. Чи можу я зареєструватися?</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ═══ 2. МЕДИЧНЕ СТРАХУВАННЯ ═══ -->
+<div id="cat2" class="sticky-cat">02 — Медичне страхування</div>
+<div class="cat-section">
+  <div class="cat-header" style="background:#1E3A5F;">
+    <div class="cat-icon-wrap">
+      <svg width="26" height="26" viewBox="0 0 28 28" fill="none">
+        <path d="M14 3L4 7.5V15C4 20.5 8.4 25.3 14 27C19.6 25.3 24 20.5 24 15V7.5L14 3Z" fill="rgba(255,255,255,0.2)" stroke="white" stroke-width="1.7"/>
+        <path d="M10 14L13 17L18 11" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+    <div class="cat-header-text">
+      <h2>Медичне страхування</h2>
+      <p>Порівняння страховиків + zorgtoeslag</p>
+    </div>
+    <div class="premium-count">2 розділи</div>
+  </div>
+  <div class="cat-body">
+
+    <div class="prem-label">Порівняння страховиків 2025</div>
+
+    <div class="insurer-card" style="border-left: 3px solid #15803D;">
+      <div class="insurer-top">
+        <div>
+          <div class="insurer-name">Menzis</div>
+          <div class="insurer-sub">Найкраще для нових жителів</div>
+        </div>
+        <div class="insurer-price">€156<span style="font-size:12px;font-weight:500;color:var(--muted);">/міс</span></div>
+      </div>
+      <div class="insurer-row"><span class="insurer-key">Рейтинг клієнтів</span><span class="stars">★★★★★</span></div>
+      <div class="insurer-row"><span class="insurer-key">Допомога з zorgtoeslag</span><span style="color:#15803D;font-weight:700;">✓ Є</span></div>
+      <div class="insurer-row"><span class="insurer-key">Обслуговування укр. мовою</span><span style="font-weight:700;">✓ Є</span></div>
+      <div class="insurer-row"><span class="insurer-key">Eigen risico</span><span style="font-weight:600;">€385/рік</span></div>
+      <span class="i-tag t-rec">👍 Рекомендовано для біженців</span>
+    </div>
+
+    <div class="insurer-card">
+      <div class="insurer-top">
+        <div>
+          <div class="insurer-name">CZ</div>
+          <div class="insurer-sub">Велика мережа tandarts</div>
+        </div>
+        <div class="insurer-price">€159<span style="font-size:12px;font-weight:500;color:var(--muted);">/міс</span></div>
+      </div>
+      <div class="insurer-row"><span class="insurer-key">Рейтинг клієнтів</span><span class="stars">★★★★☆</span></div>
+      <div class="insurer-row"><span class="insurer-key">Допомога з zorgtoeslag</span><span style="color:var(--muted);">— Самостійно</span></div>
+      <div class="insurer-row"><span class="insurer-key">Eigen risico</span><span style="font-weight:600;">€385/рік</span></div>
+    </div>
+
+    <div class="insurer-card">
+      <div class="insurer-top">
+        <div>
+          <div class="insurer-name">VGZ</div>
+          <div class="insurer-sub">Найнижча ціна</div>
+        </div>
+        <div class="insurer-price">€148<span style="font-size:12px;font-weight:500;color:var(--muted);">/міс</span></div>
+      </div>
+      <div class="insurer-row"><span class="insurer-key">Рейтинг клієнтів</span><span class="stars">★★★☆☆</span></div>
+      <div class="insurer-row"><span class="insurer-key">Eigen risico</span><span style="font-weight:600;">€385/рік</span></div>
+      <span class="i-tag t-cheap">💰 Найдешевший варіант</span>
+    </div>
+
+    <div class="insurer-card">
+      <div class="insurer-top">
+        <div>
+          <div class="insurer-name">Zilveren Kruis</div>
+          <div class="insurer-sub">Найбільший страховик NL</div>
+        </div>
+        <div class="insurer-price">€162<span style="font-size:12px;font-weight:500;color:var(--muted);">/міс</span></div>
+      </div>
+      <div class="insurer-row"><span class="insurer-key">Рейтинг клієнтів</span><span class="stars">★★★★☆</span></div>
+      <div class="insurer-row"><span class="insurer-key">Eigen risico</span><span style="font-weight:600;">€385/рік</span></div>
+    </div>
+
+    <div class="divider"></div>
+    <div class="prem-label">Zorgtoeslag — крок за кроком</div>
+
+    <div class="zstep">
+      <div class="znum">1</div>
+      <div class="zstep-body">
+        <div class="zstep-title">Перейдіть на сайт Belastingdienst</div>
+        <div class="zstep-desc">Потрібні: DigiD, BSN-номер, номер поліса страховки</div>
+        <a href="https://www.toeslagen.nl" class="zstep-link" target="_blank">→ toeslagen.nl</a>
+      </div>
+    </div>
+    <div class="zstep">
+      <div class="znum">2</div>
+      <div class="zstep-body">
+        <div class="zstep-title">Увійдіть через DigiD</div>
+        <div class="zstep-desc">Оберіть "Zorgtoeslag aanvragen" у меню toeslagen</div>
+      </div>
+    </div>
+    <div class="zstep">
+      <div class="znum">3</div>
+      <div class="zstep-body">
+        <div class="zstep-title">Вкажіть дохід</div>
+        <div class="zstep-desc">Якщо ще немає роботи — вкажіть 0. Максимальна виплата до €127/міс</div>
+      </div>
+    </div>
+    <div class="zstep">
+      <div class="znum">4</div>
+      <div class="zstep-body">
+        <div class="zstep-title">Підтвердіть і відправте</div>
+        <div class="zstep-desc">Гроші надходять щомісяця на ваш банківський рахунок. Retroactief — можна подати за 3 роки назад.</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ═══ 3. ЕКСТРЕНА ДОПОМОГА ═══ -->
+<div id="cat3" class="sticky-cat">03 — Екстрена та термінова допомога</div>
+<div class="cat-section">
+  <div class="cat-header" style="background:#7F1D1D;">
+    <div class="cat-icon-wrap">
+      <svg width="26" height="26" viewBox="0 0 28 28" fill="none">
+        <rect x="3" y="9" width="22" height="13" rx="3" fill="rgba(255,255,255,0.15)" stroke="white" stroke-width="1.7"/>
+        <circle cx="7.5" cy="9" r="2.5" fill="rgba(255,255,255,0.3)" stroke="white" stroke-width="1.5"/>
+        <circle cx="20.5" cy="9" r="2.5" fill="rgba(255,255,255,0.3)" stroke="white" stroke-width="1.5"/>
+        <path d="M3 13H25" stroke="white" stroke-width="1.3" stroke-dasharray="2 2"/>
+        <path d="M12 16.5H14M14 16.5H16M14 16.5V14.5M14 16.5V18.5" stroke="white" stroke-width="1.8" stroke-linecap="round"/>
+      </svg>
+    </div>
+    <div class="cat-header-text">
+      <h2>Екстрена допомога</h2>
+      <p>Повний розмовник + HAP по містах</p>
+    </div>
+    <div class="premium-count">2 розділи</div>
+  </div>
+  <div class="cat-body">
+
+    <div class="prem-label">Розмовник нідерландської — екстрені фрази</div>
+    <div class="phrase-hdr">
+      <span>Нідерландська</span><span>Українська</span>
+    </div>
+    <div class="phrase-cols"><div class="phr-nl">Ik heb pijn</div><div class="phr-ua">У мене болить</div></div>
+    <div class="phrase-cols"><div class="phr-nl">Bel een ambulance!</div><div class="phr-ua">Викличте швидку!</div></div>
+    <div class="phrase-cols"><div class="phr-nl">Ik kan niet ademen</div><div class="phr-ua">Я не можу дихати</div></div>
+    <div class="phrase-cols"><div class="phr-nl">Mijn kind is ziek</div><div class="phr-ua">Моя дитина хвора</div></div>
+    <div class="phrase-cols"><div class="phr-nl">Ik ben allergisch voor...</div><div class="phr-ua">У мене алергія на...</div></div>
+    <div class="phrase-cols"><div class="phr-nl">Ik heb koorts — [°C]</div><div class="phr-ua">У мене температура [°C]</div></div>
+    <div class="phrase-cols"><div class="phr-nl">Ik gebruik medicijnen</div><div class="phr-ua">Я приймаю ліки</div></div>
+    <div class="phrase-cols"><div class="phr-nl">Het bloedt veel</div><div class="phr-ua">Сильна кровотеча</div></div>
+    <div class="phrase-cols"><div class="phr-nl">Ik ben gevallen</div><div class="phr-ua">Я впав / впала</div></div>
+    <div class="phrase-cols"><div class="phr-nl">Ik heb pijn op de borst</div><div class="phr-ua">Біль у грудях</div></div>
+    <div class="phrase-cols"><div class="phr-nl">Ik ben duizelig</div><div class="phr-ua">Мені запаморочення</div></div>
+    <div class="phrase-cols"><div class="phr-nl">Ik heb mijn medicijn vergeten</div><div class="phr-ua">Я забула прийняти ліки</div></div>
+
+    <div class="divider"></div>
+    <div class="prem-label">Huisartsenpost (HAP) — телефони по містах</div>
+    <div class="hap-list">
+      <div class="hap-row"><span class="hap-city">Amsterdam</span><a class="hap-phone" href="tel:0205923434">020 592 3434</a><span class="hap-hours">24/7</span></div>
+      <div class="hap-row"><span class="hap-city">Rotterdam</span><a class="hap-phone" href="tel:0102901500">010 290 1500</a><span class="hap-hours">24/7</span></div>
+      <div class="hap-row"><span class="hap-city">Den Haag</span><a class="hap-phone" href="tel:0703469669">070 346 9669</a><span class="hap-hours">24/7</span></div>
+      <div class="hap-row"><span class="hap-city">Utrecht</span><a class="hap-phone" href="tel:0306873700">030 687 3700</a><span class="hap-hours">24/7</span></div>
+      <div class="hap-row"><span class="hap-city">Eindhoven</span><a class="hap-phone" href="tel:0402975500">040 297 5500</a><span class="hap-hours">24/7</span></div>
+      <div class="hap-row"><span class="hap-city">Tilburg</span><a class="hap-phone" href="tel:0134637777">013 463 7777</a><span class="hap-hours">24/7</span></div>
+      <div class="hap-row"><span class="hap-city">Groningen</span><a class="hap-phone" href="tel:0505245100">050 524 5100</a><span class="hap-hours">24/7</span></div>
+      <div class="hap-row"><span class="hap-city">Breda</span><a class="hap-phone" href="tel:0765302200">076 530 2200</a><span class="hap-hours">24/7</span></div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ═══ 4. ПСИХОЛОГІЧНА ДОПОМОГА ═══ -->
+<div id="cat4" class="sticky-cat">04 — Психологічна допомога</div>
+<div class="cat-section">
+  <div class="cat-header" style="background:#4C1D95;">
+    <div class="cat-icon-wrap">
+      <svg width="26" height="26" viewBox="0 0 28 28" fill="none">
+        <path d="M14 9.5C14 9.5 11 7.2 11 5.3C11 4.1 11.9 3.2 13.1 3.2C13.7 3.2 14 3.9 14 3.9C14 3.9 14.3 3.2 14.9 3.2C16.1 3.2 17 4.1 17 5.3C17 7.2 14 9.5 14 9.5Z" fill="rgba(255,255,255,0.3)" stroke="white" stroke-width="1.6"/>
+        <line x1="9.5" y1="19" x2="9.5" y2="13.5" stroke="white" stroke-width="1.6" stroke-linecap="round"/>
+        <line x1="12.5" y1="19" x2="12.5" y2="12" stroke="white" stroke-width="1.6" stroke-linecap="round"/>
+        <line x1="15.5" y1="19" x2="15.5" y2="12" stroke="white" stroke-width="1.6" stroke-linecap="round"/>
+        <line x1="18.5" y1="19" x2="18.5" y2="14" stroke="white" stroke-width="1.6" stroke-linecap="round"/>
+        <path d="M7.5 19H20.5V23C20.5 24.7 19.2 26 17.5 26H10.5C8.8 26 7.5 24.7 7.5 23V19Z" fill="rgba(255,255,255,0.2)" stroke="white" stroke-width="1.6"/>
+      </svg>
+    </div>
+    <div class="cat-header-text">
+      <h2>Психологічна допомога</h2>
+      <p>Список психологів + скрипт для лікаря</p>
+    </div>
+    <div class="premium-count">2 розділи</div>
+  </div>
+  <div class="cat-body">
+
+    <div class="prem-label">Психологи, які говорять українською</div>
+
+    <div class="psycho-card">
+      <div class="psycho-av">🌻</div>
+      <div>
+        <div class="psycho-name">Олена Василенко</div>
+        <div class="psycho-city">Amsterdam · Trauma, тривога, ПТСР</div>
+        <span class="tag t-online">💻 Онлайн</span>
+        <span class="tag t-lang">🇺🇦 Укр</span>
+        <span class="tag t-price">від €40</span>
+      </div>
+    </div>
+    <div class="psycho-card">
+      <div class="psycho-av">🌿</div>
+      <div>
+        <div class="psycho-name">Наталія Коваль</div>
+        <div class="psycho-city">Rotterdam · Сімейна терапія, діти</div>
+        <span class="tag t-online">💻 Онлайн</span>
+        <span class="tag t-lang">🇺🇦 Укр/Рус</span>
+        <span class="tag t-price">Sliding scale</span>
+      </div>
+    </div>
+    <div class="psycho-card">
+      <div class="psycho-av">🦋</div>
+      <div>
+        <div class="psycho-name">Марина Петренко</div>
+        <div class="psycho-city">Den Haag · CBT, EMDR, групова терапія</div>
+        <span class="tag t-lang">🇺🇦 Укр</span>
+        <span class="tag t-price">від €45</span>
+      </div>
+    </div>
+    <div class="psycho-card">
+      <div class="psycho-av">🌸</div>
+      <div>
+        <div class="psycho-name">Ірина Мороз</div>
+        <div class="psycho-city">Utrecht / Online · Дитяча психологія</div>
+        <span class="tag t-online">💻 Онлайн</span>
+        <span class="tag t-lang">🇺🇦 Укр</span>
+        <span class="tag t-price">від €35</span>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+    <div class="prem-label">Скрипт для huisarts — як попросити направлення</div>
+    <div class="script-card">
+      <div class="script-row">
+        <span class="who who-you">Ви</span>
+        <div>
+          <div class="script-nl">Ik heb last van angstklachten en slaapproblemen na de oorlog in Oekraïne.</div>
+          <div class="script-ua">Після війни в Україні у мене тривожність і проблеми зі сном.</div>
+        </div>
+      </div>
+      <div class="script-row">
+        <span class="who who-you">Ви</span>
+        <div>
+          <div class="script-nl">Kunt u mij doorverwijzen naar een psycholoog? Liefst iemand die Oekraïens of Russisch spreekt.</div>
+          <div class="script-ua">Чи можете ви направити мене до психолога? Бажано до того, хто говорить українською або російською.</div>
+        </div>
+      </div>
+      <div class="script-row">
+        <span class="who who-doc">Лікар</span>
+        <div>
+          <div class="script-nl">Ik schrijf u een verwijzing naar de GGZ. U ontvangt een brief.</div>
+          <div class="script-ua">Я виписую вам направлення до GGZ. Ви отримаєте листа.</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ═══ 5. СТОМАТОЛОГІЯ ═══ -->
+<div id="cat5" class="sticky-cat">05 — Стоматологія</div>
+<div class="cat-section">
+  <div class="cat-header" style="background:#164E63;">
+    <div class="cat-icon-wrap">
+      <svg width="26" height="26" viewBox="0 0 28 28" fill="none">
+        <path d="M10 5C8 5 6 7 6 9C6 11 7 14 8 18C8.5 20 9.5 23 11 23C12 23 12.5 22 13 20C13.5 18.5 14 18.5 14 18.5C14 18.5 14.5 18.5 15 20C15.5 22 16 23 17 23C18.5 23 19.5 20 20 18C21 14 22 11 22 9C22 7 20 5 18 5C17 5 16 5.5 15 6C14.5 6.5 14 7 14 7C14 7 13.5 6.5 13 6C12 5.5 11 5 10 5Z" fill="rgba(255,255,255,0.25)" stroke="white" stroke-width="1.6"/>
+      </svg>
+    </div>
+    <div class="cat-header-text">
+      <h2>Стоматологія</h2>
+      <p>Дешеві клініки + страховки</p>
+    </div>
+    <div class="premium-count">2 розділи</div>
+  </div>
+  <div class="cat-body">
+
+    <div class="prem-label">Академічні клініки — нижчі ціни</div>
+
+    <div class="clinic-card">
+      <div class="clinic-top">
+        <div>
+          <div class="clinic-name">ACTA — Amsterdam</div>
+          <div class="clinic-meta">Universiteit van Amsterdam + VU</div>
+          <div class="clinic-meta">📍 Gustav Mahlerlaan 3004</div>
+        </div>
+        <div class="clinic-price">~€15–35</div>
+      </div>
+      <div class="clinic-note">Студентська клініка університету. Якість контролюється викладачами. Запис заздалегідь — черга 1–2 тижні.</div>
+      <a class="clinic-phone" href="tel:0205980700">📞 020 598 0700</a>
+    </div>
+
+    <div class="clinic-card">
+      <div class="clinic-top">
+        <div>
+          <div class="clinic-name">HAN Dental — Nijmegen</div>
+          <div class="clinic-meta">Hogeschool van Arnhem en Nijmegen</div>
+        </div>
+        <div class="clinic-price">~€20–40</div>
+      </div>
+      <div class="clinic-note">Навчальна клініка. Лікування під наглядом досвідчених стоматологів.</div>
+    </div>
+
+    <div class="clinic-card">
+      <div class="clinic-top">
+        <div>
+          <div class="clinic-name">UMCG — Groningen</div>
+          <div class="clinic-meta">Universitair Medisch Centrum Groningen</div>
+        </div>
+        <div class="clinic-price">~€25–50</div>
+      </div>
+      <div class="clinic-note">Університетський медичний центр. Також приймають складні випадки.</div>
+    </div>
+
+    <div class="divider"></div>
+    <div class="prem-label">Порівняння aanvullend verzekering (зуби)</div>
+    <table class="pt">
+      <thead><tr><th>Страховик</th><th>Ціна/міс</th><th>Покриття</th></tr></thead>
+      <tbody>
+        <tr><td style="font-weight:700;">Menzis Tand</td><td style="color:#15803D;font-weight:700;">€10</td><td>80% до €500/рік</td></tr>
+        <tr><td style="font-weight:700;">VGZ Basis</td><td>€9</td><td>75% до €300/рік</td></tr>
+        <tr><td style="font-weight:700;">CZ Tand</td><td>€12</td><td>75% до €750/рік</td></tr>
+        <tr><td style="font-weight:700;">Zilveren Tand</td><td>€14</td><td>75% до €1000/рік</td></tr>
+      </tbody>
+    </table>
+
+  </div>
+</div>
+
+<!-- ═══ 6. АПТЕКА ═══ -->
+<div id="cat6" class="sticky-cat">06 — Аптека (Apotheek)</div>
+<div class="cat-section">
+  <div class="cat-header" style="background:#14532D;">
+    <div class="cat-icon-wrap">
+      <svg width="26" height="26" viewBox="0 0 28 28" fill="none">
+        <path d="M6.5 10.5H14V17.5H6.5C4.6 17.5 3 15.9 3 14C3 12.1 4.6 10.5 6.5 10.5Z" fill="rgba(219,234,254,0.3)"/>
+        <path d="M14 10.5H21.5C23.4 10.5 25 12.1 25 14C25 15.9 23.4 17.5 21.5 17.5H14V10.5Z" fill="rgba(255,255,255,0.2)"/>
+        <rect x="3" y="10.5" width="22" height="7" rx="3.5" fill="none" stroke="white" stroke-width="1.8"/>
+        <line x1="14" y1="10.5" x2="14" y2="17.5" stroke="white" stroke-width="1.8"/>
+      </svg>
+    </div>
+    <div class="cat-header-text">
+      <h2>Аптека (Apotheek)</h2>
+      <p>Словник ліків укр ↔ нід ↔ англ</p>
+    </div>
+    <div class="premium-count">1 розділ</div>
+  </div>
+  <div class="cat-body">
+
+    <div class="prem-label">Словник ліків (50+ позицій)</div>
+    <div class="med-hdr">
+      <span>🇺🇦 Україна</span><span>🇳🇱 Nederland</span><span>🇬🇧 English</span>
+    </div>
+    <div class="med-row"><div class="med-ua">Парацетамол</div><div class="med-nl">Paracetamol</div><div class="med-en">Paracetamol</div></div>
+    <div class="med-row"><div class="med-ua">Ібупрофен</div><div class="med-nl">Ibuprofen</div><div class="med-en">Ibuprofen</div></div>
+    <div class="med-row"><div class="med-ua">Но-шпа</div><div class="med-nl">Drotaverinum</div><div class="med-en">Drotaverine</div></div>
+    <div class="med-row"><div class="med-ua">Активоване вугілля</div><div class="med-nl">Norit / Carbo</div><div class="med-en">Activated charcoal</div></div>
+    <div class="med-row"><div class="med-ua">Валеріана</div><div class="med-nl">Valeriaanwortel</div><div class="med-en">Valerian</div></div>
+    <div class="med-row"><div class="med-ua">Анальгін</div><div class="med-nl">Metamizol</div><div class="med-en">Metamizole</div></div>
+    <div class="med-row"><div class="med-ua">Супрастин</div><div class="med-nl">Chloorfenaminum</div><div class="med-en">Chlorphenamine</div></div>
+    <div class="med-row"><div class="med-ua">Мукалтин</div><div class="med-nl">Mucosolvan</div><div class="med-en">Ambroxol</div></div>
+    <div class="med-row"><div class="med-ua">Діазолін</div><div class="med-nl">Mebhydroline</div><div class="med-en">Mebhydroline</div></div>
+    <div class="med-row"><div class="med-ua">Смекта</div><div class="med-nl">Diosmectite</div><div class="med-en">Diosmectite</div></div>
+    <div class="med-row"><div class="med-ua">Корвалол</div><div class="med-nl">—</div><div class="med-en">Phenobarbital mix</div></div>
+    <div class="med-row"><div class="med-ua">Ентеросгель</div><div class="med-nl">Methylsilicol</div><div class="med-en">Methylsilicic acid</div></div>
+    <div class="med-more">+ ще 38 позицій у повній версії словника</div>
+
+  </div>
+</div>
+
+<!-- ═══ 7. ВАКЦИНАЦІЯ ═══ -->
+<div id="cat7" class="sticky-cat">07 — Вакцинація дітей</div>
+<div class="cat-section" style="margin-bottom:0;">
+  <div class="cat-header" style="background:#1D4ED8;">
+    <div class="cat-icon-wrap">
+      <svg width="26" height="26" viewBox="0 0 28 28" fill="none">
+        <line x1="3" y1="14" x2="8" y2="14" stroke="white" stroke-width="1.8" stroke-linecap="round"/>
+        <rect x="8" y="10.5" width="13" height="7" rx="2" fill="rgba(255,255,255,0.2)" stroke="white" stroke-width="1.7"/>
+        <line x1="21" y1="14" x2="25" y2="14" stroke="white" stroke-width="1.7" stroke-linecap="round"/>
+        <line x1="25" y1="11.5" x2="25" y2="16.5" stroke="white" stroke-width="1.7" stroke-linecap="round"/>
+        <path d="M12 14L14 12L16 14L14 16L12 14Z" fill="rgba(255,255,255,0.4)" stroke="white" stroke-width="1"/>
+      </svg>
+    </div>
+    <div class="cat-header-text">
+      <h2>Вакцинація дітей</h2>
+      <p>Шаблон листа + таблиця назв вакцин</p>
+    </div>
+    <div class="premium-count">2 розділи</div>
+  </div>
+  <div class="cat-body">
+
+    <div class="prem-label">Шаблон листа для inhaalschema</div>
+    <div class="letter">
+      <div class="letter-meta">📄 Для huisarts або GGD · Нідерландська мова</div>
+      <p>Geachte heer/mevrouw,</p><br>
+      <p>Mijn kind <strong style="background:#FEF9C3;padding:0 3px;border-radius:3px;">[ім'я дитини]</strong>, geboren op <strong style="background:#FEF9C3;padding:0 3px;border-radius:3px;">[дата народження]</strong>, is recentelijk vanuit Oekraïne naar Nederland gekomen.</p><br>
+      <p>In Oekraïne heeft mijn kind de volgende vaccinaties ontvangen: <strong style="background:#FEF9C3;padding:0 3px;border-radius:3px;">[перелік вакцин]</strong>. Een kopie van het vaccinatieboekje is bijgevoegd.</p><br>
+      <p>Ik verzoek u vriendelijk een inhaalschema op te stellen conform het Nederlandse Rijksvaccinatieprogramma (RVP).</p><br>
+      <p>Met vriendelijke groet,<br><strong style="background:#FEF9C3;padding:0 3px;border-radius:3px;">[ваше ім'я]</strong></p>
+    </div>
+
+    <div class="divider"></div>
+    <div class="prem-label">Назви вакцин: Україна ↔ Нідерланди</div>
+    <div class="vac-hdr">
+      <span>🇺🇦 Україна (АКДП тощо)</span><span>🇳🇱 Нідерланди (RVP)</span>
+    </div>
+    <div class="vac-row"><div class="vac-ua">АКДП (дифтерія, правець, кашлюк)</div><div class="vac-nl">DKTP-Hib-HepB</div></div>
+    <div class="vac-row"><div class="vac-ua">Поліомієліт</div><div class="vac-nl">Polio (IPV)</div></div>
+    <div class="vac-row"><div class="vac-ua">Кір, паротит, краснуха (КПК)</div><div class="vac-nl">BMR / MMR</div></div>
+    <div class="vac-row"><div class="vac-ua">Гепатит В</div><div class="vac-nl">Hepatitis B (HepB)</div></div>
+    <div class="vac-row"><div class="vac-ua">Гемофільна інфекція (Hib)</div><div class="vac-nl">Hib</div></div>
+    <div class="vac-row"><div class="vac-ua">Менінгокок C</div><div class="vac-nl">MenACWY</div></div>
+    <div class="vac-row"><div class="vac-ua">Пневмококова інфекція</div><div class="vac-nl">Pneumokokken (PCV)</div></div>
+    <div class="vac-row"><div class="vac-ua">Ротавірус</div><div class="vac-nl">Rotavirus (RVP 2023)</div></div>
+
+  </div>
+</div>
+
+</div><!-- /pb -->
+
+<nav>
+  <a href="final_colorful.html" class="nav-item"><div class="nav-pill"><span class="msym">home</span></div><span style="font-size:10px;font-weight:600;">Головна</span></a>
+  <a href="#" class="nav-item active"><div class="nav-pill"><span class="msym">workspace_premium</span></div><span style="font-size:10px;font-weight:600;">Преміум</span></a>
+  <a href="#" class="nav-item"><div class="nav-pill"><span class="msym">bookmark</span></div><span style="font-size:10px;font-weight:600;">Збережені</span></a>
+  <a href="#" class="nav-item"><div class="nav-pill"><span class="msym">person</span></div><span style="font-size:10px;font-weight:600;">Профіль</span></a>
+</nav>
+</body>
+</html>

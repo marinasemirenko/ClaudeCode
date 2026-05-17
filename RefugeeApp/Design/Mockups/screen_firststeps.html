@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Перші кроки в Нідерландах</title>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --blue: #0057B7; --blue-dark: #003DA6; --blue-soft: #EDF4FF;
+      --yellow: #FCD400; --bg: #EFECE5; --card: #fff;
+      --text: #111827; --muted: #6B7280; --border: #DDD9D0;
+      --green: #15803D; --green-soft: #DCFCE7;
+      --amber: #B45309; --amber-soft: #FEF3C7;
+      --orange: #C2410C; --orange-soft: #FFF7ED;
+      --premium: #7C3AED; --premium-soft: #EDE9FE;
+      --hero: #7C2D12;
+    }
+    body { font-family: 'Manrope', sans-serif; background: var(--bg); color: var(--text); max-width: 390px; margin: 0 auto; min-height: 100vh; }
+    .msym { font-family: 'Material Symbols Outlined'; font-variation-settings: 'FILL' 1,'wght' 400,'GRAD' 0,'opsz' 24; font-size: 22px; line-height: 1; }
+
+    /* ── UA bar ── */
+    .ua-bar { height: 4px; background: linear-gradient(90deg, #0057B7 50%, #FCD400 50%); }
+
+    /* ── Sticky Header ── */
+    .sticky-header {
+      position: sticky; top: 0; z-index: 50;
+      background: white; border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; gap: 10px; padding: 12px 16px;
+    }
+    .back-btn {
+      width: 36px; height: 36px; border-radius: 12px;
+      background: var(--bg); border: none; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--text); text-decoration: none; flex-shrink: 0;
+    }
+    .header-title { font-size: 15px; font-weight: 700; }
+
+    /* ── Hero ── */
+    .hero {
+      background: linear-gradient(160deg, #7C2D12 0%, #C2410C 60%, #EA580C 100%);
+      padding: 28px 20px 32px; position: relative; overflow: hidden;
+    }
+    .hero::before {
+      content: ''; position: absolute; inset: 0;
+      background-image: radial-gradient(circle, rgba(255,255,255,0.07) 1px, transparent 1px);
+      background-size: 18px 18px;
+    }
+    .hero::after {
+      content: ''; position: absolute;
+      bottom: -30px; right: -20px;
+      width: 160px; height: 160px;
+      background: rgba(255,255,255,0.05);
+      border-radius: 50%;
+    }
+    .hero-step-badge {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.25);
+      color: rgba(255,255,255,0.9); font-size: 11px; font-weight: 700;
+      border-radius: 20px; padding: 4px 12px; margin-bottom: 12px;
+      position: relative;
+    }
+    .hero h1 { font-size: 24px; font-weight: 900; color: white; line-height: 1.15; position: relative; }
+    .hero h1 span { color: var(--yellow); }
+    .hero p { color: rgba(255,255,255,0.75); font-size: 13px; margin-top: 8px; line-height: 1.55; position: relative; }
+    .hero-stats {
+      display: flex; gap: 10px; margin-top: 18px; position: relative;
+    }
+    .stat-pill {
+      background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 12px; padding: 8px 12px; flex: 1;
+    }
+    .stat-num { font-size: 18px; font-weight: 900; color: white; }
+    .stat-lbl { font-size: 10px; font-weight: 600; color: rgba(255,255,255,0.65); margin-top: 1px; }
+
+    /* ── Alert ── */
+    .alert {
+      margin: 12px 16px 0; padding: 12px 14px;
+      background: #FEF3C7; border: 1px solid #FCD34D;
+      border-radius: 14px; display: flex; gap: 10px; align-items: flex-start;
+    }
+    .alert-icon { font-size: 18px; flex-shrink: 0; margin-top: 1px; }
+    .alert p { font-size: 12.5px; font-weight: 600; color: #92400E; line-height: 1.5; }
+
+    /* ── Section label ── */
+    .sec-label {
+      padding: 16px 16px 8px;
+      font-size: 11px; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.07em; color: var(--muted);
+    }
+
+    /* ── Timeline / steps indicator ── */
+    .timeline {
+      margin: 0 16px 4px;
+      background: white; border-radius: 16px;
+      padding: 14px 16px; box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+    }
+    .timeline-title { font-size: 12px; font-weight: 700; color: var(--text); margin-bottom: 10px; }
+    .tl-row { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }
+    .tl-row:last-child { margin-bottom: 0; }
+    .tl-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+    .dot-done { background: var(--green); }
+    .dot-now { background: var(--orange); }
+    .dot-later { background: #D1D5DB; }
+    .tl-line { width: 2px; height: 12px; background: #E5E7EB; margin-left: 3px; flex-shrink: 0; }
+    .tl-text { font-size: 11.5px; font-weight: 600; color: var(--text); }
+    .tl-when { font-size: 10px; color: var(--muted); margin-left: auto; }
+
+    /* ── Cards ── */
+    .cards { padding: 0 16px; display: flex; flex-direction: column; gap: 8px; padding-bottom: 90px; }
+
+    .topic-card {
+      background: white; border-radius: 18px;
+      display: flex; align-items: center; gap: 14px;
+      padding: 14px 16px; text-decoration: none; color: inherit;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+      transition: box-shadow 0.15s;
+      position: relative; overflow: hidden;
+    }
+    .topic-card:active { box-shadow: 0 1px 2px rgba(0,0,0,0.04); }
+
+    .topic-icon {
+      width: 52px; height: 52px; border-radius: 16px;
+      background: var(--blue-soft);
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    }
+
+    .topic-info { flex: 1; min-width: 0; }
+    .topic-title { font-size: 14px; font-weight: 700; color: var(--text); line-height: 1.3; }
+    .topic-desc { font-size: 11.5px; color: var(--muted); margin-top: 3px; line-height: 1.4; }
+
+    .topic-right { display: flex; flex-direction: column; align-items: flex-end; gap: 6px; flex-shrink: 0; }
+    .chevron {
+      font-family: 'Material Symbols Outlined';
+      font-variation-settings: 'FILL' 0, 'wght' 400;
+      font-size: 18px; color: #D1D5DB;
+    }
+
+    .badge {
+      font-size: 10px; font-weight: 700; padding: 3px 8px;
+      border-radius: 20px; white-space: nowrap;
+    }
+    .badge-free { background: var(--green-soft); color: var(--green); }
+    .badge-prem { background: var(--premium-soft); color: var(--premium); }
+    .badge-urgent { background: #FEE2E2; color: #B91C1C; }
+    .badge-amber { background: var(--amber-soft); color: var(--amber); }
+
+    /* Step number overlay on card */
+    .step-num {
+      position: absolute; top: 10px; left: 10px;
+      width: 20px; height: 20px;
+      background: var(--orange); color: white;
+      border-radius: 50%; font-size: 10px; font-weight: 800;
+      display: flex; align-items: center; justify-content: center;
+    }
+
+    /* ── Nav ── */
+    nav { position: fixed; bottom: 0; left: 50%; transform: translateX(-50%); width: 100%; max-width: 390px; background: white; border-top: 1px solid var(--border); display: flex; justify-content: space-around; padding: 6px 0 14px; z-index: 100; }
+    .nav-item { display: flex; flex-direction: column; align-items: center; gap: 3px; text-decoration: none; color: var(--muted); font-size: 10px; font-weight: 600; }
+    .nav-pill { width: 52px; height: 32px; display: flex; align-items: center; justify-content: center; border-radius: 20px; }
+    .nav-item.active .nav-pill { background: #FFF7ED; }
+    .nav-item.active { color: var(--orange); }
+
+    /* FAB */
+    .fab { position: fixed; bottom: 76px; right: calc(50% - 195px + 16px); width: 50px; height: 50px; background: var(--orange); border-radius: 18px; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(194,65,12,0.4); z-index: 90; text-decoration: none; }
+  </style>
+</head>
+<body>
+<div class="ua-bar"></div>
+
+<!-- Header -->
+<div class="sticky-header">
+  <a href="final_colorful.html" class="back-btn">
+    <span class="msym" style="font-size:20px;">arrow_back</span>
+  </a>
+  <span class="header-title">Перші кроки в Нідерландах</span>
+</div>
+
+<!-- Hero -->
+<div class="hero">
+  <div class="hero-step-badge">🗺️ Покроковий гайд для новоприбулих</div>
+  <h1>З чого<br>розпочати<br><span>в Нідерландах</span></h1>
+  <p>Що зробити в перші тижні після приїзду — по порядку, зрозуміло, без зайвого стресу.</p>
+  <div class="hero-stats">
+    <div class="stat-pill">
+      <div class="stat-num">8</div>
+      <div class="stat-lbl">кроків</div>
+    </div>
+    <div class="stat-pill">
+      <div class="stat-num">~4–6</div>
+      <div class="stat-lbl">тижні на все</div>
+    </div>
+    <div class="stat-pill">
+      <div class="stat-num">100%</div>
+      <div class="stat-lbl">актуально</div>
+    </div>
+  </div>
+</div>
+
+<!-- Alert -->
+<div class="alert">
+  <span class="alert-icon">⚡</span>
+  <p>Починайте з реєстрації BRP — від неї залежить все інше: страховка, банк, виплати, школа для дітей.</p>
+</div>
+
+<!-- Timeline -->
+<div class="sec-label">Орієнтовний порядок дій</div>
+<div class="timeline">
+  <div class="timeline-title">Перші 6 тижнів у Нідерландах</div>
+  <div class="tl-row"><div class="tl-dot dot-now"></div><div class="tl-text">Тиждень 1–2: BRP + BSN, страховка</div><div class="tl-when">Терміново</div></div>
+  <div class="tl-line"></div>
+  <div class="tl-row"><div class="tl-dot dot-now"></div><div class="tl-text">Тиждень 2–3: Банківський рахунок, DigiD</div><div class="tl-when">Пріоритет</div></div>
+  <div class="tl-line"></div>
+  <div class="tl-row"><div class="tl-dot dot-later"></div><div class="tl-text">Тиждень 3–4: Школа для дітей, мовні курси</div><div class="tl-when">Незабаром</div></div>
+  <div class="tl-line"></div>
+  <div class="tl-row"><div class="tl-dot dot-later"></div><div class="tl-text">Тиждень 4–6: Робота, житло, інтеграція</div><div class="tl-when">Планувати</div></div>
+</div>
+
+<!-- Cards -->
+<div class="sec-label">8 кроків — натисніть на будь-який</div>
+<div class="cards">
+
+  <!-- 1. BRP / BSN -->
+  <a href="firststeps_brp.html" class="topic-card">
+    <div class="step-num">1</div>
+    <div class="topic-icon" style="background:#FFF7ED;">
+      <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+        <!-- ID card -->
+        <rect x="3" y="8" width="22" height="14" rx="3" fill="white" stroke="#0057B7" stroke-width="1.7"/>
+        <!-- Photo placeholder -->
+        <rect x="6" y="11" width="6" height="8" rx="2" fill="white" stroke="#0057B7" stroke-width="1.5"/>
+        <circle cx="9" cy="13" r="1.5" fill="#0057B7"/>
+        <path d="M6.5 19C7 17.5 8 16.5 9 16.5C10 16.5 11 17.5 11.5 19" stroke="#0057B7" stroke-width="1.3" stroke-linecap="round"/>
+        <!-- Lines -->
+        <line x1="14" y1="13" x2="22" y2="13" stroke="#0057B7" stroke-width="1.5" stroke-linecap="round"/>
+        <line x1="14" y1="16" x2="20" y2="16" stroke="#0057B7" stroke-width="1.3" stroke-linecap="round"/>
+      </svg>
+    </div>
+    <div class="topic-info">
+      <div class="topic-title">Реєстрація BRP та BSN</div>
+      <div class="topic-desc">Реєстрація в муніципалітеті, отримання BSN-номера</div>
+    </div>
+    <div class="topic-right">
+      <span class="badge badge-urgent">Терміново</span>
+      <span class="chevron">chevron_right</span>
+    </div>
+  </a>
+
+  <!-- 2. IND / Тимчасовий захист -->
+  <a href="firststeps_ind.html" class="topic-card">
+    <div class="step-num">2</div>
+    <div class="topic-icon" style="background:#FFF7ED;">
+      <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+        <!-- Shield -->
+        <path d="M14 3L4.5 7.5V15C4.5 20.2 8.7 24.8 14 26.5C19.3 24.8 23.5 20.2 23.5 15V7.5L14 3Z" fill="white" stroke="#0057B7" stroke-width="1.7" stroke-linejoin="round"/>
+        <!-- Document lines inside -->
+        <line x1="10" y1="13" x2="18" y2="13" stroke="#0057B7" stroke-width="1.5" stroke-linecap="round"/>
+        <line x1="10" y1="16" x2="16" y2="16" stroke="#0057B7" stroke-width="1.3" stroke-linecap="round"/>
+        <circle cx="14" cy="10" r="1.8" fill="#0057B7"/>
+      </svg>
+    </div>
+    <div class="topic-info">
+      <div class="topic-title">Тимчасовий захист (IND)</div>
+      <div class="topic-desc">Verblijfsdocument, права, продовження статусу</div>
+    </div>
+    <div class="topic-right">
+      <span class="badge badge-urgent">Терміново</span>
+      <span class="chevron">chevron_right</span>
+    </div>
+  </a>
+
+  <!-- 3. Страховка -->
+  <a href="article_insurance.html" class="topic-card">
+    <div class="step-num">3</div>
+    <div class="topic-icon" style="background:#FFF7ED;">
+      <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+        <path d="M14 3L4 7.5V15C4 20.5 8.4 25.3 14 27C19.6 25.3 24 20.5 24 15V7.5L14 3Z" fill="white" stroke="#0057B7" stroke-width="1.7"/>
+        <path d="M10 14L13 17L18 11" stroke="#0057B7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+    <div class="topic-info">
+      <div class="topic-title">Медична страховка</div>
+      <div class="topic-desc">Zorgverzekering, zorgtoeslag, власна чи через COA</div>
+    </div>
+    <div class="topic-right">
+      <span class="badge badge-urgent">Тиждень 1</span>
+      <span class="chevron">chevron_right</span>
+    </div>
+  </a>
+
+  <!-- 4. Банк -->
+  <a href="firststeps_bank.html" class="topic-card">
+    <div class="step-num">4</div>
+    <div class="topic-icon" style="background:#FFF7ED;">
+      <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+        <!-- Card shape -->
+        <rect x="3" y="8" width="22" height="15" rx="3.5" fill="white" stroke="#0057B7" stroke-width="1.7"/>
+        <!-- Stripe -->
+        <rect x="3" y="12" width="22" height="3.5" fill="#0057B7"/>
+        <!-- Chip -->
+        <rect x="6" y="17.5" width="6" height="3" rx="1" fill="white" stroke="#0057B7" stroke-width="1.2"/>
+        <!-- Dots (contactless) -->
+        <path d="M17 17.5C17.8 17.5 18.5 18.2 18.5 19C18.5 19.8 17.8 20.5 17 20.5" stroke="#0057B7" stroke-width="1.2" stroke-linecap="round"/>
+        <path d="M19.5 16.5C21 17 22 17.9 22 19C22 20.1 21 21 19.5 21.5" stroke="#0057B7" stroke-width="1.2" stroke-linecap="round"/>
+      </svg>
+    </div>
+    <div class="topic-info">
+      <div class="topic-title">Банківський рахунок</div>
+      <div class="topic-desc">Bunq, ING, ASN — які банки приймають UID-тримачів</div>
+    </div>
+    <div class="topic-right">
+      <span class="badge badge-free">Безкоштовно</span>
+      <span class="chevron">chevron_right</span>
+    </div>
+  </a>
+
+  <!-- 5. DigiD -->
+  <a href="firststeps_digid.html" class="topic-card">
+    <div class="step-num">5</div>
+    <div class="topic-icon" style="background:#FFF7ED;">
+      <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+        <!-- Phone / app -->
+        <rect x="8" y="3" width="12" height="22" rx="3" fill="white" stroke="#0057B7" stroke-width="1.7"/>
+        <!-- Screen -->
+        <rect x="10" y="6" width="8" height="13" rx="1.5" fill="#EDF4FF"/>
+        <!-- Lock -->
+        <path d="M12 12V10.5C12 9.1 12.9 8 14 8C15.1 8 16 9.1 16 10.5V12" stroke="#0057B7" stroke-width="1.5" stroke-linecap="round"/>
+        <rect x="11.5" y="12" width="5" height="4" rx="1" fill="#0057B7"/>
+        <!-- Home button -->
+        <circle cx="14" cy="22.5" r="1" fill="#0057B7"/>
+      </svg>
+    </div>
+    <div class="topic-info">
+      <div class="topic-title">DigiD — цифровий ID</div>
+      <div class="topic-desc">Реєстрація DigiD, необхідний для держпослуг онлайн</div>
+    </div>
+    <div class="topic-right">
+      <span class="badge badge-free">Безкоштовно</span>
+      <span class="chevron">chevron_right</span>
+    </div>
+  </a>
+
+  <!-- 6. Мова / Inburgering -->
+  <a href="firststeps_language.html" class="topic-card">
+    <div class="step-num">6</div>
+    <div class="topic-icon" style="background:#FFF7ED;">
+      <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+        <!-- Open book -->
+        <path d="M14 7V23" stroke="#0057B7" stroke-width="1.6" stroke-linecap="round"/>
+        <path d="M14 7C14 7 11 5.5 6 6V22C11 21.5 14 23 14 23" fill="white" stroke="#0057B7" stroke-width="1.6" stroke-linejoin="round"/>
+        <path d="M14 7C14 7 17 5.5 22 6V22C17 21.5 14 23 14 23" fill="white" stroke="#0057B7" stroke-width="1.6" stroke-linejoin="round"/>
+        <!-- Lines on pages -->
+        <line x1="8" y1="10" x2="12" y2="10" stroke="#0057B7" stroke-width="1.2" stroke-linecap="round"/>
+        <line x1="8" y1="13" x2="12" y2="13" stroke="#0057B7" stroke-width="1.2" stroke-linecap="round"/>
+        <line x1="8" y1="16" x2="11" y2="16" stroke="#0057B7" stroke-width="1.2" stroke-linecap="round"/>
+        <line x1="16" y1="10" x2="20" y2="10" stroke="#0057B7" stroke-width="1.2" stroke-linecap="round"/>
+        <line x1="16" y1="13" x2="20" y2="13" stroke="#0057B7" stroke-width="1.2" stroke-linecap="round"/>
+      </svg>
+    </div>
+    <div class="topic-info">
+      <div class="topic-title">Курси нідерландської</div>
+      <div class="topic-desc">Inburgering, NT2, безкоштовні курси для біженців</div>
+    </div>
+    <div class="topic-right">
+      <span class="badge badge-free">Безкоштовно</span>
+      <span class="chevron">chevron_right</span>
+    </div>
+  </a>
+
+  <!-- 7. Школа для дітей -->
+  <a href="firststeps_school.html" class="topic-card">
+    <div class="step-num">7</div>
+    <div class="topic-icon" style="background:#FFF7ED;">
+      <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+        <!-- School building -->
+        <rect x="5" y="13" width="18" height="12" rx="2" fill="white" stroke="#0057B7" stroke-width="1.7"/>
+        <!-- Roof / triangle -->
+        <path d="M3 14L14 5L25 14" fill="white" stroke="#0057B7" stroke-width="1.7" stroke-linejoin="round"/>
+        <!-- Door -->
+        <rect x="11" y="19" width="6" height="6" rx="1" fill="#0057B7"/>
+        <!-- Windows -->
+        <rect x="6.5" y="16" width="4" height="3.5" rx="0.8" fill="#EDF4FF" stroke="#0057B7" stroke-width="1.2"/>
+        <rect x="17.5" y="16" width="4" height="3.5" rx="0.8" fill="#EDF4FF" stroke="#0057B7" stroke-width="1.2"/>
+        <!-- Flag on top -->
+        <line x1="14" y1="3" x2="14" y2="5" stroke="#0057B7" stroke-width="1.5" stroke-linecap="round"/>
+      </svg>
+    </div>
+    <div class="topic-info">
+      <div class="topic-title">Школа для дітей</div>
+      <div class="topic-desc">Реєстрація в школі, ISK-клас, leerplicht (обов'язкова освіта)</div>
+    </div>
+    <div class="topic-right">
+      <span class="badge badge-free">Безкоштовно</span>
+      <span class="chevron">chevron_right</span>
+    </div>
+  </a>
+
+  <!-- 8. Робота -->
+  <a href="firststeps_work.html" class="topic-card">
+    <div class="step-num">8</div>
+    <div class="topic-icon" style="background:#FFF7ED;">
+      <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+        <!-- Briefcase -->
+        <rect x="4" y="12" width="20" height="13" rx="3" fill="white" stroke="#0057B7" stroke-width="1.7"/>
+        <!-- Handle -->
+        <path d="M10 12V10C10 8.9 10.9 8 12 8H16C17.1 8 18 8.9 18 10V12" fill="none" stroke="#0057B7" stroke-width="1.7"/>
+        <!-- Center bar -->
+        <line x1="4" y1="18" x2="24" y2="18" stroke="#0057B7" stroke-width="1.5"/>
+        <rect x="12" y="16" width="4" height="4" rx="1" fill="#EDF4FF" stroke="#0057B7" stroke-width="1.2"/>
+      </svg>
+    </div>
+    <div class="topic-info">
+      <div class="topic-title">Пошук роботи</div>
+      <div class="topic-desc">Право на роботу, UWV, перші кроки на нідерландському ринку</div>
+    </div>
+    <div class="topic-right">
+      <span class="badge badge-prem">Преміум</span>
+      <span class="chevron">chevron_right</span>
+    </div>
+  </a>
+
+</div><!-- /cards -->
+
+<!-- FAB -->
+<a href="#" class="fab">
+  <span class="msym" style="color:white;font-size:22px;">chat</span>
+</a>
+
+<nav>
+  <a href="final_colorful.html" class="nav-item"><div class="nav-pill"><span class="msym">home</span></div><span style="font-size:10px;font-weight:600;">Головна</span></a>
+  <a href="#" class="nav-item active"><div class="nav-pill"><span class="msym">explore</span></div><span style="font-size:10px;font-weight:600;">Огляд</span></a>
+  <a href="#" class="nav-item"><div class="nav-pill"><span class="msym">bookmark</span></div><span style="font-size:10px;font-weight:600;">Збережені</span></a>
+  <a href="#" class="nav-item"><div class="nav-pill"><span class="msym">person</span></div><span style="font-size:10px;font-weight:600;">Профіль</span></a>
+</nav>
+</body>
+</html>

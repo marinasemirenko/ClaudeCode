@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Реєстрація BRP та BSN</title>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --blue: #0057B7; --blue-dark: #003DA6; --blue-soft: #EDF4FF;
+      --yellow: #FCD400; --bg: #EFECE5; --card: #fff;
+      --text: #111827; --muted: #6B7280; --border: #DDD9D0;
+      --red: #B91C1C; --green: #15803D; --green-soft: #DCFCE7;
+      --amber: #B45309; --amber-soft: #FEF3C7;
+      --orange: #C2410C; --orange-dark: #7C2D12;
+      --premium: #7C3AED; --premium-soft: #EDE9FE;
+    }
+    body { font-family: 'Manrope', sans-serif; background: var(--bg); color: var(--text); max-width: 390px; margin: 0 auto; min-height: 100vh; }
+    .msym { font-family: 'Material Symbols Outlined'; font-variation-settings: 'FILL' 1,'wght' 400,'GRAD' 0,'opsz' 24; font-size: 22px; line-height: 1; }
+    .ua-bar { height: 4px; background: linear-gradient(90deg, #0057B7 50%, #FCD400 50%); }
+
+    /* ── Header ── */
+    .sticky-header {
+      position: sticky; top: 0; z-index: 50;
+      background: white; border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; gap: 10px; padding: 12px 16px;
+    }
+    .back-btn {
+      width: 36px; height: 36px; border-radius: 12px;
+      background: var(--bg); border: none; cursor: pointer;
+      display: flex; align-items: center; justify-content: center; color: var(--text); text-decoration: none;
+    }
+    .header-title { font-size: 14px; font-weight: 700; flex: 1; }
+    .header-badge {
+      font-size: 10px; font-weight: 700; padding: 4px 9px; border-radius: 20px;
+      background: var(--green-soft); color: var(--green);
+    }
+
+    /* ── Hero ── */
+    .hero {
+      background: linear-gradient(150deg, #7C2D12 0%, #C2410C 55%, #EA580C 100%);
+      padding: 24px 20px 36px; position: relative; overflow: hidden;
+    }
+    .hero::before {
+      content: ''; position: absolute; inset: 0;
+      background-image: radial-gradient(circle, rgba(255,255,255,0.07) 1px, transparent 1px);
+      background-size: 18px 18px;
+    }
+    .hero-step { display: inline-flex; align-items: center; gap: 7px; background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.25); color: rgba(255,255,255,0.9); font-size: 11px; font-weight: 700; border-radius: 20px; padding: 4px 12px; margin-bottom: 12px; position: relative; }
+    .hero h1 { color: white; font-size: 22px; font-weight: 900; line-height: 1.2; position: relative; }
+    .hero p { color: rgba(255,255,255,0.72); font-size: 13px; margin-top: 8px; line-height: 1.55; position: relative; }
+    .hero-icon-wrap { position: absolute; right: 16px; bottom: 16px; opacity: 0.15; }
+
+    /* ── Content sections ── */
+    .section { margin: 12px 16px 0; }
+    .sec-label {
+      font-size: 11px; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.06em; color: var(--muted); margin-bottom: 8px;
+      display: flex; align-items: center; gap: 6px;
+    }
+    .sec-label::before { content: ''; display: block; width: 3px; height: 14px; background: var(--orange); border-radius: 2px; }
+
+    /* ── Alert boxes ── */
+    .alert { padding: 12px 14px; border-radius: 14px; display: flex; gap: 10px; align-items: flex-start; }
+    .alert.red { background: #FEF2F2; border: 1px solid #FECACA; }
+    .alert.yellow { background: var(--amber-soft); border: 1px solid #FCD34D; }
+    .alert.green { background: var(--green-soft); border: 1px solid #86EFAC; }
+    .alert.blue { background: var(--blue-soft); border: 1px solid #BFDBFE; }
+    .alert-icon { font-size: 18px; flex-shrink: 0; }
+    .alert p { font-size: 12.5px; font-weight: 600; line-height: 1.55; }
+    .alert.red p { color: #991B1B; }
+    .alert.yellow p { color: #92400E; }
+    .alert.green p { color: #14532D; }
+    .alert.blue p { color: #1E40AF; }
+
+    /* ── What is BSN ── */
+    .info-card { background: white; border-radius: 18px; padding: 16px; box-shadow: 0 1px 6px rgba(0,0,0,0.07); }
+    .bsn-big { font-size: 36px; font-weight: 900; color: var(--blue); letter-spacing: 3px; text-align: center; padding: 8px 0; font-family: 'Manrope', monospace; }
+    .bsn-label { text-align: center; font-size: 11px; font-weight: 600; color: var(--muted); margin-bottom: 12px; }
+    .bsn-uses { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+    .bsn-use { background: var(--blue-soft); border-radius: 10px; padding: 10px; display: flex; align-items: center; gap: 8px; }
+    .bsn-use-icon { font-size: 16px; }
+    .bsn-use-text { font-size: 11.5px; font-weight: 600; color: var(--text); }
+
+    /* ── Steps ── */
+    .steps { background: white; border-radius: 18px; overflow: hidden; box-shadow: 0 1px 6px rgba(0,0,0,0.07); }
+    .step { display: flex; gap: 14px; padding: 14px 16px; border-bottom: 1px solid #F9FAFB; align-items: flex-start; }
+    .step:last-child { border-bottom: none; }
+    .step-num { width: 32px; height: 32px; background: var(--orange); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 800; flex-shrink: 0; }
+    .step-body { flex: 1; }
+    .step-title { font-size: 13.5px; font-weight: 700; color: var(--text); }
+    .step-desc { font-size: 12px; color: var(--muted); margin-top: 4px; line-height: 1.55; }
+    .step-tip { margin-top: 6px; font-size: 11.5px; background: var(--amber-soft); color: var(--amber); padding: 5px 9px; border-radius: 8px; display: inline-block; font-weight: 600; }
+    .step-link { display: inline-block; margin-top: 5px; font-size: 12px; color: var(--blue); font-weight: 700; text-decoration: none; }
+
+    /* ── Docs table ── */
+    .docs-card { background: white; border-radius: 18px; padding: 16px; box-shadow: 0 1px 6px rgba(0,0,0,0.07); }
+    .doc-row { display: flex; align-items: center; gap: 10px; padding: 8px 0; border-bottom: 1px solid #F3F4F6; }
+    .doc-row:last-child { border-bottom: none; }
+    .doc-check { width: 22px; height: 22px; background: var(--green-soft); border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .doc-check span { color: var(--green); font-size: 13px; font-weight: 800; }
+    .doc-text { font-size: 13px; font-weight: 600; flex: 1; }
+    .doc-note { font-size: 11px; color: var(--muted); }
+
+    /* ── Info table ── */
+    .tbl { width: 100%; border-collapse: collapse; font-size: 12px; }
+    .tbl th { background: #F3F4F6; padding: 8px 12px; text-align: left; font-size: 10px; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 0.04em; }
+    .tbl td { padding: 9px 12px; border-bottom: 1px solid #F9FAFB; vertical-align: top; line-height: 1.45; }
+    .tbl tr:last-child td { border-bottom: none; }
+    .td-key { font-weight: 700; color: var(--text); white-space: nowrap; }
+
+    /* ── FAQ ── */
+    .faq-item { background: white; border-radius: 14px; padding: 14px; margin-bottom: 8px; box-shadow: 0 1px 4px rgba(0,0,0,0.05); }
+    .faq-q { font-size: 13px; font-weight: 700; color: var(--text); display: flex; gap: 8px; align-items: flex-start; }
+    .faq-q::before { content: 'Q'; background: var(--orange); color: white; font-size: 10px; font-weight: 800; padding: 2px 6px; border-radius: 5px; flex-shrink: 0; margin-top: 2px; }
+    .faq-a { font-size: 12px; color: var(--muted); margin-top: 7px; line-height: 1.6; padding-left: 26px; }
+
+    /* ── Tip ── */
+    .tip-card { background: var(--amber-soft); border: 1px solid #FCD34D; border-radius: 14px; padding: 14px; display: flex; gap: 10px; align-items: flex-start; }
+    .tip-icon { font-size: 20px; flex-shrink: 0; }
+    .tip-text { font-size: 12.5px; color: #78350F; font-weight: 600; line-height: 1.55; }
+
+    /* ── Premium gate ── */
+    .premium-gate { margin: 12px 16px 0; border-radius: 18px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.08); position: relative; }
+    .gate-blur { filter: blur(3px); pointer-events: none; user-select: none; background: white; padding: 16px; }
+    .gate-blur .fake-row { height: 44px; background: #F3F4F6; border-radius: 10px; margin-bottom: 8px; }
+    .gate-overlay { position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0.95) 40%); display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 20px; text-align: center; }
+    .lock-circle { width: 52px; height: 52px; background: var(--premium-soft); border-radius: 18px; display: flex; align-items: center; justify-content: center; margin-bottom: 10px; }
+    .gate-title { font-size: 15px; font-weight: 800; color: var(--text); }
+    .gate-desc { font-size: 12px; color: var(--muted); margin-top: 5px; line-height: 1.5; }
+    .gate-btn { margin-top: 14px; background: var(--premium); color: white; font-size: 13px; font-weight: 700; border: none; border-radius: 14px; padding: 12px 24px; cursor: pointer; width: 100%; }
+    .gate-price { font-size: 11px; color: var(--muted); margin-top: 7px; }
+
+    /* ── Nav ── */
+    nav { position: fixed; bottom: 0; left: 50%; transform: translateX(-50%); width: 100%; max-width: 390px; background: white; border-top: 1px solid var(--border); display: flex; justify-content: space-around; padding: 6px 0 14px; z-index: 100; }
+    .nav-item { display: flex; flex-direction: column; align-items: center; gap: 3px; text-decoration: none; color: var(--muted); font-size: 10px; font-weight: 600; }
+    .nav-pill { width: 52px; height: 32px; display: flex; align-items: center; justify-content: center; border-radius: 20px; }
+    .nav-item.active .nav-pill { background: #FFF7ED; }
+    .nav-item.active { color: var(--orange); }
+    .pb { padding-bottom: 90px; }
+
+    /* FAB */
+    .fab { position: fixed; bottom: 76px; right: calc(50% - 195px + 16px); width: 50px; height: 50px; background: var(--orange); border-radius: 18px; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(194,65,12,0.4); z-index: 90; text-decoration: none; }
+  </style>
+</head>
+<body>
+<div class="ua-bar"></div>
+
+<!-- Header -->
+<div class="sticky-header">
+  <a href="screen_firststeps.html" class="back-btn">
+    <span class="msym" style="font-size:20px;">arrow_back</span>
+  </a>
+  <span class="header-title">Реєстрація BRP та BSN</span>
+  <span class="header-badge">✓ Безкоштовно</span>
+</div>
+
+<!-- Hero -->
+<div class="hero">
+  <div class="hero-step">
+    <span>📋</span> Крок 1 з 8
+  </div>
+  <h1>Реєстрація в муніципалітеті та BSN</h1>
+  <p>Перше, що потрібно зробити після приїзду. BSN-номер відкриває доступ до всіх послуг у Нідерландах.</p>
+  <div class="hero-icon-wrap">
+    <svg width="90" height="90" viewBox="0 0 90 90" fill="none">
+      <rect x="10" y="25" width="70" height="50" rx="8" fill="white" opacity="0.8"/>
+      <rect x="20" y="35" width="22" height="28" rx="5" fill="#FCD400" opacity="0.7"/>
+      <circle cx="31" cy="43" r="6" fill="white"/>
+      <path d="M22 62C24 57 27 54 31 54C35 54 38 57 40 62" fill="white"/>
+      <line x1="48" y1="43" x2="72" y2="43" stroke="white" stroke-width="3" stroke-linecap="round"/>
+      <line x1="48" y1="51" x2="66" y2="51" stroke="white" stroke-width="3" stroke-linecap="round"/>
+    </svg>
+  </div>
+</div>
+
+<div class="pb">
+
+<!-- Alert: urgent -->
+<div class="section">
+  <div class="alert red">
+    <span class="alert-icon">⚡</span>
+    <p>Зробіть це якомога раніше. Без BSN неможливо відкрити банківський рахунок, оформити страховку чи записати дитину до школи.</p>
+  </div>
+</div>
+
+<!-- What is BSN -->
+<div class="section" style="margin-top:16px;">
+  <div class="sec-label">Що таке BSN?</div>
+  <div class="info-card">
+    <div class="bsn-big">1 2 3 4 5 6 7 8 9</div>
+    <div class="bsn-label">Burgerservicenummer — 9-значний унікальний номер</div>
+    <div class="bsn-uses">
+      <div class="bsn-use"><span class="bsn-use-icon">🏥</span><span class="bsn-use-text">Медична страховка</span></div>
+      <div class="bsn-use"><span class="bsn-use-icon">🏦</span><span class="bsn-use-text">Банківський рахунок</span></div>
+      <div class="bsn-use"><span class="bsn-use-icon">💰</span><span class="bsn-use-text">Виплати та допомога</span></div>
+      <div class="bsn-use"><span class="bsn-use-icon">🎓</span><span class="bsn-use-text">Школа для дітей</span></div>
+      <div class="bsn-use"><span class="bsn-use-icon">💼</span><span class="bsn-use-text">Офіційна робота</span></div>
+      <div class="bsn-use"><span class="bsn-use-icon">📱</span><span class="bsn-use-text">DigiD та держпослуги</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- AZC vs Not AZC -->
+<div class="section" style="margin-top:16px;">
+  <div class="alert blue">
+    <span class="alert-icon">🏠</span>
+    <p><strong>Мешкаєте в AZC (COA)?</strong> Реєстрацію в BRP за вас часто робить COA автоматично. Запитайте у своєму центрі — можливо, BSN у вас вже є.</p>
+  </div>
+</div>
+
+<!-- Documents -->
+<div class="section" style="margin-top:16px;">
+  <div class="sec-label">Які документи потрібні</div>
+  <div class="docs-card">
+    <div class="doc-row">
+      <div class="doc-check"><span>✓</span></div>
+      <div>
+        <div class="doc-text">Паспорт або ID-картка</div>
+        <div class="doc-note">Оригінал + ксерокопія</div>
+      </div>
+    </div>
+    <div class="doc-row">
+      <div class="doc-check"><span>✓</span></div>
+      <div>
+        <div class="doc-text">UID-документ (Oekraïense vluchtelingen)</div>
+        <div class="doc-note">Verblijfsdocument або bevestigingsbrief IND</div>
+      </div>
+    </div>
+    <div class="doc-row">
+      <div class="doc-check"><span>✓</span></div>
+      <div>
+        <div class="doc-text">Підтвердження адреси проживання</div>
+        <div class="doc-note">Договір оренди, лист від господаря або verklaring van verblijf</div>
+      </div>
+    </div>
+    <div class="doc-row">
+      <div class="doc-check"><span>✓</span></div>
+      <div>
+        <div class="doc-text">Свідоцтва про народження дітей</div>
+        <div class="doc-note">Якщо реєструєте дітей разом з собою</div>
+      </div>
+    </div>
+    <div class="doc-row">
+      <div class="doc-check"><span>✓</span></div>
+      <div>
+        <div class="doc-text">Якщо є — свідоцтво про шлюб</div>
+        <div class="doc-note">Бажано перекладене або апостильоване</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Steps -->
+<div class="section" style="margin-top:16px;">
+  <div class="sec-label">Як зареєструватися — крок за кроком</div>
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-body">
+        <div class="step-title">Знайдіть свій gemeente (муніципалітет)</div>
+        <div class="step-desc">Реєструватися потрібно за місцем фактичного проживання. Знайдіть сайт свого gemeente — зазвичай це <em>gemeente[місто].nl</em></div>
+        <a class="step-link" href="https://www.government.nl/topics/municipal-registration" target="_blank">→ government.nl/municipal-registration</a>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-body">
+        <div class="step-title">Запишіться на прийом онлайн</div>
+        <div class="step-desc">Більшість муніципалітетів вимагають попереднього запису на сайті. Шукайте "eerste inschrijving" або "inschrijven als nieuwe inwoner".</div>
+        <div class="step-tip">💡 Великі міста: Amsterdam, Rotterdam, Den Haag — черги 1–2 тижні. Записуйтесь заздалегідь.</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-body">
+        <div class="step-title">Прийдіть особисто до gemeentehuis</div>
+        <div class="step-desc">Візьміть всі оригінали документів. Якщо не знаєте нідерландської — можна взяти з собою когось, хто перекладатиме, або попросити перекладача через gemeente.</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">4</div>
+      <div class="step-body">
+        <div class="step-title">Отримайте BSN</div>
+        <div class="step-desc">BSN видають або одразу під час реєстрації, або надсилають поштою протягом 1–2 тижнів. Запишіть і збережіть його — він знадобиться скрізь.</div>
+        <div class="step-tip">📬 BSN не надсилають на телефон або email — тільки офіційним листом або видають особисто.</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">5</div>
+      <div class="step-body">
+        <div class="step-title">Перевірте реєстрацію в MijnOverheid</div>
+        <div class="step-desc">Після отримання BSN і DigiD можна перевірити свої дані на mijnoverheid.nl — чи правильно записане ім'я, адреса, склад сім'ї.</div>
+        <a class="step-link" href="https://mijn.overheid.nl" target="_blank">→ mijn.overheid.nl</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Key facts table -->
+<div class="section" style="margin-top:16px;">
+  <div class="sec-label">Корисна інформація</div>
+  <div style="background:white;border-radius:18px;overflow:hidden;box-shadow:0 1px 6px rgba(0,0,0,0.07);">
+    <table class="tbl">
+      <thead><tr><th>Питання</th><th>Відповідь</th></tr></thead>
+      <tbody>
+        <tr>
+          <td class="td-key">Ціна</td>
+          <td>Безкоштовно</td>
+        </tr>
+        <tr>
+          <td class="td-key">Тривалість</td>
+          <td>Прийом 20–40 хв. BSN — одразу або до 2 тижнів</td>
+        </tr>
+        <tr>
+          <td class="td-key">Мова прийому</td>
+          <td>Нідерландська. Перекладача зазвичай потрібно організувати самостійно</td>
+        </tr>
+        <tr>
+          <td class="td-key">Для дітей</td>
+          <td>Дітей реєструють разом з батьками. Потрібні свідоцтва про народження</td>
+        </tr>
+        <tr>
+          <td class="td-key">Якщо живете в AZC</td>
+          <td>Реєстрація часто вже зроблена через COA. Запитайте менеджера</td>
+        </tr>
+        <tr>
+          <td class="td-key">Термін подачі</td>
+          <td>Протягом 5 днів після отримання постійного місця проживання</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- Tip -->
+<div class="section" style="margin-top:14px;">
+  <div class="tip-card">
+    <span class="tip-icon">💡</span>
+    <span class="tip-text">Якщо не можете записатися через сайт — телефонуйте безпосередньо в gemeente. Для українців деякі міста мають спрощений процес і окремі прийомні дні.</span>
+  </div>
+</div>
+
+<!-- FAQ -->
+<div class="section" style="margin-top:16px;">
+  <div class="sec-label">Часті запитання</div>
+
+  <div class="faq-item">
+    <div class="faq-q">Я орендую кімнату — як підтвердити адресу?</div>
+    <div class="faq-a">Попросіть господаря написати "verklaring van verblijf" — просте підтвердження що ви живете за цією адресою. Шаблон можна знайти на сайті gemeente.</div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q">Мені відмовили в реєстрації. Що робити?</div>
+    <div class="faq-a">Зверніться до Vluchtelingenwerk або юридичної допомоги VluchtelingenWerk Nederland. Відмова в реєстрації є незаконною для осіб з UID.</div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q">Чи можна зареєструватися до того, як знайдеш житло?</div>
+    <div class="faq-a">Ні, для реєстрації потрібна адреса. Якщо живете тимчасово — можна зареєструватися за адресою знайомих (з їхнього дозволу) або через gemeente отримати "briefadres".</div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q">Що таке briefadres?</div>
+    <div class="faq-a">Адреса для листів — для тих, хто не має постійного житла. Оформлюється через gemeente. Дозволяє отримати BSN навіть без фіксованого місця проживання.</div>
+  </div>
+
+</div>
+
+<!-- Premium gate -->
+<div style="margin-top:16px;">
+  <div class="section">
+    <div class="sec-label">Для тих, хто тільки приїхав</div>
+  </div>
+  <div class="premium-gate">
+    <div class="gate-blur">
+      <div class="fake-row"></div>
+      <div class="fake-row"></div>
+      <div class="fake-row" style="height:32px;"></div>
+      <div class="fake-row" style="height:56px;"></div>
+    </div>
+    <div class="gate-overlay">
+      <div class="lock-circle">
+        <span class="msym" style="color:var(--premium);font-size:26px;">lock</span>
+      </div>
+      <div class="gate-title">Преміум матеріали</div>
+      <div class="gate-desc">Телефони BRP-реєстрації по всіх великих містах · Шаблон verklaring van verblijf · Список волонтерів, які допомагають з реєстрацією</div>
+      <button class="gate-btn">Отримати доступ — €4.99/міс</button>
+      <div class="gate-price">Перші 7 днів безкоштовно · Відмінити будь-коли</div>
+    </div>
+  </div>
+</div>
+
+<!-- Next step -->
+<div class="section" style="margin-top:16px;">
+  <div class="alert green">
+    <span class="alert-icon">✅</span>
+    <p><strong>Після реєстрації:</strong> одразу оформлюйте медичну страховку та відкривайте банківський рахунок — вони потребують BSN.</p>
+  </div>
+  <div style="margin-top:8px;">
+    <a href="article_insurance.html" style="display:flex;align-items:center;justify-content:space-between;background:white;border-radius:14px;padding:14px 16px;text-decoration:none;color:inherit;box-shadow:0 1px 4px rgba(0,0,0,0.06);">
+      <div>
+        <div style="font-size:13px;font-weight:700;">→ Наступний крок: Медична страховка</div>
+        <div style="font-size:11.5px;color:var(--muted);margin-top:3px;">Крок 3 · Потрібен BSN</div>
+      </div>
+      <span style="font-family:'Material Symbols Outlined';font-size:20px;color:#D1D5DB;">chevron_right</span>
+    </a>
+  </div>
+</div>
+
+</div><!-- /pb -->
+
+<a href="#" class="fab">
+  <span class="msym" style="color:white;font-size:22px;">chat</span>
+</a>
+
+<nav>
+  <a href="final_colorful.html" class="nav-item"><div class="nav-pill"><span class="msym">home</span></div><span style="font-size:10px;font-weight:600;">Головна</span></a>
+  <a href="screen_firststeps.html" class="nav-item active"><div class="nav-pill"><span class="msym">explore</span></div><span style="font-size:10px;font-weight:600;">Огляд</span></a>
+  <a href="#" class="nav-item"><div class="nav-pill"><span class="msym">bookmark</span></div><span style="font-size:10px;font-weight:600;">Збережені</span></a>
+  <a href="#" class="nav-item"><div class="nav-pill"><span class="msym">person</span></div><span style="font-size:10px;font-weight:600;">Профіль</span></a>
+</nav>
+</body>
+</html>

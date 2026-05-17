@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Тимчасовий захист (IND)</title>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --blue: #0057B7; --blue-dark: #003DA6; --blue-soft: #EDF4FF;
+      --yellow: #FCD400; --bg: #EFECE5; --card: #fff;
+      --text: #111827; --muted: #6B7280; --border: #DDD9D0;
+      --green: #15803D; --green-soft: #DCFCE7;
+      --amber: #B45309; --amber-soft: #FEF3C7;
+      --indigo: #3730A3; --indigo-soft: #E0E7FF;
+      --premium: #7C3AED; --premium-soft: #EDE9FE;
+    }
+    body { font-family: 'Manrope', sans-serif; background: var(--bg); color: var(--text); max-width: 390px; margin: 0 auto; min-height: 100vh; }
+    .msym { font-family: 'Material Symbols Outlined'; font-variation-settings: 'FILL' 1,'wght' 400,'GRAD' 0,'opsz' 24; font-size: 22px; line-height: 1; }
+    .ua-bar { height: 4px; background: linear-gradient(90deg, #0057B7 50%, #FCD400 50%); }
+
+    .sticky-header { position: sticky; top: 0; z-index: 50; background: white; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 10px; padding: 12px 16px; }
+    .back-btn { width: 36px; height: 36px; border-radius: 12px; background: var(--bg); border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; color: var(--text); text-decoration: none; }
+    .header-title { font-size: 14px; font-weight: 700; flex: 1; }
+    .header-badge { font-size: 10px; font-weight: 700; padding: 4px 9px; border-radius: 20px; background: var(--green-soft); color: var(--green); }
+
+    .hero { background: linear-gradient(150deg, #1E1B4B 0%, #3730A3 55%, #4F46E5 100%); padding: 24px 20px 36px; position: relative; overflow: hidden; }
+    .hero::before { content: ''; position: absolute; inset: 0; background-image: radial-gradient(circle, rgba(255,255,255,0.07) 1px, transparent 1px); background-size: 18px 18px; }
+    .hero-step { display: inline-flex; align-items: center; gap: 7px; background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.25); color: rgba(255,255,255,0.9); font-size: 11px; font-weight: 700; border-radius: 20px; padding: 4px 12px; margin-bottom: 12px; position: relative; }
+    .hero h1 { color: white; font-size: 22px; font-weight: 900; line-height: 1.2; position: relative; }
+    .hero p { color: rgba(255,255,255,0.72); font-size: 13px; margin-top: 8px; line-height: 1.55; position: relative; }
+
+    .section { margin: 12px 16px 0; }
+    .sec-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); margin-bottom: 8px; display: flex; align-items: center; gap: 6px; }
+    .sec-label::before { content: ''; display: block; width: 3px; height: 14px; background: var(--indigo); border-radius: 2px; }
+
+    .alert { padding: 12px 14px; border-radius: 14px; display: flex; gap: 10px; align-items: flex-start; }
+    .alert.yellow { background: var(--amber-soft); border: 1px solid #FCD34D; }
+    .alert.green { background: var(--green-soft); border: 1px solid #86EFAC; }
+    .alert.blue { background: var(--blue-soft); border: 1px solid #BFDBFE; }
+    .alert.indigo { background: var(--indigo-soft); border: 1px solid #A5B4FC; }
+    .alert-icon { font-size: 18px; flex-shrink: 0; }
+    .alert p { font-size: 12.5px; font-weight: 600; line-height: 1.55; }
+    .alert.yellow p { color: #92400E; }
+    .alert.green p { color: #14532D; }
+    .alert.blue p { color: #1E40AF; }
+    .alert.indigo p { color: #312E81; }
+
+    /* Rights card */
+    .rights-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+    .right-item { background: white; border-radius: 14px; padding: 12px; box-shadow: 0 1px 4px rgba(0,0,0,0.06); }
+    .right-icon { font-size: 22px; margin-bottom: 6px; }
+    .right-title { font-size: 12px; font-weight: 700; line-height: 1.3; }
+    .right-desc { font-size: 11px; color: var(--muted); margin-top: 3px; line-height: 1.4; }
+
+    /* Doc card */
+    .doc-card { background: white; border-radius: 18px; padding: 16px; box-shadow: 0 1px 6px rgba(0,0,0,0.07); }
+    .doc-visual { background: linear-gradient(135deg, #E0E7FF 0%, #C7D2FE 100%); border-radius: 12px; padding: 16px; margin-bottom: 14px; position: relative; overflow: hidden; }
+    .doc-visual::before { content: '🇳🇱'; position: absolute; top: 10px; right: 12px; font-size: 22px; }
+    .doc-type { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--indigo); }
+    .doc-title { font-size: 16px; font-weight: 900; color: var(--indigo); margin-top: 4px; }
+    .doc-holder { font-size: 12px; color: var(--indigo); margin-top: 8px; opacity: 0.7; }
+    .doc-number { font-size: 13px; font-weight: 700; color: var(--indigo); font-family: monospace; letter-spacing: 2px; margin-top: 3px; }
+    .doc-valid { font-size: 11px; color: var(--indigo); opacity: 0.65; margin-top: 8px; }
+    .doc-row { display: flex; justify-content: space-between; align-items: center; font-size: 12px; padding: 7px 0; border-bottom: 1px solid #F3F4F6; }
+    .doc-row:last-child { border-bottom: none; }
+    .doc-key { color: var(--muted); }
+    .doc-val { font-weight: 700; }
+
+    /* Steps */
+    .steps { background: white; border-radius: 18px; overflow: hidden; box-shadow: 0 1px 6px rgba(0,0,0,0.07); }
+    .step { display: flex; gap: 14px; padding: 14px 16px; border-bottom: 1px solid #F9FAFB; align-items: flex-start; }
+    .step:last-child { border-bottom: none; }
+    .step-num { width: 32px; height: 32px; background: var(--indigo); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 800; flex-shrink: 0; }
+    .step-body { flex: 1; }
+    .step-title { font-size: 13.5px; font-weight: 700; }
+    .step-desc { font-size: 12px; color: var(--muted); margin-top: 4px; line-height: 1.55; }
+    .step-link { display: inline-block; margin-top: 5px; font-size: 12px; color: var(--blue); font-weight: 700; text-decoration: none; }
+
+    /* Extension timeline */
+    .timeline-card { background: white; border-radius: 18px; padding: 16px; box-shadow: 0 1px 6px rgba(0,0,0,0.07); }
+    .tl-item { display: flex; gap: 12px; margin-bottom: 12px; }
+    .tl-item:last-child { margin-bottom: 0; }
+    .tl-dot-wrap { display: flex; flex-direction: column; align-items: center; }
+    .tl-dot { width: 12px; height: 12px; border-radius: 50%; flex-shrink: 0; margin-top: 3px; }
+    .tl-connector { flex: 1; width: 2px; background: #E5E7EB; margin-top: 4px; }
+    .tl-content { flex: 1; }
+    .tl-period { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; color: var(--muted); }
+    .tl-action { font-size: 13px; font-weight: 700; color: var(--text); margin-top: 1px; }
+    .tl-note { font-size: 11.5px; color: var(--muted); margin-top: 3px; line-height: 1.45; }
+
+    .tip-card { background: var(--amber-soft); border: 1px solid #FCD34D; border-radius: 14px; padding: 14px; display: flex; gap: 10px; align-items: flex-start; }
+    .tip-text { font-size: 12.5px; color: #78350F; font-weight: 600; line-height: 1.55; }
+
+    /* Premium gate */
+    .premium-gate { border-radius: 18px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.08); position: relative; }
+    .gate-blur { filter: blur(3px); pointer-events: none; user-select: none; background: white; padding: 16px; }
+    .gate-blur .fake-row { height: 44px; background: #F3F4F6; border-radius: 10px; margin-bottom: 8px; }
+    .gate-overlay { position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0.95) 40%); display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 20px; text-align: center; }
+    .lock-circle { width: 52px; height: 52px; background: var(--premium-soft); border-radius: 18px; display: flex; align-items: center; justify-content: center; margin-bottom: 10px; }
+    .gate-title { font-size: 15px; font-weight: 800; }
+    .gate-desc { font-size: 12px; color: var(--muted); margin-top: 5px; line-height: 1.5; }
+    .gate-btn { margin-top: 14px; background: var(--premium); color: white; font-size: 13px; font-weight: 700; border: none; border-radius: 14px; padding: 12px 24px; cursor: pointer; width: 100%; }
+    .gate-price { font-size: 11px; color: var(--muted); margin-top: 7px; }
+
+    nav { position: fixed; bottom: 0; left: 50%; transform: translateX(-50%); width: 100%; max-width: 390px; background: white; border-top: 1px solid var(--border); display: flex; justify-content: space-around; padding: 6px 0 14px; z-index: 100; }
+    .nav-item { display: flex; flex-direction: column; align-items: center; gap: 3px; text-decoration: none; color: var(--muted); font-size: 10px; font-weight: 600; }
+    .nav-pill { width: 52px; height: 32px; display: flex; align-items: center; justify-content: center; border-radius: 20px; }
+    .nav-item.active .nav-pill { background: var(--indigo-soft); }
+    .nav-item.active { color: var(--indigo); }
+    .pb { padding-bottom: 90px; }
+    .fab { position: fixed; bottom: 76px; right: calc(50% - 195px + 16px); width: 50px; height: 50px; background: var(--indigo); border-radius: 18px; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(55,48,163,0.4); z-index: 90; text-decoration: none; }
+  </style>
+</head>
+<body>
+<div class="ua-bar"></div>
+
+<div class="sticky-header">
+  <a href="screen_firststeps.html" class="back-btn"><span class="msym" style="font-size:20px;">arrow_back</span></a>
+  <span class="header-title">Тимчасовий захист (IND)</span>
+  <span class="header-badge">✓ Безкоштовно</span>
+</div>
+
+<div class="hero">
+  <div class="hero-step">🛡️ Крок 2 з 8</div>
+  <h1>Тимчасовий захист в Нідерландах</h1>
+  <p>Українці мають право на тимчасовий захист (tijdelijke bescherming) в рамках EU Directive 2001/55/EC. Дізнайтеся про свої права та документи.</p>
+</div>
+
+<div class="pb">
+
+<div class="section" style="margin-top:12px;">
+  <div class="alert indigo">
+    <span class="alert-icon">ℹ️</span>
+    <p>Тимчасовий захист надається автоматично громадянам України та членам їхніх сімей. Окремого asylum-запиту подавати не потрібно.</p>
+  </div>
+</div>
+
+<!-- Your rights -->
+<div class="section" style="margin-top:16px;">
+  <div class="sec-label">Ваші права з тимчасовим захистом</div>
+  <div class="rights-grid">
+    <div class="right-item">
+      <div class="right-icon">🏠</div>
+      <div class="right-title">Право на житло</div>
+      <div class="right-desc">Безкоштовне або субсидоване</div>
+    </div>
+    <div class="right-item">
+      <div class="right-icon">🏥</div>
+      <div class="right-title">Медична допомога</div>
+      <div class="right-desc">Через Menzis COA або власна страховка</div>
+    </div>
+    <div class="right-item">
+      <div class="right-icon">💼</div>
+      <div class="right-title">Право на роботу</div>
+      <div class="right-desc">Без додаткового дозволу (TWV)</div>
+    </div>
+    <div class="right-item">
+      <div class="right-icon">🎓</div>
+      <div class="right-title">Освіта</div>
+      <div class="right-desc">Безкоштовна школа для дітей</div>
+    </div>
+    <div class="right-item">
+      <div class="right-icon">💰</div>
+      <div class="right-title">Соціальні виплати</div>
+      <div class="right-desc">Leefgeld, bijstand, kinderbijslag</div>
+    </div>
+    <div class="right-item">
+      <div class="right-icon">🌐</div>
+      <div class="right-title">Курси мови</div>
+      <div class="right-desc">Безкоштовний inburgering</div>
+    </div>
+  </div>
+</div>
+
+<!-- Document card -->
+<div class="section" style="margin-top:16px;">
+  <div class="sec-label">Verblijfsdocument — ваш документ</div>
+  <div class="doc-card">
+    <div class="doc-visual">
+      <div class="doc-type">Tijdelijke Bescherming</div>
+      <div class="doc-title">Verblijfsdocument</div>
+      <div class="doc-holder">ШЕВЧЕНКО, Оксана Іванівна</div>
+      <div class="doc-number">NL•••••••••</div>
+      <div class="doc-valid">Geldig tot: 04-03-2026</div>
+    </div>
+    <div class="doc-row"><span class="doc-key">Тип документа</span><span class="doc-val">Verblijfsdocument type W</span></div>
+    <div class="doc-row"><span class="doc-key">Виданий</span><span class="doc-val">IND (Immigratie- en Naturalisatiedienst)</span></div>
+    <div class="doc-row"><span class="doc-key">Дійсний</span><span class="doc-val">1 рік (продовжується)</span></div>
+    <div class="doc-row"><span class="doc-key">Дає право на</span><span class="doc-val">Роботу, освіту, соціальні послуги</span></div>
+    <div class="doc-row"><span class="doc-key">Ціна отримання</span><span class="doc-val" style="color:var(--green);">Безкоштовно</span></div>
+  </div>
+</div>
+
+<!-- How to get it -->
+<div class="section" style="margin-top:16px;">
+  <div class="sec-label">Як отримати документ IND</div>
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-body">
+        <div class="step-title">Зверніться до IND або COA</div>
+        <div class="step-desc">Якщо живете в AZC — COA сам ініціює реєстрацію. Якщо живете самостійно — зайдіть на сайт IND.</div>
+        <a class="step-link" href="https://ind.nl/oekraine" target="_blank">→ ind.nl/oekraine</a>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-body">
+        <div class="step-title">Запишіться на biometrie (відбитки)</div>
+        <div class="step-desc">IND вимагає здачі біометрії (фото + відбитки пальців). Запис через сайт IND або на спеціальних пунктах.</div>
+        <div style="margin-top:6px;font-size:11.5px;background:#FEF3C7;color:#92400E;padding:5px 9px;border-radius:8px;display:inline-block;font-weight:600;">💡 Черги від 2 до 6 тижнів. Записуйтеся одразу!</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-body">
+        <div class="step-title">Прийдіть особисто з документами</div>
+        <div class="step-desc">Потрібні: паспорт або ID-картка України + будь-який документ, що підтверджує прибуття з України.</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">4</div>
+      <div class="step-body">
+        <div class="step-title">Отримайте sticker або документ</div>
+        <div class="step-desc">Тимчасово видають sticker у паспорт. Потім поштою надсилають verblijfsdocument (пластикова картка).</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Renewal timeline -->
+<div class="section" style="margin-top:16px;">
+  <div class="sec-label">Коли продовжувати статус</div>
+  <div class="timeline-card">
+    <div class="tl-item">
+      <div class="tl-dot-wrap">
+        <div class="tl-dot" style="background:#15803D;"></div>
+        <div class="tl-connector"></div>
+      </div>
+      <div class="tl-content">
+        <div class="tl-period">Зараз</div>
+        <div class="tl-action">Тимчасовий захист активний до 04.03.2026</div>
+        <div class="tl-note">EU рішення — продовжено автоматично для всіх українців</div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot-wrap">
+        <div class="tl-dot" style="background:#F59E0B;"></div>
+        <div class="tl-connector"></div>
+      </div>
+      <div class="tl-content">
+        <div class="tl-period">За 3 місяці до закінчення</div>
+        <div class="tl-action">Подайте заяву на продовження</div>
+        <div class="tl-note">Через IND online або особисто. Ваш статус продовжується автоматично доки EU directive діє.</div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot-wrap">
+        <div class="tl-dot" style="background:#6B7280;"></div>
+      </div>
+      <div class="tl-content">
+        <div class="tl-period">Після закінчення захисту</div>
+        <div class="tl-action">Можна подати на asylum або повернутися</div>
+        <div class="tl-note">Зверніться до юридичної допомоги VluchtelingenWerk Nederland</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Tip -->
+<div class="section" style="margin-top:14px;">
+  <div class="tip-card">
+    <span style="font-size:20px;">💡</span>
+    <span class="tip-text">Тримайте verblijfsdocument завжди при собі. Він потрібен для реєстрації у лікаря, відкриття рахунку та багатьох інших ситуацій. Зробіть кілька ксерокопій.</span>
+  </div>
+</div>
+
+<!-- FAQ -->
+<div class="section" style="margin-top:16px;">
+  <div class="sec-label">Часті запитання</div>
+  <div style="display:flex;flex-direction:column;gap:8px;">
+    <div style="background:white;border-radius:14px;padding:14px;box-shadow:0 1px 4px rgba(0,0,0,0.05);">
+      <div style="font-size:13px;font-weight:700;display:flex;gap:8px;">
+        <span style="background:var(--indigo);color:white;font-size:10px;font-weight:800;padding:2px 6px;border-radius:5px;flex-shrink:0;margin-top:2px;">Q</span>
+        Чи потрібно подавати asylum окремо?
+      </div>
+      <div style="font-size:12px;color:var(--muted);margin-top:7px;line-height:1.6;padding-left:26px;">Ні. Громадяни України автоматично отримують тимчасовий захист без подачі індивідуального asylum-запиту. Якщо ви все ж хочете подати на asylum — зверніться до юриста, це складніша процедура.</div>
+    </div>
+    <div style="background:white;border-radius:14px;padding:14px;box-shadow:0 1px 4px rgba(0,0,0,0.05);">
+      <div style="font-size:13px;font-weight:700;display:flex;gap:8px;">
+        <span style="background:var(--indigo);color:white;font-size:10px;font-weight:800;padding:2px 6px;border-radius:5px;flex-shrink:0;margin-top:2px;">Q</span>
+        Чи можу я їздити в Україну з цим документом?
+      </div>
+      <div style="font-size:12px;color:var(--muted);margin-top:7px;line-height:1.6;padding-left:26px;">Технічно — так, але IND рекомендує не їздити в зону конфлікту. Візит до України може вплинути на статус, якщо він вважатиметься "добровільним поверненням". Порадьтеся з юристом.</div>
+    </div>
+    <div style="background:white;border-radius:14px;padding:14px;box-shadow:0 1px 4px rgba(0,0,0,0.05);">
+      <div style="font-size:13px;font-weight:700;display:flex;gap:8px;">
+        <span style="background:var(--indigo);color:white;font-size:10px;font-weight:800;padding:2px 6px;border-radius:5px;flex-shrink:0;margin-top:2px;">Q</span>
+        Що якщо я втратила документ?
+      </div>
+      <div style="font-size:12px;color:var(--muted);margin-top:7px;line-height:1.6;padding-left:26px;">Негайно зверніться до IND для отримання замінного документа. У разі крадіжки — спочатку заявіть в поліцію (politie.nl), отримайте aangifte і з ним йдіть до IND.</div>
+    </div>
+  </div>
+</div>
+
+<!-- Premium gate -->
+<div class="section" style="margin-top:16px;">
+  <div class="premium-gate">
+    <div class="gate-blur">
+      <div class="fake-row"></div>
+      <div class="fake-row"></div>
+      <div class="fake-row" style="height:32px;"></div>
+    </div>
+    <div class="gate-overlay">
+      <div class="lock-circle">
+        <span class="msym" style="color:var(--premium);font-size:26px;">lock</span>
+      </div>
+      <div class="gate-title">Преміум матеріали</div>
+      <div class="gate-desc">Шаблон листа для продовження статусу · Список пунктів biometrie по містах · Контакти безкоштовних юристів IND</div>
+      <button class="gate-btn">Отримати доступ — €4.99/міс</button>
+      <div class="gate-price">Перші 7 днів безкоштовно · Відмінити будь-коли</div>
+    </div>
+  </div>
+</div>
+
+<!-- Useful links -->
+<div class="section" style="margin-top:16px;">
+  <div class="sec-label">Корисні посилання</div>
+  <div style="display:flex;flex-direction:column;gap:8px;">
+    <a href="https://ind.nl/oekraine" target="_blank" style="background:white;border-radius:14px;padding:14px 16px;text-decoration:none;color:inherit;box-shadow:0 1px 4px rgba(0,0,0,0.06);display:flex;align-items:center;justify-content:space-between;">
+      <div>
+        <div style="font-size:13px;font-weight:700;">IND — Officiële informatie</div>
+        <div style="font-size:11.5px;color:var(--muted);margin-top:2px;">ind.nl/oekraine</div>
+      </div>
+      <span style="font-family:'Material Symbols Outlined';font-size:18px;color:#D1D5DB;">open_in_new</span>
+    </a>
+    <a href="https://www.vluchtelingenwerk.nl" target="_blank" style="background:white;border-radius:14px;padding:14px 16px;text-decoration:none;color:inherit;box-shadow:0 1px 4px rgba(0,0,0,0.06);display:flex;align-items:center;justify-content:space-between;">
+      <div>
+        <div style="font-size:13px;font-weight:700;">VluchtelingenWerk Nederland</div>
+        <div style="font-size:11.5px;color:var(--muted);margin-top:2px;">Безкоштовна юридична допомога</div>
+      </div>
+      <span style="font-family:'Material Symbols Outlined';font-size:18px;color:#D1D5DB;">open_in_new</span>
+    </a>
+  </div>
+</div>
+
+<!-- Next step -->
+<div class="section" style="margin-top:16px;">
+  <div class="alert green">
+    <span class="alert-icon">✅</span>
+    <p><strong>Після IND:</strong> Оформте медичну страховку та відкрийте банківський рахунок — обидва потребують verblijfsdocument і BSN.</p>
+  </div>
+  <div style="margin-top:8px;">
+    <a href="firststeps_bank.html" style="display:flex;align-items:center;justify-content:space-between;background:white;border-radius:14px;padding:14px 16px;text-decoration:none;color:inherit;box-shadow:0 1px 4px rgba(0,0,0,0.06);">
+      <div>
+        <div style="font-size:13px;font-weight:700;">→ Наступний крок: Банківський рахунок</div>
+        <div style="font-size:11.5px;color:var(--muted);margin-top:3px;">Крок 4 · Потрібен BSN</div>
+      </div>
+      <span style="font-family:'Material Symbols Outlined';font-size:20px;color:#D1D5DB;">chevron_right</span>
+    </a>
+  </div>
+</div>
+
+</div>
+
+<a href="#" class="fab"><span class="msym" style="color:white;font-size:22px;">chat</span></a>
+
+<nav>
+  <a href="final_colorful.html" class="nav-item"><div class="nav-pill"><span class="msym">home</span></div><span style="font-size:10px;font-weight:600;">Головна</span></a>
+  <a href="screen_firststeps.html" class="nav-item active"><div class="nav-pill"><span class="msym">explore</span></div><span style="font-size:10px;font-weight:600;">Огляд</span></a>
+  <a href="#" class="nav-item"><div class="nav-pill"><span class="msym">bookmark</span></div><span style="font-size:10px;font-weight:600;">Збережені</span></a>
+  <a href="#" class="nav-item"><div class="nav-pill"><span class="msym">person</span></div><span style="font-size:10px;font-weight:600;">Профіль</span></a>
+</nav>
+</body>
+</html>

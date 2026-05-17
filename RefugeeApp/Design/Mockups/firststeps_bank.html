@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Банківський рахунок</title>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --blue: #0057B7; --blue-dark: #003DA6; --blue-soft: #EDF4FF;
+      --yellow: #FCD400; --bg: #EFECE5; --card: #fff;
+      --text: #111827; --muted: #6B7280; --border: #DDD9D0;
+      --green: #15803D; --green-soft: #DCFCE7;
+      --amber: #B45309; --amber-soft: #FEF3C7;
+      --orange: #C2410C; --orange-dark: #7C2D12;
+      --teal: #0D9488; --teal-soft: #CCFBF1;
+      --premium: #7C3AED; --premium-soft: #EDE9FE;
+    }
+    body { font-family: 'Manrope', sans-serif; background: var(--bg); color: var(--text); max-width: 390px; margin: 0 auto; min-height: 100vh; }
+    .msym { font-family: 'Material Symbols Outlined'; font-variation-settings: 'FILL' 1,'wght' 400,'GRAD' 0,'opsz' 24; font-size: 22px; line-height: 1; }
+    .ua-bar { height: 4px; background: linear-gradient(90deg, #0057B7 50%, #FCD400 50%); }
+
+    /* ── Header ── */
+    .sticky-header { position: sticky; top: 0; z-index: 50; background: white; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 10px; padding: 12px 16px; }
+    .back-btn { width: 36px; height: 36px; border-radius: 12px; background: var(--bg); border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; color: var(--text); text-decoration: none; }
+    .header-title { font-size: 14px; font-weight: 700; flex: 1; }
+    .header-badge { font-size: 10px; font-weight: 700; padding: 4px 9px; border-radius: 20px; background: var(--green-soft); color: var(--green); }
+
+    /* ── Hero ── */
+    .hero { background: linear-gradient(150deg, #134E4A 0%, #0D9488 55%, #14B8A6 100%); padding: 24px 20px 36px; position: relative; overflow: hidden; }
+    .hero::before { content: ''; position: absolute; inset: 0; background-image: radial-gradient(circle, rgba(255,255,255,0.07) 1px, transparent 1px); background-size: 18px 18px; }
+    .hero-step { display: inline-flex; align-items: center; gap: 7px; background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.25); color: rgba(255,255,255,0.9); font-size: 11px; font-weight: 700; border-radius: 20px; padding: 4px 12px; margin-bottom: 12px; position: relative; }
+    .hero h1 { color: white; font-size: 22px; font-weight: 900; line-height: 1.2; position: relative; }
+    .hero p { color: rgba(255,255,255,0.72); font-size: 13px; margin-top: 8px; line-height: 1.55; position: relative; }
+
+    /* ── Content ── */
+    .section { margin: 12px 16px 0; }
+    .sec-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); margin-bottom: 8px; display: flex; align-items: center; gap: 6px; }
+    .sec-label::before { content: ''; display: block; width: 3px; height: 14px; background: var(--teal); border-radius: 2px; }
+
+    .alert { padding: 12px 14px; border-radius: 14px; display: flex; gap: 10px; align-items: flex-start; }
+    .alert.yellow { background: var(--amber-soft); border: 1px solid #FCD34D; }
+    .alert.green { background: var(--green-soft); border: 1px solid #86EFAC; }
+    .alert.blue { background: var(--blue-soft); border: 1px solid #BFDBFE; }
+    .alert-icon { font-size: 18px; flex-shrink: 0; }
+    .alert p { font-size: 12.5px; font-weight: 600; line-height: 1.55; }
+    .alert.yellow p { color: #92400E; }
+    .alert.green p { color: #14532D; }
+    .alert.blue p { color: #1E40AF; }
+
+    /* ── Bank comparison cards ── */
+    .bank-card { background: white; border-radius: 18px; padding: 16px; margin-bottom: 10px; box-shadow: 0 1px 6px rgba(0,0,0,0.07); border-left: 4px solid #E5E7EB; }
+    .bank-card.rec { border-left-color: var(--teal); }
+    .bank-card.ok { border-left-color: var(--blue); }
+    .bank-card.hard { border-left-color: #FCD34D; }
+    .bank-top { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 10px; }
+    .bank-name { font-size: 17px; font-weight: 900; }
+    .bank-sub { font-size: 11px; color: var(--muted); margin-top: 2px; }
+    .bank-logo { width: 44px; height: 44px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 22px; flex-shrink: 0; }
+    .bank-row { display: flex; justify-content: space-between; align-items: center; font-size: 12px; margin-bottom: 5px; }
+    .bank-key { color: var(--muted); }
+    .bank-val { font-weight: 700; }
+    .val-yes { color: var(--green); }
+    .val-no { color: #DC2626; }
+    .val-partial { color: var(--amber); }
+    .bank-btn { display: block; margin-top: 12px; background: var(--teal); color: white; font-size: 13px; font-weight: 700; text-align: center; border-radius: 12px; padding: 10px; text-decoration: none; }
+    .bank-btn.blue { background: var(--blue); }
+    .bank-btn.outline { background: white; color: var(--text); border: 1.5px solid var(--border); }
+    .bank-tag { display: inline-flex; align-items: center; gap: 4px; font-size: 10px; font-weight: 700; padding: 3px 9px; border-radius: 20px; margin-bottom: 8px; }
+    .tag-rec { background: var(--teal-soft); color: var(--teal); }
+    .tag-ok { background: var(--blue-soft); color: var(--blue); }
+    .tag-hard { background: var(--amber-soft); color: var(--amber); }
+
+    /* ── Steps ── */
+    .steps { background: white; border-radius: 18px; overflow: hidden; box-shadow: 0 1px 6px rgba(0,0,0,0.07); }
+    .step { display: flex; gap: 14px; padding: 14px 16px; border-bottom: 1px solid #F9FAFB; align-items: flex-start; }
+    .step:last-child { border-bottom: none; }
+    .step-num { width: 32px; height: 32px; background: var(--teal); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 800; flex-shrink: 0; }
+    .step-body { flex: 1; }
+    .step-title { font-size: 13.5px; font-weight: 700; }
+    .step-desc { font-size: 12px; color: var(--muted); margin-top: 4px; line-height: 1.55; }
+    .step-link { display: inline-block; margin-top: 5px; font-size: 12px; color: var(--blue); font-weight: 700; text-decoration: none; }
+
+    /* ── Comparison table ── */
+    .tbl { width: 100%; border-collapse: collapse; font-size: 12px; }
+    .tbl th { background: #F3F4F6; padding: 8px 10px; text-align: left; font-size: 10px; font-weight: 700; color: var(--muted); text-transform: uppercase; }
+    .tbl td { padding: 9px 10px; border-bottom: 1px solid #F9FAFB; vertical-align: middle; }
+    .tbl tr:last-child td { border-bottom: none; }
+    .td-bank { font-weight: 700; }
+
+    /* ── Tip ── */
+    .tip-card { background: var(--amber-soft); border: 1px solid #FCD34D; border-radius: 14px; padding: 14px; display: flex; gap: 10px; align-items: flex-start; }
+    .tip-text { font-size: 12.5px; color: #78350F; font-weight: 600; line-height: 1.55; }
+
+    /* ── Premium gate ── */
+    .premium-gate { border-radius: 18px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.08); position: relative; }
+    .gate-blur { filter: blur(3px); pointer-events: none; user-select: none; background: white; padding: 16px; }
+    .gate-blur .fake-row { height: 44px; background: #F3F4F6; border-radius: 10px; margin-bottom: 8px; }
+    .gate-overlay { position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0.95) 40%); display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 20px; text-align: center; }
+    .lock-circle { width: 52px; height: 52px; background: var(--premium-soft); border-radius: 18px; display: flex; align-items: center; justify-content: center; margin-bottom: 10px; }
+    .gate-title { font-size: 15px; font-weight: 800; }
+    .gate-desc { font-size: 12px; color: var(--muted); margin-top: 5px; line-height: 1.5; }
+    .gate-btn { margin-top: 14px; background: var(--premium); color: white; font-size: 13px; font-weight: 700; border: none; border-radius: 14px; padding: 12px 24px; cursor: pointer; width: 100%; }
+    .gate-price { font-size: 11px; color: var(--muted); margin-top: 7px; }
+
+    /* ── Nav ── */
+    nav { position: fixed; bottom: 0; left: 50%; transform: translateX(-50%); width: 100%; max-width: 390px; background: white; border-top: 1px solid var(--border); display: flex; justify-content: space-around; padding: 6px 0 14px; z-index: 100; }
+    .nav-item { display: flex; flex-direction: column; align-items: center; gap: 3px; text-decoration: none; color: var(--muted); font-size: 10px; font-weight: 600; }
+    .nav-pill { width: 52px; height: 32px; display: flex; align-items: center; justify-content: center; border-radius: 20px; }
+    .nav-item.active .nav-pill { background: #F0FDF4; }
+    .nav-item.active { color: var(--teal); }
+    .pb { padding-bottom: 90px; }
+    .fab { position: fixed; bottom: 76px; right: calc(50% - 195px + 16px); width: 50px; height: 50px; background: var(--teal); border-radius: 18px; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(13,148,136,0.4); z-index: 90; text-decoration: none; }
+  </style>
+</head>
+<body>
+<div class="ua-bar"></div>
+
+<div class="sticky-header">
+  <a href="screen_firststeps.html" class="back-btn"><span class="msym" style="font-size:20px;">arrow_back</span></a>
+  <span class="header-title">Банківський рахунок</span>
+  <span class="header-badge">✓ Безкоштовно</span>
+</div>
+
+<div class="hero">
+  <div class="hero-step">💳 Крок 4 з 8</div>
+  <h1>Банківський рахунок у Нідерландах</h1>
+  <p>Без банківського рахунку неможливо отримати зарплату, виплати від DUO, zorgtoeslag чи оренду житла.</p>
+</div>
+
+<div class="pb">
+
+<div class="section" style="margin-top:12px;">
+  <div class="alert yellow">
+    <span class="alert-icon">⚠️</span>
+    <p>Для відкриття рахунку потрібен BSN. Спочатку зареєструйтеся в BRP і отримайте BSN-номер.</p>
+  </div>
+</div>
+
+<!-- Banks overview -->
+<div class="section" style="margin-top:16px;">
+  <div class="sec-label">Які банки підходять для біженців</div>
+
+  <!-- Bunq -->
+  <div class="bank-card rec">
+    <span class="bank-tag tag-rec">⭐ Рекомендовано</span>
+    <div class="bank-top">
+      <div>
+        <div class="bank-name">bunq</div>
+        <div class="bank-sub">Нідерландський онлайн-банк</div>
+      </div>
+      <div class="bank-logo" style="background:#00C9A7;">💚</div>
+    </div>
+    <div class="bank-row"><span class="bank-key">Приймає UID-тримачів</span><span class="bank-val val-yes">✓ Так</span></div>
+    <div class="bank-row"><span class="bank-key">Потрібен BSN</span><span class="bank-val val-yes">✓ Так</span></div>
+    <div class="bank-row"><span class="bank-key">Відкриття онлайн</span><span class="bank-val val-yes">✓ Так</span></div>
+    <div class="bank-row"><span class="bank-key">Час відкриття</span><span class="bank-val">~10 хвилин</span></div>
+    <div class="bank-row"><span class="bank-key">Вартість</span><span class="bank-val">€2.99/міс або безкоштовно*</span></div>
+    <div style="font-size:11px;color:var(--muted);margin-top:6px;line-height:1.5;">*Безкоштовно через програму для біженців. Уточнюйте на сайті.</div>
+    <a href="https://www.bunq.com" class="bank-btn" target="_blank">→ Відкрити на bunq.com</a>
+  </div>
+
+  <!-- ASN -->
+  <div class="bank-card ok">
+    <span class="bank-tag tag-ok">✓ Хороший варіант</span>
+    <div class="bank-top">
+      <div>
+        <div class="bank-name">ASN Bank</div>
+        <div class="bank-sub">Etische bank · de Volksbank</div>
+      </div>
+      <div class="bank-logo" style="background:#E8F0FF;">🌱</div>
+    </div>
+    <div class="bank-row"><span class="bank-key">Приймає UID-тримачів</span><span class="bank-val val-yes">✓ Так</span></div>
+    <div class="bank-row"><span class="bank-key">Відкриття онлайн</span><span class="bank-val val-yes">✓ Так</span></div>
+    <div class="bank-row"><span class="bank-key">Вартість</span><span class="bank-val">Безкоштовно</span></div>
+    <div class="bank-row"><span class="bank-key">Мова сервісу</span><span class="bank-val">Нідерландська</span></div>
+    <a href="https://www.asnbank.nl" class="bank-btn blue" target="_blank">→ Відкрити на asnbank.nl</a>
+  </div>
+
+  <!-- ING -->
+  <div class="bank-card hard">
+    <span class="bank-tag tag-hard">⚠️ Складніше</span>
+    <div class="bank-top">
+      <div>
+        <div class="bank-name">ING</div>
+        <div class="bank-sub">Великий нідерландський банк</div>
+      </div>
+      <div class="bank-logo" style="background:#FFF7ED;">🦁</div>
+    </div>
+    <div class="bank-row"><span class="bank-key">Приймає UID-тримачів</span><span class="bank-val val-partial">⚠️ Не завжди</span></div>
+    <div class="bank-row"><span class="bank-key">Відкриття онлайн</span><span class="bank-val val-no">✗ Потрібен візит</span></div>
+    <div class="bank-row"><span class="bank-key">Вартість</span><span class="bank-val">€1.95/міс</span></div>
+    <div style="font-size:11px;color:var(--muted);margin-top:6px;line-height:1.5;">Деякі відділення відмовляють. Рекомендуємо спробувати спочатку bunq або ASN.</div>
+    <a href="https://www.ing.nl" class="bank-btn outline" target="_blank">→ Сайт ING</a>
+  </div>
+
+</div>
+
+<!-- Comparison table -->
+<div class="section" style="margin-top:16px;">
+  <div class="sec-label">Порівняння одним поглядом</div>
+  <div style="background:white;border-radius:18px;overflow:hidden;box-shadow:0 1px 6px rgba(0,0,0,0.07);">
+    <table class="tbl">
+      <thead><tr><th>Банк</th><th>UID</th><th>Онлайн</th><th>Ціна/міс</th></tr></thead>
+      <tbody>
+        <tr><td class="td-bank">bunq</td><td style="color:var(--green);font-weight:700;">✓</td><td style="color:var(--green);font-weight:700;">✓</td><td>€0–2.99</td></tr>
+        <tr><td class="td-bank">ASN Bank</td><td style="color:var(--green);font-weight:700;">✓</td><td style="color:var(--green);font-weight:700;">✓</td><td>€0</td></tr>
+        <tr><td class="td-bank">Rabobank</td><td style="color:var(--amber);font-weight:700;">~</td><td style="color:var(--amber);font-weight:700;">~</td><td>€1.20</td></tr>
+        <tr><td class="td-bank">ING</td><td style="color:#DC2626;font-weight:700;">✗</td><td style="color:#DC2626;font-weight:700;">✗</td><td>€1.95</td></tr>
+        <tr><td class="td-bank">ABN AMRO</td><td style="color:#DC2626;font-weight:700;">✗</td><td style="color:#DC2626;font-weight:700;">✗</td><td>€1.95</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- Steps for bunq -->
+<div class="section" style="margin-top:16px;">
+  <div class="sec-label">Як відкрити рахунок у bunq — інструкція</div>
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-body">
+        <div class="step-title">Завантажте додаток bunq</div>
+        <div class="step-desc">App Store або Google Play. Безкоштовно. Інтерфейс англійською.</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-body">
+        <div class="step-title">Зареєструйтеся — вкажіть email та телефон</div>
+        <div class="step-desc">Введіть своє ім'я як у паспорті. Потрібен діючий номер телефону.</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-body">
+        <div class="step-title">Пройдіть верифікацію особи</div>
+        <div class="step-desc">Сфотографуйте паспорт та зробіть селфі. Займає 5–10 хвилин. UID-документ також приймається.</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">4</div>
+      <div class="step-body">
+        <div class="step-title">Введіть BSN-номер</div>
+        <div class="step-desc">Потрібен для відповідності нідерландському законодавству. Без BSN рахунок відкрити неможливо.</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">5</div>
+      <div class="step-body">
+        <div class="step-title">Отримайте IBAN і картку</div>
+        <div class="step-desc">IBAN-номер з'являється одразу в додатку. Фізична картка надсилається поштою протягом 3–5 робочих днів.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Tip -->
+<div class="section" style="margin-top:14px;">
+  <div class="tip-card">
+    <span style="font-size:20px;">💡</span>
+    <span class="tip-text">Якщо bunq відмовив — зверніться в ASN Bank або попросіть допомоги у Vluchtelingenwerk. Вони можуть допомогти відкрити рахунок через банк-партнер.</span>
+  </div>
+</div>
+
+<!-- FAQ -->
+<div class="section" style="margin-top:16px;">
+  <div class="sec-label">Часті запитання</div>
+  <div style="display:flex;flex-direction:column;gap:8px;">
+    <div style="background:white;border-radius:14px;padding:14px;box-shadow:0 1px 4px rgba(0,0,0,0.05);">
+      <div style="font-size:13px;font-weight:700;display:flex;gap:8px;">
+        <span style="background:var(--teal);color:white;font-size:10px;font-weight:800;padding:2px 6px;border-radius:5px;flex-shrink:0;margin-top:2px;">Q</span>
+        Чи можна отримувати виплати без банківського рахунку?
+      </div>
+      <div style="font-size:12px;color:var(--muted);margin-top:7px;line-height:1.6;padding-left:26px;">Ні. Всі державні виплати (zorgtoeslag, kinderbijslag, bijstand) переводяться виключно на нідерландський банківський рахунок з IBAN.</div>
+    </div>
+    <div style="background:white;border-radius:14px;padding:14px;box-shadow:0 1px 4px rgba(0,0,0,0.05);">
+      <div style="font-size:13px;font-weight:700;display:flex;gap:8px;">
+        <span style="background:var(--teal);color:white;font-size:10px;font-weight:800;padding:2px 6px;border-radius:5px;flex-shrink:0;margin-top:2px;">Q</span>
+        Чи можу я переказувати гроші в Україну?
+      </div>
+      <div style="font-size:12px;color:var(--muted);margin-top:7px;line-height:1.6;padding-left:26px;">Так. Через bunq або за допомогою Wise (transferwise.com) — найвигідніші курси та низькі комісії для переказів в Україну.</div>
+    </div>
+    <div style="background:white;border-radius:14px;padding:14px;box-shadow:0 1px 4px rgba(0,0,0,0.05);">
+      <div style="font-size:13px;font-weight:700;display:flex;gap:8px;">
+        <span style="background:var(--teal);color:white;font-size:10px;font-weight:800;padding:2px 6px;border-radius:5px;flex-shrink:0;margin-top:2px;">Q</span>
+        Що таке IBAN?
+      </div>
+      <div style="font-size:12px;color:var(--muted);margin-top:7px;line-height:1.6;padding-left:26px;">Номер банківського рахунку міжнародного формату. У Нідерландах починається з NL. Наприклад: NL91 BUNQ 1234 5678 90. Використовується для всіх переказів.</div>
+    </div>
+  </div>
+</div>
+
+<!-- Premium gate -->
+<div class="section" style="margin-top:16px;">
+  <div class="premium-gate">
+    <div class="gate-blur">
+      <div class="fake-row"></div>
+      <div class="fake-row"></div>
+      <div class="fake-row" style="height:32px;"></div>
+    </div>
+    <div class="gate-overlay">
+      <div class="lock-circle">
+        <span class="msym" style="color:var(--premium);font-size:26px;">lock</span>
+      </div>
+      <div class="gate-title">Преміум матеріали</div>
+      <div class="gate-desc">Покроковий гайд для відкриття рахунку в ASN Bank · Список волонтерів, які допоможуть з банком · Як отримати Wise без нідерландського рахунку</div>
+      <button class="gate-btn">Отримати доступ — €4.99/міс</button>
+      <div class="gate-price">Перші 7 днів безкоштовно · Відмінити будь-коли</div>
+    </div>
+  </div>
+</div>
+
+<!-- Next step -->
+<div class="section" style="margin-top:16px;">
+  <div class="alert green">
+    <span class="alert-icon">✅</span>
+    <p><strong>Наступний крок:</strong> Після отримання BSN та банківського рахунку — оформте DigiD. Він потрібен для всіх онлайн-послуг держави.</p>
+  </div>
+  <div style="margin-top:8px;">
+    <a href="firststeps_digid.html" style="display:flex;align-items:center;justify-content:space-between;background:white;border-radius:14px;padding:14px 16px;text-decoration:none;color:inherit;box-shadow:0 1px 4px rgba(0,0,0,0.06);">
+      <div>
+        <div style="font-size:13px;font-weight:700;">→ Наступний крок: DigiD</div>
+        <div style="font-size:11.5px;color:var(--muted);margin-top:3px;">Крок 5 · Потрібен BSN</div>
+      </div>
+      <span style="font-family:'Material Symbols Outlined';font-size:20px;color:#D1D5DB;">chevron_right</span>
+    </a>
+  </div>
+</div>
+
+</div>
+
+<a href="#" class="fab"><span class="msym" style="color:white;font-size:22px;">chat</span></a>
+
+<nav>
+  <a href="final_colorful.html" class="nav-item"><div class="nav-pill"><span class="msym">home</span></div><span style="font-size:10px;font-weight:600;">Головна</span></a>
+  <a href="screen_firststeps.html" class="nav-item active"><div class="nav-pill"><span class="msym">explore</span></div><span style="font-size:10px;font-weight:600;">Огляд</span></a>
+  <a href="#" class="nav-item"><div class="nav-pill"><span class="msym">bookmark</span></div><span style="font-size:10px;font-weight:600;">Збережені</span></a>
+  <a href="#" class="nav-item"><div class="nav-pill"><span class="msym">person</span></div><span style="font-size:10px;font-weight:600;">Профіль</span></a>
+</nav>
+</body>
+</html>
