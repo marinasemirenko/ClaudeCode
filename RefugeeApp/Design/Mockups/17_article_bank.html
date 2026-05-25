@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Банківський рахунок</title>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --blue: #0057B7; --yellow: #FCD400; --bg: #EFECE5; --card: #fff;
+      --text: #111827; --muted: #6B7280; --border: #DDD9D0;
+      --accent: #DC2626; --accent-dark: #991B1B; --accent-soft: #FEE2E2;
+      --green: #15803D; --green-soft: #DCFCE7;
+      --amber: #B45309; --amber-soft: #FEF3C7;
+      --red: #B91C1C; --red-soft: #FEE2E2;
+    }
+    body { font-family: 'Manrope', sans-serif; background: var(--bg); color: var(--text); max-width: 390px; margin: 0 auto; min-height: 100vh; }
+    .msym { font-family: 'Material Symbols Outlined'; font-variation-settings: 'FILL' 1,'wght' 400,'GRAD' 0,'opsz' 24; font-size: 22px; line-height: 1; }
+    .msym.o { font-variation-settings: 'FILL' 0,'wght' 400,'GRAD' 0,'opsz' 24; }
+    .flag-bar { height: 3px; background: linear-gradient(90deg, var(--blue) 50%, var(--yellow) 50%); }
+    header { background: var(--card); padding: 13px 18px; display: flex; align-items: center; gap: 12px; border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 50; }
+    .back-btn { width: 36px; height: 36px; border-radius: 50%; background: var(--bg); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; cursor: pointer; text-decoration: none; color: var(--text); flex-shrink: 0; }
+    .header-title { font-size: 15px; font-weight: 800; color: var(--text); flex: 1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .bookmark-btn { width: 36px; height: 36px; border-radius: 50%; background: var(--bg); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; cursor: pointer; color: var(--muted); flex-shrink: 0; }
+    main { padding-bottom: 100px; }
+    .hero { background: #041A1A; padding: 28px 20px 32px; position: relative; overflow: hidden; }
+    .hero-pattern { position: absolute; inset: 0; pointer-events: none; background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='20' cy='20' r='1.5' fill='%23ffffff' fill-opacity='0.06'/%3E%3C/svg%3E"); background-size: 40px; }
+    .hero-breadcrumb { display: flex; align-items: center; gap: 6px; font-size: 11px; font-weight: 700; color: rgba(255,255,255,0.4); margin-bottom: 14px; }
+    .hero-icon { width: 56px; height: 56px; border-radius: 18px; background: rgba(255,255,255,0.12); display: flex; align-items: center; justify-content: center; margin-bottom: 14px; }
+    .hero-icon .msym { font-size: 30px; color: #fff; }
+    .hero-title { font-size: 26px; font-weight: 900; color: #fff; letter-spacing: -0.7px; line-height: 1.2; margin-bottom: 8px; }
+    .hero-sub { font-size: 13px; color: rgba(255,255,255,0.55); font-weight: 500; line-height: 1.5; }
+    .hero-badge { display: inline-flex; align-items: center; gap: 5px; background: var(--green-soft); border-radius: 100px; padding: 4px 10px; font-size: 10px; font-weight: 800; color: var(--green); margin-top: 12px; }
+    .content { padding: 0 18px; }
+    .mt16 { margin-top: 16px; } .mt20 { margin-top: 20px; } .mt24 { margin-top: 24px; }
+    .sec-label { font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.12em; color: var(--muted); margin-bottom: 12px; }
+    .info-box { border-radius: 16px; padding: 16px 18px; font-size: 13px; font-weight: 600; line-height: 1.6; }
+    .info-box.green { background: var(--green-soft); color: var(--green); border: 1px solid #BBF7D0; }
+    .info-box.amber { background: var(--amber-soft); color: var(--amber); border: 1px solid #FDE68A; }
+    .info-box.red { background: var(--red-soft); color: var(--red); border: 1px solid #FECACA; }
+    .info-box-title { font-size: 12px; font-weight: 900; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 6px; }
+    .bank-list { display: flex; flex-direction: column; gap: 10px; }
+    .bank-card { background: var(--card); border-radius: 16px; padding: 16px; border: 1px solid var(--border); }
+    .bank-header { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+    .bank-emoji { font-size: 28px; }
+    .bank-name { font-size: 15px; font-weight: 900; color: var(--text); }
+    .bank-tag { display: inline-flex; align-items: center; border-radius: 100px; padding: 2px 8px; font-size: 10px; font-weight: 800; }
+    .bank-tag.green { background: var(--green-soft); color: var(--green); }
+    .bank-tag.amber { background: var(--amber-soft); color: var(--amber); }
+    .bank-desc { font-size: 12px; color: var(--muted); font-weight: 500; line-height: 1.5; }
+    .bank-fee { font-size: 12px; font-weight: 700; color: var(--text); margin-top: 6px; }
+    /* Required docs */
+    .doc-list { display: flex; flex-direction: column; gap: 0; }
+    .doc-row { background: var(--card); padding: 12px 16px; border-bottom: 1px solid var(--border); display: flex; gap: 10px; align-items: center; }
+    .doc-row:first-child { border-radius: 16px 16px 0 0; }
+    .doc-row:last-child { border-bottom: none; border-radius: 0 0 16px 16px; }
+    .doc-check { color: var(--accent); font-size: 18px; flex-shrink: 0; font-family: 'Material Symbols Outlined'; font-variation-settings: 'FILL' 1,'wght' 400,'GRAD' 0,'opsz' 24; line-height: 1; }
+    .doc-text { font-size: 13px; font-weight: 600; color: var(--text); }
+    .doc-sub { font-size: 11px; color: var(--muted); font-weight: 500; margin-top: 1px; }
+    .bottom-nav { position: fixed; bottom: 0; left: 50%; transform: translateX(-50%); width: 100%; max-width: 390px; background: var(--card); border-top: 1px solid var(--border); display: flex; z-index: 100; }
+    .nav-item { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 10px 0 8px; gap: 3px; text-decoration: none; color: var(--muted); }
+    .nav-item span.label { font-size: 10px; font-weight: 700; }
+    .nav-item .msym { font-size: 24px; }
+    .fab { position: fixed; bottom: 72px; right: calc(50% - 195px + 14px); width: 52px; height: 52px; border-radius: 18px; background: var(--accent); box-shadow: 0 4px 16px rgba(220,38,38,0.35); display: flex; align-items: center; justify-content: center; z-index: 99; text-decoration: none; }
+    .fab .msym { color: #fff; font-size: 26px; }
+  </style>
+</head>
+<body>
+<div class="flag-bar"></div>
+<header>
+  <a href="17_tips.html" class="back-btn"><span class="msym o" style="font-size:20px;">arrow_back</span></a>
+  <span class="header-title">Банківський рахунок</span>
+  <button class="bookmark-btn"><span class="msym o">bookmark</span></button>
+</header>
+<main>
+  <div class="hero">
+    <div class="hero-pattern"></div>
+    <div class="hero-breadcrumb">
+      <span>Поради</span>
+      <span class="msym o" style="font-size:13px;">chevron_right</span>
+      <span>Банк</span>
+    </div>
+    <div class="hero-icon"><span class="msym">account_balance</span></div>
+    <div class="hero-title">Банківський рахунок</div>
+    <div class="hero-sub">Які банки приймають біженців і що потрібно для відкриття рахунку</div>
+    <div class="hero-badge"><span class="msym" style="font-size:14px;">check_circle</span> Безкоштовно</div>
+  </div>
+
+  <div class="content">
+    <div class="info-box green mt20">
+      <div class="info-box-title">Право є</div>
+      За Директивою ЄС про платіжні рахунки (PAD) кожен резидент ЄС — включно з біженцями — має право на базовий банківський рахунок. Банк не може відмовити лише через статус біженця.
+    </div>
+
+    <div class="mt24">
+      <div class="sec-label">Що потрібно для відкриття</div>
+      <div class="doc-list">
+        <div class="doc-row">
+          <span class="doc-check">badge</span>
+          <div>
+            <div class="doc-text">Дійсний документ особи</div>
+            <div class="doc-sub">Паспорт або IND O-document / W-document</div>
+          </div>
+        </div>
+        <div class="doc-row">
+          <span class="doc-check">home</span>
+          <div>
+            <div class="doc-text">Нідерландська адреса</div>
+            <div class="doc-sub">Адреса реєстрації BRP (gemeente)</div>
+          </div>
+        </div>
+        <div class="doc-row">
+          <span class="doc-check">tag</span>
+          <div>
+            <div class="doc-text">BSN (для більшості банків)</div>
+            <div class="doc-sub">Отримуєш автоматично в gemeente</div>
+          </div>
+        </div>
+        <div class="doc-row">
+          <span class="doc-check">email</span>
+          <div>
+            <div class="doc-text">Email-адреса</div>
+            <div class="doc-sub">Для підтвердження і онлайн-банкінгу</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="mt24">
+      <div class="sec-label">Банки для біженців</div>
+      <div class="bank-list">
+
+        <div class="bank-card">
+          <div class="bank-header">
+            <div class="bank-emoji">🐰</div>
+            <div>
+              <div class="bank-name">Bunq</div>
+              <span class="bank-tag green">Найпростіший для старту</span>
+            </div>
+          </div>
+          <div class="bank-desc">Приймає W-document і O-document. Відкриття онлайн без відвідування відділення. Є українська підтримка.</div>
+          <div class="bank-fee">Вартість: від €0/місяць (Easy Bank) або €10.99/міс (Easy Money)</div>
+        </div>
+
+        <div class="bank-card">
+          <div class="bank-header">
+            <div class="bank-emoji">🧡</div>
+            <div>
+              <div class="bank-name">ING</div>
+              <span class="bank-tag amber">Потрібен BSN</span>
+            </div>
+          </div>
+          <div class="bank-desc">Безкоштовний betaalrekening (базовий рахунок). Потрібні BSN + адреса. Відкриття онлайн або у відділенні.</div>
+          <div class="bank-fee">Вартість: €0/місяць (базовий рахунок)</div>
+        </div>
+
+        <div class="bank-card">
+          <div class="bank-header">
+            <div class="bank-emoji">💚</div>
+            <div>
+              <div class="bank-name">ABN AMRO / Rabobank</div>
+              <span class="bank-tag amber">Потрібен BSN</span>
+            </div>
+          </div>
+          <div class="bank-desc">Стандартні нідерландські банки. Відкриття з BSN і адресою. Rabobank має відділення по всій країні.</div>
+          <div class="bank-fee">Вартість: ~€2–5/місяць</div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="info-box amber mt20">
+      <div class="info-box-title">Якщо ти в COA/GOO</div>
+      Якщо ти ще не маєш постійної адреси реєстрації — запитай свого COA-менеджера. Деякі gemeente надають тимчасові prepaid-картки для основних витрат до відкриття рахунку.
+    </div>
+
+    <div class="info-box green mt16" style="margin-bottom:16px;">
+      <div class="info-box-title">IBAN — для зарплати і toeslagen</div>
+      Як тільки рахунок відкрито — повідом IBAN роботодавцю і belastingdienst (для toeslagen). Без IBAN зарплата і субсидії не можуть бути перераховані.
+    </div>
+  </div>
+</main>
+<a href="#" class="fab"><span class="msym">chat</span></a>
+<nav class="bottom-nav">
+  <a href="1final_colorful.html" class="nav-item"><span class="msym o">home</span><span class="label">Головна</span></a>
+  <a href="#" class="nav-item"><span class="msym o">explore</span><span class="label">Пошук</span></a>
+  <a href="#" class="nav-item"><span class="msym o">bookmark</span><span class="label">Збережені</span></a>
+  <a href="#" class="nav-item"><span class="msym o">person</span><span class="label">Профіль</span></a>
+</nav>
+</body>
+</html>

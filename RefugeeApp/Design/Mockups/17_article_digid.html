@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DigiD і BSN</title>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --blue: #0057B7; --yellow: #FCD400; --bg: #EFECE5; --card: #fff;
+      --text: #111827; --muted: #6B7280; --border: #DDD9D0;
+      --accent: #DC2626; --accent-dark: #991B1B; --accent-soft: #FEE2E2;
+      --green: #15803D; --green-soft: #DCFCE7;
+      --amber: #B45309; --amber-soft: #FEF3C7;
+      --red: #B91C1C; --red-soft: #FEE2E2;
+    }
+    body { font-family: 'Manrope', sans-serif; background: var(--bg); color: var(--text); max-width: 390px; margin: 0 auto; min-height: 100vh; }
+    .msym { font-family: 'Material Symbols Outlined'; font-variation-settings: 'FILL' 1,'wght' 400,'GRAD' 0,'opsz' 24; font-size: 22px; line-height: 1; }
+    .msym.o { font-variation-settings: 'FILL' 0,'wght' 400,'GRAD' 0,'opsz' 24; }
+    .flag-bar { height: 3px; background: linear-gradient(90deg, var(--blue) 50%, var(--yellow) 50%); }
+    header { background: var(--card); padding: 13px 18px; display: flex; align-items: center; gap: 12px; border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 50; }
+    .back-btn { width: 36px; height: 36px; border-radius: 50%; background: var(--bg); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; cursor: pointer; text-decoration: none; color: var(--text); flex-shrink: 0; }
+    .header-title { font-size: 15px; font-weight: 800; color: var(--text); flex: 1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .bookmark-btn { width: 36px; height: 36px; border-radius: 50%; background: var(--bg); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; cursor: pointer; color: var(--muted); flex-shrink: 0; }
+    main { padding-bottom: 100px; }
+    .hero { background: #1C0808; padding: 28px 20px 32px; position: relative; overflow: hidden; }
+    .hero-pattern { position: absolute; inset: 0; pointer-events: none; background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='20' cy='20' r='1.5' fill='%23ffffff' fill-opacity='0.06'/%3E%3C/svg%3E"); background-size: 40px; }
+    .hero-breadcrumb { display: flex; align-items: center; gap: 6px; font-size: 11px; font-weight: 700; color: rgba(255,255,255,0.4); margin-bottom: 14px; }
+    .hero-icon { width: 56px; height: 56px; border-radius: 18px; background: rgba(255,255,255,0.12); display: flex; align-items: center; justify-content: center; margin-bottom: 14px; }
+    .hero-icon .msym { font-size: 30px; color: #fff; }
+    .hero-title { font-size: 26px; font-weight: 900; color: #fff; letter-spacing: -0.7px; line-height: 1.2; margin-bottom: 8px; }
+    .hero-sub { font-size: 13px; color: rgba(255,255,255,0.55); font-weight: 500; line-height: 1.5; }
+    .hero-badge { display: inline-flex; align-items: center; gap: 5px; background: var(--green-soft); border-radius: 100px; padding: 4px 10px; font-size: 10px; font-weight: 800; color: var(--green); margin-top: 12px; }
+    .fact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 20px; }
+    .fact-item { background: rgba(255,255,255,0.1); border-radius: 14px; padding: 14px 12px; }
+    .fact-label { font-size: 10px; font-weight: 700; color: rgba(255,255,255,0.5); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 4px; }
+    .fact-value { font-size: 14px; font-weight: 900; color: #fff; line-height: 1.2; }
+    .content { padding: 0 18px; }
+    .mt16 { margin-top: 16px; } .mt20 { margin-top: 20px; } .mt24 { margin-top: 24px; }
+    .sec-label { font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.12em; color: var(--muted); margin-bottom: 12px; }
+    .info-box { border-radius: 16px; padding: 16px 18px; font-size: 13px; font-weight: 600; line-height: 1.6; }
+    .info-box.green { background: var(--green-soft); color: var(--green); border: 1px solid #BBF7D0; }
+    .info-box.amber { background: var(--amber-soft); color: var(--amber); border: 1px solid #FDE68A; }
+    .info-box.red { background: var(--red-soft); color: var(--red); border: 1px solid #FECACA; }
+    .info-box-title { font-size: 12px; font-weight: 900; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 6px; }
+    .info-card { background: var(--card); border-radius: 16px; padding: 16px; box-shadow: 0 1px 3px rgba(0,0,0,0.06); border: 1px solid var(--border); }
+    .steps { display: flex; flex-direction: column; gap: 0; }
+    .step { display: flex; gap: 14px; align-items: flex-start; padding: 14px 0; border-bottom: 1px solid var(--border); }
+    .step:last-child { border-bottom: none; }
+    .step-num { width: 30px; height: 30px; border-radius: 10px; background: var(--accent); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 900; flex-shrink: 0; margin-top: 1px; }
+    .step-title { font-size: 14px; font-weight: 800; color: var(--text); margin-bottom: 3px; }
+    .step-desc { font-size: 12px; color: var(--muted); font-weight: 500; line-height: 1.5; }
+    /* Use-case grid */
+    .use-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+    .use-item { background: var(--card); border-radius: 12px; padding: 12px; border: 1px solid var(--border); display: flex; flex-direction: column; gap: 4px; align-items: flex-start; }
+    .use-icon { font-size: 20px; }
+    .use-text { font-size: 11px; font-weight: 700; color: var(--text); line-height: 1.3; }
+    .bottom-nav { position: fixed; bottom: 0; left: 50%; transform: translateX(-50%); width: 100%; max-width: 390px; background: var(--card); border-top: 1px solid var(--border); display: flex; z-index: 100; }
+    .nav-item { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 10px 0 8px; gap: 3px; text-decoration: none; color: var(--muted); }
+    .nav-item span.label { font-size: 10px; font-weight: 700; }
+    .nav-item .msym { font-size: 24px; }
+    .fab { position: fixed; bottom: 72px; right: calc(50% - 195px + 14px); width: 52px; height: 52px; border-radius: 18px; background: var(--accent); box-shadow: 0 4px 16px rgba(220,38,38,0.35); display: flex; align-items: center; justify-content: center; z-index: 99; text-decoration: none; }
+    .fab .msym { color: #fff; font-size: 26px; }
+  </style>
+</head>
+<body>
+<div class="flag-bar"></div>
+<header>
+  <a href="17_tips.html" class="back-btn"><span class="msym o" style="font-size:20px;">arrow_back</span></a>
+  <span class="header-title">DigiD і BSN</span>
+  <button class="bookmark-btn"><span class="msym o">bookmark</span></button>
+</header>
+<main>
+  <div class="hero">
+    <div class="hero-pattern"></div>
+    <div class="hero-breadcrumb">
+      <span>Поради</span>
+      <span class="msym o" style="font-size:13px;">chevron_right</span>
+      <span>DigiD і BSN</span>
+    </div>
+    <div class="hero-icon"><span class="msym">fingerprint</span></div>
+    <div class="hero-title">DigiD і BSN</div>
+    <div class="hero-sub">Без цих двох речей майже нічого не можна зробити онлайн у Нідерландах</div>
+    <div class="hero-badge"><span class="msym" style="font-size:14px;">check_circle</span> Безкоштовно</div>
+    <div class="fact-grid">
+      <div class="fact-item">
+        <div class="fact-label">BSN отримуєш</div>
+        <div class="fact-value">В gemeente</div>
+      </div>
+      <div class="fact-item">
+        <div class="fact-label">DigiD реєстрація</div>
+        <div class="fact-value">digid.nl</div>
+      </div>
+      <div class="fact-item">
+        <div class="fact-label">Час на DigiD</div>
+        <div class="fact-value">~5 робочих днів</div>
+      </div>
+      <div class="fact-item">
+        <div class="fact-label">Потрібний спочатку</div>
+        <div class="fact-value">BSN → DigiD</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="content">
+    <div class="mt20">
+      <div class="sec-label">Що таке BSN</div>
+      <div class="info-card" style="padding:16px 18px;">
+        <div style="font-size:13px; font-weight:600; color:var(--text); line-height:1.6;">
+          BSN (burgerservicenummer) — це твій особистий номер у Нідерландах, 8 або 9 цифр. Він потрібний для роботи, податків, медичної страховки і будь-яких держпослуг.<br><br>
+          <strong>BSN видається автоматично</strong> при реєстрації в BRP (basisregistratie personen) у своїй gemeente. Окремо подавати заявку не треба.
+        </div>
+      </div>
+    </div>
+
+    <div class="mt20">
+      <div class="sec-label">DigiD — твій цифровий підпис</div>
+      <div class="use-grid">
+        <div class="use-item">
+          <div class="use-icon">💰</div>
+          <div class="use-text">Податкова декларація belastingdienst.nl</div>
+        </div>
+        <div class="use-item">
+          <div class="use-icon">🏥</div>
+          <div class="use-text">Toeslagen (huurtoeslag, zorgtoeslag)</div>
+        </div>
+        <div class="use-item">
+          <div class="use-icon">🏛️</div>
+          <div class="use-text">UWV (WW, ziektewet)</div>
+        </div>
+        <div class="use-item">
+          <div class="use-icon">🏠</div>
+          <div class="use-text">Реєстрація на соціальне житло</div>
+        </div>
+        <div class="use-item">
+          <div class="use-icon">🩺</div>
+          <div class="use-text">Онлайн портал лікаря (huisarts)</div>
+        </div>
+        <div class="use-item">
+          <div class="use-icon">📋</div>
+          <div class="use-text">Більшість держпорталів</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="mt24">
+      <div class="sec-label">Як отримати — покроково</div>
+      <div class="info-card">
+        <div class="steps">
+          <div class="step">
+            <div class="step-num">1</div>
+            <div>
+              <div class="step-title">Зареєструйся в gemeente (BRP)</div>
+              <div class="step-desc">Принеси: W-document + паспорт + підтвердження адреси (договір оренди або лист від COA). BSN з'явиться автоматично.</div>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">2</div>
+            <div>
+              <div class="step-title">Зачекай 5 днів</div>
+              <div class="step-desc">BSN має активуватись у держсистемах. Краще не поспішати з DigiD до цього моменту.</div>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">3</div>
+            <div>
+              <div class="step-title">Іди на digid.nl → «Aanvragen»</div>
+              <div class="step-desc">Введи BSN, ім'я, адресу, email. Обери пароль. Надішли заявку — безкоштовно.</div>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">4</div>
+            <div>
+              <div class="step-title">Отримай листа поштою</div>
+              <div class="step-desc">Через 5 робочих днів прийде лист з кодом активації. Введи на digid.nl — DigiD готовий.</div>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">5</div>
+            <div>
+              <div class="step-title">Завантаж DigiD app</div>
+              <div class="step-desc">Після активації встанови DigiD-додаток на телефон — це зручніше, ніж вводити код з SMS щоразу.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="info-box amber mt20" style="margin-bottom:16px;">
+      <div class="info-box-title">Перевір спочатку</div>
+      BSN може вже бути в тебе — перевір W-document або листи від gemeente. Якщо BSN є — можна одразу іти на digid.nl, пропускаючи крок 1.
+    </div>
+  </div>
+</main>
+<a href="#" class="fab"><span class="msym">chat</span></a>
+<nav class="bottom-nav">
+  <a href="1final_colorful.html" class="nav-item"><span class="msym o">home</span><span class="label">Головна</span></a>
+  <a href="#" class="nav-item"><span class="msym o">explore</span><span class="label">Пошук</span></a>
+  <a href="#" class="nav-item"><span class="msym o">bookmark</span><span class="label">Збережені</span></a>
+  <a href="#" class="nav-item"><span class="msym o">person</span><span class="label">Профіль</span></a>
+</nav>
+</body>
+</html>
