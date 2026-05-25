@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Освіта і мова</title>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --blue: #0057B7; --yellow: #FCD400; --bg: #EFECE5; --card: #fff;
+      --text: #111827; --muted: #6B7280; --border: #DDD9D0;
+      --accent: #0284C7; --accent-dark: #0369A1; --accent-soft: #E0F2FE;
+      --green: #15803D; --green-soft: #DCFCE7;
+      --amber: #B45309; --amber-soft: #FEF3C7;
+    }
+    body { font-family: 'Manrope', sans-serif; background: var(--bg); color: var(--text); max-width: 390px; margin: 0 auto; min-height: 100vh; }
+    .msym { font-family: 'Material Symbols Outlined'; font-variation-settings: 'FILL' 1,'wght' 400,'GRAD' 0,'opsz' 24; font-size: 22px; line-height: 1; }
+    .msym.o { font-variation-settings: 'FILL' 0,'wght' 400,'GRAD' 0,'opsz' 24; }
+    .flag-bar { height: 3px; background: linear-gradient(90deg, var(--blue) 50%, var(--yellow) 50%); }
+    header { background: var(--card); padding: 13px 18px; display: flex; align-items: center; gap: 12px; border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 50; }
+    .back-btn { width: 36px; height: 36px; border-radius: 50%; background: var(--bg); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; cursor: pointer; text-decoration: none; color: var(--text); flex-shrink: 0; }
+    .header-title { font-size: 15px; font-weight: 800; color: var(--text); flex: 1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .bookmark-btn { width: 36px; height: 36px; border-radius: 50%; background: var(--bg); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; cursor: pointer; color: var(--muted); flex-shrink: 0; }
+    main { padding-bottom: 100px; }
+    .hero { background: #06121A; padding: 28px 20px 32px; position: relative; overflow: hidden; }
+    .hero-pattern { position: absolute; inset: 0; pointer-events: none; background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='20' cy='20' r='1.5' fill='%23ffffff' fill-opacity='0.06'/%3E%3C/svg%3E"); background-size: 40px; }
+    .hero-breadcrumb { display: flex; align-items: center; gap: 6px; font-size: 11px; font-weight: 700; color: rgba(255,255,255,0.4); margin-bottom: 14px; }
+    .hero-icon { width: 56px; height: 56px; border-radius: 18px; background: rgba(255,255,255,0.12); display: flex; align-items: center; justify-content: center; margin-bottom: 14px; }
+    .hero-icon .msym { font-size: 30px; color: #fff; }
+    .hero-title { font-size: 26px; font-weight: 900; color: #fff; letter-spacing: -0.7px; line-height: 1.2; margin-bottom: 8px; }
+    .hero-sub { font-size: 13px; color: rgba(255,255,255,0.55); font-weight: 500; line-height: 1.5; }
+    .hero-badge { display: inline-flex; align-items: center; gap: 5px; background: var(--green-soft); border-radius: 100px; padding: 4px 10px; font-size: 10px; font-weight: 800; color: var(--green); margin-top: 12px; }
+    .content { padding: 0 18px; }
+    .mt16 { margin-top: 16px; } .mt20 { margin-top: 20px; } .mt24 { margin-top: 24px; }
+    .sec-label { font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.12em; color: var(--muted); margin-bottom: 12px; }
+    .info-box { border-radius: 16px; padding: 16px 18px; font-size: 13px; font-weight: 600; line-height: 1.6; }
+    .info-box.green { background: var(--green-soft); color: var(--green); border: 1px solid #BBF7D0; }
+    .info-box.amber { background: var(--amber-soft); color: var(--amber); border: 1px solid #FDE68A; }
+    .info-box-title { font-size: 12px; font-weight: 900; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 6px; }
+    .link-list { display: flex; flex-direction: column; gap: 8px; }
+    .link-card { background: var(--card); border-radius: 16px; padding: 14px 16px; border: 1px solid var(--border); display: flex; gap: 12px; align-items: center; cursor: pointer; }
+    .link-icon { width: 44px; height: 44px; border-radius: 12px; background: var(--accent-soft); display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 22px; }
+    .link-name { font-size: 13px; font-weight: 900; color: var(--text); margin-bottom: 2px; }
+    .link-url { font-size: 11px; font-weight: 700; color: var(--accent); margin-bottom: 3px; }
+    .link-desc { font-size: 11px; color: var(--muted); font-weight: 500; line-height: 1.4; }
+    .link-arrow { color: var(--muted); font-size: 18px; flex-shrink: 0; font-family: 'Material Symbols Outlined'; font-variation-settings: 'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 24; line-height: 1; }
+    .bottom-nav { position: fixed; bottom: 0; left: 50%; transform: translateX(-50%); width: 100%; max-width: 390px; background: var(--card); border-top: 1px solid var(--border); display: flex; z-index: 100; }
+    .nav-item { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 10px 0 8px; gap: 3px; text-decoration: none; color: var(--muted); }
+    .nav-item span.label { font-size: 10px; font-weight: 700; }
+    .nav-item .msym { font-size: 24px; }
+    .fab { position: fixed; bottom: 72px; right: calc(50% - 195px + 14px); width: 52px; height: 52px; border-radius: 18px; background: var(--accent); box-shadow: 0 4px 16px rgba(2,132,199,0.35); display: flex; align-items: center; justify-content: center; z-index: 99; text-decoration: none; }
+    .fab .msym { color: #fff; font-size: 26px; }
+  </style>
+</head>
+<body>
+<div class="flag-bar"></div>
+<header>
+  <a href="18_links.html" class="back-btn"><span class="msym o" style="font-size:20px;">arrow_back</span></a>
+  <span class="header-title">Освіта і мова</span>
+  <button class="bookmark-btn"><span class="msym o">bookmark</span></button>
+</header>
+<main>
+  <div class="hero">
+    <div class="hero-pattern"></div>
+    <div class="hero-breadcrumb">
+      <span>Посилання</span>
+      <span class="msym o" style="font-size:13px;">chevron_right</span>
+      <span>Освіта</span>
+    </div>
+    <div class="hero-icon"><span class="msym">school</span></div>
+    <div class="hero-title">Освіта і мова</div>
+    <div class="hero-sub">UAF, університети, визнання дипломів і курси нідерландської</div>
+    <div class="hero-badge"><span class="msym" style="font-size:14px;">check_circle</span> Безкоштовно</div>
+  </div>
+
+  <div class="content">
+    <div class="mt20">
+      <div class="sec-label">Вища освіта і визнання дипломів</div>
+      <div class="link-list">
+        <div class="link-card">
+          <div class="link-icon">🎓</div>
+          <div style="flex:1;">
+            <div class="link-name">UAF — підтримка для біженців-студентів</div>
+            <div class="link-url">uaf.nl</div>
+            <div class="link-desc">Стипендії, коучинг і юридична допомога для продовження навчання</div>
+          </div>
+          <span class="link-arrow">open_in_new</span>
+        </div>
+        <div class="link-card">
+          <div class="link-icon">🏛️</div>
+          <div style="flex:1;">
+            <div class="link-name">Studielink — вступ до університетів</div>
+            <div class="link-url">studielink.nl</div>
+            <div class="link-desc">Єдиний портал для подачі заяв у всі нідерландські університети (HBO/WO)</div>
+          </div>
+          <span class="link-arrow">open_in_new</span>
+        </div>
+        <div class="link-card">
+          <div class="link-icon">📜</div>
+          <div style="flex:1;">
+            <div class="link-name">Nuffic / IDW — визнання диплому</div>
+            <div class="link-url">nuffic.nl · idw.nl</div>
+            <div class="link-desc">Офіційна оцінка іноземних дипломів — потрібна для роботи і навчання</div>
+          </div>
+          <span class="link-arrow">open_in_new</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="mt24">
+      <div class="sec-label">Нідерландська мова (NT2)</div>
+      <div class="link-list">
+        <div class="link-card">
+          <div class="link-icon">🗣️</div>
+          <div style="flex:1;">
+            <div class="link-name">NT2.nl — офіційні курси нідерландської</div>
+            <div class="link-url">nt2.nl</div>
+            <div class="link-desc">Акредитовані мовні курси для дорослих — від A1 до B2/C1</div>
+          </div>
+          <span class="link-arrow">open_in_new</span>
+        </div>
+        <div class="link-card">
+          <div class="link-icon">📱</div>
+          <div style="flex:1;">
+            <div class="link-name">Duolingo + Babbel</div>
+            <div class="link-url">duolingo.com · babbel.com</div>
+            <div class="link-desc">Самостійне вивчення нідерландської — безкоштовно (Duolingo) або платно</div>
+          </div>
+          <span class="link-arrow">open_in_new</span>
+        </div>
+        <div class="link-card">
+          <div class="link-icon">🤝</div>
+          <div style="flex:1;">
+            <div class="link-name">Karibu — мовна практика з волонтерами</div>
+            <div class="link-url">karibu.nl</div>
+            <div class="link-desc">Безкоштовна розмовна практика з носіями — особисто і онлайн</div>
+          </div>
+          <span class="link-arrow">open_in_new</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="mt24">
+      <div class="sec-label">Бібліотека і безкоштовне навчання</div>
+      <div class="link-list">
+        <div class="link-card">
+          <div class="link-icon">📚</div>
+          <div style="flex:1;">
+            <div class="link-name">Bibliotheek — бібліотека</div>
+            <div class="link-url">[місто].bibliotheek.nl</div>
+            <div class="link-desc">До 18 років — безкоштовно. Дорослим ~€40/рік. Wi-Fi, комп'ютери, курси</div>
+          </div>
+          <span class="link-arrow">open_in_new</span>
+        </div>
+        <div class="link-card">
+          <div class="link-icon">💻</div>
+          <div style="flex:1;">
+            <div class="link-name">Coursera / edX — онлайн-курси</div>
+            <div class="link-url">coursera.org · edx.org</div>
+            <div class="link-desc">Безкоштовний аудит курсів від топ-університетів — сертифікат платно</div>
+          </div>
+          <span class="link-arrow">open_in_new</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="info-box amber mt20" style="margin-bottom:16px;">
+      <div class="info-box-title">Важливо про диплом</div>
+      Більшість нідерландських роботодавців і університетів вимагають офіційну оцінку іноземного диплому через Nuffic або IDW. Замов завчасно — процес займає кілька тижнів.
+    </div>
+  </div>
+</main>
+<a href="#" class="fab"><span class="msym">chat</span></a>
+<nav class="bottom-nav">
+  <a href="1final_colorful.html" class="nav-item"><span class="msym o">home</span><span class="label">Головна</span></a>
+  <a href="#" class="nav-item"><span class="msym o">explore</span><span class="label">Пошук</span></a>
+  <a href="#" class="nav-item"><span class="msym o">bookmark</span><span class="label">Збережені</span></a>
+  <a href="#" class="nav-item"><span class="msym o">person</span><span class="label">Профіль</span></a>
+</nav>
+</body>
+</html>
