@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Збережені — RefugeeGuide</title>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #F8F9FA; --card: #FFFFFF; --text: #111827; --muted: #6B7280;
+      --border: #E5E2DA; --blue: #0057B7; --blue-dark: #003DA6; --blue-soft: #E8F0FF;
+      --yellow: #FCD400; --accent: #0284C7; --accent-soft: #E0F2FE;
+    }
+    body { font-family: 'Manrope', sans-serif; background: var(--bg); color: var(--text); max-width: 390px; margin: 0 auto; min-height: 100vh; }
+    .msym { font-family: 'Material Symbols Outlined'; font-variation-settings: 'FILL' 1,'wght' 400,'GRAD' 0,'opsz' 24; font-size: 22px; line-height: 1; }
+    .msym.o { font-variation-settings: 'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 24; }
+    .flag-bar { height: 3px; background: linear-gradient(90deg, var(--blue) 50%, var(--yellow) 50%); }
+    header { background: var(--card); padding: 14px 18px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 50; }
+    .header-title { font-size: 18px; font-weight: 900; color: var(--text); }
+    .header-count { font-size: 12px; font-weight: 700; color: var(--muted); background: var(--bg); border: 1px solid var(--border); border-radius: 100px; padding: 4px 10px; }
+
+    main { padding-bottom: 110px; }
+
+    /* Filter tabs */
+    .filter-bar { padding: 14px 16px 0; display: flex; gap: 8px; overflow-x: auto; scrollbar-width: none; }
+    .filter-bar::-webkit-scrollbar { display: none; }
+    .filter-tab { padding: 7px 14px; border-radius: 100px; font-size: 12px; font-weight: 800; white-space: nowrap; cursor: pointer; border: 1.5px solid var(--border); background: var(--card); color: var(--muted); flex-shrink: 0; }
+    .filter-tab.active { background: var(--blue); border-color: var(--blue); color: #fff; }
+
+    /* Saved article cards */
+    .section { padding: 0 16px; margin-top: 16px; }
+    .saved-list { display: flex; flex-direction: column; gap: 10px; }
+    .saved-card { background: var(--card); border-radius: 18px; padding: 14px 16px; border: 1px solid var(--border); display: flex; gap: 12px; align-items: center; text-decoration: none; color: inherit; box-shadow: 0 2px 6px rgba(0,0,0,0.04); }
+    .saved-card:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(0,0,0,0.09); }
+    .saved-icon { width: 48px; height: 48px; border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 24px; flex-shrink: 0; }
+    .c-blue   .saved-icon { background: linear-gradient(145deg, #A8C4E8, #5B85B8); }
+    .c-green  .saved-icon { background: linear-gradient(145deg, #9DCFB4, #4E9272); }
+    .c-teal   .saved-icon { background: linear-gradient(145deg, #8ECECE, #3E8E8E); }
+    .c-amber  .saved-icon { background: linear-gradient(145deg, #EDD09A, #B88D4A); }
+    .c-purple .saved-icon { background: linear-gradient(145deg, #C4A8E0, #7E5AAA); }
+    .c-red    .saved-icon { background: linear-gradient(145deg, #E8A8A8, #B85858); }
+    .c-sky    .saved-icon { background: linear-gradient(145deg, #A0CCE8, #4888B0); }
+    .saved-info { flex: 1; min-width: 0; }
+    .saved-cat { font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); margin-bottom: 3px; }
+    .saved-title { font-size: 13px; font-weight: 800; color: var(--text); line-height: 1.3; }
+    .saved-meta { font-size: 11px; color: var(--muted); font-weight: 500; margin-top: 4px; }
+    .saved-bm { color: var(--blue); font-size: 20px; flex-shrink: 0; font-family: 'Material Symbols Outlined'; font-variation-settings: 'FILL' 1,'wght' 400,'GRAD' 0,'opsz' 24; line-height: 1; }
+
+    /* Empty state */
+    .empty-state { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 60px 32px; text-align: center; }
+    .empty-icon { width: 80px; height: 80px; border-radius: 24px; background: var(--accent-soft); display: flex; align-items: center; justify-content: center; margin-bottom: 20px; font-size: 36px; }
+    .empty-title { font-size: 18px; font-weight: 900; color: var(--text); margin-bottom: 8px; }
+    .empty-sub { font-size: 13px; color: var(--muted); font-weight: 500; line-height: 1.5; max-width: 260px; }
+    .empty-btn { margin-top: 24px; background: var(--blue); color: #fff; font-family: inherit; font-size: 13px; font-weight: 800; padding: 12px 24px; border-radius: 14px; border: none; cursor: pointer; display: flex; align-items: center; gap: 6px; text-decoration: none; }
+    .empty-btn .msym { font-size: 18px; }
+
+    /* FAB */
+    .fab { position: fixed; bottom: 90px; right: calc(50% - 185px); width: 52px; height: 52px; background: linear-gradient(145deg, #1270D8, #003DA6); border-radius: 18px; display: flex; align-items: center; justify-content: center; box-shadow: 0 6px 20px rgba(0,87,183,0.45); cursor: pointer; z-index: 40; text-decoration: none; }
+    .fab .msym { color: #fff; font-size: 24px; }
+
+    /* NAV */
+    nav { position: fixed; bottom: 0; left: 50%; transform: translateX(-50%); width: 100%; max-width: 390px; background: rgba(255,255,255,0.98); backdrop-filter: blur(20px); border-top: 1px solid var(--border); border-radius: 24px 24px 0 0; padding: 10px 8px 24px; display: flex; justify-content: space-around; z-index: 50; }
+    .nav-item { display: flex; flex-direction: column; align-items: center; gap: 4px; text-decoration: none; flex: 1; }
+    .nav-pill { padding: 6px 16px; border-radius: 100px; display: flex; align-items: center; justify-content: center; }
+    .nav-item.active .nav-pill { background: var(--blue-soft); }
+    .nav-item.active .msym { color: var(--blue); font-size: 23px; }
+    .nav-item:not(.active) .msym { color: var(--muted); font-size: 23px; font-variation-settings: 'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 24; }
+    .nav-lbl { font-size: 9px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.06em; }
+    .nav-item.active .nav-lbl { color: var(--blue); }
+    .nav-item:not(.active) .nav-lbl { color: var(--muted); }
+  </style>
+</head>
+<body>
+
+<div class="flag-bar"></div>
+
+<header>
+  <div class="header-title">Збережені</div>
+  <span class="header-count">3 статті</span>
+</header>
+
+<main>
+
+  <div class="filter-bar">
+    <div class="filter-tab active">Всі</div>
+    <div class="filter-tab">Закони</div>
+    <div class="filter-tab">Робота</div>
+    <div class="filter-tab">Здоров'я</div>
+    <div class="filter-tab">Житло</div>
+  </div>
+
+  <div class="section">
+    <div class="saved-list">
+
+      <a href="13_article_protection.html" class="saved-card c-blue">
+        <div class="saved-icon">🛡️</div>
+        <div class="saved-info">
+          <div class="saved-cat">Закони та права</div>
+          <div class="saved-title">Тимчасовий захист (TPD) — що це і скільки діє</div>
+          <div class="saved-meta">Збережено 3 дні тому</div>
+        </div>
+        <span class="saved-bm">bookmark</span>
+      </a>
+
+      <a href="16_article_contracts.html" class="saved-card c-amber">
+        <div class="saved-icon">📄</div>
+        <div class="saved-info">
+          <div class="saved-cat">Робота</div>
+          <div class="saved-title">Типи контрактів — vast, tijdelijk, oproep</div>
+          <div class="saved-meta">Збережено тиждень тому</div>
+        </div>
+        <span class="saved-bm">bookmark</span>
+      </a>
+
+      <a href="15_article_huurtoeslag.html" class="saved-card c-purple">
+        <div class="saved-icon">💸</div>
+        <div class="saved-info">
+          <div class="saved-cat">Житло</div>
+          <div class="saved-title">Huurtoeslag — субсидія на оренду</div>
+          <div class="saved-meta">Збережено 2 тижні тому</div>
+        </div>
+        <span class="saved-bm">bookmark</span>
+      </a>
+
+    </div>
+  </div>
+
+  <!-- Shown when no items: uncomment to preview empty state
+  <div class="empty-state">
+    <div class="empty-icon">🔖</div>
+    <div class="empty-title">Поки нічого немає</div>
+    <div class="empty-sub">Зберігай статті, щоб повертатися до них без пошуку. Натисни 🔖 на будь-якій сторінці.</div>
+    <a href="search.html" class="empty-btn"><span class="msym">explore</span>Переглянути статті</a>
+  </div>
+  -->
+
+</main>
+
+<a href="#" class="fab"><span class="msym">chat_bubble</span></a>
+
+<nav>
+  <a href="1final_colorful.html" class="nav-item">
+    <div class="nav-pill"><span class="msym o">home</span></div>
+    <span class="nav-lbl">Головна</span>
+  </a>
+  <a href="search.html" class="nav-item">
+    <div class="nav-pill"><span class="msym o">explore</span></div>
+    <span class="nav-lbl">Огляд</span>
+  </a>
+  <a href="saved.html" class="nav-item active">
+    <div class="nav-pill"><span class="msym">bookmark</span></div>
+    <span class="nav-lbl">Збережені</span>
+  </a>
+  <a href="profile.html" class="nav-item">
+    <div class="nav-pill"><span class="msym o">person</span></div>
+    <span class="nav-lbl">Профіль</span>
+  </a>
+</nav>
+
+</body>
+</html>
