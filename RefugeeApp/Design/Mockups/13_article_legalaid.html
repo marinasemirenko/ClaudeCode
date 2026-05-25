@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Юридична допомога</title>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --blue: #0057B7; --yellow: #FCD400; --bg: #EFECE5; --card: #fff;
+      --text: #111827; --muted: #6B7280; --border: #DDD9D0;
+      --accent: #4F46E5; --accent-dark: #3730A3; --accent-soft: #EEF2FF;
+      --green: #15803D; --green-soft: #DCFCE7;
+      --amber: #B45309; --amber-soft: #FEF3C7;
+      --premium: #7C3AED; --premium-soft: #EDE9FE;
+    }
+    body { font-family: 'Manrope', sans-serif; background: var(--bg); color: var(--text); max-width: 390px; margin: 0 auto; min-height: 100vh; }
+    .msym { font-family: 'Material Symbols Outlined'; font-variation-settings: 'FILL' 1,'wght' 400,'GRAD' 0,'opsz' 24; font-size: 22px; line-height: 1; }
+    .msym.o { font-variation-settings: 'FILL' 0,'wght' 400,'GRAD' 0,'opsz' 24; }
+    .flag-bar { height: 3px; background: linear-gradient(90deg, var(--blue) 50%, var(--yellow) 50%); }
+    header { background: var(--card); padding: 13px 18px; display: flex; align-items: center; gap: 12px; border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 50; }
+    .back-btn { width: 36px; height: 36px; border-radius: 50%; background: var(--bg); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; cursor: pointer; text-decoration: none; color: var(--text); flex-shrink: 0; }
+    .header-title { font-size: 15px; font-weight: 800; color: var(--text); flex: 1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .bookmark-btn { width: 36px; height: 36px; border-radius: 50%; background: var(--bg); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; cursor: pointer; color: var(--muted); flex-shrink: 0; }
+    main { padding-bottom: 100px; }
+    .hero { background: #1E293B; padding: 28px 20px 32px; position: relative; overflow: hidden; }
+    .hero-pattern { position: absolute; inset: 0; pointer-events: none; background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='20' cy='20' r='1.5' fill='%23ffffff' fill-opacity='0.06'/%3E%3C/svg%3E"); background-size: 40px; }
+    .hero-breadcrumb { display: flex; align-items: center; gap: 6px; font-size: 11px; font-weight: 700; color: rgba(255,255,255,0.4); margin-bottom: 14px; }
+    .hero-icon { width: 56px; height: 56px; border-radius: 18px; background: rgba(255,255,255,0.12); display: flex; align-items: center; justify-content: center; margin-bottom: 14px; }
+    .hero-icon .msym { font-size: 30px; color: #fff; }
+    .hero-title { font-size: 26px; font-weight: 900; color: #fff; letter-spacing: -0.7px; line-height: 1.2; margin-bottom: 8px; }
+    .hero-sub { font-size: 13px; color: rgba(255,255,255,0.55); font-weight: 500; line-height: 1.5; }
+    .hero-badge { display: inline-flex; align-items: center; gap: 5px; background: var(--green-soft); border-radius: 100px; padding: 4px 10px; font-size: 10px; font-weight: 800; color: var(--green); margin-top: 12px; }
+    .content { padding: 0 18px; }
+    .mt16 { margin-top: 16px; } .mt20 { margin-top: 20px; } .mt24 { margin-top: 24px; }
+    .sec-label { font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.12em; color: var(--muted); margin-bottom: 12px; }
+    .contact-card { background: var(--card); border-radius: 18px; padding: 18px; border: 1px solid var(--border); box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+    .contact-name { font-size: 16px; font-weight: 900; color: var(--text); margin-bottom: 4px; }
+    .contact-desc { font-size: 12px; color: var(--muted); font-weight: 500; line-height: 1.5; margin-bottom: 14px; }
+    .contact-row { display: flex; align-items: center; gap: 10px; padding: 10px 0; border-top: 1px solid var(--border); }
+    .contact-row .msym { color: var(--accent); font-size: 20px; flex-shrink: 0; }
+    .contact-value { font-size: 14px; font-weight: 800; color: var(--accent); }
+    .contact-sub { font-size: 11px; color: var(--muted); font-weight: 500; }
+    .info-card { background: var(--card); border-radius: 16px; padding: 16px; box-shadow: 0 1px 3px rgba(0,0,0,0.06); border: 1px solid var(--border); }
+    .steps { display: flex; flex-direction: column; gap: 0; }
+    .step { display: flex; gap: 14px; align-items: flex-start; padding: 14px 0; border-bottom: 1px solid var(--border); }
+    .step:last-child { border-bottom: none; }
+    .step-num { width: 30px; height: 30px; border-radius: 10px; background: var(--accent); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 900; flex-shrink: 0; margin-top: 1px; }
+    .step-body { flex: 1; }
+    .step-title { font-size: 14px; font-weight: 800; margin-bottom: 3px; }
+    .step-desc { font-size: 12px; color: var(--muted); font-weight: 500; line-height: 1.5; }
+    .alert-box { border-radius: 14px; padding: 14px 16px; display: flex; gap: 12px; }
+    .alert-box.green { background: var(--green-soft); border: 1px solid #BBF7D0; }
+    .alert-box.green .msym { color: var(--green); font-size: 20px; flex-shrink: 0; margin-top: 1px; }
+    .alert-box.green .alert-text { font-size: 13px; color: #14532D; font-weight: 600; line-height: 1.5; }
+    .alert-box.green .alert-text strong { font-weight: 800; }
+    .org-list { display: flex; flex-direction: column; gap: 8px; }
+    .org-card { background: var(--card); border-radius: 14px; padding: 14px 16px; border: 1px solid var(--border); display: flex; gap: 12px; align-items: center; }
+    .org-icon { width: 36px; height: 36px; border-radius: 10px; background: var(--accent-soft); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .org-icon .msym { font-size: 18px; color: var(--accent); }
+    .org-name { font-size: 13px; font-weight: 800; color: var(--text); }
+    .org-desc { font-size: 11px; color: var(--muted); font-weight: 500; margin-top: 2px; }
+    .premium-gate { border-radius: 20px; overflow: hidden; position: relative; }
+    .premium-blur { padding: 20px 16px; background: var(--card); border: 1px solid var(--border); border-radius: 20px; filter: blur(3px); pointer-events: none; user-select: none; }
+    .premium-blur .pitem { display: flex; gap: 12px; align-items: center; padding: 12px 0; border-bottom: 1px solid var(--border); }
+    .premium-blur .pitem:last-child { border-bottom: none; padding-bottom: 0; }
+    .pitem-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--premium); flex-shrink: 0; }
+    .pitem-text { font-size: 13px; font-weight: 600; color: var(--text); line-height: 1.4; }
+    .premium-overlay { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 24px; text-align: center; background: rgba(255,255,255,0.85); backdrop-filter: blur(2px); border-radius: 20px; }
+    .premium-icon { width: 56px; height: 56px; border-radius: 18px; background: var(--premium-soft); display: flex; align-items: center; justify-content: center; margin-bottom: 14px; }
+    .premium-icon .msym { color: var(--premium); font-size: 28px; }
+    .premium-title { font-size: 17px; font-weight: 900; color: var(--text); margin-bottom: 6px; }
+    .premium-sub { font-size: 12px; color: var(--muted); font-weight: 500; line-height: 1.5; margin-bottom: 18px; }
+    .premium-btn { background: var(--premium); color: #fff; border: none; border-radius: 14px; padding: 13px 28px; font-family: inherit; font-size: 14px; font-weight: 800; cursor: pointer; width: 100%; margin-bottom: 10px; box-shadow: 0 4px 16px rgba(124,58,237,0.35); }
+    .premium-price { font-size: 11px; color: var(--muted); font-weight: 600; }
+    .premium-price strong { color: var(--premium); }
+    nav { position: fixed; bottom: 0; left: 50%; transform: translateX(-50%); width: 100%; max-width: 390px; background: rgba(255,255,255,0.97); backdrop-filter: blur(20px); border-top: 1px solid var(--border); border-radius: 22px 22px 0 0; padding: 10px 8px 22px; display: flex; justify-content: space-around; z-index: 50; }
+    .nav-item { display: flex; flex-direction: column; align-items: center; gap: 3px; text-decoration: none; flex: 1; }
+    .nav-pill { padding: 5px 14px; border-radius: 100px; display: flex; align-items: center; justify-content: center; }
+    .nav-item.active .nav-pill { background: var(--accent-soft); }
+    .nav-item.active .msym { color: var(--accent); }
+    .nav-item:not(.active) .msym { color: var(--muted); font-variation-settings: 'FILL' 0,'wght' 400,'GRAD' 0,'opsz' 24; }
+    .nav-lbl { font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; }
+    .nav-item.active .nav-lbl { color: var(--accent); }
+    .nav-item:not(.active) .nav-lbl { color: var(--muted); }
+  </style>
+</head>
+<body>
+  <div class="flag-bar"></div>
+  <header>
+    <a href="13_laws.html" class="back-btn"><span class="msym o" style="font-size:20px">arrow_back</span></a>
+    <div class="header-title">Юридична допомога</div>
+    <button class="bookmark-btn"><span class="msym o" style="font-size:20px">bookmark</span></button>
+  </header>
+  <main>
+    <div class="hero">
+      <div class="hero-pattern"></div>
+      <div class="hero-breadcrumb">
+        <span class="msym" style="font-size:13px">gavel</span>
+        Закони та права
+        <span class="msym o" style="font-size:13px">chevron_right</span>
+        Юридична допомога
+      </div>
+      <div class="hero-icon"><span class="msym">balance</span></div>
+      <div class="hero-title">Безкоштовна<br>юридична допомога</div>
+      <div class="hero-sub">Юридична консультація — безкоштовно, навіть без грошей і документів</div>
+      <div class="hero-badge"><span class="msym" style="font-size:13px">check_circle</span> Безкоштовний контент</div>
+    </div>
+
+    <div class="content mt20">
+      <div class="contact-card">
+        <div class="contact-name">Het Juridisch Loket</div>
+        <div class="contact-desc">Безкоштовна юридична консультація для людей з низьким доходом. Перша консультація — завжди безкоштовна. Спеціалісти розмовляють нідерландською та часто англійською.</div>
+        <div class="contact-row">
+          <span class="msym">call</span>
+          <div><div class="contact-value">0900-8020</div><div class="contact-sub">Пн–Пт, безкоштовно</div></div>
+        </div>
+        <div class="contact-row">
+          <span class="msym">language</span>
+          <div><div class="contact-value">juridischloket.nl</div><div class="contact-sub">Онлайн чат та запис на прийом</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="content mt24">
+      <div class="sec-label">Як отримати допомогу — покроково</div>
+      <div class="info-card">
+        <div class="steps">
+          <div class="step">
+            <div class="step-num">1</div>
+            <div class="step-body">
+              <div class="step-title">Зателефонуй або прийди</div>
+              <div class="step-desc">Зателефонуй 0900-8020 або знайди найближчий офіс на juridischloket.nl. Є офіси у більшості великих міст.</div>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">2</div>
+            <div class="step-body">
+              <div class="step-title">Опиши проблему</div>
+              <div class="step-desc">Скажи, що ти Ukrainian і попроси допомогу. Якщо потрібно — зроби це через перекладача або принеси когось хто допоможе.</div>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">3</div>
+            <div class="step-body">
+              <div class="step-title">Отримай безкоштовну пораду</div>
+              <div class="step-desc">Юрист пояснить твої права і можливі кроки. Перша консультація завжди безкоштовна.</div>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">4</div>
+            <div class="step-body">
+              <div class="step-title">Якщо потрібен адвокат — проси "toevoeging"</div>
+              <div class="step-desc">Toevoeging — це державна субсидія на послуги адвоката. За низького доходу ти платиш лише невелику частину (~€196). Адвокат оформляє це сам.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="content mt16">
+      <div class="alert-box green">
+        <span class="msym">info</span>
+        <div class="alert-text"><strong>Juridisch Loket допомагає з:</strong> трудовими спорами, проблемами з житлом, відмовами у виплатах, суперечками з IND, сімейним правом та іншим.</div>
+      </div>
+    </div>
+
+    <div class="content mt24">
+      <div class="sec-label">Інші організації</div>
+      <div class="org-list">
+        <div class="org-card">
+          <div class="org-icon"><span class="msym">groups</span></div>
+          <div>
+            <div class="org-name">VluchtelingenWerk Nederland</div>
+            <div class="org-desc">Безкоштовна підтримка біженців: консультації, навігація у документах</div>
+          </div>
+        </div>
+        <div class="org-card">
+          <div class="org-icon"><span class="msym">handshake</span></div>
+          <div>
+            <div class="org-name">Raad voor Rechtsbijstand</div>
+            <div class="org-desc">Державний орган з субсидованої правової допомоги (toevoeging)</div>
+          </div>
+        </div>
+        <div class="org-card">
+          <div class="org-icon"><span class="msym">school</span></div>
+          <div>
+            <div class="org-name">UAF</div>
+            <div class="org-desc">Підтримка студентів-біженців у вищій освіті</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="content mt24">
+      <div class="sec-label">Преміум контент</div>
+      <div class="premium-gate">
+        <div class="premium-blur">
+          <div class="pitem"><div class="pitem-dot"></div><div class="pitem-text">Як оскаржити рішення IND — покрокова інструкція з термінами</div></div>
+          <div class="pitem"><div class="pitem-dot"></div><div class="pitem-text">Ваші права якщо вас хочуть виселити з муніципального житла</div></div>
+          <div class="pitem"><div class="pitem-dot"></div><div class="pitem-text">Трудові суперечки: як подати скаргу та що очікувати</div></div>
+        </div>
+        <div class="premium-overlay">
+          <div class="premium-icon"><span class="msym">lock</span></div>
+          <div class="premium-title">Преміум контент</div>
+          <div class="premium-sub">Деталі процедур та апеляцій</div>
+          <button class="premium-btn">Відкрити за €4.99/міс</button>
+          <div class="premium-price">Перший місяць безкоштовно · <strong>Скасувати будь-коли</strong></div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <nav>
+    <a href="1final_colorful.html" class="nav-item active"><div class="nav-pill"><span class="msym">home</span></div><span class="nav-lbl">Головна</span></a>
+    <a href="#" class="nav-item"><div class="nav-pill"><span class="msym">explore</span></div><span class="nav-lbl">Огляд</span></a>
+    <a href="#" class="nav-item"><div class="nav-pill"><span class="msym">bookmark</span></div><span class="nav-lbl">Збережені</span></a>
+    <a href="#" class="nav-item"><div class="nav-pill"><span class="msym">person</span></div><span class="nav-lbl">Профіль</span></a>
+  </nav>
+</body>
+</html>

@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Соціальні виплати</title>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --blue: #0057B7; --yellow: #FCD400; --bg: #EFECE5; --card: #fff;
+      --text: #111827; --muted: #6B7280; --border: #DDD9D0;
+      --accent: #4F46E5; --accent-dark: #3730A3; --accent-soft: #EEF2FF;
+      --green: #15803D; --green-soft: #DCFCE7;
+      --amber: #B45309; --amber-soft: #FEF3C7;
+      --red: #B91C1C; --red-soft: #FEE2E2;
+      --premium: #7C3AED; --premium-soft: #EDE9FE;
+    }
+    body { font-family: 'Manrope', sans-serif; background: var(--bg); color: var(--text); max-width: 390px; margin: 0 auto; min-height: 100vh; }
+    .msym { font-family: 'Material Symbols Outlined'; font-variation-settings: 'FILL' 1,'wght' 400,'GRAD' 0,'opsz' 24; font-size: 22px; line-height: 1; }
+    .msym.o { font-variation-settings: 'FILL' 0,'wght' 400,'GRAD' 0,'opsz' 24; }
+    .flag-bar { height: 3px; background: linear-gradient(90deg, var(--blue) 50%, var(--yellow) 50%); }
+    header { background: var(--card); padding: 13px 18px; display: flex; align-items: center; gap: 12px; border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 50; }
+    .back-btn { width: 36px; height: 36px; border-radius: 50%; background: var(--bg); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; cursor: pointer; text-decoration: none; color: var(--text); flex-shrink: 0; }
+    .header-title { font-size: 15px; font-weight: 800; color: var(--text); flex: 1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .bookmark-btn { width: 36px; height: 36px; border-radius: 50%; background: var(--bg); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; cursor: pointer; color: var(--muted); flex-shrink: 0; }
+    main { padding-bottom: 100px; }
+    .hero { background: #14532D; padding: 28px 20px 32px; position: relative; overflow: hidden; }
+    .hero-pattern { position: absolute; inset: 0; pointer-events: none; background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='20' cy='20' r='1.5' fill='%23ffffff' fill-opacity='0.06'/%3E%3C/svg%3E"); background-size: 40px; }
+    .hero-breadcrumb { display: flex; align-items: center; gap: 6px; font-size: 11px; font-weight: 700; color: rgba(255,255,255,0.4); margin-bottom: 14px; }
+    .hero-icon { width: 56px; height: 56px; border-radius: 18px; background: rgba(255,255,255,0.12); display: flex; align-items: center; justify-content: center; margin-bottom: 14px; }
+    .hero-icon .msym { font-size: 30px; color: #fff; }
+    .hero-title { font-size: 26px; font-weight: 900; color: #fff; letter-spacing: -0.7px; line-height: 1.2; margin-bottom: 8px; }
+    .hero-sub { font-size: 13px; color: rgba(255,255,255,0.55); font-weight: 500; line-height: 1.5; }
+    .hero-badge { display: inline-flex; align-items: center; gap: 5px; background: var(--green-soft); border-radius: 100px; padding: 4px 10px; font-size: 10px; font-weight: 800; color: var(--green); margin-top: 12px; }
+    .content { padding: 0 18px; }
+    .mt16 { margin-top: 16px; } .mt20 { margin-top: 20px; } .mt24 { margin-top: 24px; }
+    .sec-label { font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.12em; color: var(--muted); margin-bottom: 12px; }
+    .benefit-list { display: flex; flex-direction: column; gap: 10px; }
+    .benefit-card { background: var(--card); border-radius: 16px; padding: 16px; border: 1px solid var(--border); display: flex; gap: 14px; align-items: flex-start; }
+    .benefit-icon { width: 42px; height: 42px; border-radius: 13px; background: var(--accent-soft); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .benefit-icon .msym { font-size: 22px; color: var(--accent); }
+    .benefit-icon.green { background: var(--green-soft); }
+    .benefit-icon.green .msym { color: var(--green); }
+    .benefit-body { flex: 1; }
+    .benefit-name { font-size: 13px; font-weight: 800; color: var(--text); margin-bottom: 3px; }
+    .benefit-desc { font-size: 12px; color: var(--muted); font-weight: 500; line-height: 1.4; }
+    .benefit-amount { font-size: 14px; font-weight: 900; color: var(--green); margin-top: 5px; }
+    .alert-box { border-radius: 14px; padding: 14px 16px; display: flex; gap: 12px; }
+    .alert-box.amber { background: var(--amber-soft); border: 1px solid #FDE68A; }
+    .alert-box.amber .msym { color: var(--amber); font-size: 20px; flex-shrink: 0; margin-top: 1px; }
+    .alert-box.amber .alert-text { font-size: 13px; color: #78350F; font-weight: 600; line-height: 1.5; }
+    .alert-box.amber .alert-text strong { font-weight: 800; }
+    .table-wrap { overflow: hidden; border-radius: 14px; border: 1px solid var(--border); }
+    .tbl { width: 100%; border-collapse: collapse; font-size: 12px; }
+    .tbl thead { background: var(--green-soft); }
+    .tbl th { padding: 10px 12px; text-align: left; font-weight: 800; color: #14532D; font-size: 11px; text-transform: uppercase; letter-spacing: 0.07em; }
+    .tbl td { padding: 11px 12px; border-top: 1px solid var(--border); font-weight: 500; color: var(--text); vertical-align: top; line-height: 1.4; }
+    .tip { display: flex; gap: 12px; align-items: flex-start; background: var(--accent-soft); border-radius: 14px; padding: 14px 16px; }
+    .tip .msym { color: var(--accent); font-size: 20px; flex-shrink: 0; margin-top: 1px; }
+    .tip-text { font-size: 12px; color: var(--accent-dark); font-weight: 600; line-height: 1.5; }
+    .tip-text strong { font-weight: 800; }
+    .premium-gate { border-radius: 20px; overflow: hidden; position: relative; }
+    .premium-blur { padding: 20px 16px; background: var(--card); border: 1px solid var(--border); border-radius: 20px; filter: blur(3px); pointer-events: none; user-select: none; }
+    .premium-blur .pitem { display: flex; gap: 12px; align-items: center; padding: 12px 0; border-bottom: 1px solid var(--border); }
+    .premium-blur .pitem:last-child { border-bottom: none; padding-bottom: 0; }
+    .pitem-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--premium); flex-shrink: 0; }
+    .pitem-text { font-size: 13px; font-weight: 600; color: var(--text); line-height: 1.4; }
+    .premium-overlay { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 24px; text-align: center; background: rgba(255,255,255,0.85); backdrop-filter: blur(2px); border-radius: 20px; }
+    .premium-icon { width: 56px; height: 56px; border-radius: 18px; background: var(--premium-soft); display: flex; align-items: center; justify-content: center; margin-bottom: 14px; }
+    .premium-icon .msym { color: var(--premium); font-size: 28px; }
+    .premium-title { font-size: 17px; font-weight: 900; color: var(--text); margin-bottom: 6px; }
+    .premium-sub { font-size: 12px; color: var(--muted); font-weight: 500; line-height: 1.5; margin-bottom: 18px; }
+    .premium-btn { background: var(--premium); color: #fff; border: none; border-radius: 14px; padding: 13px 28px; font-family: inherit; font-size: 14px; font-weight: 800; cursor: pointer; width: 100%; margin-bottom: 10px; box-shadow: 0 4px 16px rgba(124,58,237,0.35); }
+    .premium-price { font-size: 11px; color: var(--muted); font-weight: 600; }
+    .premium-price strong { color: var(--premium); }
+    nav { position: fixed; bottom: 0; left: 50%; transform: translateX(-50%); width: 100%; max-width: 390px; background: rgba(255,255,255,0.97); backdrop-filter: blur(20px); border-top: 1px solid var(--border); border-radius: 22px 22px 0 0; padding: 10px 8px 22px; display: flex; justify-content: space-around; z-index: 50; }
+    .nav-item { display: flex; flex-direction: column; align-items: center; gap: 3px; text-decoration: none; flex: 1; }
+    .nav-pill { padding: 5px 14px; border-radius: 100px; display: flex; align-items: center; justify-content: center; }
+    .nav-item.active .nav-pill { background: var(--accent-soft); }
+    .nav-item.active .msym { color: var(--accent); }
+    .nav-item:not(.active) .msym { color: var(--muted); font-variation-settings: 'FILL' 0,'wght' 400,'GRAD' 0,'opsz' 24; }
+    .nav-lbl { font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; }
+    .nav-item.active .nav-lbl { color: var(--accent); }
+    .nav-item:not(.active) .nav-lbl { color: var(--muted); }
+  </style>
+</head>
+<body>
+  <div class="flag-bar"></div>
+  <header>
+    <a href="13_laws.html" class="back-btn"><span class="msym o" style="font-size:20px">arrow_back</span></a>
+    <div class="header-title">Соціальні виплати</div>
+    <button class="bookmark-btn"><span class="msym o" style="font-size:20px">bookmark</span></button>
+  </header>
+  <main>
+    <div class="hero">
+      <div class="hero-pattern"></div>
+      <div class="hero-breadcrumb">
+        <span class="msym" style="font-size:13px">gavel</span>
+        Закони та права
+        <span class="msym o" style="font-size:13px">chevron_right</span>
+        Соціальні виплати
+      </div>
+      <div class="hero-icon"><span class="msym">payments</span></div>
+      <div class="hero-title">Соціальні<br>виплати</div>
+      <div class="hero-sub">Leefgeld, bijstand, zorgtoeslag — що ти можеш отримати і як</div>
+      <div class="hero-badge"><span class="msym" style="font-size:13px">check_circle</span> Безкоштовний контент</div>
+    </div>
+
+    <div class="content mt20">
+      <div class="sec-label">Виплати у муніципальному житлі (COA/gemeente)</div>
+      <div class="table-wrap">
+        <table class="tbl">
+          <thead><tr><th>Виплата</th><th>Сума / міс (2025)</th></tr></thead>
+          <tbody>
+            <tr><td>Їжа (leefgeld)</td><td><strong>€252.18</strong></td></tr>
+            <tr><td>Одяг</td><td><strong>€62.66</strong></td></tr>
+            <tr><td>Додаткова виплата</td><td><strong>€77.16</strong></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="content mt16">
+      <div class="alert-box amber">
+        <span class="msym">warning</span>
+        <div class="alert-text"><strong>⚠️ З жовтня 2025:</strong> Якщо ти живеш у муніципальному житлі і <strong>маєш власний дохід</strong>, ти зобов'язана платити €244.22/місяць за проживання. Це нове правило — перевір своє конкретне положення у gemeente.</div>
+      </div>
+    </div>
+
+    <div class="content mt24">
+      <div class="sec-label">Що ще ти можеш отримати</div>
+      <div class="benefit-list">
+
+        <div class="benefit-card">
+          <div class="benefit-icon green"><span class="msym">favorite</span></div>
+          <div class="benefit-body">
+            <div class="benefit-name">Zorgtoeslag (медична субсидія)</div>
+            <div class="benefit-desc">Допомога на оплату медичного страхування. Подавати через Belastingdienst з DigiD.</div>
+            <div class="benefit-amount">⚠️ Сума залежить від доходу</div>
+          </div>
+        </div>
+
+        <div class="benefit-card">
+          <div class="benefit-icon green"><span class="msym">home</span></div>
+          <div class="benefit-body">
+            <div class="benefit-name">Huurtoeslag (субсидія на оренду)</div>
+            <div class="benefit-desc">Якщо ти орендуєш квартиру приватно і маєш низький дохід — ти маєш право на цю допомогу.</div>
+            <div class="benefit-amount">⚠️ Перевір актуальність на belastingdienst.nl</div>
+          </div>
+        </div>
+
+        <div class="benefit-card">
+          <div class="benefit-icon"><span class="msym">child_care</span></div>
+          <div class="benefit-body">
+            <div class="benefit-name">Kinderbijslag (допомога на дітей)</div>
+            <div class="benefit-desc">Виплата на кожну дитину до 18 років. Подавати через SVB (svb.nl).</div>
+            <div class="benefit-amount">⚠️ Сума змінюється щоквартально</div>
+          </div>
+        </div>
+
+        <div class="benefit-card">
+          <div class="benefit-icon"><span class="msym">school</span></div>
+          <div class="benefit-body">
+            <div class="benefit-name">Kinderopvangtoeslag (ясла/садок)</div>
+            <div class="benefit-desc">Якщо ти працюєш і відводиш дитину до ясел чи садка — компенсація до 96% вартості.</div>
+            <div class="benefit-amount">Умова: потрібен дохід від роботи</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="content mt16">
+      <div class="tip">
+        <span class="msym">lightbulb</span>
+        <div class="tip-text"><strong>Для більшості виплат потрібен DigiD.</strong> Отримай його якнайшвидше: зареєструйся у gemeente → отримай BSN → купи нідерландську SIM → подавай на digid.nl.</div>
+      </div>
+    </div>
+
+    <div class="content mt24">
+      <div class="sec-label">Преміум контент</div>
+      <div class="premium-gate">
+        <div class="premium-blur">
+          <div class="pitem"><div class="pitem-dot"></div><div class="pitem-text">Покрокова інструкція: як подати на zorgtoeslag через Belastingdienst</div></div>
+          <div class="pitem"><div class="pitem-dot"></div><div class="pitem-text">Як розрахувати, чи маєш право на huurtoeslag — онлайн калькулятор</div></div>
+          <div class="pitem"><div class="pitem-dot"></div><div class="pitem-text">Bijstand: як подати заяву і що потрібно принести до gemeente</div></div>
+          <div class="pitem"><div class="pitem-dot"></div><div class="pitem-text">Що робити, якщо gemeente відмовила у виплаті — оскарження</div></div>
+        </div>
+        <div class="premium-overlay">
+          <div class="premium-icon"><span class="msym">lock</span></div>
+          <div class="premium-title">Преміум контент</div>
+          <div class="premium-sub">Покрокові інструкції з оформлення всіх виплат</div>
+          <button class="premium-btn">Відкрити за €4.99/міс</button>
+          <div class="premium-price">Перший місяць безкоштовно · <strong>Скасувати будь-коли</strong></div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <nav>
+    <a href="1final_colorful.html" class="nav-item active"><div class="nav-pill"><span class="msym">home</span></div><span class="nav-lbl">Головна</span></a>
+    <a href="#" class="nav-item"><div class="nav-pill"><span class="msym">explore</span></div><span class="nav-lbl">Огляд</span></a>
+    <a href="#" class="nav-item"><div class="nav-pill"><span class="msym">bookmark</span></div><span class="nav-lbl">Збережені</span></a>
+    <a href="#" class="nav-item"><div class="nav-pill"><span class="msym">person</span></div><span class="nav-lbl">Профіль</span></a>
+  </nav>
+</body>
+</html>

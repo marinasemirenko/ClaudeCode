@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Право на подорожі</title>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --blue: #0057B7; --yellow: #FCD400; --bg: #EFECE5; --card: #fff;
+      --text: #111827; --muted: #6B7280; --border: #DDD9D0;
+      --accent: #4F46E5; --accent-dark: #3730A3; --accent-soft: #EEF2FF;
+      --green: #15803D; --green-soft: #DCFCE7;
+      --amber: #B45309; --amber-soft: #FEF3C7;
+      --red: #B91C1C; --red-soft: #FEE2E2;
+      --premium: #7C3AED; --premium-soft: #EDE9FE;
+    }
+    body { font-family: 'Manrope', sans-serif; background: var(--bg); color: var(--text); max-width: 390px; margin: 0 auto; min-height: 100vh; }
+    .msym { font-family: 'Material Symbols Outlined'; font-variation-settings: 'FILL' 1,'wght' 400,'GRAD' 0,'opsz' 24; font-size: 22px; line-height: 1; }
+    .msym.o { font-variation-settings: 'FILL' 0,'wght' 400,'GRAD' 0,'opsz' 24; }
+    .flag-bar { height: 3px; background: linear-gradient(90deg, var(--blue) 50%, var(--yellow) 50%); }
+    header { background: var(--card); padding: 13px 18px; display: flex; align-items: center; gap: 12px; border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 50; }
+    .back-btn { width: 36px; height: 36px; border-radius: 50%; background: var(--bg); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; cursor: pointer; text-decoration: none; color: var(--text); flex-shrink: 0; }
+    .header-title { font-size: 15px; font-weight: 800; color: var(--text); flex: 1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .bookmark-btn { width: 36px; height: 36px; border-radius: 50%; background: var(--bg); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; cursor: pointer; color: var(--muted); flex-shrink: 0; }
+    main { padding-bottom: 100px; }
+    .hero { background: #0F4C5C; padding: 28px 20px 32px; position: relative; overflow: hidden; }
+    .hero-pattern { position: absolute; inset: 0; pointer-events: none; background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='20' cy='20' r='1.5' fill='%23ffffff' fill-opacity='0.06'/%3E%3C/svg%3E"); background-size: 40px; }
+    .hero-breadcrumb { display: flex; align-items: center; gap: 6px; font-size: 11px; font-weight: 700; color: rgba(255,255,255,0.4); margin-bottom: 14px; }
+    .hero-icon { width: 56px; height: 56px; border-radius: 18px; background: rgba(255,255,255,0.12); display: flex; align-items: center; justify-content: center; margin-bottom: 14px; }
+    .hero-icon .msym { font-size: 30px; color: #fff; }
+    .hero-title { font-size: 26px; font-weight: 900; color: #fff; letter-spacing: -0.7px; line-height: 1.2; margin-bottom: 8px; }
+    .hero-sub { font-size: 13px; color: rgba(255,255,255,0.55); font-weight: 500; line-height: 1.5; }
+    .hero-badge { display: inline-flex; align-items: center; gap: 5px; background: var(--green-soft); border-radius: 100px; padding: 4px 10px; font-size: 10px; font-weight: 800; color: var(--green); margin-top: 12px; }
+    .content { padding: 0 18px; }
+    .mt16 { margin-top: 16px; } .mt20 { margin-top: 20px; } .mt24 { margin-top: 24px; }
+    .sec-label { font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.12em; color: var(--muted); margin-bottom: 12px; }
+    .info-card { background: var(--card); border-radius: 16px; padding: 16px; box-shadow: 0 1px 3px rgba(0,0,0,0.06); border: 1px solid var(--border); font-size: 13px; font-weight: 600; color: var(--text); line-height: 1.6; }
+    .travel-grid { display: flex; flex-direction: column; gap: 10px; }
+    .travel-card { background: var(--card); border-radius: 16px; padding: 16px; border: 1px solid var(--border); display: flex; gap: 14px; align-items: flex-start; }
+    .travel-icon { width: 42px; height: 42px; border-radius: 13px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 22px; }
+    .travel-icon.green { background: var(--green-soft); }
+    .travel-icon.amber { background: var(--amber-soft); }
+    .travel-icon.red { background: var(--red-soft); }
+    .travel-title { font-size: 13px; font-weight: 800; color: var(--text); margin-bottom: 4px; }
+    .travel-desc { font-size: 12px; color: var(--muted); font-weight: 500; line-height: 1.5; }
+    .alert-box { border-radius: 14px; padding: 14px 16px; display: flex; gap: 12px; }
+    .alert-box.amber { background: var(--amber-soft); border: 1px solid #FDE68A; }
+    .alert-box.amber .msym { color: var(--amber); font-size: 20px; flex-shrink: 0; margin-top: 1px; }
+    .alert-box.amber .alert-text { font-size: 13px; color: #78350F; font-weight: 600; line-height: 1.5; }
+    .alert-box.amber .alert-text strong { font-weight: 800; }
+    .alert-box.red { background: var(--red-soft); border: 1px solid #FECACA; }
+    .alert-box.red .msym { color: var(--red); font-size: 20px; flex-shrink: 0; margin-top: 1px; }
+    .alert-box.red .alert-text { font-size: 13px; color: #7F1D1D; font-weight: 600; line-height: 1.5; }
+    .alert-box.red .alert-text strong { font-weight: 800; }
+    .premium-gate { border-radius: 20px; overflow: hidden; position: relative; }
+    .premium-blur { padding: 20px 16px; background: var(--card); border: 1px solid var(--border); border-radius: 20px; filter: blur(3px); pointer-events: none; user-select: none; }
+    .premium-blur .pitem { display: flex; gap: 12px; align-items: center; padding: 12px 0; border-bottom: 1px solid var(--border); }
+    .premium-blur .pitem:last-child { border-bottom: none; padding-bottom: 0; }
+    .pitem-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--premium); flex-shrink: 0; }
+    .pitem-text { font-size: 13px; font-weight: 600; color: var(--text); line-height: 1.4; }
+    .premium-overlay { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 24px; text-align: center; background: rgba(255,255,255,0.85); backdrop-filter: blur(2px); border-radius: 20px; }
+    .premium-icon { width: 56px; height: 56px; border-radius: 18px; background: var(--premium-soft); display: flex; align-items: center; justify-content: center; margin-bottom: 14px; }
+    .premium-icon .msym { color: var(--premium); font-size: 28px; }
+    .premium-title { font-size: 17px; font-weight: 900; color: var(--text); margin-bottom: 6px; }
+    .premium-sub { font-size: 12px; color: var(--muted); font-weight: 500; line-height: 1.5; margin-bottom: 18px; }
+    .premium-btn { background: var(--premium); color: #fff; border: none; border-radius: 14px; padding: 13px 28px; font-family: inherit; font-size: 14px; font-weight: 800; cursor: pointer; width: 100%; margin-bottom: 10px; box-shadow: 0 4px 16px rgba(124,58,237,0.35); }
+    .premium-price { font-size: 11px; color: var(--muted); font-weight: 600; }
+    .premium-price strong { color: var(--premium); }
+    nav { position: fixed; bottom: 0; left: 50%; transform: translateX(-50%); width: 100%; max-width: 390px; background: rgba(255,255,255,0.97); backdrop-filter: blur(20px); border-top: 1px solid var(--border); border-radius: 22px 22px 0 0; padding: 10px 8px 22px; display: flex; justify-content: space-around; z-index: 50; }
+    .nav-item { display: flex; flex-direction: column; align-items: center; gap: 3px; text-decoration: none; flex: 1; }
+    .nav-pill { padding: 5px 14px; border-radius: 100px; display: flex; align-items: center; justify-content: center; }
+    .nav-item.active .nav-pill { background: var(--accent-soft); }
+    .nav-item.active .msym { color: var(--accent); }
+    .nav-item:not(.active) .msym { color: var(--muted); font-variation-settings: 'FILL' 0,'wght' 400,'GRAD' 0,'opsz' 24; }
+    .nav-lbl { font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; }
+    .nav-item.active .nav-lbl { color: var(--accent); }
+    .nav-item:not(.active) .nav-lbl { color: var(--muted); }
+  </style>
+</head>
+<body>
+  <div class="flag-bar"></div>
+  <header>
+    <a href="13_laws.html" class="back-btn"><span class="msym o" style="font-size:20px">arrow_back</span></a>
+    <div class="header-title">Право на подорожі</div>
+    <button class="bookmark-btn"><span class="msym o" style="font-size:20px">bookmark</span></button>
+  </header>
+  <main>
+    <div class="hero">
+      <div class="hero-pattern"></div>
+      <div class="hero-breadcrumb">
+        <span class="msym" style="font-size:13px">gavel</span>
+        Закони та права
+        <span class="msym o" style="font-size:13px">chevron_right</span>
+        Право на подорожі
+      </div>
+      <div class="hero-icon"><span class="msym">flight</span></div>
+      <div class="hero-title">Право<br>на подорожі</div>
+      <div class="hero-sub">Шенген, повернення в Україну — що дозволено і що може зашкодити твоєму статусу</div>
+      <div class="hero-badge"><span class="msym" style="font-size:13px">check_circle</span> Безкоштовний контент</div>
+    </div>
+
+    <div class="content mt20">
+      <div class="travel-grid">
+        <div class="travel-card">
+          <div class="travel-icon green">✅</div>
+          <div>
+            <div class="travel-title">Подорожі по Шенгену</div>
+            <div class="travel-desc">З українським паспортом і W-документом ти можеш вільно пересуватися по всій Шенгенській зоні. Окрема віза не потрібна.</div>
+          </div>
+        </div>
+        <div class="travel-card">
+          <div class="travel-icon amber">⚠️</div>
+          <div>
+            <div class="travel-title">Поїздки в Україну</div>
+            <div class="travel-desc">Короткі візити — як правило, допустимі. Але тривале перебування може бути витлумачене як "добровільне повернення" і призвести до втрати статусу.</div>
+          </div>
+        </div>
+        <div class="travel-card">
+          <div class="travel-icon red">🛑</div>
+          <div>
+            <div class="travel-title">Якщо паспорт прострочений</div>
+            <div class="travel-desc">W-документ може використовуватися як проїзний документ всередині ЄС, але умови різняться залежно від країни — перевіряй заздалегідь.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="content mt20">
+      <div class="alert-box red">
+        <span class="msym">warning</span>
+        <div class="alert-text"><strong>Перед поїздкою в Україну — обов'язково проконсультуйся.</strong> Юридично "коротка поїздка" не визначена законом. IND може визнати тривале перебування в Україні підставою для скасування захисту. Зверніться до VluchtelingenWerk або Juridisch Loket перед відʼїздом.</div>
+      </div>
+    </div>
+
+    <div class="content mt24">
+      <div class="sec-label">Що взяти в дорогу</div>
+      <div class="info-card">
+        <strong>По Шенгену:</strong><br>
+        Український паспорт (або ID) + W-документ. Цього достатньо для перетину кордонів.<br><br>
+        <strong>В Україну:</strong><br>
+        Паспорт + W-документ. Переконайся, що W-документ дійсний — і що ти знаєш дату повернення назад до NL.<br><br>
+        <strong>Порада:</strong> Зроби скановані копії всіх документів і збережи їх у хмарі (Google Drive чи iCloud).
+      </div>
+    </div>
+
+    <div class="content mt24">
+      <div class="sec-label">Преміум контент</div>
+      <div class="premium-gate">
+        <div class="premium-blur">
+          <div class="pitem"><div class="pitem-dot"></div><div class="pitem-text">Як поновити прострочений паспорт через українське консульство в NL</div></div>
+          <div class="pitem"><div class="pitem-dot"></div><div class="pitem-text">Правила в'їзду до інших країн ЄС з W-документом — таблиця по країнах</div></div>
+          <div class="pitem"><div class="pitem-dot"></div><div class="pitem-text">Що робити, якщо тебе затримали на кордоні</div></div>
+        </div>
+        <div class="premium-overlay">
+          <div class="premium-icon"><span class="msym">lock</span></div>
+          <div class="premium-title">Преміум контент</div>
+          <div class="premium-sub">Таблиці, деталі документів, кордонні ситуації</div>
+          <button class="premium-btn">Відкрити за €4.99/міс</button>
+          <div class="premium-price">Перший місяць безкоштовно · <strong>Скасувати будь-коли</strong></div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <nav>
+    <a href="1final_colorful.html" class="nav-item active"><div class="nav-pill"><span class="msym">home</span></div><span class="nav-lbl">Головна</span></a>
+    <a href="#" class="nav-item"><div class="nav-pill"><span class="msym">explore</span></div><span class="nav-lbl">Огляд</span></a>
+    <a href="#" class="nav-item"><div class="nav-pill"><span class="msym">bookmark</span></div><span class="nav-lbl">Збережені</span></a>
+    <a href="#" class="nav-item"><div class="nav-pill"><span class="msym">person</span></div><span class="nav-lbl">Профіль</span></a>
+  </nav>
+</body>
+</html>

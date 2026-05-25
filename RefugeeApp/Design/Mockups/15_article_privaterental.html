@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Приватна оренда</title>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --blue: #0057B7; --yellow: #FCD400; --bg: #EFECE5; --card: #fff;
+      --text: #111827; --muted: #6B7280; --border: #DDD9D0;
+      --accent: #7C3AED; --accent-dark: #4C1D95; --accent-soft: #EDE9FE;
+      --green: #15803D; --green-soft: #DCFCE7;
+      --amber: #B45309; --amber-soft: #FEF3C7;
+      --red: #B91C1C; --red-soft: #FEE2E2;
+    }
+    body { font-family: 'Manrope', sans-serif; background: var(--bg); color: var(--text); max-width: 390px; margin: 0 auto; min-height: 100vh; }
+    .msym { font-family: 'Material Symbols Outlined'; font-variation-settings: 'FILL' 1,'wght' 400,'GRAD' 0,'opsz' 24; font-size: 22px; line-height: 1; }
+    .msym.o { font-variation-settings: 'FILL' 0,'wght' 400,'GRAD' 0,'opsz' 24; }
+    .flag-bar { height: 3px; background: linear-gradient(90deg, var(--blue) 50%, var(--yellow) 50%); }
+    header { background: var(--card); padding: 13px 18px; display: flex; align-items: center; gap: 12px; border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 50; }
+    .back-btn { width: 36px; height: 36px; border-radius: 50%; background: var(--bg); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; cursor: pointer; text-decoration: none; color: var(--text); flex-shrink: 0; }
+    .header-title { font-size: 15px; font-weight: 800; color: var(--text); flex: 1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .bookmark-btn { width: 36px; height: 36px; border-radius: 50%; background: var(--bg); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; cursor: pointer; color: var(--muted); flex-shrink: 0; }
+    main { padding-bottom: 100px; }
+    .hero { background: #3B0764; padding: 28px 20px 32px; position: relative; overflow: hidden; }
+    .hero-pattern { position: absolute; inset: 0; pointer-events: none; background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='20' cy='20' r='1.5' fill='%23ffffff' fill-opacity='0.06'/%3E%3C/svg%3E"); background-size: 40px; }
+    .hero-breadcrumb { display: flex; align-items: center; gap: 6px; font-size: 11px; font-weight: 700; color: rgba(255,255,255,0.4); margin-bottom: 14px; }
+    .hero-icon { width: 56px; height: 56px; border-radius: 18px; background: rgba(255,255,255,0.12); display: flex; align-items: center; justify-content: center; margin-bottom: 14px; }
+    .hero-icon .msym { font-size: 30px; color: #fff; }
+    .hero-title { font-size: 26px; font-weight: 900; color: #fff; letter-spacing: -0.7px; line-height: 1.2; margin-bottom: 8px; }
+    .hero-sub { font-size: 13px; color: rgba(255,255,255,0.55); font-weight: 500; line-height: 1.5; }
+    .hero-badge { display: inline-flex; align-items: center; gap: 5px; background: var(--green-soft); border-radius: 100px; padding: 4px 10px; font-size: 10px; font-weight: 800; color: var(--green); margin-top: 12px; }
+    .fact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 20px; }
+    .fact-item { background: rgba(255,255,255,0.1); border-radius: 14px; padding: 14px 12px; }
+    .fact-label { font-size: 10px; font-weight: 700; color: rgba(255,255,255,0.5); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 4px; }
+    .fact-value { font-size: 14px; font-weight: 900; color: #fff; line-height: 1.2; }
+    .content { padding: 0 18px; }
+    .mt16 { margin-top: 16px; } .mt20 { margin-top: 20px; } .mt24 { margin-top: 24px; }
+    .sec-label { font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.12em; color: var(--muted); margin-bottom: 12px; }
+    .info-box { border-radius: 16px; padding: 16px 18px; font-size: 13px; font-weight: 600; line-height: 1.6; }
+    .info-box.green { background: var(--green-soft); color: var(--green); border: 1px solid #BBF7D0; }
+    .info-box.amber { background: var(--amber-soft); color: var(--amber); border: 1px solid #FDE68A; }
+    .info-box.red { background: var(--red-soft); color: var(--red); border: 1px solid #FECACA; }
+    .info-box.accent { background: var(--accent-soft); color: var(--accent-dark); border: 1px solid #C4B5FD; }
+    .info-box-title { font-size: 12px; font-weight: 900; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 6px; }
+    .price-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .price-card { background: var(--card); border-radius: 14px; padding: 14px 12px; border: 1px solid var(--border); }
+    .price-city { font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); margin-bottom: 4px; }
+    .price-range { font-size: 15px; font-weight: 900; color: var(--text); line-height: 1.2; }
+    .price-sub { font-size: 10px; color: var(--muted); font-weight: 600; margin-top: 2px; }
+    .platform-list { display: flex; flex-direction: column; gap: 8px; }
+    .platform-item { background: var(--card); border-radius: 14px; padding: 12px 14px; border: 1px solid var(--border); display: flex; gap: 10px; align-items: center; }
+    .platform-emoji { font-size: 22px; flex-shrink: 0; }
+    .platform-name { font-size: 13px; font-weight: 800; color: var(--text); }
+    .platform-desc { font-size: 11px; color: var(--muted); font-weight: 500; margin-top: 2px; }
+    .bottom-nav { position: fixed; bottom: 0; left: 50%; transform: translateX(-50%); width: 100%; max-width: 390px; background: var(--card); border-top: 1px solid var(--border); display: flex; z-index: 100; }
+    .nav-item { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 10px 0 8px; gap: 3px; text-decoration: none; color: var(--muted); }
+    .nav-item span.label { font-size: 10px; font-weight: 700; }
+    .nav-item .msym { font-size: 24px; }
+    .fab { position: fixed; bottom: 72px; right: calc(50% - 195px + 14px); width: 52px; height: 52px; border-radius: 18px; background: var(--accent); box-shadow: 0 4px 16px rgba(124,58,237,0.35); display: flex; align-items: center; justify-content: center; z-index: 99; text-decoration: none; }
+    .fab .msym { color: #fff; font-size: 26px; }
+  </style>
+</head>
+<body>
+<div class="flag-bar"></div>
+<header>
+  <a href="15_housing.html" class="back-btn"><span class="msym o" style="font-size:20px;">arrow_back</span></a>
+  <span class="header-title">Приватна оренда</span>
+  <button class="bookmark-btn"><span class="msym o">bookmark</span></button>
+</header>
+<main>
+  <div class="hero">
+    <div class="hero-pattern"></div>
+    <div class="hero-breadcrumb">
+      <span>Житло</span>
+      <span class="msym o" style="font-size:13px;">chevron_right</span>
+      <span>Приватна оренда</span>
+    </div>
+    <div class="hero-icon"><span class="msym">key</span></div>
+    <div class="hero-title">Приватна оренда</div>
+    <div class="hero-sub">Ціни, платформи і на що звертати увагу при підписанні договору</div>
+    <div class="hero-badge"><span class="msym" style="font-size:14px;">check_circle</span> Безкоштовно</div>
+    <div class="fact-grid">
+      <div class="fact-item">
+        <div class="fact-label">Середня ціна</div>
+        <div class="fact-value">€1,838/міс</div>
+      </div>
+      <div class="fact-item">
+        <div class="fact-label">Макс. депозит</div>
+        <div class="fact-value">2 міс. оренди</div>
+      </div>
+      <div class="fact-item">
+        <div class="fact-label">Потрібний дохід</div>
+        <div class="fact-value">3× оренди</div>
+      </div>
+      <div class="fact-item">
+        <div class="fact-label">Дискримінація</div>
+        <div class="fact-value">Заборонена ✅</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="content">
+    <div class="mt20">
+      <div class="sec-label">Ціни по містах (2025)</div>
+      <div class="price-grid">
+        <div class="price-card">
+          <div class="price-city">Амстердам</div>
+          <div class="price-range">€1,500–2,500+</div>
+          <div class="price-sub">за місяць</div>
+        </div>
+        <div class="price-card">
+          <div class="price-city">Роттердам</div>
+          <div class="price-range">€1,200–1,800</div>
+          <div class="price-sub">за місяць</div>
+        </div>
+        <div class="price-card">
+          <div class="price-city">Ден Хааг</div>
+          <div class="price-range">€1,200–1,700</div>
+          <div class="price-sub">за місяць</div>
+        </div>
+        <div class="price-card">
+          <div class="price-city">Малі міста</div>
+          <div class="price-range">€900–1,400</div>
+          <div class="price-sub">за місяць</div>
+        </div>
+      </div>
+      <div style="margin-top:8px; font-size:11px; color:var(--muted); font-weight:600; padding:0 2px;">
+        Для отримання huurtoeslag оренда має бути до €900.07/місяць (вік 23+)
+      </div>
+    </div>
+
+    <div class="mt24">
+      <div class="sec-label">Надійні платформи для пошуку</div>
+      <div class="platform-list">
+        <div class="platform-item">
+          <div class="platform-emoji">🏠</div>
+          <div>
+            <div class="platform-name">Funda.nl</div>
+            <div class="platform-desc">Найбільша платформа Нідерландів. Квартири від агентів.</div>
+          </div>
+        </div>
+        <div class="platform-item">
+          <div class="platform-emoji">🔑</div>
+          <div>
+            <div class="platform-name">Pararius.nl</div>
+            <div class="platform-desc">Квартири від приватних власників та агентів.</div>
+          </div>
+        </div>
+        <div class="platform-item">
+          <div class="platform-emoji">🛏️</div>
+          <div>
+            <div class="platform-name">Kamernet.nl</div>
+            <div class="platform-desc">Кімнати та спільне житло — дешевший варіант</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="info-box red mt20">
+      <div class="info-box-title">🚫 Уникай — високий ризик шахрайства</div>
+      Facebook Marketplace і Marktplaats — найпоширеніші місця для шахраїв. Ніколи не переказуй депозит без підписаного договору і особистого огляду квартири.
+    </div>
+
+    <div class="info-box green mt16">
+      <div class="info-box-title">Дискримінація заборонена</div>
+      За нідерландським законом орендодавець не може відмовити тобі через національність або статус резидента. З 2024 року є офіційні пункти скарг у кожному муніципалітеті. Якщо тебе дискримінували — повідом в <strong>Melding.nl</strong>.
+    </div>
+
+    <div class="info-box amber mt16" style="margin-bottom:16px;">
+      <div class="info-box-title">⚠️ Вимога до доходу</div>
+      Більшість орендодавців вимагають офіційний дохід 3× місячної орендної плати. Якщо ти тільки починаєш працювати — спочатку розглядай менші міста або кімнату в квартирі.
+    </div>
+  </div>
+</main>
+<a href="#" class="fab"><span class="msym">chat</span></a>
+<nav class="bottom-nav">
+  <a href="1final_colorful.html" class="nav-item"><span class="msym o">home</span><span class="label">Головна</span></a>
+  <a href="#" class="nav-item"><span class="msym o">explore</span><span class="label">Пошук</span></a>
+  <a href="#" class="nav-item"><span class="msym o">bookmark</span><span class="label">Збережені</span></a>
+  <a href="#" class="nav-item"><span class="msym o">person</span><span class="label">Профіль</span></a>
+</nav>
+</body>
+</html>

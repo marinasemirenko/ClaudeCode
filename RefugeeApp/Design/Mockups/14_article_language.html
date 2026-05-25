@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Курси нідерландської</title>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --blue: #0057B7; --yellow: #FCD400; --bg: #EFECE5; --card: #fff;
+      --text: #111827; --muted: #6B7280; --border: #DDD9D0;
+      --accent: #0D9488; --accent-dark: #115E59; --accent-soft: #CCFBF1;
+      --green: #15803D; --green-soft: #DCFCE7;
+      --amber: #B45309; --amber-soft: #FEF3C7;
+    }
+    body { font-family: 'Manrope', sans-serif; background: var(--bg); color: var(--text); max-width: 390px; margin: 0 auto; min-height: 100vh; }
+    .msym { font-family: 'Material Symbols Outlined'; font-variation-settings: 'FILL' 1,'wght' 400,'GRAD' 0,'opsz' 24; font-size: 22px; line-height: 1; }
+    .msym.o { font-variation-settings: 'FILL' 0,'wght' 400,'GRAD' 0,'opsz' 24; }
+    .flag-bar { height: 3px; background: linear-gradient(90deg, var(--blue) 50%, var(--yellow) 50%); }
+    header { background: var(--card); padding: 13px 18px; display: flex; align-items: center; gap: 12px; border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 50; }
+    .back-btn { width: 36px; height: 36px; border-radius: 50%; background: var(--bg); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; cursor: pointer; text-decoration: none; color: var(--text); flex-shrink: 0; }
+    .header-title { font-size: 15px; font-weight: 800; color: var(--text); flex: 1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .bookmark-btn { width: 36px; height: 36px; border-radius: 50%; background: var(--bg); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; cursor: pointer; color: var(--muted); flex-shrink: 0; }
+    main { padding-bottom: 100px; }
+    .hero { background: #1A3042; padding: 28px 20px 32px; position: relative; overflow: hidden; }
+    .hero-pattern { position: absolute; inset: 0; pointer-events: none; background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='20' cy='20' r='1.5' fill='%23ffffff' fill-opacity='0.06'/%3E%3C/svg%3E"); background-size: 40px; }
+    .hero-breadcrumb { display: flex; align-items: center; gap: 6px; font-size: 11px; font-weight: 700; color: rgba(255,255,255,0.4); margin-bottom: 14px; }
+    .hero-icon { width: 56px; height: 56px; border-radius: 18px; background: rgba(255,255,255,0.12); display: flex; align-items: center; justify-content: center; margin-bottom: 14px; }
+    .hero-icon .msym { font-size: 30px; color: #fff; }
+    .hero-title { font-size: 26px; font-weight: 900; color: #fff; letter-spacing: -0.7px; line-height: 1.2; margin-bottom: 8px; }
+    .hero-sub { font-size: 13px; color: rgba(255,255,255,0.55); font-weight: 500; line-height: 1.5; }
+    .hero-badge { display: inline-flex; align-items: center; gap: 5px; background: var(--green-soft); border-radius: 100px; padding: 4px 10px; font-size: 10px; font-weight: 800; color: var(--green); margin-top: 12px; }
+    .content { padding: 0 18px; }
+    .mt16 { margin-top: 16px; } .mt20 { margin-top: 20px; } .mt24 { margin-top: 24px; }
+    .sec-label { font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.12em; color: var(--muted); margin-bottom: 12px; }
+    .info-box { border-radius: 16px; padding: 16px 18px; font-size: 13px; font-weight: 600; line-height: 1.6; }
+    .info-box.green { background: var(--green-soft); color: var(--green); border: 1px solid #BBF7D0; }
+    .info-box.amber { background: var(--amber-soft); color: var(--amber); border: 1px solid #FDE68A; }
+    .info-box.accent { background: var(--accent-soft); color: var(--accent-dark); border: 1px solid #99F6E4; }
+    .info-box-title { font-size: 12px; font-weight: 900; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 6px; }
+    .info-card { background: var(--card); border-radius: 16px; padding: 16px; box-shadow: 0 1px 3px rgba(0,0,0,0.06); border: 1px solid var(--border); }
+    .route-card { background: var(--card); border-radius: 16px; padding: 16px; border: 1px solid var(--border); margin-bottom: 10px; }
+    .route-header { display: flex; align-items: center; gap: 10px; margin-bottom: 6px; }
+    .route-tag { padding: 3px 10px; border-radius: 100px; font-size: 10px; font-weight: 800; }
+    .tag-teal { background: var(--accent-soft); color: var(--accent-dark); }
+    .tag-green { background: var(--green-soft); color: var(--green); }
+    .tag-amber { background: var(--amber-soft); color: var(--amber); }
+    .route-title { font-size: 14px; font-weight: 800; color: var(--text); }
+    .route-level { font-size: 11px; font-weight: 700; color: var(--muted); }
+    .route-desc { font-size: 12px; color: var(--muted); font-weight: 500; line-height: 1.5; margin-top: 4px; }
+    .free-list { display: flex; flex-direction: column; gap: 8px; }
+    .free-item { background: var(--card); border-radius: 14px; padding: 13px 14px; border: 1px solid var(--border); display: flex; gap: 10px; align-items: flex-start; }
+    .free-emoji { font-size: 20px; flex-shrink: 0; }
+    .free-title { font-size: 13px; font-weight: 800; color: var(--text); margin-bottom: 2px; }
+    .free-desc { font-size: 12px; color: var(--muted); font-weight: 500; line-height: 1.4; }
+    .bottom-nav { position: fixed; bottom: 0; left: 50%; transform: translateX(-50%); width: 100%; max-width: 390px; background: var(--card); border-top: 1px solid var(--border); display: flex; z-index: 100; }
+    .nav-item { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 10px 0 8px; gap: 3px; text-decoration: none; color: var(--muted); }
+    .nav-item span.label { font-size: 10px; font-weight: 700; }
+    .nav-item .msym { font-size: 24px; }
+    .fab { position: fixed; bottom: 72px; right: calc(50% - 195px + 14px); width: 52px; height: 52px; border-radius: 18px; background: var(--accent); box-shadow: 0 4px 16px rgba(13,148,136,0.35); display: flex; align-items: center; justify-content: center; z-index: 99; text-decoration: none; }
+    .fab .msym { color: #fff; font-size: 26px; }
+  </style>
+</head>
+<body>
+<div class="flag-bar"></div>
+<header>
+  <a href="14_education.html" class="back-btn"><span class="msym o" style="font-size:20px;">arrow_back</span></a>
+  <span class="header-title">Курси нідерландської</span>
+  <button class="bookmark-btn"><span class="msym o">bookmark</span></button>
+</header>
+<main>
+  <div class="hero">
+    <div class="hero-pattern"></div>
+    <div class="hero-breadcrumb">
+      <span>Освіта</span>
+      <span class="msym o" style="font-size:13px;">chevron_right</span>
+      <span>Мова</span>
+    </div>
+    <div class="hero-icon"><span class="msym">record_voice_over</span></div>
+    <div class="hero-title">Курси нідерландської</div>
+    <div class="hero-sub">NT2, ROC та безкоштовні варіанти — де і як вчити мову</div>
+    <div class="hero-badge"><span class="msym" style="font-size:14px;">check_circle</span> Безкоштовно</div>
+  </div>
+
+  <div class="content">
+    <div class="info-box green mt20">
+      <div class="info-box-title">Добра новина</div>
+      Як власник W-document ти НЕ зобов'язаний проходити інтеграційний курс (інбюргерінг) — але дуже рекомендується. Мова — головний ключ до роботи і нормального життя тут.
+    </div>
+
+    <div class="mt24">
+      <div class="sec-label">Три офіційні маршрути NT2</div>
+
+      <div class="route-card">
+        <div class="route-header">
+          <span class="route-tag tag-teal">B1-маршрут</span>
+          <span class="route-level">Ціль: рівень B1</span>
+        </div>
+        <div class="route-title">Стандартний курс</div>
+        <div class="route-desc">Нідерландська до рівня B1 + іспит "Kennis van de Nederlandse Maatschappij" (знання нідерландського суспільства). Муніципалітет оплачує для зобов'язаних — добровільно можна записатись самостійно через ROC.</div>
+      </div>
+
+      <div class="route-card">
+        <div class="route-header">
+          <span class="route-tag tag-green">Освітній маршрут</span>
+          <span class="route-level">Ціль: B1 або B2</span>
+        </div>
+        <div class="route-title">Для тих, хто хоче вчитися далі</div>
+        <div class="route-desc">Поєднує вивчення мови з підготовкою до MBO, HBO або університету. Рівень B2 відкриє двері до голландськомовних програм вищої освіти.</div>
+      </div>
+
+      <div class="route-card">
+        <div class="route-header">
+          <span class="route-tag tag-amber">Z-маршрут</span>
+          <span class="route-level">Ціль: рівень A1</span>
+        </div>
+        <div class="route-title">Для тих, кому важко навчатися</div>
+        <div class="route-desc">Щонайменше 800 годин мови + 800 годин практичних активностей. Без формального іспиту. Муніципалітет призначає цей маршрут після оцінки.</div>
+      </div>
+    </div>
+
+    <div class="mt24">
+      <div class="sec-label">Де вчити нідерландську безкоштовно</div>
+      <div class="free-list">
+        <div class="free-item">
+          <div class="free-emoji">🏫</div>
+          <div>
+            <div class="free-title">ROC (Регіональний освітній центр)</div>
+            <div class="free-desc">Найпоширеніший варіант. Структуровані курси NT2. Знайди свій ROC на roc.nl. Безкоштовно для направлених муніципалітетом.</div>
+          </div>
+        </div>
+        <div class="free-item">
+          <div class="free-emoji">🏛️</div>
+          <div>
+            <div class="free-title">Бібліотека (Bibliotheek)</div>
+            <div class="free-desc">Розмовні кафе, практичні групи, безкоштовні підручники та е-книги. Ідеально для початківців і тренування розмовної мови.</div>
+          </div>
+        </div>
+        <div class="free-item">
+          <div class="free-emoji">👥</div>
+          <div>
+            <div class="free-title">Het Begint met Taal</div>
+            <div class="free-desc">Безкоштовна програма "мовний партнер": волонтер-нідерландець практикує мову з тобою 1 на 1. hetbegintmettaal.nl</div>
+          </div>
+        </div>
+        <div class="free-item">
+          <div class="free-emoji">📱</div>
+          <div>
+            <div class="free-title">Додаток Karibu</div>
+            <div class="free-desc">Безкоштовний додаток для вивчення нідерландської в телефоні. Є уроки для початківців і аудіо вимова.</div>
+          </div>
+        </div>
+        <div class="free-item">
+          <div class="free-emoji">🎓</div>
+          <div>
+            <div class="free-title">Gemeente — безкоштовні заняття</div>
+            <div class="free-desc">Багато муніципалітетів пропонують безкоштовні вступні курси нідерландської для власників W-document. Запитай у своєму gemeente.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="info-box amber mt20">
+      <div class="info-box-title">⚠️ Важлива зміна планується</div>
+      Нідерландський уряд обіцяє уточнити правила інтеграції для власників TPD навесні 2026. Якщо ти отримаєш постійний дозвіл на проживання після 2027 — курс, скоріш за все, стане обов'язковим.
+    </div>
+
+    <div class="info-box accent mt16" style="margin-bottom:16px;">
+      <div class="info-box-title">Порада</div>
+      Якщо тобі 18–30 років і ти навчаєшся в MBO — ти можеш подати на звільнення від оплати навчального внеску (lesgeld). Строк: до 31 липня навчального року.
+    </div>
+  </div>
+</main>
+<a href="#" class="fab"><span class="msym">chat</span></a>
+<nav class="bottom-nav">
+  <a href="1final_colorful.html" class="nav-item"><span class="msym o">home</span><span class="label">Головна</span></a>
+  <a href="#" class="nav-item"><span class="msym o">explore</span><span class="label">Пошук</span></a>
+  <a href="#" class="nav-item"><span class="msym o">bookmark</span><span class="label">Збережені</span></a>
+  <a href="#" class="nav-item"><span class="msym o">person</span><span class="label">Профіль</span></a>
+</nav>
+</body>
+</html>

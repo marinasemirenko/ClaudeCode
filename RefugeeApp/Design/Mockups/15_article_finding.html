@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Як знайти квартиру</title>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --blue: #0057B7; --yellow: #FCD400; --bg: #EFECE5; --card: #fff;
+      --text: #111827; --muted: #6B7280; --border: #DDD9D0;
+      --accent: #7C3AED; --accent-dark: #4C1D95; --accent-soft: #EDE9FE;
+      --green: #15803D; --green-soft: #DCFCE7;
+      --amber: #B45309; --amber-soft: #FEF3C7;
+      --red: #B91C1C; --red-soft: #FEE2E2;
+      --premium: #7C3AED; --premium-soft: #EDE9FE;
+    }
+    body { font-family: 'Manrope', sans-serif; background: var(--bg); color: var(--text); max-width: 390px; margin: 0 auto; min-height: 100vh; }
+    .msym { font-family: 'Material Symbols Outlined'; font-variation-settings: 'FILL' 1,'wght' 400,'GRAD' 0,'opsz' 24; font-size: 22px; line-height: 1; }
+    .msym.o { font-variation-settings: 'FILL' 0,'wght' 400,'GRAD' 0,'opsz' 24; }
+    .flag-bar { height: 3px; background: linear-gradient(90deg, var(--blue) 50%, var(--yellow) 50%); }
+    header { background: var(--card); padding: 13px 18px; display: flex; align-items: center; gap: 12px; border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 50; }
+    .back-btn { width: 36px; height: 36px; border-radius: 50%; background: var(--bg); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; cursor: pointer; text-decoration: none; color: var(--text); flex-shrink: 0; }
+    .header-title { font-size: 15px; font-weight: 800; color: var(--text); flex: 1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .bookmark-btn { width: 36px; height: 36px; border-radius: 50%; background: var(--bg); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; cursor: pointer; color: var(--muted); flex-shrink: 0; }
+    main { padding-bottom: 100px; }
+    .hero { background: #2D1654; padding: 28px 20px 32px; position: relative; overflow: hidden; }
+    .hero-pattern { position: absolute; inset: 0; pointer-events: none; background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='20' cy='20' r='1.5' fill='%23ffffff' fill-opacity='0.06'/%3E%3C/svg%3E"); background-size: 40px; }
+    .hero-breadcrumb { display: flex; align-items: center; gap: 6px; font-size: 11px; font-weight: 700; color: rgba(255,255,255,0.4); margin-bottom: 14px; }
+    .hero-icon { width: 56px; height: 56px; border-radius: 18px; background: rgba(255,255,255,0.12); display: flex; align-items: center; justify-content: center; margin-bottom: 14px; }
+    .hero-icon .msym { font-size: 30px; color: #fff; }
+    .hero-title { font-size: 26px; font-weight: 900; color: #fff; letter-spacing: -0.7px; line-height: 1.2; margin-bottom: 8px; }
+    .hero-sub { font-size: 13px; color: rgba(255,255,255,0.55); font-weight: 500; line-height: 1.5; }
+    .hero-badge { display: inline-flex; align-items: center; gap: 5px; background: var(--premium-soft); border-radius: 100px; padding: 4px 10px; font-size: 10px; font-weight: 800; color: var(--premium); margin-top: 12px; }
+    .content { padding: 0 18px; }
+    .mt16 { margin-top: 16px; } .mt20 { margin-top: 20px; } .mt24 { margin-top: 24px; }
+    .sec-label { font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.12em; color: var(--muted); margin-bottom: 12px; }
+    .info-box { border-radius: 16px; padding: 16px 18px; font-size: 13px; font-weight: 600; line-height: 1.6; }
+    .info-box.green { background: var(--green-soft); color: var(--green); border: 1px solid #BBF7D0; }
+    .info-box.amber { background: var(--amber-soft); color: var(--amber); border: 1px solid #FDE68A; }
+    .info-box-title { font-size: 12px; font-weight: 900; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 6px; }
+    .info-card { background: var(--card); border-radius: 16px; padding: 16px; box-shadow: 0 1px 3px rgba(0,0,0,0.06); border: 1px solid var(--border); }
+    .steps { display: flex; flex-direction: column; gap: 0; }
+    .step { display: flex; gap: 14px; align-items: flex-start; padding: 14px 0; border-bottom: 1px solid var(--border); }
+    .step:last-child { border-bottom: none; }
+    .step-num { width: 30px; height: 30px; border-radius: 10px; background: var(--accent); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 900; flex-shrink: 0; margin-top: 1px; }
+    .step-title { font-size: 14px; font-weight: 800; color: var(--text); margin-bottom: 3px; }
+    .step-desc { font-size: 12px; color: var(--muted); font-weight: 500; line-height: 1.5; }
+    /* Premium gate */
+    .premium-gate { position: relative; }
+    .premium-blur { filter: blur(4px); pointer-events: none; user-select: none; }
+    .premium-overlay { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; background: linear-gradient(to bottom, rgba(239,236,229,0) 0%, rgba(239,236,229,0.97) 30%); padding: 24px 20px; }
+    .premium-card { background: #fff; border-radius: 20px; padding: 22px 20px; box-shadow: 0 8px 32px rgba(124,58,237,0.15); border: 1px solid var(--premium-soft); width: 100%; text-align: center; }
+    .lock-icon { width: 48px; height: 48px; border-radius: 16px; background: var(--premium-soft); display: flex; align-items: center; justify-content: center; margin: 0 auto 12px; }
+    .lock-icon .msym { color: var(--premium); font-size: 26px; }
+    .premium-title { font-size: 16px; font-weight: 900; color: var(--text); margin-bottom: 6px; }
+    .premium-desc { font-size: 12px; color: var(--muted); font-weight: 500; line-height: 1.5; margin-bottom: 16px; }
+    .premium-btn { display: block; background: var(--premium); color: #fff; border-radius: 14px; padding: 14px; font-size: 14px; font-weight: 900; text-align: center; text-decoration: none; }
+    .premium-price { font-size: 11px; color: var(--muted); font-weight: 500; margin-top: 8px; }
+    .bottom-nav { position: fixed; bottom: 0; left: 50%; transform: translateX(-50%); width: 100%; max-width: 390px; background: var(--card); border-top: 1px solid var(--border); display: flex; z-index: 100; }
+    .nav-item { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 10px 0 8px; gap: 3px; text-decoration: none; color: var(--muted); }
+    .nav-item span.label { font-size: 10px; font-weight: 700; }
+    .nav-item .msym { font-size: 24px; }
+    .fab { position: fixed; bottom: 72px; right: calc(50% - 195px + 14px); width: 52px; height: 52px; border-radius: 18px; background: var(--accent); box-shadow: 0 4px 16px rgba(124,58,237,0.35); display: flex; align-items: center; justify-content: center; z-index: 99; text-decoration: none; }
+    .fab .msym { color: #fff; font-size: 26px; }
+  </style>
+</head>
+<body>
+<div class="flag-bar"></div>
+<header>
+  <a href="15_housing.html" class="back-btn"><span class="msym o" style="font-size:20px;">arrow_back</span></a>
+  <span class="header-title">Як знайти квартиру</span>
+  <button class="bookmark-btn"><span class="msym o">bookmark</span></button>
+</header>
+<main>
+  <div class="hero">
+    <div class="hero-pattern"></div>
+    <div class="hero-breadcrumb">
+      <span>Житло</span>
+      <span class="msym o" style="font-size:13px;">chevron_right</span>
+      <span>Пошук</span>
+    </div>
+    <div class="hero-icon"><span class="msym">search_home</span></div>
+    <div class="hero-title">Як знайти квартиру</div>
+    <div class="hero-sub">Покрокова стратегія пошуку, уникнення шахраїв і ведення переговорів</div>
+    <div class="hero-badge"><span class="msym" style="font-size:14px;">lock</span> Преміум</div>
+  </div>
+
+  <div class="content">
+    <div class="info-box green mt20">
+      <div class="info-box-title">З чого почати</div>
+      Ринок оренди в Нідерландах дуже конкурентний. Хороша квартира зникає за кілька годин. Успіх — це підготовка і швидкість реакції.
+    </div>
+
+    <div class="mt24">
+      <div class="sec-label">Перші кроки (безкоштовно)</div>
+      <div class="info-card">
+        <div class="steps">
+          <div class="step">
+            <div class="step-num">1</div>
+            <div>
+              <div class="step-title">Визнач бюджет і місто</div>
+              <div class="step-desc">Малі міста — дешевше і менша конкуренція. Якщо робота дозволяє — розглянь Тілбург, Бреда, Зволле, Арнем.</div>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">2</div>
+            <div>
+              <div class="step-title">Підготуй документи заздалегідь</div>
+              <div class="step-desc">Зарплатні листки (3 останніх), виписка з банку, W-document, диплом або CV — все готово, щоб відправити за 10 хвилин</div>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">3</div>
+            <div>
+              <div class="step-title">Реєструйся на Funda та Pararius</div>
+              <div class="step-desc">Увімкни сповіщення — нові об'єкти з'являються щодня. Реагуй протягом 1–2 годин після публікації.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PREMIUM GATE -->
+    <div class="premium-gate mt24" style="min-height:520px;">
+      <div class="premium-blur">
+        <div class="sec-label">Стратегія успішного пошуку</div>
+        <div class="info-card">
+          <div class="steps">
+            <div class="step">
+              <div class="step-num">4</div>
+              <div>
+                <div class="step-title">Як написати переконливого листа орендодавцю</div>
+                <div class="step-desc">Шаблон мотиваційного листа, що підвищує шанси на відповідь</div>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-num">5</div>
+              <div>
+                <div class="step-title">Перевірка договору перед підписанням</div>
+                <div class="step-desc">10 пунктів, які обов'язково перевірити — чого не підписувати</div>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-num">6</div>
+              <div>
+                <div class="step-title">Як розпізнати шахрайство</div>
+                <div class="step-desc">5 ознак фейкового оголошення і що робити, якщо вже переказав гроші</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="info-box amber" style="margin-top:12px;">
+          <div class="info-box-title">Переговори про оренду</div>
+          Деталі про те, що реально можна знизити і як домовитись про умови договору.
+        </div>
+      </div>
+      <div class="premium-overlay">
+        <div class="premium-card">
+          <div class="lock-icon"><span class="msym">lock</span></div>
+          <div class="premium-title">Повна стратегія пошуку</div>
+          <div class="premium-desc">Шаблон листа, чек-лист договору, ознаки шахрайства і тактика переговорів</div>
+          <a href="#" class="premium-btn">Отримати Преміум</a>
+          <div class="premium-price">€4.99 / місяць · Скасувати будь-коли</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="info-box amber mt24" style="margin-bottom:16px;">
+      <div class="info-box-title">⚠️ Основне правило</div>
+      Ніколи не переказуй депозит або орендну плату до підписання договору і особистого огляду квартири. Якщо просять — це шахрайство.
+    </div>
+  </div>
+</main>
+<a href="#" class="fab"><span class="msym">chat</span></a>
+<nav class="bottom-nav">
+  <a href="1final_colorful.html" class="nav-item"><span class="msym o">home</span><span class="label">Головна</span></a>
+  <a href="#" class="nav-item"><span class="msym o">explore</span><span class="label">Пошук</span></a>
+  <a href="#" class="nav-item"><span class="msym o">bookmark</span><span class="label">Збережені</span></a>
+  <a href="#" class="nav-item"><span class="msym o">person</span><span class="label">Профіль</span></a>
+</nav>
+</body>
+</html>

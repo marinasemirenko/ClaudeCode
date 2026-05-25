@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Що буде після закінчення захисту</title>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --blue: #0057B7; --yellow: #FCD400; --bg: #EFECE5; --card: #fff;
+      --text: #111827; --muted: #6B7280; --border: #DDD9D0;
+      --accent: #4F46E5; --accent-dark: #3730A3; --accent-soft: #EEF2FF;
+      --green: #15803D; --green-soft: #DCFCE7;
+      --amber: #B45309; --amber-soft: #FEF3C7;
+      --red: #B91C1C; --red-soft: #FEE2E2;
+      --premium: #7C3AED; --premium-soft: #EDE9FE;
+    }
+    body { font-family: 'Manrope', sans-serif; background: var(--bg); color: var(--text); max-width: 390px; margin: 0 auto; min-height: 100vh; }
+    .msym { font-family: 'Material Symbols Outlined'; font-variation-settings: 'FILL' 1,'wght' 400,'GRAD' 0,'opsz' 24; font-size: 22px; line-height: 1; }
+    .msym.o { font-variation-settings: 'FILL' 0,'wght' 400,'GRAD' 0,'opsz' 24; }
+    .flag-bar { height: 3px; background: linear-gradient(90deg, var(--blue) 50%, var(--yellow) 50%); }
+    header { background: var(--card); padding: 13px 18px; display: flex; align-items: center; gap: 12px; border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 50; }
+    .back-btn { width: 36px; height: 36px; border-radius: 50%; background: var(--bg); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; cursor: pointer; text-decoration: none; color: var(--text); flex-shrink: 0; }
+    .header-title { font-size: 15px; font-weight: 800; color: var(--text); flex: 1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .bookmark-btn { width: 36px; height: 36px; border-radius: 50%; background: var(--bg); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; cursor: pointer; color: var(--muted); flex-shrink: 0; }
+    main { padding-bottom: 100px; }
+    .hero { background: #1C1917; padding: 28px 20px 32px; position: relative; overflow: hidden; }
+    .hero-pattern { position: absolute; inset: 0; pointer-events: none; background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='20' cy='20' r='1.5' fill='%23ffffff' fill-opacity='0.06'/%3E%3C/svg%3E"); background-size: 40px; }
+    .hero-breadcrumb { display: flex; align-items: center; gap: 6px; font-size: 11px; font-weight: 700; color: rgba(255,255,255,0.4); margin-bottom: 14px; }
+    .hero-icon { width: 56px; height: 56px; border-radius: 18px; background: rgba(255,255,255,0.12); display: flex; align-items: center; justify-content: center; margin-bottom: 14px; }
+    .hero-icon .msym { font-size: 30px; color: #fff; }
+    .hero-title { font-size: 26px; font-weight: 900; color: #fff; letter-spacing: -0.7px; line-height: 1.2; margin-bottom: 8px; }
+    .hero-sub { font-size: 13px; color: rgba(255,255,255,0.55); font-weight: 500; line-height: 1.5; }
+    .hero-badge { display: inline-flex; align-items: center; gap: 5px; background: var(--premium-soft); border-radius: 100px; padding: 4px 10px; font-size: 10px; font-weight: 800; color: var(--premium); margin-top: 12px; }
+    .content { padding: 0 18px; }
+    .mt16 { margin-top: 16px; } .mt20 { margin-top: 20px; } .mt24 { margin-top: 24px; }
+    .sec-label { font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.12em; color: var(--muted); margin-bottom: 12px; }
+    .info-box { border-radius: 16px; padding: 16px 18px; font-size: 13px; font-weight: 600; line-height: 1.6; }
+    .info-box.green { background: var(--green-soft); color: var(--green); border: 1px solid #BBF7D0; }
+    .info-box.amber { background: var(--amber-soft); color: var(--amber); border: 1px solid #FDE68A; }
+    .info-box.red { background: var(--red-soft); color: var(--red); border: 1px solid #FECACA; }
+    .info-box.accent { background: var(--accent-soft); color: var(--accent-dark); border: 1px solid #C7D2FE; }
+    .info-box-title { font-size: 12px; font-weight: 900; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 6px; }
+    .info-card { background: var(--card); border-radius: 16px; padding: 16px; box-shadow: 0 1px 3px rgba(0,0,0,0.06); border: 1px solid var(--border); }
+    .timeline { display: flex; flex-direction: column; gap: 0; position: relative; }
+    .timeline-item { display: flex; gap: 14px; padding: 16px 0; border-bottom: 1px solid var(--border); position: relative; }
+    .timeline-item:last-child { border-bottom: none; }
+    .timeline-dot { width: 36px; height: 36px; border-radius: 12px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .timeline-dot.blue { background: #DBEAFE; }
+    .timeline-dot.blue .msym { color: #1D4ED8; }
+    .timeline-dot.green { background: var(--green-soft); }
+    .timeline-dot.green .msym { color: var(--green); }
+    .timeline-dot.amber { background: var(--amber-soft); }
+    .timeline-dot.amber .msym { color: var(--amber); }
+    .timeline-dot.purple { background: var(--premium-soft); }
+    .timeline-dot.purple .msym { color: var(--premium); }
+    .timeline-date { font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); margin-bottom: 3px; }
+    .timeline-title { font-size: 14px; font-weight: 800; color: var(--text); margin-bottom: 3px; }
+    .timeline-desc { font-size: 12px; color: var(--muted); font-weight: 500; line-height: 1.5; }
+    .option-card { background: var(--card); border-radius: 16px; padding: 16px; border: 1px solid var(--border); margin-bottom: 10px; }
+    .option-title { font-size: 14px; font-weight: 800; color: var(--text); margin-bottom: 4px; }
+    .option-desc { font-size: 12px; color: var(--muted); font-weight: 500; line-height: 1.5; }
+    .option-badge { display: inline-block; padding: 2px 8px; border-radius: 100px; font-size: 10px; font-weight: 800; margin-top: 8px; }
+    .badge-green { background: var(--green-soft); color: var(--green); }
+    .badge-amber { background: var(--amber-soft); color: var(--amber); }
+    .badge-blue { background: #DBEAFE; color: #1D4ED8; }
+    /* Premium gate */
+    .premium-gate { position: relative; }
+    .premium-blur { filter: blur(4px); pointer-events: none; user-select: none; }
+    .premium-overlay { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; background: linear-gradient(to bottom, rgba(239,236,229,0) 0%, rgba(239,236,229,0.97) 30%); padding: 24px 20px; }
+    .premium-card { background: #fff; border-radius: 20px; padding: 22px 20px; box-shadow: 0 8px 32px rgba(124,58,237,0.15); border: 1px solid var(--premium-soft); width: 100%; text-align: center; }
+    .lock-icon { width: 48px; height: 48px; border-radius: 16px; background: var(--premium-soft); display: flex; align-items: center; justify-content: center; margin: 0 auto 12px; }
+    .lock-icon .msym { color: var(--premium); font-size: 26px; }
+    .premium-title { font-size: 16px; font-weight: 900; color: var(--text); margin-bottom: 6px; }
+    .premium-desc { font-size: 12px; color: var(--muted); font-weight: 500; line-height: 1.5; margin-bottom: 16px; }
+    .premium-btn { display: block; background: var(--premium); color: #fff; border-radius: 14px; padding: 14px; font-size: 14px; font-weight: 900; text-align: center; text-decoration: none; }
+    .premium-price { font-size: 11px; color: var(--muted); font-weight: 500; margin-top: 8px; }
+    /* Bottom nav */
+    .bottom-nav { position: fixed; bottom: 0; left: 50%; transform: translateX(-50%); width: 100%; max-width: 390px; background: var(--card); border-top: 1px solid var(--border); display: flex; z-index: 100; padding-bottom: env(safe-area-inset-bottom, 0); }
+    .nav-item { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 10px 0 8px; gap: 3px; text-decoration: none; color: var(--muted); }
+    .nav-item.active { color: var(--blue); }
+    .nav-item span.label { font-size: 10px; font-weight: 700; }
+    .nav-item .msym { font-size: 24px; }
+    .fab { position: fixed; bottom: 72px; right: calc(50% - 195px + 14px); width: 52px; height: 52px; border-radius: 18px; background: var(--accent); box-shadow: 0 4px 16px rgba(79,70,229,0.35); display: flex; align-items: center; justify-content: center; z-index: 99; text-decoration: none; }
+    .fab .msym { color: #fff; font-size: 26px; }
+  </style>
+</head>
+<body>
+
+<div class="flag-bar"></div>
+
+<header>
+  <a href="13_laws.html" class="back-btn"><span class="msym o" style="font-size:20px;">arrow_back</span></a>
+  <span class="header-title">Що буде після захисту</span>
+  <button class="bookmark-btn"><span class="msym o">bookmark</span></button>
+</header>
+
+<main>
+  <div class="hero">
+    <div class="hero-pattern"></div>
+    <div class="hero-breadcrumb">
+      <span>Права та закони</span>
+      <span class="msym o" style="font-size:13px;">chevron_right</span>
+      <span>Майбутнє</span>
+    </div>
+    <div class="hero-icon"><span class="msym">update</span></div>
+    <div class="hero-title">Що буде після закінчення захисту?</div>
+    <div class="hero-sub">Терміни, варіанти і що ти можеш зробити вже зараз</div>
+    <div class="hero-badge"><span class="msym" style="font-size:14px;">lock</span> Преміум</div>
+  </div>
+
+  <div class="content">
+    <div class="info-box green mt20">
+      <div class="info-box-title">Головне — без паніки</div>
+      Тимчасовий захист діє до 4 березня 2027. Після цього IND автоматично видасть дозвіл на проживання на 3 роки (2027–2030). Тобі не треба нікуди звертатися — це відбудеться автоматично.
+    </div>
+
+    <div class="mt24">
+      <div class="sec-label">Хронологія подій</div>
+      <div class="info-card">
+        <div class="timeline">
+          <div class="timeline-item">
+            <div class="timeline-dot blue"><span class="msym">today</span></div>
+            <div>
+              <div class="timeline-date">Зараз — до 4 березня 2027</div>
+              <div class="timeline-title">Тимчасовий захист (W-document)</div>
+              <div class="timeline-desc">Повне право на роботу, медицину, освіту та соціальні виплати</div>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-dot green"><span class="msym">verified</span></div>
+            <div>
+              <div class="timeline-date">4 Березня 2027</div>
+              <div class="timeline-title">Автоматичний перехід</div>
+              <div class="timeline-desc">IND автоматично видає дозвіл на проживання на 3 роки. Ніяких заявок — сам прийде</div>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-dot amber"><span class="msym">schedule</span></div>
+            <div>
+              <div class="timeline-date">2027 — 2030</div>
+              <div class="timeline-title">Трирічний дозвіл на проживання</div>
+              <div class="timeline-desc">Продовжуєш жити, працювати і вчитися — нічого не змінюється на практиці</div>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-dot purple"><span class="msym">home_work</span></div>
+            <div>
+              <div class="timeline-date">Після 2030</div>
+              <div class="timeline-title">Постійне проживання або повернення</div>
+              <div class="timeline-desc">Якщо прожив 5 років законно — маєш право на постійний дозвіл або громадянство</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PREMIUM GATE -->
+    <div class="premium-gate mt24" style="min-height:560px;">
+      <div class="premium-blur">
+        <div class="sec-label">Твої варіанти після 2027</div>
+        <div class="option-card">
+          <div class="option-title">Залишитися в Нідерландах</div>
+          <div class="option-desc">Подати на постійний дозвіл або натуралізацію після 5 років. Потрібні: мова (NT2 A2+), стабільний дохід, відсутність кримінального минулого.</div>
+          <span class="option-badge badge-green">Реально досяжно</span>
+        </div>
+        <div class="option-card">
+          <div class="option-title">Переїхати до іншої країни ЄС</div>
+          <div class="option-desc">Маючи дозвіл на проживання, можна подати на інший статус в іншій країні ЄС. Умови різняться.</div>
+          <span class="option-badge badge-blue">Варто дослідити</span>
+        </div>
+        <div class="option-card">
+          <div class="option-title">Повернутися в Україну</div>
+          <div class="option-desc">Якщо ситуація дозволяє. Дозвіл на проживання в Нідерландах при цьому анулюється.</div>
+          <span class="option-badge badge-amber">Власне рішення</span>
+        </div>
+        <div class="sec-label mt20">Що робити вже зараз</div>
+        <div class="info-box accent">
+          Якщо плануєш залишитися — починай вчити нідерландську вже зараз. Це найважливіше для постійного дозволу.
+        </div>
+      </div>
+      <div class="premium-overlay">
+        <div class="premium-card">
+          <div class="lock-icon"><span class="msym">lock</span></div>
+          <div class="premium-title">Повний аналіз твоїх варіантів</div>
+          <div class="premium-desc">Детальна інструкція по кожному шляху: залишитися, переїхати або повернутися — з конкретними кроками</div>
+          <a href="#" class="premium-btn">Отримати Преміум</a>
+          <div class="premium-price">€4.99 / місяць · Скасувати будь-коли</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="info-box amber mt24">
+      <div class="info-box-title">⚠️ Слідкуй за змінами</div>
+      Директива ЄС може змінитися. Перевіряй актуальну інформацію на ind.nl або в цьому додатку — ми повідомимо при будь-яких змінах.
+    </div>
+
+    <div class="info-box accent mt16" style="margin-bottom:16px;">
+      <div class="info-box-title">Корисні контакти</div>
+      <div style="margin-top:4px; display:flex; flex-direction:column; gap:6px;">
+        <div><strong>IND</strong> — 088 043 04 30 · ind.nl</div>
+        <div><strong>VluchtelingenWerk</strong> — vluchtelingenwerk.nl</div>
+        <div><strong>Juridisch Loket</strong> — 0900-8020 (безкоштовно)</div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<a href="#" class="fab"><span class="msym">chat</span></a>
+
+<nav class="bottom-nav">
+  <a href="1final_colorful.html" class="nav-item">
+    <span class="msym o">home</span><span class="label">Головна</span>
+  </a>
+  <a href="#" class="nav-item">
+    <span class="msym o">explore</span><span class="label">Пошук</span>
+  </a>
+  <a href="#" class="nav-item">
+    <span class="msym o">bookmark</span><span class="label">Збережені</span>
+  </a>
+  <a href="#" class="nav-item">
+    <span class="msym o">person</span><span class="label">Профіль</span>
+  </a>
+</nav>
+
+</body>
+</html>

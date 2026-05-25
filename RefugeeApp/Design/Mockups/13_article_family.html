@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Возз'єднання сім'ї</title>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --blue: #0057B7; --yellow: #FCD400; --bg: #EFECE5; --card: #fff;
+      --text: #111827; --muted: #6B7280; --border: #DDD9D0;
+      --accent: #4F46E5; --accent-dark: #3730A3; --accent-soft: #EEF2FF;
+      --green: #15803D; --green-soft: #DCFCE7;
+      --amber: #B45309; --amber-soft: #FEF3C7;
+      --red: #B91C1C; --red-soft: #FEE2E2;
+      --premium: #7C3AED; --premium-soft: #EDE9FE;
+    }
+    body { font-family: 'Manrope', sans-serif; background: var(--bg); color: var(--text); max-width: 390px; margin: 0 auto; min-height: 100vh; }
+    .msym { font-family: 'Material Symbols Outlined'; font-variation-settings: 'FILL' 1,'wght' 400,'GRAD' 0,'opsz' 24; font-size: 22px; line-height: 1; }
+    .msym.o { font-variation-settings: 'FILL' 0,'wght' 400,'GRAD' 0,'opsz' 24; }
+    .flag-bar { height: 3px; background: linear-gradient(90deg, var(--blue) 50%, var(--yellow) 50%); }
+    header { background: var(--card); padding: 13px 18px; display: flex; align-items: center; gap: 12px; border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 50; }
+    .back-btn { width: 36px; height: 36px; border-radius: 50%; background: var(--bg); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; cursor: pointer; text-decoration: none; color: var(--text); flex-shrink: 0; }
+    .header-title { font-size: 15px; font-weight: 800; color: var(--text); flex: 1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .bookmark-btn { width: 36px; height: 36px; border-radius: 50%; background: var(--bg); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; cursor: pointer; color: var(--muted); flex-shrink: 0; }
+    main { padding-bottom: 100px; }
+    .hero { background: #3B0764; padding: 28px 20px 32px; position: relative; overflow: hidden; }
+    .hero-pattern { position: absolute; inset: 0; pointer-events: none; background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='20' cy='20' r='1.5' fill='%23ffffff' fill-opacity='0.06'/%3E%3C/svg%3E"); background-size: 40px; }
+    .hero-breadcrumb { display: flex; align-items: center; gap: 6px; font-size: 11px; font-weight: 700; color: rgba(255,255,255,0.4); margin-bottom: 14px; }
+    .hero-icon { width: 56px; height: 56px; border-radius: 18px; background: rgba(255,255,255,0.12); display: flex; align-items: center; justify-content: center; margin-bottom: 14px; }
+    .hero-icon .msym { font-size: 30px; color: #fff; }
+    .hero-title { font-size: 26px; font-weight: 900; color: #fff; letter-spacing: -0.7px; line-height: 1.2; margin-bottom: 8px; }
+    .hero-sub { font-size: 13px; color: rgba(255,255,255,0.55); font-weight: 500; line-height: 1.5; }
+    .hero-badge { display: inline-flex; align-items: center; gap: 5px; background: var(--premium-soft); border-radius: 100px; padding: 4px 10px; font-size: 10px; font-weight: 800; color: var(--premium); margin-top: 12px; }
+    .content { padding: 0 18px; }
+    .mt16 { margin-top: 16px; } .mt20 { margin-top: 20px; } .mt24 { margin-top: 24px; }
+    .sec-label { font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.12em; color: var(--muted); margin-bottom: 12px; }
+    .info-box { border-radius: 16px; padding: 16px 18px; font-size: 13px; font-weight: 600; line-height: 1.6; }
+    .info-box.green { background: var(--green-soft); color: var(--green); border: 1px solid #BBF7D0; }
+    .info-box.amber { background: var(--amber-soft); color: var(--amber); border: 1px solid #FDE68A; }
+    .info-box.red { background: var(--red-soft); color: var(--red); border: 1px solid #FECACA; }
+    .info-box.accent { background: var(--accent-soft); color: var(--accent-dark); border: 1px solid #C7D2FE; }
+    .info-box-title { font-size: 12px; font-weight: 900; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 6px; }
+    .info-card { background: var(--card); border-radius: 16px; padding: 16px; box-shadow: 0 1px 3px rgba(0,0,0,0.06); border: 1px solid var(--border); }
+    .fact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .fact-item { background: rgba(255,255,255,0.1); border-radius: 14px; padding: 14px 12px; }
+    .fact-label { font-size: 10px; font-weight: 700; color: rgba(255,255,255,0.5); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 4px; }
+    .fact-value { font-size: 15px; font-weight: 900; color: #fff; line-height: 1.2; }
+    .steps { display: flex; flex-direction: column; gap: 0; }
+    .step { display: flex; gap: 14px; align-items: flex-start; padding: 14px 0; border-bottom: 1px solid var(--border); }
+    .step:last-child { border-bottom: none; }
+    .step-num { width: 30px; height: 30px; border-radius: 10px; background: var(--accent); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 900; flex-shrink: 0; margin-top: 1px; }
+    .step-title { font-size: 14px; font-weight: 800; color: var(--text); margin-bottom: 3px; }
+    .step-desc { font-size: 12px; color: var(--muted); font-weight: 500; line-height: 1.5; }
+    .who-list { display: flex; flex-direction: column; gap: 0; }
+    .who-row { display: flex; align-items: flex-start; gap: 10px; padding: 12px 0; border-bottom: 1px solid var(--border); }
+    .who-row:last-child { border-bottom: none; }
+    .who-icon { font-size: 18px; flex-shrink: 0; margin-top: 2px; }
+    .who-text { font-size: 13px; font-weight: 600; color: var(--text); line-height: 1.4; }
+    .who-sub { font-size: 11px; color: var(--muted); font-weight: 500; margin-top: 2px; }
+    .doc-list { display: flex; flex-direction: column; gap: 8px; }
+    .doc-item { display: flex; align-items: center; gap: 10px; background: var(--card); border-radius: 12px; padding: 12px 14px; border: 1px solid var(--border); }
+    .doc-item .msym { color: var(--accent); font-size: 20px; flex-shrink: 0; }
+    .doc-text { font-size: 13px; font-weight: 700; color: var(--text); }
+    .doc-sub { font-size: 11px; color: var(--muted); font-weight: 500; margin-top: 2px; }
+    /* Premium gate */
+    .premium-gate { position: relative; }
+    .premium-blur { filter: blur(4px); pointer-events: none; user-select: none; }
+    .premium-overlay { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; background: linear-gradient(to bottom, rgba(239,236,229,0) 0%, rgba(239,236,229,0.97) 30%); padding: 24px 20px; }
+    .premium-card { background: #fff; border-radius: 20px; padding: 22px 20px; box-shadow: 0 8px 32px rgba(124,58,237,0.15); border: 1px solid var(--premium-soft); width: 100%; text-align: center; }
+    .lock-icon { width: 48px; height: 48px; border-radius: 16px; background: var(--premium-soft); display: flex; align-items: center; justify-content: center; margin: 0 auto 12px; }
+    .lock-icon .msym { color: var(--premium); font-size: 26px; }
+    .premium-title { font-size: 16px; font-weight: 900; color: var(--text); margin-bottom: 6px; }
+    .premium-desc { font-size: 12px; color: var(--muted); font-weight: 500; line-height: 1.5; margin-bottom: 16px; }
+    .premium-btn { display: block; background: var(--premium); color: #fff; border-radius: 14px; padding: 14px; font-size: 14px; font-weight: 900; text-align: center; text-decoration: none; }
+    .premium-price { font-size: 11px; color: var(--muted); font-weight: 500; margin-top: 8px; }
+    /* Bottom nav */
+    .bottom-nav { position: fixed; bottom: 0; left: 50%; transform: translateX(-50%); width: 100%; max-width: 390px; background: var(--card); border-top: 1px solid var(--border); display: flex; z-index: 100; padding-bottom: env(safe-area-inset-bottom, 0); }
+    .nav-item { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 10px 0 8px; gap: 3px; text-decoration: none; color: var(--muted); }
+    .nav-item.active { color: var(--blue); }
+    .nav-item span.label { font-size: 10px; font-weight: 700; }
+    .nav-item .msym { font-size: 24px; }
+    .fab { position: fixed; bottom: 72px; right: calc(50% - 195px + 14px); width: 52px; height: 52px; border-radius: 18px; background: var(--accent); box-shadow: 0 4px 16px rgba(79,70,229,0.35); display: flex; align-items: center; justify-content: center; z-index: 99; text-decoration: none; }
+    .fab .msym { color: #fff; font-size: 26px; }
+  </style>
+</head>
+<body>
+
+<div class="flag-bar"></div>
+
+<header>
+  <a href="13_laws.html" class="back-btn"><span class="msym o" style="font-size:20px;">arrow_back</span></a>
+  <span class="header-title">Возз'єднання сім'ї</span>
+  <button class="bookmark-btn"><span class="msym o">bookmark</span></button>
+</header>
+
+<main>
+  <div class="hero">
+    <div class="hero-pattern"></div>
+    <div class="hero-breadcrumb">
+      <span>Права та закони</span>
+      <span class="msym o" style="font-size:13px;">chevron_right</span>
+      <span>Сім'я</span>
+    </div>
+    <div class="hero-icon"><span class="msym">family_restroom</span></div>
+    <div class="hero-title">Возз'єднання сім'ї</div>
+    <div class="hero-sub">Як перевезти рідних до Нідерландів і що для цього потрібно</div>
+    <div class="hero-badge"><span class="msym" style="font-size:14px;">lock</span> Преміум</div>
+    <div class="fact-grid" style="margin-top:20px;">
+      <div class="fact-item">
+        <div class="fact-label">Категорія</div>
+        <div class="fact-value">Тимчасовий захист</div>
+      </div>
+      <div class="fact-item">
+        <div class="fact-label">Термін розгляду</div>
+        <div class="fact-value">⚠️ до 90 днів</div>
+      </div>
+      <div class="fact-item">
+        <div class="fact-label">Заявник</div>
+        <div class="fact-value">Через IND</div>
+      </div>
+      <div class="fact-item">
+        <div class="fact-label">Вартість</div>
+        <div class="fact-value">Безкоштовно</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="content">
+    <div class="info-box green mt20">
+      <div class="info-box-title">Добра новина</div>
+      Якщо у тебе є тимчасовий захист (W-document), твої близькі родичі можуть приїхати до тебе в Нідерланди. Процедура безкоштовна — держава не стягує мита.
+    </div>
+
+    <div class="mt24">
+      <div class="sec-label">Хто може приїхати</div>
+      <div class="info-card">
+        <div class="who-list">
+          <div class="who-row">
+            <div class="who-icon">✅</div>
+            <div>
+              <div class="who-text">Чоловік або дружина</div>
+              <div class="who-sub">Офіційно зареєстрований шлюб або довгострокові відносини</div>
+            </div>
+          </div>
+          <div class="who-row">
+            <div class="who-icon">✅</div>
+            <div>
+              <div class="who-text">Неповнолітні діти</div>
+              <div class="who-sub">До 18 років — обидва батьки або один, якщо має опіку</div>
+            </div>
+          </div>
+          <div class="who-row">
+            <div class="who-icon">✅</div>
+            <div>
+              <div class="who-text">Партнер (без шлюбу)</div>
+              <div class="who-sub">Потрібно довести тривалі відносини (не менше 6 місяців)</div>
+            </div>
+          </div>
+          <div class="who-row">
+            <div class="who-icon">⚠️</div>
+            <div>
+              <div class="who-text">Батьки, повнолітні діти</div>
+              <div class="who-sub">Тільки якщо є особлива залежність — розглядається індивідуально</div>
+            </div>
+          </div>
+          <div class="who-row">
+            <div class="who-icon">🚫</div>
+            <div>
+              <div class="who-text">Брати, сестри, бабусі/дідусі</div>
+              <div class="who-sub">Не підпадають під стандартне возз'єднання сім'ї</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PREMIUM GATE -->
+    <div class="premium-gate mt24" style="min-height:520px;">
+      <div class="premium-blur">
+        <div class="sec-label">Покрокова інструкція</div>
+        <div class="info-card">
+          <div class="steps">
+            <div class="step">
+              <div class="step-num">1</div>
+              <div>
+                <div class="step-title">Зберіть документи</div>
+                <div class="step-desc">Паспорти, свідоцтво про шлюб або народження, фото</div>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-num">2</div>
+              <div>
+                <div class="step-title">Подайте заявку через IND</div>
+                <div class="step-desc">Онлайн або в офісі — через сайт ind.nl або за телефоном</div>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-num">3</div>
+              <div>
+                <div class="step-title">Родич отримує MVV</div>
+                <div class="step-desc">Тимчасова віза для в'їзду до Нідерландів через нідерландське посольство</div>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-num">4</div>
+              <div>
+                <div class="step-title">Реєстрація по приїзді</div>
+                <div class="step-desc">Gemeente, IND, BSN і W-document для члена сім'ї</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="sec-label mt20">Необхідні документи</div>
+        <div class="doc-list">
+          <div class="doc-item">
+            <span class="msym">badge</span>
+            <div><div class="doc-text">Твій W-document</div><div class="doc-sub">Підтвердження твого тимчасового захисту</div></div>
+          </div>
+          <div class="doc-item">
+            <span class="msym">article</span>
+            <div><div class="doc-text">Паспорт члена сім'ї</div><div class="doc-sub">Дійсний на момент подачі</div></div>
+          </div>
+          <div class="doc-item">
+            <span class="msym">favorite</span>
+            <div><div class="doc-text">Свідоцтво про шлюб / народження</div><div class="doc-sub">З апостилем та перекладом нідерландською або англійською</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="premium-overlay">
+        <div class="premium-card">
+          <div class="lock-icon"><span class="msym">lock</span></div>
+          <div class="premium-title">Повна інструкція</div>
+          <div class="premium-desc">Покрокова процедура IND, список документів з поясненнями, контакти та поради як прискорити процес</div>
+          <a href="#" class="premium-btn">Отримати Преміум</a>
+          <div class="premium-price">€4.99 / місяць · Скасувати будь-коли</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="info-box amber mt24">
+      <div class="info-box-title">⚠️ Важливо</div>
+      Процедура може тривати від кількох тижнів до 90 днів. Якщо маєш труднощі — зверніся до VluchtelingenWerk Nederland. Вони допоможуть безкоштовно.
+    </div>
+
+    <div class="info-box accent mt16" style="margin-bottom:16px;">
+      <div class="info-box-title">Корисні контакти</div>
+      <div style="margin-top:4px; display:flex; flex-direction:column; gap:6px;">
+        <div><strong>IND</strong> — 088 043 04 30 · ind.nl</div>
+        <div><strong>VluchtelingenWerk</strong> — vluchtelingenwerk.nl</div>
+        <div><strong>Juridisch Loket</strong> — 0900-8020 (безкоштовно)</div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<a href="#" class="fab"><span class="msym">chat</span></a>
+
+<nav class="bottom-nav">
+  <a href="1final_colorful.html" class="nav-item">
+    <span class="msym o">home</span><span class="label">Головна</span>
+  </a>
+  <a href="#" class="nav-item">
+    <span class="msym o">explore</span><span class="label">Пошук</span>
+  </a>
+  <a href="#" class="nav-item">
+    <span class="msym o">bookmark</span><span class="label">Збережені</span>
+  </a>
+  <a href="#" class="nav-item">
+    <span class="msym o">person</span><span class="label">Профіль</span>
+  </a>
+</nav>
+
+</body>
+</html>

@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Права орендаря</title>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --blue: #0057B7; --yellow: #FCD400; --bg: #EFECE5; --card: #fff;
+      --text: #111827; --muted: #6B7280; --border: #DDD9D0;
+      --accent: #7C3AED; --accent-dark: #4C1D95; --accent-soft: #EDE9FE;
+      --green: #15803D; --green-soft: #DCFCE7;
+      --amber: #B45309; --amber-soft: #FEF3C7;
+      --red: #B91C1C; --red-soft: #FEE2E2;
+    }
+    body { font-family: 'Manrope', sans-serif; background: var(--bg); color: var(--text); max-width: 390px; margin: 0 auto; min-height: 100vh; }
+    .msym { font-family: 'Material Symbols Outlined'; font-variation-settings: 'FILL' 1,'wght' 400,'GRAD' 0,'opsz' 24; font-size: 22px; line-height: 1; }
+    .msym.o { font-variation-settings: 'FILL' 0,'wght' 400,'GRAD' 0,'opsz' 24; }
+    .flag-bar { height: 3px; background: linear-gradient(90deg, var(--blue) 50%, var(--yellow) 50%); }
+    header { background: var(--card); padding: 13px 18px; display: flex; align-items: center; gap: 12px; border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 50; }
+    .back-btn { width: 36px; height: 36px; border-radius: 50%; background: var(--bg); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; cursor: pointer; text-decoration: none; color: var(--text); flex-shrink: 0; }
+    .header-title { font-size: 15px; font-weight: 800; color: var(--text); flex: 1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .bookmark-btn { width: 36px; height: 36px; border-radius: 50%; background: var(--bg); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; cursor: pointer; color: var(--muted); flex-shrink: 0; }
+    main { padding-bottom: 100px; }
+    .hero { background: #1C1917; padding: 28px 20px 32px; position: relative; overflow: hidden; }
+    .hero-pattern { position: absolute; inset: 0; pointer-events: none; background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='20' cy='20' r='1.5' fill='%23ffffff' fill-opacity='0.06'/%3E%3C/svg%3E"); background-size: 40px; }
+    .hero-breadcrumb { display: flex; align-items: center; gap: 6px; font-size: 11px; font-weight: 700; color: rgba(255,255,255,0.4); margin-bottom: 14px; }
+    .hero-icon { width: 56px; height: 56px; border-radius: 18px; background: rgba(255,255,255,0.12); display: flex; align-items: center; justify-content: center; margin-bottom: 14px; }
+    .hero-icon .msym { font-size: 30px; color: #fff; }
+    .hero-title { font-size: 26px; font-weight: 900; color: #fff; letter-spacing: -0.7px; line-height: 1.2; margin-bottom: 8px; }
+    .hero-sub { font-size: 13px; color: rgba(255,255,255,0.55); font-weight: 500; line-height: 1.5; }
+    .hero-badge { display: inline-flex; align-items: center; gap: 5px; background: var(--green-soft); border-radius: 100px; padding: 4px 10px; font-size: 10px; font-weight: 800; color: var(--green); margin-top: 12px; }
+    .content { padding: 0 18px; }
+    .mt16 { margin-top: 16px; } .mt20 { margin-top: 20px; } .mt24 { margin-top: 24px; }
+    .sec-label { font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.12em; color: var(--muted); margin-bottom: 12px; }
+    .info-box { border-radius: 16px; padding: 16px 18px; font-size: 13px; font-weight: 600; line-height: 1.6; }
+    .info-box.green { background: var(--green-soft); color: var(--green); border: 1px solid #BBF7D0; }
+    .info-box.amber { background: var(--amber-soft); color: var(--amber); border: 1px solid #FDE68A; }
+    .info-box.red { background: var(--red-soft); color: var(--red); border: 1px solid #FECACA; }
+    .info-box.accent { background: var(--accent-soft); color: var(--accent-dark); border: 1px solid #C4B5FD; }
+    .info-box-title { font-size: 12px; font-weight: 900; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 6px; }
+    .info-card { background: var(--card); border-radius: 16px; padding: 16px; box-shadow: 0 1px 3px rgba(0,0,0,0.06); border: 1px solid var(--border); }
+    .right-row { display: flex; align-items: flex-start; gap: 10px; padding: 12px 0; border-bottom: 1px solid var(--border); }
+    .right-row:last-child { border-bottom: none; }
+    .right-icon { font-size: 20px; flex-shrink: 0; }
+    .right-title { font-size: 13px; font-weight: 800; color: var(--text); margin-bottom: 3px; }
+    .right-desc { font-size: 12px; color: var(--muted); font-weight: 500; line-height: 1.5; }
+    .compare-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .compare-card { border-radius: 14px; padding: 14px; }
+    .compare-title { font-size: 11px; font-weight: 900; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 8px; }
+    .compare-item { font-size: 12px; font-weight: 600; line-height: 1.6; display: flex; align-items: flex-start; gap: 6px; margin-bottom: 4px; }
+    .contact-card { background: var(--card); border-radius: 16px; padding: 16px; border: 1px solid var(--border); }
+    .contact-name { font-size: 15px; font-weight: 900; color: var(--text); margin-bottom: 4px; }
+    .contact-desc { font-size: 12px; color: var(--muted); font-weight: 500; margin-bottom: 12px; }
+    .contact-row { display: flex; align-items: center; gap: 10px; padding: 8px 0; border-top: 1px solid var(--border); }
+    .contact-row .msym { color: var(--accent); font-size: 18px; flex-shrink: 0; }
+    .contact-val { font-size: 13px; font-weight: 800; color: var(--accent); }
+    .bottom-nav { position: fixed; bottom: 0; left: 50%; transform: translateX(-50%); width: 100%; max-width: 390px; background: var(--card); border-top: 1px solid var(--border); display: flex; z-index: 100; }
+    .nav-item { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 10px 0 8px; gap: 3px; text-decoration: none; color: var(--muted); }
+    .nav-item span.label { font-size: 10px; font-weight: 700; }
+    .nav-item .msym { font-size: 24px; }
+    .fab { position: fixed; bottom: 72px; right: calc(50% - 195px + 14px); width: 52px; height: 52px; border-radius: 18px; background: var(--accent); box-shadow: 0 4px 16px rgba(124,58,237,0.35); display: flex; align-items: center; justify-content: center; z-index: 99; text-decoration: none; }
+    .fab .msym { color: #fff; font-size: 26px; }
+  </style>
+</head>
+<body>
+<div class="flag-bar"></div>
+<header>
+  <a href="15_housing.html" class="back-btn"><span class="msym o" style="font-size:20px;">arrow_back</span></a>
+  <span class="header-title">Права орендаря</span>
+  <button class="bookmark-btn"><span class="msym o">bookmark</span></button>
+</header>
+<main>
+  <div class="hero">
+    <div class="hero-pattern"></div>
+    <div class="hero-breadcrumb">
+      <span>Житло</span>
+      <span class="msym o" style="font-size:13px;">chevron_right</span>
+      <span>Права</span>
+    </div>
+    <div class="hero-icon"><span class="msym">gavel</span></div>
+    <div class="hero-title">Права орендаря</div>
+    <div class="hero-sub">Депозит, виселення, ремонт і суперечки — що каже нідерландський закон</div>
+    <div class="hero-badge"><span class="msym" style="font-size:14px;">check_circle</span> Безкоштовно</div>
+  </div>
+
+  <div class="content">
+    <div class="info-box green mt20">
+      <div class="info-box-title">Ти захищений законом</div>
+      Нідерланди мають одне з найсильніших законодавств щодо захисту орендарів у Європі. Твої права однакові незалежно від національності та статусу.
+    </div>
+
+    <div class="mt24">
+      <div class="sec-label">Ключові права орендаря</div>
+      <div class="info-card">
+        <div class="right-row">
+          <div class="right-icon">💰</div>
+          <div>
+            <div class="right-title">Депозит — максимум 2 місяці</div>
+            <div class="right-desc">За договорами з 1 липня 2023: орендодавець не може вимагати більше 2 місяців базової орендної плати. Якщо вимагають більше — це незаконно.</div>
+          </div>
+        </div>
+        <div class="right-row">
+          <div class="right-icon">⏱️</div>
+          <div>
+            <div class="right-title">Депозит — повернення за 14 днів</div>
+            <div class="right-desc">Після виселення орендодавець зобов'язаний повернути депозит протягом 14 днів, або 30 днів якщо є утримання. Він може утримати тільки за несплачену оренду або справжні пошкодження — не за звичайний знос.</div>
+          </div>
+        </div>
+        <div class="right-row">
+          <div class="right-icon">🔒</div>
+          <div>
+            <div class="right-title">Виселення тільки через суд</div>
+            <div class="right-desc">Орендодавець не може виселити тебе самостійно — це незаконно. Навіть якщо ти не платиш, потрібне рішення суду. Якщо тебе намагаються виселити незаконно — зателефонуй до поліції або Juridisch Loket.</div>
+          </div>
+        </div>
+        <div class="right-row">
+          <div class="right-icon">🔧</div>
+          <div>
+            <div class="right-title">Серйозний ремонт — обов'язок власника</div>
+            <div class="right-desc">Дах, труби, опалення, структурні проблеми — за рахунок орендодавця. Ти відповідаєш тільки за дрібний ремонт (лампочки, замки, дрібниці до ~€300).</div>
+          </div>
+        </div>
+        <div class="right-row">
+          <div class="right-icon">📈</div>
+          <div>
+            <div class="right-title">Збільшення орендної плати — є обмеження</div>
+            <div class="right-desc">З 2025 всі нові договори оренди прив'язані до системи балів WWS. Якщо нарахована оренда завищена — можна оскаржити в Huurcommissie протягом 6 місяців після підписання.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="mt24">
+      <div class="sec-label">Ремонт — хто за що відповідає</div>
+      <div class="compare-grid">
+        <div class="compare-card" style="background:var(--green-soft);">
+          <div class="compare-title" style="color:var(--green);">🏠 Власник</div>
+          <div class="compare-item" style="color:var(--green);">✔ Дах та стіни</div>
+          <div class="compare-item" style="color:var(--green);">✔ Опалення та бойлер</div>
+          <div class="compare-item" style="color:var(--green);">✔ Труби та каналізація</div>
+          <div class="compare-item" style="color:var(--green);">✔ Вікна та двері (великий ремонт)</div>
+        </div>
+        <div class="compare-card" style="background:var(--amber-soft);">
+          <div class="compare-title" style="color:var(--amber);">🔑 Орендар</div>
+          <div class="compare-item" style="color:var(--amber);">✔ Лампочки</div>
+          <div class="compare-item" style="color:var(--amber);">✔ Замки та ручки</div>
+          <div class="compare-item" style="color:var(--amber);">✔ Дрібний ремонт ~€300</div>
+          <div class="compare-item" style="color:var(--amber);">✔ Власні пошкодження</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="mt24">
+      <div class="sec-label">Суперечка з орендодавцем?</div>
+      <div class="contact-card">
+        <div class="contact-name">Huurcommissie</div>
+        <div class="contact-desc">Незалежний орган для вирішення суперечок між орендарями та власниками. Обов'язкові рішення. Вартість для орендаря: €25.</div>
+        <div class="contact-row"><span class="msym">language</span><div class="contact-val">huurcommissie.nl</div></div>
+        <div class="contact-row"><span class="msym">checklist</span><div class="contact-val" style="font-size:12px; color:var(--muted); font-weight:600;">Безкоштовна перевірка орендної плати: "Huurprijscheck"</div></div>
+      </div>
+    </div>
+
+    <div class="info-box accent mt20" style="margin-bottom:16px;">
+      <div class="info-box-title">Безкоштовна юридична допомога</div>
+      <div style="margin-top:4px; display:flex; flex-direction:column; gap:4px;">
+        <div>⚖️ <strong>Juridisch Loket</strong> — 0900-8020 · juridischloket.nl</div>
+        <div>🤝 <strong>VluchtelingenWerk</strong> — допомога з житловими питаннями</div>
+      </div>
+    </div>
+  </div>
+</main>
+<a href="#" class="fab"><span class="msym">chat</span></a>
+<nav class="bottom-nav">
+  <a href="1final_colorful.html" class="nav-item"><span class="msym o">home</span><span class="label">Головна</span></a>
+  <a href="#" class="nav-item"><span class="msym o">explore</span><span class="label">Пошук</span></a>
+  <a href="#" class="nav-item"><span class="msym o">bookmark</span><span class="label">Збережені</span></a>
+  <a href="#" class="nav-item"><span class="msym o">person</span><span class="label">Профіль</span></a>
+</nav>
+</body>
+</html>
