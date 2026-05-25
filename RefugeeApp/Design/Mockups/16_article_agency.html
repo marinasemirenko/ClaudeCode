@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Робота через агентство</title>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --blue: #0057B7; --yellow: #FCD400; --bg: #EFECE5; --card: #fff;
+      --text: #111827; --muted: #6B7280; --border: #DDD9D0;
+      --accent: #D97706; --accent-dark: #92400E; --accent-soft: #FEF3C7;
+      --green: #15803D; --green-soft: #DCFCE7;
+      --amber: #B45309; --amber-soft: #FEF3C7;
+      --red: #B91C1C; --red-soft: #FEE2E2;
+    }
+    body { font-family: 'Manrope', sans-serif; background: var(--bg); color: var(--text); max-width: 390px; margin: 0 auto; min-height: 100vh; }
+    .msym { font-family: 'Material Symbols Outlined'; font-variation-settings: 'FILL' 1,'wght' 400,'GRAD' 0,'opsz' 24; font-size: 22px; line-height: 1; }
+    .msym.o { font-variation-settings: 'FILL' 0,'wght' 400,'GRAD' 0,'opsz' 24; }
+    .flag-bar { height: 3px; background: linear-gradient(90deg, var(--blue) 50%, var(--yellow) 50%); }
+    header { background: var(--card); padding: 13px 18px; display: flex; align-items: center; gap: 12px; border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 50; }
+    .back-btn { width: 36px; height: 36px; border-radius: 50%; background: var(--bg); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; cursor: pointer; text-decoration: none; color: var(--text); flex-shrink: 0; }
+    .header-title { font-size: 15px; font-weight: 800; color: var(--text); flex: 1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .bookmark-btn { width: 36px; height: 36px; border-radius: 50%; background: var(--bg); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; cursor: pointer; color: var(--muted); flex-shrink: 0; }
+    main { padding-bottom: 100px; }
+    .hero { background: #150E00; padding: 28px 20px 32px; position: relative; overflow: hidden; }
+    .hero-pattern { position: absolute; inset: 0; pointer-events: none; background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='20' cy='20' r='1.5' fill='%23ffffff' fill-opacity='0.06'/%3E%3C/svg%3E"); background-size: 40px; }
+    .hero-breadcrumb { display: flex; align-items: center; gap: 6px; font-size: 11px; font-weight: 700; color: rgba(255,255,255,0.4); margin-bottom: 14px; }
+    .hero-icon { width: 56px; height: 56px; border-radius: 18px; background: rgba(255,255,255,0.12); display: flex; align-items: center; justify-content: center; margin-bottom: 14px; }
+    .hero-icon .msym { font-size: 30px; color: #fff; }
+    .hero-title { font-size: 26px; font-weight: 900; color: #fff; letter-spacing: -0.7px; line-height: 1.2; margin-bottom: 8px; }
+    .hero-sub { font-size: 13px; color: rgba(255,255,255,0.55); font-weight: 500; line-height: 1.5; }
+    .hero-badge { display: inline-flex; align-items: center; gap: 5px; background: var(--green-soft); border-radius: 100px; padding: 4px 10px; font-size: 10px; font-weight: 800; color: var(--green); margin-top: 12px; }
+    .content { padding: 0 18px; }
+    .mt16 { margin-top: 16px; } .mt20 { margin-top: 20px; } .mt24 { margin-top: 24px; }
+    .sec-label { font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.12em; color: var(--muted); margin-bottom: 12px; }
+    .info-box { border-radius: 16px; padding: 16px 18px; font-size: 13px; font-weight: 600; line-height: 1.6; }
+    .info-box.green { background: var(--green-soft); color: var(--green); border: 1px solid #BBF7D0; }
+    .info-box.amber { background: var(--amber-soft); color: var(--amber); border: 1px solid #FDE68A; }
+    .info-box.red { background: var(--red-soft); color: var(--red); border: 1px solid #FECACA; }
+    .info-box.accent { background: var(--accent-soft); color: var(--accent-dark); border: 1px solid #FDE68A; }
+    .info-box-title { font-size: 12px; font-weight: 900; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 6px; }
+    /* How it works */
+    .flow { display: flex; flex-direction: column; gap: 0; position: relative; }
+    .flow-item { display: flex; gap: 14px; align-items: flex-start; padding: 14px 0; }
+    .flow-step { width: 30px; height: 30px; border-radius: 10px; background: var(--accent); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 900; flex-shrink: 0; }
+    .flow-title { font-size: 14px; font-weight: 800; color: var(--text); margin-bottom: 3px; }
+    .flow-desc { font-size: 12px; color: var(--muted); font-weight: 500; line-height: 1.5; }
+    /* Sector chips */
+    .chip-wrap { display: flex; flex-wrap: wrap; gap: 8px; }
+    .chip { padding: 6px 13px; border-radius: 100px; background: var(--card); border: 1px solid var(--border); font-size: 12px; font-weight: 700; color: var(--text); }
+    /* Rights list */
+    .rights-list { display: flex; flex-direction: column; gap: 0; }
+    .right-row { background: var(--card); padding: 12px 16px; border-bottom: 1px solid var(--border); display: flex; gap: 10px; align-items: center; }
+    .right-row:first-child { border-radius: 16px 16px 0 0; }
+    .right-row:last-child { border-bottom: none; border-radius: 0 0 16px 16px; }
+    .right-check { color: var(--green); font-size: 18px; flex-shrink: 0; font-family: 'Material Symbols Outlined'; font-variation-settings: 'FILL' 1,'wght' 400,'GRAD' 0,'opsz' 24; line-height: 1; }
+    .right-text { font-size: 13px; font-weight: 600; color: var(--text); }
+    /* SNA card */
+    .sna-card { background: var(--card); border-radius: 16px; border: 2px solid #FDE68A; padding: 16px; }
+    .sna-title { font-size: 14px; font-weight: 900; color: var(--amber); margin-bottom: 6px; display: flex; align-items: center; gap: 8px; }
+    .sna-desc { font-size: 12px; color: var(--muted); font-weight: 500; line-height: 1.5; }
+    .bottom-nav { position: fixed; bottom: 0; left: 50%; transform: translateX(-50%); width: 100%; max-width: 390px; background: var(--card); border-top: 1px solid var(--border); display: flex; z-index: 100; }
+    .nav-item { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 10px 0 8px; gap: 3px; text-decoration: none; color: var(--muted); }
+    .nav-item span.label { font-size: 10px; font-weight: 700; }
+    .nav-item .msym { font-size: 24px; }
+    .fab { position: fixed; bottom: 72px; right: calc(50% - 195px + 14px); width: 52px; height: 52px; border-radius: 18px; background: var(--accent); box-shadow: 0 4px 16px rgba(217,119,6,0.35); display: flex; align-items: center; justify-content: center; z-index: 99; text-decoration: none; }
+    .fab .msym { color: #fff; font-size: 26px; }
+  </style>
+</head>
+<body>
+<div class="flag-bar"></div>
+<header>
+  <a href="16_work.html" class="back-btn"><span class="msym o" style="font-size:20px;">arrow_back</span></a>
+  <span class="header-title">Робота через агентство</span>
+  <button class="bookmark-btn"><span class="msym o">bookmark</span></button>
+</header>
+<main>
+  <div class="hero">
+    <div class="hero-pattern"></div>
+    <div class="hero-breadcrumb">
+      <span>Робота</span>
+      <span class="msym o" style="font-size:13px;">chevron_right</span>
+      <span>Агентство</span>
+    </div>
+    <div class="hero-icon"><span class="msym">groups</span></div>
+    <div class="hero-title">Робота через агентство</div>
+    <div class="hero-sub">Uitzendbureau — хороший старт. Але треба знати, як вибрати надійне агентство</div>
+    <div class="hero-badge"><span class="msym" style="font-size:14px;">check_circle</span> Безкоштовно</div>
+  </div>
+
+  <div class="content">
+    <div class="info-box green mt20">
+      <div class="info-box-title">Чому агентство — це добре</div>
+      Для нових в Нідерландах — агентство часто найшвидший шлях до роботи. Нідерландська не завжди потрібна. Агентство бере на себе paperwork, іноді навчання. Ти отримуєш досвід і Dutch reference.
+    </div>
+
+    <div class="mt24">
+      <div class="sec-label">Як це працює</div>
+      <div class="flow">
+        <div class="flow-item">
+          <div class="flow-step">1</div>
+          <div>
+            <div class="flow-title">Підписуєш договір з агентством</div>
+            <div class="flow-desc">Агентство (uitzendbureau) стає твоїм офіційним роботодавцем. Воно платить тобі зарплату і відповідає за всі права.</div>
+          </div>
+        </div>
+        <div class="flow-item">
+          <div class="flow-step">2</div>
+          <div>
+            <div class="flow-title">Агентство направляє тебе до клієнта</div>
+            <div class="flow-desc">Клієнт — це компанія, де ти реально працюєш. Але юридично — твій роботодавець залишається агентство.</div>
+          </div>
+        </div>
+        <div class="flow-item">
+          <div class="flow-step">3</div>
+          <div>
+            <div class="flow-title">Права — як у штатного співробітника</div>
+            <div class="flow-desc">За законом, зарплата не може бути нижча, ніж у прямих співробітників компанії на такій самій посаді.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="mt24">
+      <div class="sec-label">Популярні сектори</div>
+      <div class="chip-wrap">
+        <div class="chip">🚚 Логістика</div>
+        <div class="chip">🌿 Сільське господарство</div>
+        <div class="chip">🍽️ Готельно-ресторанний</div>
+        <div class="chip">🧹 Клінінг</div>
+        <div class="chip">🏭 Виробництво</div>
+        <div class="chip">💻 IT (рідше)</div>
+      </div>
+    </div>
+
+    <div class="mt24">
+      <div class="sna-card">
+        <div class="sna-title"><span class="msym" style="font-size:18px;">verified</span>SNA-сертифікат — обов'язково!</div>
+        <div class="sna-desc">З 1 січня 2025 року всі агентства, що наймають через subcontracting, зобов'язані мати SNA-сертифікат. Перед підписанням договору перевір агентство на <strong>normeringarbeid.nl</strong>. Якщо агентства там немає — великий ризик.</div>
+      </div>
+    </div>
+
+    <div class="mt24">
+      <div class="sec-label">Твої права в агентстві</div>
+      <div class="rights-list">
+        <div class="right-row">
+          <span class="right-check">check_circle</span>
+          <div class="right-text">Зарплата не нижча, ніж у штатних співробітників компанії</div>
+        </div>
+        <div class="right-row">
+          <span class="right-check">check_circle</span>
+          <div class="right-text">Оплата лікарняного — з першого дня</div>
+        </div>
+        <div class="right-row">
+          <span class="right-check">check_circle</span>
+          <div class="right-text">Пенсійні накопичення (pensioen) після 26 тижнів</div>
+        </div>
+        <div class="right-row">
+          <span class="right-check">check_circle</span>
+          <div class="right-text">Відпускні 8% від брутто-зарплати</div>
+        </div>
+        <div class="right-row">
+          <span class="right-check">check_circle</span>
+          <div class="right-text">Колективний договір ABU або NBBU</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="info-box red mt20" style="margin-bottom:16px;">
+      <div class="info-box-title">🚫 Ознаки фейкового агентства</div>
+      Просять паспорт без пояснень · платять готівкою · немає юридичної адреси · не можуть показати SNA-сертифікат · обіцяють «легкий заробіток» без договору. Якщо щось не так — зв'яжись з Arbeidsinspectie: 0800 5151 (анонімно).
+    </div>
+  </div>
+</main>
+<a href="#" class="fab"><span class="msym">chat</span></a>
+<nav class="bottom-nav">
+  <a href="1final_colorful.html" class="nav-item"><span class="msym o">home</span><span class="label">Головна</span></a>
+  <a href="#" class="nav-item"><span class="msym o">explore</span><span class="label">Пошук</span></a>
+  <a href="#" class="nav-item"><span class="msym o">bookmark</span><span class="label">Збережені</span></a>
+  <a href="#" class="nav-item"><span class="msym o">person</span><span class="label">Профіль</span></a>
+</nav>
+</body>
+</html>

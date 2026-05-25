@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Самозайнятість ZZP</title>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --blue: #0057B7; --yellow: #FCD400; --bg: #EFECE5; --card: #fff;
+      --text: #111827; --muted: #6B7280; --border: #DDD9D0;
+      --accent: #D97706; --accent-dark: #92400E; --accent-soft: #FEF3C7;
+      --green: #15803D; --green-soft: #DCFCE7;
+      --amber: #B45309; --amber-soft: #FEF3C7;
+      --red: #B91C1C; --red-soft: #FEE2E2;
+    }
+    body { font-family: 'Manrope', sans-serif; background: var(--bg); color: var(--text); max-width: 390px; margin: 0 auto; min-height: 100vh; }
+    .msym { font-family: 'Material Symbols Outlined'; font-variation-settings: 'FILL' 1,'wght' 400,'GRAD' 0,'opsz' 24; font-size: 22px; line-height: 1; }
+    .msym.o { font-variation-settings: 'FILL' 0,'wght' 400,'GRAD' 0,'opsz' 24; }
+    .flag-bar { height: 3px; background: linear-gradient(90deg, var(--blue) 50%, var(--yellow) 50%); }
+    header { background: var(--card); padding: 13px 18px; display: flex; align-items: center; gap: 12px; border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 50; }
+    .back-btn { width: 36px; height: 36px; border-radius: 50%; background: var(--bg); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; cursor: pointer; text-decoration: none; color: var(--text); flex-shrink: 0; }
+    .header-title { font-size: 15px; font-weight: 800; color: var(--text); flex: 1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .bookmark-btn { width: 36px; height: 36px; border-radius: 50%; background: var(--bg); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; cursor: pointer; color: var(--muted); flex-shrink: 0; }
+    main { padding-bottom: 100px; }
+    .hero { background: #1A0E00; padding: 28px 20px 32px; position: relative; overflow: hidden; }
+    .hero-pattern { position: absolute; inset: 0; pointer-events: none; background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='20' cy='20' r='1.5' fill='%23ffffff' fill-opacity='0.06'/%3E%3C/svg%3E"); background-size: 40px; }
+    .hero-breadcrumb { display: flex; align-items: center; gap: 6px; font-size: 11px; font-weight: 700; color: rgba(255,255,255,0.4); margin-bottom: 14px; }
+    .hero-icon { width: 56px; height: 56px; border-radius: 18px; background: rgba(255,255,255,0.12); display: flex; align-items: center; justify-content: center; margin-bottom: 14px; }
+    .hero-icon .msym { font-size: 30px; color: #fff; }
+    .hero-title { font-size: 26px; font-weight: 900; color: #fff; letter-spacing: -0.7px; line-height: 1.2; margin-bottom: 8px; }
+    .hero-sub { font-size: 13px; color: rgba(255,255,255,0.55); font-weight: 500; line-height: 1.5; }
+    .hero-badge { display: inline-flex; align-items: center; gap: 5px; background: var(--green-soft); border-radius: 100px; padding: 4px 10px; font-size: 10px; font-weight: 800; color: var(--green); margin-top: 12px; }
+    .fact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 20px; }
+    .fact-item { background: rgba(255,255,255,0.1); border-radius: 14px; padding: 14px 12px; }
+    .fact-label { font-size: 10px; font-weight: 700; color: rgba(255,255,255,0.5); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 4px; }
+    .fact-value { font-size: 14px; font-weight: 900; color: #fff; line-height: 1.2; }
+    .fact-value.red { color: #FCA5A5; }
+    .content { padding: 0 18px; }
+    .mt16 { margin-top: 16px; } .mt20 { margin-top: 20px; } .mt24 { margin-top: 24px; }
+    .sec-label { font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.12em; color: var(--muted); margin-bottom: 12px; }
+    .info-box { border-radius: 16px; padding: 16px 18px; font-size: 13px; font-weight: 600; line-height: 1.6; }
+    .info-box.green { background: var(--green-soft); color: var(--green); border: 1px solid #BBF7D0; }
+    .info-box.amber { background: var(--amber-soft); color: var(--amber); border: 1px solid #FDE68A; }
+    .info-box.red { background: var(--red-soft); color: var(--red); border: 1px solid #FECACA; }
+    .info-box-title { font-size: 12px; font-weight: 900; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 6px; }
+    /* Yes / No grid */
+    .yn-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .yn-card { background: var(--card); border-radius: 16px; padding: 16px 14px; border: 1px solid var(--border); }
+    .yn-header { font-size: 12px; font-weight: 900; margin-bottom: 10px; display: flex; align-items: center; gap: 6px; }
+    .yn-header.yes { color: var(--green); }
+    .yn-header.no { color: var(--red); }
+    .yn-row { font-size: 12px; font-weight: 600; color: var(--text); line-height: 1.5; padding: 5px 0; border-bottom: 1px solid var(--border); }
+    .yn-row:last-child { border-bottom: none; }
+    /* Explanation card */
+    .explain-card { background: var(--card); border-radius: 16px; padding: 18px; border: 1px solid var(--border); }
+    .explain-title { font-size: 14px; font-weight: 900; color: var(--text); margin-bottom: 8px; }
+    .explain-text { font-size: 13px; font-weight: 500; color: var(--muted); line-height: 1.6; }
+    .bottom-nav { position: fixed; bottom: 0; left: 50%; transform: translateX(-50%); width: 100%; max-width: 390px; background: var(--card); border-top: 1px solid var(--border); display: flex; z-index: 100; }
+    .nav-item { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 10px 0 8px; gap: 3px; text-decoration: none; color: var(--muted); }
+    .nav-item span.label { font-size: 10px; font-weight: 700; }
+    .nav-item .msym { font-size: 24px; }
+    .fab { position: fixed; bottom: 72px; right: calc(50% - 195px + 14px); width: 52px; height: 52px; border-radius: 18px; background: var(--accent); box-shadow: 0 4px 16px rgba(217,119,6,0.35); display: flex; align-items: center; justify-content: center; z-index: 99; text-decoration: none; }
+    .fab .msym { color: #fff; font-size: 26px; }
+  </style>
+</head>
+<body>
+<div class="flag-bar"></div>
+<header>
+  <a href="16_work.html" class="back-btn"><span class="msym o" style="font-size:20px;">arrow_back</span></a>
+  <span class="header-title">Самозайнятість (ZZP)</span>
+  <button class="bookmark-btn"><span class="msym o">bookmark</span></button>
+</header>
+<main>
+  <div class="hero">
+    <div class="hero-pattern"></div>
+    <div class="hero-breadcrumb">
+      <span>Робота</span>
+      <span class="msym o" style="font-size:13px;">chevron_right</span>
+      <span>ZZP</span>
+    </div>
+    <div class="hero-icon"><span class="msym">store</span></div>
+    <div class="hero-title">Самозайнятість (ZZP)</div>
+    <div class="hero-sub">KvK зареєструвати можна. Але з TPD-статусом є серйозні обмеження</div>
+    <div class="hero-badge"><span class="msym" style="font-size:14px;">check_circle</span> Безкоштовно</div>
+    <div class="fact-grid">
+      <div class="fact-item">
+        <div class="fact-label">Реєстрація KvK</div>
+        <div class="fact-value">Дозволено ✅</div>
+      </div>
+      <div class="fact-item">
+        <div class="fact-label">TWV на кожного клієнта</div>
+        <div class="fact-value red">Потрібно ⚠️</div>
+      </div>
+      <div class="fact-item">
+        <div class="fact-label">Відсоток відмов UWV</div>
+        <div class="fact-value red">~99%</div>
+      </div>
+      <div class="fact-item">
+        <div class="fact-label">BTW-реєстрація</div>
+        <div class="fact-value">Від €20k/рік</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="content">
+    <div class="info-box red mt20">
+      <div class="info-box-title">⚠️ Головна проблема</div>
+      ZZP (zelfstandige zonder personeel) — це самозайнятість. Зареєструватись у KvK можна. Але для роботи з кожним новим клієнтом потрібен дозвіл UWV (TWV). UWV відмовляє майже завжди, бо в Нідерландах є свої кандидати.
+    </div>
+
+    <div class="mt24">
+      <div class="sec-label">Що можна і що важко</div>
+      <div class="yn-grid">
+        <div class="yn-card">
+          <div class="yn-header yes">✅ Можна</div>
+          <div class="yn-row">Зареєструватись у KvK</div>
+          <div class="yn-row">Відкрити рахунок</div>
+          <div class="yn-row">Подати заявку на TWV</div>
+          <div class="yn-row">Продавати товари</div>
+        </div>
+        <div class="yn-card">
+          <div class="yn-header no">⚠️ Складно</div>
+          <div class="yn-row">Отримати TWV від UWV</div>
+          <div class="yn-row">Знайти клієнтів без ризику</div>
+          <div class="yn-row">Отримати 30% ruling</div>
+          <div class="yn-row">Стабільний дохід</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="mt24">
+      <div class="explain-card">
+        <div class="explain-title">Що таке TWV і чому це проблема?</div>
+        <div class="explain-text">
+          TWV (tewerkstellingsvergunning) — дозвіл на роботу для конкретного роботодавця або клієнта. З W-document він не потрібен для найманої роботи. Але для ZZP — кожен новий клієнт вимагає окремого TWV.<br><br>
+          UWV видає TWV лише якщо у Нідерландах немає підходящих кандидатів. Для більшості спеціальностей — це майже неможливо довести. Звідси ~99% відмов.
+        </div>
+      </div>
+    </div>
+
+    <div class="info-box green mt20">
+      <div class="info-box-title">Коли ZZP може спрацювати</div>
+      Якщо ти маєш унікальні навички, яких немає на нідерландському ринку (рідкісні мови програмування, специфічна інженерна спеціалізація, робота саме з українськими клієнтами) — шанс є. Але потрібна допомога юриста.
+    </div>
+
+    <div class="info-box amber mt16">
+      <div class="info-box-title">Реальна альтернатива</div>
+      Спочатку знайди постійну роботу (vast або tijdelijk). Потім можна паралельно розвивати ZZP — але TWV на клієнтів все одно потрібен. Ситуація може змінитись: ЄС обговорює розширення прав на ринку праці для TPD-власників.
+    </div>
+
+    <div style="background:var(--card); border-radius:16px; border:1px solid var(--border); padding:16px; margin-top:16px; margin-bottom:16px;">
+      <div style="font-size:12px; font-weight:900; color:var(--muted); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:8px;">Корисні ресурси</div>
+      <div style="font-size:13px; font-weight:600; color:var(--text); line-height:1.8;">
+        📋 kvk.nl — реєстрація підприємства<br>
+        🏛️ uwv.nl — подача заявки на TWV<br>
+        ⚖️ vluchtelingenwerk.nl — безкоштовна юридична порада
+      </div>
+    </div>
+  </div>
+</main>
+<a href="#" class="fab"><span class="msym">chat</span></a>
+<nav class="bottom-nav">
+  <a href="1final_colorful.html" class="nav-item"><span class="msym o">home</span><span class="label">Головна</span></a>
+  <a href="#" class="nav-item"><span class="msym o">explore</span><span class="label">Пошук</span></a>
+  <a href="#" class="nav-item"><span class="msym o">bookmark</span><span class="label">Збережені</span></a>
+  <a href="#" class="nav-item"><span class="msym o">person</span><span class="label">Профіль</span></a>
+</nav>
+</body>
+</html>
