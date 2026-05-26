@@ -4,96 +4,390 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Новини — RefugeeGuide</title>
-  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
     :root {
-      --bg: #F8F9FA; --card: #FFFFFF; --text: #111827; --muted: #6B7280;
-      --border: #E5E2DA; --blue: #0057B7; --blue-dark: #003DA6; --blue-soft: #E8F0FF;
+      --bg: #F8F9FA;
+      --card: #FFFFFF;
+      --text: #111827;
+      --muted: #6B7280;
+      --border: #E5E2DA;
+      --blue: #0057B7;
+      --blue-dark: #003DA6;
+      --blue-soft: #E8F0FF;
       --yellow: #FCD400;
-      --ua-blue: #0057B7; --ua-yellow: #FCD400;
-      --nl-red: #AE1C28; --nl-blue: #21468B;
+      --red: #DC2626;
     }
-    body { font-family: 'Manrope', sans-serif; background: var(--bg); color: var(--text); max-width: 390px; margin: 0 auto; min-height: 100vh; }
-    .msym { font-family: 'Material Symbols Outlined'; font-variation-settings: 'FILL' 1,'wght' 400,'GRAD' 0,'opsz' 24; font-size: 22px; line-height: 1; }
-    .msym.o { font-variation-settings: 'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 24; }
+
+    body {
+      font-family: 'Manrope', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      max-width: 390px;
+      margin: 0 auto;
+      min-height: 100vh;
+    }
+
+    .msym {
+      font-family: 'Material Symbols Outlined';
+      font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      font-size: 22px;
+      line-height: 1;
+      vertical-align: middle;
+    }
+    .msym.o { font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24; }
+
+    /* FLAG BAR */
     .flag-bar { height: 3px; background: linear-gradient(90deg, var(--blue) 50%, var(--yellow) 50%); }
 
     /* HEADER */
-    header { background: var(--card); padding: 14px 18px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 50; }
-    .logo { font-size: 18px; font-weight: 900; color: var(--blue); letter-spacing: -0.5px; }
-    .logo em { color: #8B6900; font-style: normal; }
-    .refresh-btn { width: 36px; height: 36px; border-radius: 50%; background: var(--bg); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; cursor: pointer; color: var(--muted); }
-    .refresh-btn.spinning .msym { animation: spin 1s linear infinite; }
+    header {
+      background: var(--card);
+      padding: 12px 16px 10px;
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 50;
+    }
+
+    .header-top {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 8px;
+    }
+
+    .back-btn {
+      width: 36px; height: 36px;
+      border-radius: 50%;
+      background: var(--bg);
+      border: 1.5px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      text-decoration: none;
+      flex-shrink: 0;
+    }
+    .back-btn .msym { font-size: 20px; color: var(--text); }
+
+    .header-title {
+      font-size: 18px;
+      font-weight: 900;
+      color: var(--text);
+      flex: 1;
+    }
+
+    .refresh-btn {
+      width: 36px; height: 36px;
+      border-radius: 50%;
+      background: var(--blue);
+      border: none;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 3px 10px rgba(0,87,183,0.3);
+    }
+    .refresh-btn .msym { font-size: 18px; color: #fff; }
+    .refresh-btn.loading .msym { animation: spin 0.8s linear infinite; }
     @keyframes spin { to { transform: rotate(360deg); } }
 
-    /* FILTER TABS */
-    .filter-bar { background: var(--card); padding: 0 16px 12px; border-bottom: 1px solid var(--border); display: flex; gap: 8px; position: sticky; top: 57px; z-index: 40; }
-    .filter-tab { padding: 7px 16px; border-radius: 100px; font-size: 12px; font-weight: 800; cursor: pointer; border: 1.5px solid var(--border); background: var(--bg); color: var(--muted); white-space: nowrap; transition: all 0.15s; }
-    .filter-tab.active-all  { background: var(--blue); border-color: var(--blue); color: #fff; }
-    .filter-tab.active-ua   { background: #0057B7; border-color: #0057B7; color: #fff; }
-    .filter-tab.active-nl   { background: #21468B; border-color: #21468B; color: #fff; }
+    .header-status {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
 
-    /* LIVE INDICATOR */
-    .live-strip { background: #111827; padding: 8px 18px; display: flex; align-items: center; gap: 8px; }
-    .live-dot { width: 7px; height: 7px; border-radius: 50%; background: #22C55E; animation: blink 2s infinite; flex-shrink: 0; }
-    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.25} }
-    .live-text { font-size: 11px; font-weight: 800; color: rgba(255,255,255,0.7); flex: 1; }
-    .live-time { font-size: 10px; font-weight: 700; color: rgba(255,255,255,0.4); }
+    .live-dot {
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: #22C55E;
+      flex-shrink: 0;
+      animation: blink 2s infinite;
+    }
+    .live-dot.error   { background: var(--red); animation: none; }
+    .live-dot.loading { background: var(--yellow); }
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
+
+    .status-text {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--muted);
+      flex: 1;
+    }
+
+    /* FILTER BAR */
+    .filter-bar {
+      display: flex;
+      gap: 8px;
+      padding: 10px 16px;
+      overflow-x: auto;
+      scrollbar-width: none;
+      background: var(--card);
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 85px;
+      z-index: 40;
+    }
+    .filter-bar::-webkit-scrollbar { display: none; }
+
+    .filter-tab {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      padding: 7px 14px;
+      border-radius: 100px;
+      border: 1.5px solid var(--border);
+      background: var(--bg);
+      font-family: inherit;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--muted);
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.15s ease;
+      flex-shrink: 0;
+    }
+    .filter-tab.active {
+      background: var(--blue);
+      border-color: var(--blue);
+      color: #fff;
+    }
+
+    .health-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: #D1D5DB;
+      flex-shrink: 0;
+    }
+    .health-dot.green { background: #22C55E; }
+    .health-dot.amber { background: #F59E0B; }
+    .health-dot.red   { background: var(--red); }
 
     /* MAIN */
-    main { padding-bottom: 110px; }
+    main { padding: 14px 16px 120px; }
 
-    /* SECTION LABEL */
-    .sec-header { padding: 14px 16px 8px; display: flex; align-items: center; justify-content: space-between; }
-    .sec-label { font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.12em; color: var(--muted); }
-    .sec-count { font-size: 11px; font-weight: 700; color: var(--muted); background: var(--bg); border: 1px solid var(--border); border-radius: 100px; padding: 2px 8px; }
+    /* ARTICLE CARDS */
+    .article-card {
+      background: var(--card);
+      border-radius: 16px;
+      padding: 14px 16px;
+      margin-bottom: 10px;
+      display: block;
+      text-decoration: none;
+      color: inherit;
+      border: 1.5px solid var(--border);
+      transition: transform 0.15s, box-shadow 0.15s, border-color 0.15s;
+    }
+    .article-card.article-unlocked:hover {
+      border-color: var(--blue);
+      box-shadow: 0 4px 16px rgba(0,87,183,0.1);
+      transform: translateY(-1px);
+    }
+    .article-card.article-unlocked:active { transform: scale(0.98); }
+    .article-card.article-locked { cursor: pointer; }
+    .article-card.article-locked:active { transform: scale(0.98); }
 
-    /* NEWS CARD */
-    .news-list { padding: 0 16px; display: flex; flex-direction: column; gap: 10px; }
-    .news-card { background: var(--card); border-radius: 18px; border: 1px solid var(--border); overflow: hidden; text-decoration: none; color: inherit; display: block; box-shadow: 0 2px 6px rgba(0,0,0,0.04); transition: transform 0.15s, box-shadow 0.15s; }
-    .news-card:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(0,0,0,0.09); }
-    .news-card-body { padding: 14px 16px; }
-    .news-meta { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
-    .source-badge { display: inline-flex; align-items: center; gap: 4px; font-size: 10px; font-weight: 800; border-radius: 100px; padding: 3px 9px; }
-    .badge-ua { background: rgba(0,87,183,0.1); color: #0057B7; }
-    .badge-nl { background: rgba(33,70,139,0.1); color: #21468B; }
-    .news-time { font-size: 10px; font-weight: 700; color: var(--muted); margin-left: auto; }
-    .news-title { font-size: 14px; font-weight: 800; color: var(--text); line-height: 1.4; margin-bottom: 10px; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
-    .news-footer { display: flex; align-items: center; justify-content: space-between; }
-    .read-btn { font-size: 11px; font-weight: 800; color: var(--blue); display: flex; align-items: center; gap: 4px; }
-    .read-btn .msym { font-size: 14px; }
+    .article-card.featured {
+      border-color: var(--blue);
+      border-width: 2px;
+      background: linear-gradient(135deg, #F0F5FF 0%, #fff 60%);
+    }
+    .article-card.featured .article-title { font-size: 15px; }
 
-    /* FEATURED card (first one) */
-    .news-card.featured .news-title { font-size: 16px; -webkit-line-clamp: 4; }
-    .news-card.featured { border: 2px solid var(--border); }
+    .article-meta {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 8px;
+    }
+
+    .cat-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .article-source {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      flex: 1;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .article-time {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--muted);
+      flex-shrink: 0;
+    }
+
+    .article-title {
+      font-size: 14px;
+      font-weight: 700;
+      line-height: 1.4;
+      color: var(--text);
+      margin-bottom: 10px;
+    }
+
+    .article-read-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 12px;
+      font-weight: 800;
+      color: var(--blue);
+    }
+    .article-read-btn .msym { font-size: 14px; }
+
+    .article-lock {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 11px;
+      font-weight: 800;
+      color: var(--muted);
+      background: var(--bg);
+      padding: 4px 10px;
+      border-radius: 100px;
+    }
+    .article-lock .msym { font-size: 13px; }
 
     /* SKELETON */
-    .skeleton-list { padding: 16px 16px 0; display: flex; flex-direction: column; gap: 10px; }
-    .skeleton-card { background: var(--card); border-radius: 18px; border: 1px solid var(--border); padding: 14px 16px; }
-    .skel { background: linear-gradient(90deg, #F3F4F6 25%, #E5E7EB 50%, #F3F4F6 75%); background-size: 200% 100%; animation: shimmer 1.4s infinite; border-radius: 6px; }
+    .skeleton-card {
+      background: var(--card);
+      border-radius: 16px;
+      padding: 14px 16px;
+      margin-bottom: 10px;
+      border: 1.5px solid var(--border);
+    }
+    .skel-line {
+      border-radius: 6px;
+      background: linear-gradient(90deg, #f0f0f0 25%, #e4e4e4 50%, #f0f0f0 75%);
+      background-size: 200% 100%;
+      animation: shimmer 1.4s infinite;
+    }
     @keyframes shimmer { 0%{background-position:200% 0} 100%{background-position:-200% 0} }
-    .skel-meta { height: 16px; width: 120px; margin-bottom: 10px; }
-    .skel-title { height: 14px; width: 100%; margin-bottom: 6px; }
-    .skel-title.short { width: 75%; }
-    .skel-btn { height: 12px; width: 60px; margin-top: 10px; }
+    .skel-meta   { height: 10px; width: 55%; margin-bottom: 10px; }
+    .skel-t1     { height: 14px; width: 96%; margin-bottom: 6px; }
+    .skel-t2     { height: 14px; width: 72%; margin-bottom: 10px; }
+    .skel-action { height: 10px; width: 28%; }
 
-    /* ERROR / EMPTY */
-    .error-box { margin: 20px 16px; background: var(--card); border-radius: 18px; border: 1px solid var(--border); padding: 24px; text-align: center; }
-    .error-icon { font-size: 32px; margin-bottom: 12px; }
-    .error-title { font-size: 14px; font-weight: 800; color: var(--text); margin-bottom: 6px; }
-    .error-sub { font-size: 12px; color: var(--muted); font-weight: 500; line-height: 1.5; }
-    .retry-btn { margin-top: 16px; background: var(--blue); color: #fff; font-family: inherit; font-size: 12px; font-weight: 800; padding: 10px 20px; border-radius: 12px; border: none; cursor: pointer; }
+    /* PREMIUM BANNER */
+    .premium-banner {
+      background: linear-gradient(135deg, #003DA6 0%, #0057B7 100%);
+      border-radius: 16px;
+      padding: 18px;
+      margin-top: 4px;
+      text-align: center;
+    }
+    .pb-icon  { font-size: 28px; margin-bottom: 8px; }
+    .pb-title { font-size: 14px; font-weight: 900; color: #fff; margin-bottom: 4px; }
+    .pb-sub   { font-size: 11px; color: rgba(255,255,255,0.65); margin-bottom: 14px; line-height: 1.5; }
+    .pb-btn {
+      display: inline-block;
+      background: var(--yellow);
+      color: #5A3800;
+      font-family: inherit;
+      font-size: 12px;
+      font-weight: 900;
+      padding: 9px 22px;
+      border-radius: 100px;
+      text-decoration: none;
+    }
+
+    /* ERROR STATE */
+    .error-state {
+      text-align: center;
+      padding: 48px 20px;
+    }
+    .error-icon  { font-size: 44px; margin-bottom: 12px; }
+    .error-title { font-size: 15px; font-weight: 800; margin-bottom: 6px; }
+    .error-sub   { font-size: 13px; color: var(--muted); margin-bottom: 18px; line-height: 1.5; }
+    .error-retry {
+      background: var(--blue);
+      color: #fff;
+      border: none;
+      font-family: inherit;
+      font-size: 13px;
+      font-weight: 700;
+      padding: 11px 26px;
+      border-radius: 100px;
+      cursor: pointer;
+    }
+
+    /* PREMIUM MODAL */
+    .modal-overlay {
+      position: fixed; inset: 0;
+      background: rgba(0,0,0,0.5);
+      z-index: 100;
+      display: flex; align-items: flex-end; justify-content: center;
+    }
+    .modal-card {
+      background: var(--card);
+      border-radius: 24px 24px 0 0;
+      padding: 28px 24px 44px;
+      max-width: 390px;
+      width: 100%;
+      text-align: center;
+    }
+    .modal-icon  { font-size: 42px; margin-bottom: 12px; }
+    .modal-title { font-size: 18px; font-weight: 900; margin-bottom: 8px; }
+    .modal-text  { font-size: 13px; color: var(--muted); line-height: 1.6; margin-bottom: 20px; }
+    .modal-cta {
+      display: block;
+      background: linear-gradient(135deg, #003DA6, #0057B7);
+      color: #fff;
+      font-family: inherit;
+      font-size: 14px;
+      font-weight: 900;
+      padding: 15px;
+      border-radius: 14px;
+      text-decoration: none;
+      margin-bottom: 10px;
+    }
+    .modal-close {
+      background: none; border: none;
+      font-family: inherit; font-size: 13px;
+      color: var(--muted); cursor: pointer; padding: 8px;
+    }
 
     /* FAB */
-    .fab { position: fixed; bottom: 90px; right: calc(50% - 185px); width: 52px; height: 52px; background: linear-gradient(145deg, #1270D8, #003DA6); border-radius: 18px; display: flex; align-items: center; justify-content: center; box-shadow: 0 6px 20px rgba(0,87,183,0.45); cursor: pointer; z-index: 40; text-decoration: none; }
+    .fab {
+      position: fixed; bottom: 90px; right: calc(50% - 185px);
+      width: 52px; height: 52px;
+      background: linear-gradient(145deg, #1270D8, #003DA6);
+      border-radius: 18px;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 6px 20px rgba(0,87,183,0.45);
+      cursor: pointer; z-index: 40;
+    }
     .fab .msym { color: #fff; font-size: 24px; }
 
     /* NAV */
-    nav { position: fixed; bottom: 0; left: 50%; transform: translateX(-50%); width: 100%; max-width: 390px; background: rgba(255,255,255,0.98); backdrop-filter: blur(20px); border-top: 1px solid var(--border); border-radius: 24px 24px 0 0; padding: 10px 8px 24px; display: flex; justify-content: space-around; z-index: 50; }
-    .nav-item { display: flex; flex-direction: column; align-items: center; gap: 4px; text-decoration: none; flex: 1; }
-    .nav-pill { padding: 6px 16px; border-radius: 100px; display: flex; align-items: center; justify-content: center; }
+    nav {
+      position: fixed; bottom: 0; left: 50%; transform: translateX(-50%);
+      width: 100%; max-width: 390px;
+      background: rgba(255,255,255,0.98);
+      backdrop-filter: blur(20px);
+      border-top: 1px solid var(--border);
+      border-radius: 24px 24px 0 0;
+      padding: 10px 8px 24px;
+      display: flex; justify-content: space-around;
+      z-index: 50;
+    }
+    .nav-item {
+      display: flex; flex-direction: column; align-items: center; gap: 4px;
+      text-decoration: none; flex: 1;
+    }
+    .nav-pill {
+      padding: 6px 16px; border-radius: 100px;
+      display: flex; align-items: center; justify-content: center;
+    }
     .nav-item.active .nav-pill { background: var(--blue-soft); }
     .nav-item.active .msym { color: var(--blue); font-size: 23px; }
     .nav-item:not(.active) .msym { color: var(--muted); font-size: 23px; font-variation-settings: 'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 24; }
@@ -104,211 +398,449 @@
 </head>
 <body>
 
-<div class="flag-bar"></div>
+  <div class="flag-bar"></div>
 
-<header>
-  <div class="logo">Refugee<em>Guide</em> <span style="font-size:13px;font-weight:700;color:var(--muted);">/ Новини</span></div>
-  <div class="refresh-btn" id="refreshBtn" onclick="loadNews(true)">
-    <span class="msym o" style="font-size:19px;">refresh</span>
+  <header>
+    <div class="header-top">
+      <a href="1final_colorful.html" class="back-btn">
+        <span class="msym o">arrow_back</span>
+      </a>
+      <div class="header-title">Новини</div>
+      <button class="refresh-btn" id="refresh-btn" onclick="triggerRefresh()">
+        <span class="msym">refresh</span>
+      </button>
+    </div>
+    <div class="header-status">
+      <div class="live-dot" id="live-dot"></div>
+      <span class="status-text" id="status-text">Завантаження...</span>
+    </div>
+  </header>
+
+  <div class="filter-bar">
+    <button class="filter-tab active" data-filter="all" onclick="setFilter('all')">&#127760; &#1042;&#1089;&#1110;</button>
+    <button class="filter-tab" data-filter="status" onclick="setFilter('status')">
+      &#128737;&#65039; &#1047;&#1072;&#1093;&#1080;&#1089;&#1090;
+      <span class="health-dot" id="health-status"></span>
+    </button>
+    <button class="filter-tab" data-filter="ukraine" onclick="setFilter('ukraine')">
+      &#127482;&#127462; &#1059;&#1082;&#1088;&#1072;&#1111;&#1085;&#1072;
+      <span class="health-dot" id="health-ukraine"></span>
+    </button>
+    <button class="filter-tab" data-filter="netherlands" onclick="setFilter('netherlands')">
+      &#127475;&#127473; &#1053;&#1110;&#1076;&#1077;&#1088;&#1083;&#1072;&#1085;&#1076;&#1080;
+      <span class="health-dot" id="health-netherlands"></span>
+    </button>
   </div>
-</header>
 
-<div class="filter-bar">
-  <div class="filter-tab active-all" data-cat="all" onclick="setFilter('all')">🌐 Всі</div>
-  <div class="filter-tab" data-cat="ua" onclick="setFilter('ua')">🇺🇦 Україна</div>
-  <div class="filter-tab" data-cat="nl" onclick="setFilter('nl')">🇳🇱 Нідерланди</div>
-</div>
+  <main>
+    <div id="articles-container"></div>
+    <div id="premium-banner" style="display:none;" class="premium-banner">
+      <div class="pb-icon">&#128275;</div>
+      <div class="pb-title">&#1063;&#1080;&#1090;&#1072;&#1081;&#1090;&#1077; &#1087;&#1086;&#1074;&#1085;&#1110; &#1089;&#1090;&#1072;&#1090;&#1090;&#1110;</div>
+      <div class="pb-sub">&#1042;&#1110;&#1076;&#1082;&#1088;&#1080;&#1081;&#1090;&#1077; &#1076;&#1086;&#1089;&#1090;&#1091;&#1087; &#1076;&#1086; &#1074;&#1089;&#1110;&#1093; &#1085;&#1086;&#1074;&#1080;&#1085;<br>&#1090;&#1072; &#1087;&#1077;&#1088;&#1096;&#1086;&#1076;&#1078;&#1077;&#1088;&#1077;&#1083; &#1073;&#1077;&#1079; &#1086;&#1073;&#1084;&#1077;&#1078;&#1077;&#1085;&#1100;</div>
+      <a href="profile.html" class="pb-btn">&#1040;&#1082;&#1090;&#1080;&#1074;&#1091;&#1074;&#1072;&#1090;&#1080; &#1087;&#1088;&#1077;&#1084;&#1110;&#1091;&#1084; &#8212; &#8364;4.99/&#1084;&#1110;&#1089;</a>
+    </div>
+  </main>
 
-<div class="live-strip">
-  <div class="live-dot"></div>
-  <div class="live-text">Оновлюється автоматично</div>
-  <div class="live-time" id="lastUpdated">—</div>
-</div>
+  <!-- PREMIUM MODAL -->
+  <div class="modal-overlay" id="premium-modal" style="display:none;" onclick="handleModalOverlayClick(event)">
+    <div class="modal-card">
+      <div class="modal-icon">&#128274;</div>
+      <div class="modal-title">&#1055;&#1088;&#1077;&#1084;&#1110;&#1091;&#1084; &#1082;&#1086;&#1085;&#1090;&#1077;&#1085;&#1090;</div>
+      <div class="modal-text">&#1063;&#1080;&#1090;&#1072;&#1081;&#1090;&#1077; &#1087;&#1086;&#1074;&#1085;&#1110; &#1089;&#1090;&#1072;&#1090;&#1090;&#1110; &#1090;&#1072; &#1087;&#1077;&#1088;&#1077;&#1093;&#1086;&#1076;&#1100;&#1090;&#1077; &#1076;&#1086; &#1087;&#1077;&#1088;&#1096;&#1086;&#1076;&#1078;&#1077;&#1088;&#1077;&#1083; &#1085;&#1077;&#1086;&#1073;&#1084;&#1077;&#1078;&#1077;&#1085;&#1086;. &#1042;&#1089;&#1110; &#1085;&#1086;&#1074;&#1080;&#1085;&#1080;, &#1097;&#1086; &#1089;&#1090;&#1086;&#1089;&#1091;&#1102;&#1090;&#1100;&#1089;&#1103; &#1089;&#1072;&#1084;&#1077; &#1074;&#1072;&#1089;.</div>
+      <a href="profile.html" class="modal-cta">&#1054;&#1090;&#1088;&#1080;&#1084;&#1072;&#1090;&#1080; &#1076;&#1086;&#1089;&#1090;&#1091;&#1087; &#8212; &#8364;4.99/&#1084;&#1110;&#1089;</a>
+      <button class="modal-close" onclick="closePremiumModal()">&#1053;&#1077; &#1079;&#1072;&#1088;&#1072;&#1079;</button>
+    </div>
+  </div>
 
-<main id="mainContent">
-  <!-- populated by JS -->
-</main>
+  <div class="fab"><span class="msym">chat_bubble</span></div>
 
-<a href="#" class="fab"><span class="msym">chat_bubble</span></a>
+  <nav>
+    <a href="1final_colorful.html" class="nav-item">
+      <div class="nav-pill"><span class="msym">home</span></div>
+      <span class="nav-lbl">&#1043;&#1086;&#1083;&#1086;&#1074;&#1085;&#1072;</span>
+    </a>
+    <a href="search.html" class="nav-item">
+      <div class="nav-pill"><span class="msym">explore</span></div>
+      <span class="nav-lbl">&#1054;&#1075;&#1083;&#1103;&#1076;</span>
+    </a>
+    <a href="saved.html" class="nav-item">
+      <div class="nav-pill"><span class="msym">bookmark</span></div>
+      <span class="nav-lbl">&#1047;&#1073;&#1077;&#1088;&#1077;&#1078;&#1077;&#1085;&#1110;</span>
+    </a>
+    <a href="profile.html" class="nav-item">
+      <div class="nav-pill"><span class="msym">person</span></div>
+      <span class="nav-lbl">&#1055;&#1088;&#1086;&#1092;&#1110;&#1083;&#1100;</span>
+    </a>
+  </nav>
 
-<nav>
-  <a href="1final_colorful.html" class="nav-item">
-    <div class="nav-pill"><span class="msym o">home</span></div>
-    <span class="nav-lbl">Головна</span>
-  </a>
-  <a href="search.html" class="nav-item">
-    <div class="nav-pill"><span class="msym o">explore</span></div>
-    <span class="nav-lbl">Огляд</span>
-  </a>
-  <a href="saved.html" class="nav-item">
-    <div class="nav-pill"><span class="msym o">bookmark</span></div>
-    <span class="nav-lbl">Збережені</span>
-  </a>
-  <a href="profile.html" class="nav-item">
-    <div class="nav-pill"><span class="msym o">person</span></div>
-    <span class="nav-lbl">Профіль</span>
-  </a>
-</nav>
+  <script>
+    // =====================================================
+    // FEED CONFIGURATION
+    // =====================================================
+    const PROXY = url =>
+      'https://api.rss2json.com/v1/api.json?count=15&rss_url=' + encodeURIComponent(url);
 
-<script>
-const RSS2JSON = 'https://api.rss2json.com/v1/api.json?count=12&rss_url=';
+    const FEEDS = {
+      status: {
+        id: 'status',
+        label: 'Захист і статус',
+        accentColor: '#0057B7',
+        keywords: ['oekrain','bescherming','ind','coa','vluchtelingen','refugee',
+                   'tijdelijke','verblijf','asiel','opvang','ukraine','displaced'],
+        primary:  'https://news.google.com/rss/search?q=tijdelijke+bescherming+Oekraine+IND+COA&hl=nl&gl=NL&ceid=NL:nl',
+        fallback: 'https://news.google.com/rss/search?q=ukraine+refugees+netherlands&hl=en&gl=NL&ceid=NL:en'
+      },
+      ukraine: {
+        id: 'ukraine',
+        label: 'Суспільне',
+        accentColor: '#DC2626',
+        keywords: ['україн','київ',
+                   'харків','зеленсь',
+                   'окупац','збройн',
+                   'фронт','війн','ukraine','kyiv'],
+        primary:  'https://suspilne.media/rss/all.xml',
+        fallback: 'https://www.pravda.com.ua/rss/view_news/'
+      },
+      netherlands: {
+        id: 'netherlands',
+        label: 'Нідерланди',
+        accentColor: '#15803D',
+        keywords: ['oekrain','nederland','wonen','uitkering','werk','bijstand',
+                   'opvang','ukraine','housing','benefits','work','integration'],
+        primary:  'https://news.google.com/rss/search?q=Oekraine+Nederland+wonen+uitkering&hl=nl&gl=NL&ceid=NL:nl',
+        fallback: 'https://news.google.com/rss/search?q=ukraine+netherlands+housing+work&hl=en&gl=NL&ceid=NL:en'
+      }
+    };
 
-const FEEDS = [
-  {
-    url: 'https://www.ukrinform.ua/rss/block-lastnews',
-    cat: 'ua', source: 'Укрінформ', flag: '🇺🇦'
-  },
-  {
-    url: 'https://www.pravda.com.ua/rss/view_news/',
-    cat: 'ua', source: 'Укр. Правда', flag: '📰'
-  },
-  {
-    url: 'https://suspilne.media/rss/all.xml',
-    cat: 'ua', source: 'Суспільне', flag: '📺'
-  },
-  {
-    url: 'https://nltimes.nl/rss.xml',
-    cat: 'nl', source: 'NL Times', flag: '🇳🇱'
-  },
-  {
-    url: 'https://www.dutchnews.nl/feed/',
-    cat: 'nl', source: 'DutchNews', flag: '🇳🇱'
-  }
-];
+    // =====================================================
+    // STATE
+    // =====================================================
+    var allArticles  = [];
+    var feedHealth   = { status: null, ukraine: null, netherlands: null };
+    var activeFilter = 'all';
+    var isLoading    = false;
+    var isPremium    = localStorage.getItem('isPremium') === 'true';
 
-let allArticles = [];
-let currentFilter = 'all';
+    // =====================================================
+    // HTTP — fetch with timeout (broad browser compatibility)
+    // =====================================================
+    function fetchWithTimeout(url, ms) {
+      ms = ms || 8000;
+      var ctrl = new AbortController();
+      var id   = setTimeout(function() { ctrl.abort(); }, ms);
+      return fetch(url, { signal: ctrl.signal }).finally(function() { clearTimeout(id); });
+    }
 
-function setFilter(cat) {
-  currentFilter = cat;
-  document.querySelectorAll('.filter-tab').forEach(t => {
-    t.className = 'filter-tab';
-    if (t.dataset.cat === cat) t.classList.add('active-' + cat);
-  });
-  render();
-}
+    // =====================================================
+    // FEED LOADER — primary then fallback then empty
+    // =====================================================
+    function loadFeedWithFallback(feedCfg) {
+      return fetchWithTimeout(PROXY(feedCfg.primary))
+        .then(function(res) { return res.json(); })
+        .then(function(data) {
+          if (data.status === 'ok' && data.items && data.items.length > 0) {
+            return { items: data.items, health: 'green', usedFallback: false };
+          }
+          throw new Error('empty');
+        })
+        .catch(function() {
+          return fetchWithTimeout(PROXY(feedCfg.fallback))
+            .then(function(res) { return res.json(); })
+            .then(function(data) {
+              if (data.status === 'ok' && data.items && data.items.length > 0) {
+                return { items: data.items, health: 'amber', usedFallback: true };
+              }
+              throw new Error('empty');
+            })
+            .catch(function() {
+              return { items: [], health: 'red', usedFallback: false };
+            });
+        });
+    }
 
-function timeAgo(dateStr) {
-  const diff = (Date.now() - new Date(dateStr)) / 60000;
-  if (diff < 1)   return 'щойно';
-  if (diff < 60)  return Math.floor(diff) + ' хв тому';
-  if (diff < 1440) return Math.floor(diff / 60) + ' год тому';
-  return Math.floor(diff / 1440) + ' дн тому';
-}
+    // =====================================================
+    // VALIDATION AGENTS — 5 agents, run in parallel
+    // =====================================================
 
-function strip(html) {
-  return html ? html.replace(/<[^>]*>/g, '').replace(/&amp;/g,'&').replace(/&quot;/g,'"').replace(/&#039;/g,"'").replace(/&lt;/g,'<').replace(/&gt;/g,'>').trim() : '';
-}
+    // Agent A: Reachability
+    function agentA_reachability(result) {
+      var ok = result.health !== 'red';
+      console.log('[Agent A — Reachability] ' + (ok ? '✅' : '❌') + ' health=' + result.health);
+      return ok;
+    }
 
-function cardHTML(article, featured) {
-  const badgeClass = article.cat === 'ua' ? 'badge-ua' : 'badge-nl';
-  const title = strip(article.title);
-  return `
-    <a href="${article.link}" target="_blank" class="news-card${featured ? ' featured' : ''}">
-      <div class="news-card-body">
-        <div class="news-meta">
-          <span class="source-badge ${badgeClass}">${article.flag} ${article.source}</span>
-          <span class="news-time">${timeAgo(article.pubDate)}</span>
-        </div>
-        <div class="news-title">${title}</div>
-        <div class="news-footer">
-          <span class="read-btn"><span class="msym o" style="font-size:14px;">open_in_new</span> Читати</span>
-        </div>
-      </div>
-    </a>`;
-}
+    // Agent B: Freshness — latest article < 48 hours old
+    function agentB_freshness(items) {
+      if (!items || !items.length) {
+        console.log('[Agent B — Freshness] ❌ No items');
+        return false;
+      }
+      var hoursOld = (Date.now() - new Date(items[0].pubDate).getTime()) / 3600000;
+      var ok = hoursOld < 48;
+      console.log('[Agent B — Freshness] ' + (ok ? '✅' : '⚠️') + ' ' + hoursOld.toFixed(1) + 'h ago');
+      return ok;
+    }
 
-function skeletonHTML(n) {
-  return '<div class="skeleton-list">' + Array(n).fill(`
-    <div class="skeleton-card">
-      <div class="skel skel-meta"></div>
-      <div class="skel skel-title"></div>
-      <div class="skel skel-title short"></div>
-      <div class="skel skel-btn"></div>
-    </div>`).join('') + '</div>';
-}
+    // Agent C: Relevance — >20% of titles contain expected keywords
+    function agentC_relevance(items, keywords) {
+      if (!items || !items.length) {
+        console.log('[Agent C — Relevance] ❌ No items');
+        return false;
+      }
+      var matches = items.filter(function(item) {
+        var text = ((item.title || '') + ' ' + (item.description || '')).toLowerCase();
+        return keywords.some(function(kw) { return text.indexOf(kw.toLowerCase()) !== -1; });
+      });
+      var ratio = matches.length / items.length;
+      var ok = ratio >= 0.2;
+      console.log('[Agent C — Relevance] ' + (ok ? '✅' : '⚠️') + ' ' + matches.length + '/' + items.length + ' (' + (ratio * 100).toFixed(0) + '%)');
+      return ok;
+    }
 
-function render() {
-  const filtered = currentFilter === 'all'
-    ? allArticles
-    : allArticles.filter(a => a.cat === currentFilter);
+    // Agent D: Link validity — article links start with http
+    function agentD_links(items) {
+      if (!items || !items.length) {
+        console.log('[Agent D — Links] ❌ No items');
+        return false;
+      }
+      var bad = items.slice(0, 5).filter(function(item) { return !item.link || item.link.indexOf('http') !== 0; }).length;
+      var ok  = bad === 0;
+      console.log('[Agent D — Links] ' + (ok ? '✅' : '⚠️') + ' ' + bad + ' bad links in first 5');
+      return ok;
+    }
 
-  const main = document.getElementById('mainContent');
+    // Agent E: Freemium gate — correct state after render
+    function agentE_freemiumGate() {
+      var readBtns = document.querySelectorAll('.article-read-btn').length;
+      var locks    = document.querySelectorAll('.article-lock').length;
+      var ok = isPremium ? (readBtns > 0 && locks === 0) : (locks > 0 && readBtns === 0);
+      console.log('[Agent E — Freemium gate] ' + (ok ? '✅' : '❌') + ' isPremium=' + isPremium + ' readBtns=' + readBtns + ' locks=' + locks);
+      return ok;
+    }
 
-  if (filtered.length === 0) {
-    main.innerHTML = `<div class="error-box">
-      <div class="error-icon">📭</div>
-      <div class="error-title">Новин не знайдено</div>
-      <div class="error-sub">Спробуй іншу категорію або оновити стрічку.</div>
-    </div>`;
-    return;
-  }
+    // Run Agents A-D in parallel, return aggregate health label
+    function runValidationAgents(feedId, result) {
+      return Promise.all([
+        Promise.resolve(agentA_reachability(result)),
+        Promise.resolve(agentB_freshness(result.items)),
+        Promise.resolve(agentC_relevance(result.items, FEEDS[feedId].keywords)),
+        Promise.resolve(agentD_links(result.items))
+      ]).then(function(results) {
+        var a = results[0], b = results[1], c = results[2], d = results[3];
+        if (!a) return 'red';
+        if (b && c && d) return 'green';
+        return 'amber';
+      });
+    }
 
-  const catLabel = currentFilter === 'ua' ? '🇺🇦 Україна'
-                 : currentFilter === 'nl' ? '🇳🇱 Нідерланди'
-                 : '🌐 Всі джерела';
+    // =====================================================
+    // MAIN LOAD ORCHESTRATOR
+    // =====================================================
+    function loadAllFeeds() {
+      if (isLoading) return;
+      isLoading = true;
+      setRefreshLoading(true);
+      setStatusLoading();
+      showSkeleton();
 
-  let html = `<div class="sec-header">
-    <span class="sec-label">${catLabel}</span>
-    <span class="sec-count">${filtered.length}</span>
-  </div><div class="news-list">`;
+      var feedKeys = Object.keys(FEEDS);
 
-  filtered.forEach((a, i) => { html += cardHTML(a, i === 0); });
-  html += '</div>';
-  main.innerHTML = html;
-}
+      // Load all 3 feeds in parallel
+      Promise.allSettled(
+        feedKeys.map(function(key) { return loadFeedWithFallback(FEEDS[key]); })
+      ).then(function(loadResults) {
+        allArticles = [];
 
-async function fetchFeed(feed) {
-  const res = await fetch(RSS2JSON + encodeURIComponent(feed.url), { signal: AbortSignal.timeout(8000) });
-  if (!res.ok) throw new Error('HTTP ' + res.status);
-  const data = await res.json();
-  if (data.status !== 'ok') throw new Error('Feed error');
-  return (data.items || []).map(item => ({
-    title:   item.title,
-    link:    item.link,
-    pubDate: item.pubDate,
-    cat:     feed.cat,
-    source:  feed.source,
-    flag:    feed.flag
-  }));
-}
+        // Run validation agents in parallel for each feed, collect articles
+        return Promise.allSettled(
+          feedKeys.map(function(key, i) {
+            var result = loadResults[i].status === 'fulfilled'
+              ? loadResults[i].value
+              : { items: [], health: 'red', usedFallback: false };
 
-async function loadNews(manual = false) {
-  const btn = document.getElementById('refreshBtn');
-  const main = document.getElementById('mainContent');
-  btn.classList.add('spinning');
-  if (allArticles.length === 0 || manual) {
-    main.innerHTML = skeletonHTML(5);
-  }
+            return runValidationAgents(key, result).then(function(health) {
+              feedHealth[key] = health;
+              (result.items || []).forEach(function(item) {
+                allArticles.push(Object.assign({}, item, { feedId: key }));
+              });
+            });
+          })
+        );
+      }).then(function() {
+        allArticles.sort(function(a, b) { return new Date(b.pubDate) - new Date(a.pubDate); });
+        isLoading = false;
+        setRefreshLoading(false);
+        updateHealthIndicators();
+        updateStatusText();
+        renderArticles();
+        setTimeout(agentE_freemiumGate, 150);
+      });
+    }
 
-  const results = await Promise.allSettled(FEEDS.map(fetchFeed));
-  const fresh = results
-    .filter(r => r.status === 'fulfilled')
-    .flatMap(r => r.value)
-    .sort((a, b) => new Date(b.pubDate) - new Date(a.pubDate));
+    // =====================================================
+    // RENDER
+    // =====================================================
+    function showSkeleton() {
+      var html = '';
+      for (var i = 0; i < 6; i++) {
+        html += '<div class="skeleton-card">' +
+          '<div class="skel-line skel-meta"></div>' +
+          '<div class="skel-line skel-t1"></div>' +
+          '<div class="skel-line skel-t2"></div>' +
+          '<div class="skel-line skel-action"></div>' +
+          '</div>';
+      }
+      document.getElementById('articles-container').innerHTML = html;
+    }
 
-  btn.classList.remove('spinning');
+    function renderArticles() {
+      var container = document.getElementById('articles-container');
+      var banner    = document.getElementById('premium-banner');
 
-  if (fresh.length === 0) {
-    main.innerHTML = `<div class="error-box">
-      <div class="error-icon">📡</div>
-      <div class="error-title">Не вдалось завантажити новини</div>
-      <div class="error-sub">Перевір з'єднання з інтернетом і спробуй ще раз.</div>
-      <button class="retry-btn" onclick="loadNews(true)">Спробувати знову</button>
-    </div>`;
-    return;
-  }
+      var filtered = activeFilter === 'all'
+        ? allArticles
+        : allArticles.filter(function(a) { return a.feedId === activeFilter; });
 
-  allArticles = fresh;
-  const now = new Date();
-  document.getElementById('lastUpdated').textContent =
-    'Оновлено ' + now.getHours().toString().padStart(2,'0') + ':' + now.getMinutes().toString().padStart(2,'0');
-  render();
-}
+      if (!filtered.length) {
+        var allFailed = Object.keys(feedHealth).every(function(k) { return feedHealth[k] === 'red'; });
+        container.innerHTML =
+          '<div class="error-state">' +
+          '<div class="error-icon">' + (allFailed ? '📡' : '😔') + '</div>' +
+          '<div class="error-title">' + (allFailed ? 'Немає зʼєднання' : 'Немає статей') + '</div>' +
+          '<div class="error-sub">' + (allFailed
+            ? 'Перевірте підключення до інтернету і спробуйте знову'
+            : 'Спробуйте іншу категорію або оновіть пізніше') + '</div>' +
+          '<button class="error-retry" onclick="loadAllFeeds()">Спробувати знову</button>' +
+          '</div>';
+        banner.style.display = 'none';
+        return;
+      }
 
-// Auto-refresh every 10 minutes
-loadNews();
-setInterval(loadNews, 10 * 60 * 1000);
-</script>
+      container.innerHTML = filtered.map(function(item, i) {
+        return renderArticleCard(item, i === 0 && activeFilter === 'all');
+      }).join('');
+
+      banner.style.display = isPremium ? 'none' : 'block';
+    }
+
+    function renderArticleCard(item, isFeatured) {
+      var feed      = FEEDS[item.feedId];
+      var title     = strip(item.title);
+      var timeStr   = timeAgo(item.pubDate);
+      var source    = strip(item.author || feed.label);
+      var featured  = isFeatured ? ' featured' : '';
+
+      var meta =
+        '<div class="article-meta">' +
+        '<span class="cat-dot" style="background:' + feed.accentColor + '"></span>' +
+        '<span class="article-source">' + source + '</span>' +
+        '<span class="article-time">' + timeStr + '</span>' +
+        '</div>' +
+        '<div class="article-title">' + title + '</div>';
+
+      if (isPremium) {
+        return '<a href="' + item.link + '" target="_blank" rel="noopener noreferrer" ' +
+          'class="article-card article-unlocked' + featured + '">' +
+          meta +
+          '<div class="article-read-btn">Читати <span class="msym">arrow_forward</span></div>' +
+          '</a>';
+      } else {
+        return '<div class="article-card article-locked' + featured + '" onclick="showPremiumModal()">' +
+          meta +
+          '<div class="article-lock"><span class="msym">lock</span> Преміум</div>' +
+          '</div>';
+      }
+    }
+
+    // =====================================================
+    // HELPERS
+    // =====================================================
+    function strip(html) {
+      return (html || '')
+        .replace(/<[^>]*>/g, '')
+        .replace(/&amp;/g,  '&')
+        .replace(/&lt;/g,   '<')
+        .replace(/&gt;/g,   '>')
+        .replace(/&quot;/g, '"')
+        .replace(/&#39;/g,  "'")
+        .replace(/&nbsp;/g, ' ')
+        .trim();
+    }
+
+    function timeAgo(dateStr) {
+      var diff  = Date.now() - new Date(dateStr).getTime();
+      var mins  = Math.floor(diff / 60000);
+      var hours = Math.floor(diff / 3600000);
+      var days  = Math.floor(diff / 86400000);
+      if (mins < 2)   return 'щойно';
+      if (mins < 60)  return mins + ' хв тому';
+      if (hours < 24) return hours + ' год тому';
+      return days + ' дн тому';
+    }
+
+    function updateHealthIndicators() {
+      Object.keys(feedHealth).forEach(function(key) {
+        var dot = document.getElementById('health-' + key);
+        if (dot) dot.className = 'health-dot ' + (feedHealth[key] || '');
+      });
+    }
+
+    function updateStatusText() {
+      var allRed   = Object.keys(feedHealth).every(function(k) { return feedHealth[k] === 'red'; });
+      var anyAmber = Object.keys(feedHealth).some(function(k) { return feedHealth[k] === 'amber'; });
+      var dot  = document.getElementById('live-dot');
+      var text = document.getElementById('status-text');
+
+      if (allRed) {
+        dot.className    = 'live-dot error';
+        text.textContent = 'Помилка завантаження';
+      } else {
+        var now = new Date();
+        var hh  = String(now.getHours()).padStart(2, '0');
+        var mm  = String(now.getMinutes()).padStart(2, '0');
+        dot.className    = 'live-dot';
+        text.textContent = 'Оновлено ' + hh + ':' + mm + (anyAmber ? ' (часткові дані)' : '');
+      }
+    }
+
+    function setStatusLoading() {
+      document.getElementById('live-dot').className = 'live-dot loading';
+      document.getElementById('status-text').textContent = 'Завантаження...';
+    }
+
+    function setRefreshLoading(loading) {
+      document.getElementById('refresh-btn').classList.toggle('loading', loading);
+    }
+
+    function setFilter(filter) {
+      activeFilter = filter;
+      document.querySelectorAll('.filter-tab').forEach(function(btn) {
+        btn.classList.toggle('active', btn.dataset.filter === filter);
+      });
+      renderArticles();
+    }
+
+    function triggerRefresh() { loadAllFeeds(); }
+
+    function showPremiumModal() {
+      document.getElementById('premium-modal').style.display = 'flex';
+    }
+
+    function closePremiumModal() {
+      document.getElementById('premium-modal').style.display = 'none';
+    }
+
+    function handleModalOverlayClick(e) {
+      if (e.target === document.getElementById('premium-modal')) closePremiumModal();
+    }
+
+    // =====================================================
+    // INIT + AUTO-REFRESH every 10 minutes
+    // =====================================================
+    loadAllFeeds();
+    setInterval(loadAllFeeds, 10 * 60 * 1000);
+  </script>
+
 </body>
 </html>
