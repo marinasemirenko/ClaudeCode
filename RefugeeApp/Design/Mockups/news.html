@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Новини — RefugeeGuide</title>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #F8F9FA; --card: #FFFFFF; --text: #111827; --muted: #6B7280;
+      --border: #E5E2DA; --blue: #0057B7; --blue-dark: #003DA6; --blue-soft: #E8F0FF;
+      --yellow: #FCD400;
+      --ua-blue: #0057B7; --ua-yellow: #FCD400;
+      --nl-red: #AE1C28; --nl-blue: #21468B;
+    }
+    body { font-family: 'Manrope', sans-serif; background: var(--bg); color: var(--text); max-width: 390px; margin: 0 auto; min-height: 100vh; }
+    .msym { font-family: 'Material Symbols Outlined'; font-variation-settings: 'FILL' 1,'wght' 400,'GRAD' 0,'opsz' 24; font-size: 22px; line-height: 1; }
+    .msym.o { font-variation-settings: 'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 24; }
+    .flag-bar { height: 3px; background: linear-gradient(90deg, var(--blue) 50%, var(--yellow) 50%); }
+
+    /* HEADER */
+    header { background: var(--card); padding: 14px 18px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 50; }
+    .logo { font-size: 18px; font-weight: 900; color: var(--blue); letter-spacing: -0.5px; }
+    .logo em { color: #8B6900; font-style: normal; }
+    .refresh-btn { width: 36px; height: 36px; border-radius: 50%; background: var(--bg); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; cursor: pointer; color: var(--muted); }
+    .refresh-btn.spinning .msym { animation: spin 1s linear infinite; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* FILTER TABS */
+    .filter-bar { background: var(--card); padding: 0 16px 12px; border-bottom: 1px solid var(--border); display: flex; gap: 8px; position: sticky; top: 57px; z-index: 40; }
+    .filter-tab { padding: 7px 16px; border-radius: 100px; font-size: 12px; font-weight: 800; cursor: pointer; border: 1.5px solid var(--border); background: var(--bg); color: var(--muted); white-space: nowrap; transition: all 0.15s; }
+    .filter-tab.active-all  { background: var(--blue); border-color: var(--blue); color: #fff; }
+    .filter-tab.active-ua   { background: #0057B7; border-color: #0057B7; color: #fff; }
+    .filter-tab.active-nl   { background: #21468B; border-color: #21468B; color: #fff; }
+
+    /* LIVE INDICATOR */
+    .live-strip { background: #111827; padding: 8px 18px; display: flex; align-items: center; gap: 8px; }
+    .live-dot { width: 7px; height: 7px; border-radius: 50%; background: #22C55E; animation: blink 2s infinite; flex-shrink: 0; }
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.25} }
+    .live-text { font-size: 11px; font-weight: 800; color: rgba(255,255,255,0.7); flex: 1; }
+    .live-time { font-size: 10px; font-weight: 700; color: rgba(255,255,255,0.4); }
+
+    /* MAIN */
+    main { padding-bottom: 110px; }
+
+    /* SECTION LABEL */
+    .sec-header { padding: 14px 16px 8px; display: flex; align-items: center; justify-content: space-between; }
+    .sec-label { font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.12em; color: var(--muted); }
+    .sec-count { font-size: 11px; font-weight: 700; color: var(--muted); background: var(--bg); border: 1px solid var(--border); border-radius: 100px; padding: 2px 8px; }
+
+    /* NEWS CARD */
+    .news-list { padding: 0 16px; display: flex; flex-direction: column; gap: 10px; }
+    .news-card { background: var(--card); border-radius: 18px; border: 1px solid var(--border); overflow: hidden; text-decoration: none; color: inherit; display: block; box-shadow: 0 2px 6px rgba(0,0,0,0.04); transition: transform 0.15s, box-shadow 0.15s; }
+    .news-card:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(0,0,0,0.09); }
+    .news-card-body { padding: 14px 16px; }
+    .news-meta { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
+    .source-badge { display: inline-flex; align-items: center; gap: 4px; font-size: 10px; font-weight: 800; border-radius: 100px; padding: 3px 9px; }
+    .badge-ua { background: rgba(0,87,183,0.1); color: #0057B7; }
+    .badge-nl { background: rgba(33,70,139,0.1); color: #21468B; }
+    .news-time { font-size: 10px; font-weight: 700; color: var(--muted); margin-left: auto; }
+    .news-title { font-size: 14px; font-weight: 800; color: var(--text); line-height: 1.4; margin-bottom: 10px; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+    .news-footer { display: flex; align-items: center; justify-content: space-between; }
+    .read-btn { font-size: 11px; font-weight: 800; color: var(--blue); display: flex; align-items: center; gap: 4px; }
+    .read-btn .msym { font-size: 14px; }
+
+    /* FEATURED card (first one) */
+    .news-card.featured .news-title { font-size: 16px; -webkit-line-clamp: 4; }
+    .news-card.featured { border: 2px solid var(--border); }
+
+    /* SKELETON */
+    .skeleton-list { padding: 16px 16px 0; display: flex; flex-direction: column; gap: 10px; }
+    .skeleton-card { background: var(--card); border-radius: 18px; border: 1px solid var(--border); padding: 14px 16px; }
+    .skel { background: linear-gradient(90deg, #F3F4F6 25%, #E5E7EB 50%, #F3F4F6 75%); background-size: 200% 100%; animation: shimmer 1.4s infinite; border-radius: 6px; }
+    @keyframes shimmer { 0%{background-position:200% 0} 100%{background-position:-200% 0} }
+    .skel-meta { height: 16px; width: 120px; margin-bottom: 10px; }
+    .skel-title { height: 14px; width: 100%; margin-bottom: 6px; }
+    .skel-title.short { width: 75%; }
+    .skel-btn { height: 12px; width: 60px; margin-top: 10px; }
+
+    /* ERROR / EMPTY */
+    .error-box { margin: 20px 16px; background: var(--card); border-radius: 18px; border: 1px solid var(--border); padding: 24px; text-align: center; }
+    .error-icon { font-size: 32px; margin-bottom: 12px; }
+    .error-title { font-size: 14px; font-weight: 800; color: var(--text); margin-bottom: 6px; }
+    .error-sub { font-size: 12px; color: var(--muted); font-weight: 500; line-height: 1.5; }
+    .retry-btn { margin-top: 16px; background: var(--blue); color: #fff; font-family: inherit; font-size: 12px; font-weight: 800; padding: 10px 20px; border-radius: 12px; border: none; cursor: pointer; }
+
+    /* FAB */
+    .fab { position: fixed; bottom: 90px; right: calc(50% - 185px); width: 52px; height: 52px; background: linear-gradient(145deg, #1270D8, #003DA6); border-radius: 18px; display: flex; align-items: center; justify-content: center; box-shadow: 0 6px 20px rgba(0,87,183,0.45); cursor: pointer; z-index: 40; text-decoration: none; }
+    .fab .msym { color: #fff; font-size: 24px; }
+
+    /* NAV */
+    nav { position: fixed; bottom: 0; left: 50%; transform: translateX(-50%); width: 100%; max-width: 390px; background: rgba(255,255,255,0.98); backdrop-filter: blur(20px); border-top: 1px solid var(--border); border-radius: 24px 24px 0 0; padding: 10px 8px 24px; display: flex; justify-content: space-around; z-index: 50; }
+    .nav-item { display: flex; flex-direction: column; align-items: center; gap: 4px; text-decoration: none; flex: 1; }
+    .nav-pill { padding: 6px 16px; border-radius: 100px; display: flex; align-items: center; justify-content: center; }
+    .nav-item.active .nav-pill { background: var(--blue-soft); }
+    .nav-item.active .msym { color: var(--blue); font-size: 23px; }
+    .nav-item:not(.active) .msym { color: var(--muted); font-size: 23px; font-variation-settings: 'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 24; }
+    .nav-lbl { font-size: 9px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.06em; }
+    .nav-item.active .nav-lbl { color: var(--blue); }
+    .nav-item:not(.active) .nav-lbl { color: var(--muted); }
+  </style>
+</head>
+<body>
+
+<div class="flag-bar"></div>
+
+<header>
+  <div class="logo">Refugee<em>Guide</em> <span style="font-size:13px;font-weight:700;color:var(--muted);">/ Новини</span></div>
+  <div class="refresh-btn" id="refreshBtn" onclick="loadNews(true)">
+    <span class="msym o" style="font-size:19px;">refresh</span>
+  </div>
+</header>
+
+<div class="filter-bar">
+  <div class="filter-tab active-all" data-cat="all" onclick="setFilter('all')">🌐 Всі</div>
+  <div class="filter-tab" data-cat="ua" onclick="setFilter('ua')">🇺🇦 Україна</div>
+  <div class="filter-tab" data-cat="nl" onclick="setFilter('nl')">🇳🇱 Нідерланди</div>
+</div>
+
+<div class="live-strip">
+  <div class="live-dot"></div>
+  <div class="live-text">Оновлюється автоматично</div>
+  <div class="live-time" id="lastUpdated">—</div>
+</div>
+
+<main id="mainContent">
+  <!-- populated by JS -->
+</main>
+
+<a href="#" class="fab"><span class="msym">chat_bubble</span></a>
+
+<nav>
+  <a href="1final_colorful.html" class="nav-item">
+    <div class="nav-pill"><span class="msym o">home</span></div>
+    <span class="nav-lbl">Головна</span>
+  </a>
+  <a href="search.html" class="nav-item">
+    <div class="nav-pill"><span class="msym o">explore</span></div>
+    <span class="nav-lbl">Огляд</span>
+  </a>
+  <a href="saved.html" class="nav-item">
+    <div class="nav-pill"><span class="msym o">bookmark</span></div>
+    <span class="nav-lbl">Збережені</span>
+  </a>
+  <a href="profile.html" class="nav-item">
+    <div class="nav-pill"><span class="msym o">person</span></div>
+    <span class="nav-lbl">Профіль</span>
+  </a>
+</nav>
+
+<script>
+const RSS2JSON = 'https://api.rss2json.com/v1/api.json?count=12&rss_url=';
+
+const FEEDS = [
+  {
+    url: 'https://www.ukrinform.ua/rss/block-lastnews',
+    cat: 'ua', source: 'Укрінформ', flag: '🇺🇦'
+  },
+  {
+    url: 'https://www.pravda.com.ua/rss/view_news/',
+    cat: 'ua', source: 'Укр. Правда', flag: '📰'
+  },
+  {
+    url: 'https://suspilne.media/rss/all.xml',
+    cat: 'ua', source: 'Суспільне', flag: '📺'
+  },
+  {
+    url: 'https://nltimes.nl/rss.xml',
+    cat: 'nl', source: 'NL Times', flag: '🇳🇱'
+  },
+  {
+    url: 'https://www.dutchnews.nl/feed/',
+    cat: 'nl', source: 'DutchNews', flag: '🇳🇱'
+  }
+];
+
+let allArticles = [];
+let currentFilter = 'all';
+
+function setFilter(cat) {
+  currentFilter = cat;
+  document.querySelectorAll('.filter-tab').forEach(t => {
+    t.className = 'filter-tab';
+    if (t.dataset.cat === cat) t.classList.add('active-' + cat);
+  });
+  render();
+}
+
+function timeAgo(dateStr) {
+  const diff = (Date.now() - new Date(dateStr)) / 60000;
+  if (diff < 1)   return 'щойно';
+  if (diff < 60)  return Math.floor(diff) + ' хв тому';
+  if (diff < 1440) return Math.floor(diff / 60) + ' год тому';
+  return Math.floor(diff / 1440) + ' дн тому';
+}
+
+function strip(html) {
+  return html ? html.replace(/<[^>]*>/g, '').replace(/&amp;/g,'&').replace(/&quot;/g,'"').replace(/&#039;/g,"'").replace(/&lt;/g,'<').replace(/&gt;/g,'>').trim() : '';
+}
+
+function cardHTML(article, featured) {
+  const badgeClass = article.cat === 'ua' ? 'badge-ua' : 'badge-nl';
+  const title = strip(article.title);
+  return `
+    <a href="${article.link}" target="_blank" class="news-card${featured ? ' featured' : ''}">
+      <div class="news-card-body">
+        <div class="news-meta">
+          <span class="source-badge ${badgeClass}">${article.flag} ${article.source}</span>
+          <span class="news-time">${timeAgo(article.pubDate)}</span>
+        </div>
+        <div class="news-title">${title}</div>
+        <div class="news-footer">
+          <span class="read-btn"><span class="msym o" style="font-size:14px;">open_in_new</span> Читати</span>
+        </div>
+      </div>
+    </a>`;
+}
+
+function skeletonHTML(n) {
+  return '<div class="skeleton-list">' + Array(n).fill(`
+    <div class="skeleton-card">
+      <div class="skel skel-meta"></div>
+      <div class="skel skel-title"></div>
+      <div class="skel skel-title short"></div>
+      <div class="skel skel-btn"></div>
+    </div>`).join('') + '</div>';
+}
+
+function render() {
+  const filtered = currentFilter === 'all'
+    ? allArticles
+    : allArticles.filter(a => a.cat === currentFilter);
+
+  const main = document.getElementById('mainContent');
+
+  if (filtered.length === 0) {
+    main.innerHTML = `<div class="error-box">
+      <div class="error-icon">📭</div>
+      <div class="error-title">Новин не знайдено</div>
+      <div class="error-sub">Спробуй іншу категорію або оновити стрічку.</div>
+    </div>`;
+    return;
+  }
+
+  const catLabel = currentFilter === 'ua' ? '🇺🇦 Україна'
+                 : currentFilter === 'nl' ? '🇳🇱 Нідерланди'
+                 : '🌐 Всі джерела';
+
+  let html = `<div class="sec-header">
+    <span class="sec-label">${catLabel}</span>
+    <span class="sec-count">${filtered.length}</span>
+  </div><div class="news-list">`;
+
+  filtered.forEach((a, i) => { html += cardHTML(a, i === 0); });
+  html += '</div>';
+  main.innerHTML = html;
+}
+
+async function fetchFeed(feed) {
+  const res = await fetch(RSS2JSON + encodeURIComponent(feed.url), { signal: AbortSignal.timeout(8000) });
+  if (!res.ok) throw new Error('HTTP ' + res.status);
+  const data = await res.json();
+  if (data.status !== 'ok') throw new Error('Feed error');
+  return (data.items || []).map(item => ({
+    title:   item.title,
+    link:    item.link,
+    pubDate: item.pubDate,
+    cat:     feed.cat,
+    source:  feed.source,
+    flag:    feed.flag
+  }));
+}
+
+async function loadNews(manual = false) {
+  const btn = document.getElementById('refreshBtn');
+  const main = document.getElementById('mainContent');
+  btn.classList.add('spinning');
+  if (allArticles.length === 0 || manual) {
+    main.innerHTML = skeletonHTML(5);
+  }
+
+  const results = await Promise.allSettled(FEEDS.map(fetchFeed));
+  const fresh = results
+    .filter(r => r.status === 'fulfilled')
+    .flatMap(r => r.value)
+    .sort((a, b) => new Date(b.pubDate) - new Date(a.pubDate));
+
+  btn.classList.remove('spinning');
+
+  if (fresh.length === 0) {
+    main.innerHTML = `<div class="error-box">
+      <div class="error-icon">📡</div>
+      <div class="error-title">Не вдалось завантажити новини</div>
+      <div class="error-sub">Перевір з'єднання з інтернетом і спробуй ще раз.</div>
+      <button class="retry-btn" onclick="loadNews(true)">Спробувати знову</button>
+    </div>`;
+    return;
+  }
+
+  allArticles = fresh;
+  const now = new Date();
+  document.getElementById('lastUpdated').textContent =
+    'Оновлено ' + now.getHours().toString().padStart(2,'0') + ':' + now.getMinutes().toString().padStart(2,'0');
+  render();
+}
+
+// Auto-refresh every 10 minutes
+loadNews();
+setInterval(loadNews, 10 * 60 * 1000);
+</script>
+</body>
+</html>
