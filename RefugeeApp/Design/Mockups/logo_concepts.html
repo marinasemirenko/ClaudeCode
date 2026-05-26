@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>RAZOM — Концепції логотипу</title>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800;900&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #07090F;
+      --card: #0F1120;
+      --border: rgba(255,255,255,0.07);
+      --text: #F2F4F8;
+      --muted: #4A5168;
+      --sub: #181D2E;
+      --blue: #0057B7;
+      --yellow: #FCD400;
+    }
+
+    body {
+      font-family: 'Manrope', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      padding: 64px 24px 96px;
+      background-image:
+        radial-gradient(ellipse 70% 40% at 50% 0%, rgba(0,87,183,0.14) 0%, transparent 100%);
+    }
+
+    /* ── Hero ── */
+    .hero {
+      text-align: center;
+      margin-bottom: 64px;
+    }
+    .hero-badge {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--yellow);
+      background: rgba(252,212,0,0.09);
+      border: 1px solid rgba(252,212,0,0.22);
+      border-radius: 100px;
+      padding: 5px 16px;
+      margin-bottom: 22px;
+    }
+    .hero h1 {
+      font-size: 80px;
+      font-weight: 900;
+      letter-spacing: -4px;
+      line-height: 1;
+      margin-bottom: 14px;
+      background: linear-gradient(160deg, #fff 30%, #6A7FA8 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero-desc {
+      font-size: 15px;
+      color: var(--muted);
+      max-width: 400px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+
+    /* ── Grid ── */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      max-width: 1080px;
+      margin: 0 auto 56px;
+    }
+    @media (max-width: 820px) {
+      .grid { grid-template-columns: 1fr; }
+      .hero h1 { font-size: 52px; letter-spacing: -2px; }
+    }
+
+    /* ── Card ── */
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 28px 20px 24px;
+      display: flex;
+      flex-direction: column;
+    }
+    .card-tag {
+      font-size: 9px;
+      font-weight: 800;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 22px;
+    }
+
+    /* ── Icon ── */
+    .icon-wrap {
+      border-radius: 22.5%;
+      overflow: hidden;
+      display: inline-block;
+      line-height: 0;
+      flex-shrink: 0;
+    }
+    .icon-main {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 16px;
+    }
+    .icon-main .icon-wrap {
+      box-shadow: 0 20px 60px rgba(0,0,0,0.65), 0 4px 16px rgba(0,0,0,0.4);
+    }
+    .sizes {
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      gap: 14px;
+    }
+    .sz { text-align: center; }
+    .sz-lbl {
+      display: block;
+      font-size: 8px;
+      font-weight: 700;
+      color: #252A3C;
+      letter-spacing: 0.5px;
+      margin-top: 5px;
+      line-height: 1;
+    }
+
+    /* ── Divider / labels ── */
+    .sep { border: none; border-top: 1px solid rgba(255,255,255,0.05); margin: 20px 0; }
+    .lbl {
+      font-size: 8.5px;
+      font-weight: 800;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #252A3C;
+      margin-bottom: 9px;
+    }
+
+    /* ── Wordmark ── */
+    .wm {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      border-radius: 10px;
+      padding: 10px 13px;
+    }
+    .wm.light { background: #EEF0F7; }
+    .wm.dark  { background: #020406; margin-top: 7px; }
+    .wm-name  { font-size: 21px; font-weight: 900; letter-spacing: -0.5px; }
+    .wm.light .wm-name { color: #0057B7; }
+    .wm.dark  .wm-name { color: #fff; }
+
+    /* ── Info ── */
+    .info { margin-top: auto; padding-top: 18px; }
+    .info-name { font-size: 16px; font-weight: 800; color: var(--text); margin-bottom: 5px; }
+    .info-desc { font-size: 12.5px; color: var(--muted); line-height: 1.65; }
+    .chips { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 10px; }
+    .chip {
+      font-size: 9.5px;
+      font-weight: 700;
+      color: #353C58;
+      background: #141828;
+      border-radius: 100px;
+      padding: 4px 10px;
+    }
+
+    /* ── Comparison ── */
+    .compare { max-width: 1080px; margin: 0 auto; }
+    .compare-title {
+      text-align: center;
+      font-size: 9.5px;
+      font-weight: 800;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 18px;
+    }
+    .compare-box {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 36px 16px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+    }
+    .compare-col {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 14px;
+      padding: 0 16px;
+    }
+    .compare-col + .compare-col { border-left: 1px solid rgba(255,255,255,0.05); }
+    .compare-name {
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Shared SVG defs -->
+<svg width="0" height="0" style="position:absolute;overflow:hidden;" aria-hidden="true">
+  <defs>
+    <linearGradient id="gradC" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%"   stop-color="#1266CC"/>
+      <stop offset="55%"  stop-color="#002A84"/>
+      <stop offset="100%" stop-color="#000E56"/>
+    </linearGradient>
+    <filter id="glowR" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="5" result="blur"/>
+      <feFlood flood-color="#FFFFFF" flood-opacity="0.45" result="color"/>
+      <feComposite in="color" in2="blur" operator="in" result="glow"/>
+      <feMerge><feMergeNode in="glow"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+</svg>
+
+<!-- ═══════════════════════════════════════ HERO ═══════════════════════════════════════ -->
+<div class="hero">
+  <div class="hero-badge">Логотип · App Icon</div>
+  <h1>RAZOM</h1>
+  <p class="hero-desc">Три концепції іконки для App Store та Google Play. Оберіть стиль, що найкраще відображає характер додатку.</p>
+</div>
+
+<!-- ═══════════════════════════════════════ CARDS ══════════════════════════════════════ -->
+<div class="grid">
+
+  <!-- ═══ CARD A — ПРАПОР ═══ -->
+  <div class="card">
+    <div class="card-tag">Варіант A · Монограм</div>
+
+    <div class="icon-main">
+      <div class="icon-wrap" style="width:200px;height:200px;">
+        <svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+          <rect width="200" height="200" fill="#0057B7"/>
+          <rect x="0" y="150" width="200" height="50" fill="#FCD400"/>
+          <text x="100" y="78" dominant-baseline="central" text-anchor="middle" font-size="122" font-weight="900" font-family="Manrope, sans-serif" fill="white">R</text>
+        </svg>
+      </div>
+    </div>
+
+    <div class="sizes">
+      <div class="sz">
+        <div class="icon-wrap" style="width:80px;height:80px;">
+          <svg width="80" height="80" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+            <rect width="200" height="200" fill="#0057B7"/><rect x="0" y="150" width="200" height="50" fill="#FCD400"/>
+            <text x="100" y="78" dominant-baseline="central" text-anchor="middle" font-size="122" font-weight="900" font-family="Manrope, sans-serif" fill="white">R</text>
+          </svg>
+        </div>
+        <span class="sz-lbl">80px</span>
+      </div>
+      <div class="sz">
+        <div class="icon-wrap" style="width:48px;height:48px;">
+          <svg width="48" height="48" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+            <rect width="200" height="200" fill="#0057B7"/><rect x="0" y="150" width="200" height="50" fill="#FCD400"/>
+            <text x="100" y="78" dominant-baseline="central" text-anchor="middle" font-size="122" font-weight="900" font-family="Manrope, sans-serif" fill="white">R</text>
+          </svg>
+        </div>
+        <span class="sz-lbl">48px</span>
+      </div>
+      <div class="sz">
+        <div class="icon-wrap" style="width:32px;height:32px;">
+          <svg width="32" height="32" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+            <rect width="200" height="200" fill="#0057B7"/><rect x="0" y="150" width="200" height="50" fill="#FCD400"/>
+            <text x="100" y="78" dominant-baseline="central" text-anchor="middle" font-size="122" font-weight="900" font-family="Manrope, sans-serif" fill="white">R</text>
+          </svg>
+        </div>
+        <span class="sz-lbl">32px</span>
+      </div>
+    </div>
+
+    <div class="sep"></div>
+    <div class="lbl">Wordmark</div>
+    <div class="wm light">
+      <div class="icon-wrap" style="width:36px;height:36px;">
+        <svg width="36" height="36" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+          <rect width="200" height="200" fill="#0057B7"/><rect x="0" y="150" width="200" height="50" fill="#FCD400"/>
+          <text x="100" y="78" dominant-baseline="central" text-anchor="middle" font-size="122" font-weight="900" font-family="Manrope, sans-serif" fill="white">R</text>
+        </svg>
+      </div>
+      <span class="wm-name">RAZOM</span>
+    </div>
+    <div class="wm dark">
+      <div class="icon-wrap" style="width:36px;height:36px;">
+        <svg width="36" height="36" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+          <rect width="200" height="200" fill="#0057B7"/><rect x="0" y="150" width="200" height="50" fill="#FCD400"/>
+          <text x="100" y="78" dominant-baseline="central" text-anchor="middle" font-size="122" font-weight="900" font-family="Manrope, sans-serif" fill="white">R</text>
+        </svg>
+      </div>
+      <span class="wm-name">RAZOM</span>
+    </div>
+
+    <div class="info">
+      <div class="info-name">Прапор</div>
+      <div class="info-desc">Синьо-жовті кольори прапора. Великий "R" — впізнаваний з першого погляду. Чисто, офіційно, по-українськи.</div>
+      <div class="chips">
+        <span class="chip">Впізнаваний</span>
+        <span class="chip">Офіційний</span>
+        <span class="chip">Мінімальний</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ CARD B — СОНЯХ ═══ -->
+  <div class="card">
+    <div class="card-tag">Варіант B · Сонях</div>
+
+    <div class="icon-main">
+      <div class="icon-wrap" style="width:200px;height:200px;">
+        <svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+          <rect width="200" height="200" fill="#0057B7"/>
+          <!-- Outer petals -->
+          <ellipse cx="100" cy="61" rx="12" ry="23" fill="#FCD400"/>
+          <ellipse cx="100" cy="61" rx="12" ry="23" fill="#FCD400" transform="rotate(45 100 100)"/>
+          <ellipse cx="100" cy="61" rx="12" ry="23" fill="#FCD400" transform="rotate(90 100 100)"/>
+          <ellipse cx="100" cy="61" rx="12" ry="23" fill="#FCD400" transform="rotate(135 100 100)"/>
+          <ellipse cx="100" cy="61" rx="12" ry="23" fill="#FCD400" transform="rotate(180 100 100)"/>
+          <ellipse cx="100" cy="61" rx="12" ry="23" fill="#FCD400" transform="rotate(225 100 100)"/>
+          <ellipse cx="100" cy="61" rx="12" ry="23" fill="#FCD400" transform="rotate(270 100 100)"/>
+          <ellipse cx="100" cy="61" rx="12" ry="23" fill="#FCD400" transform="rotate(315 100 100)"/>
+          <!-- Inner petals -->
+          <ellipse cx="100" cy="68" rx="9" ry="16" fill="#E6B800" transform="rotate(22.5 100 100)"/>
+          <ellipse cx="100" cy="68" rx="9" ry="16" fill="#E6B800" transform="rotate(67.5 100 100)"/>
+          <ellipse cx="100" cy="68" rx="9" ry="16" fill="#E6B800" transform="rotate(112.5 100 100)"/>
+          <ellipse cx="100" cy="68" rx="9" ry="16" fill="#E6B800" transform="rotate(157.5 100 100)"/>
+          <ellipse cx="100" cy="68" rx="9" ry="16" fill="#E6B800" transform="rotate(202.5 100 100)"/>
+          <ellipse cx="100" cy="68" rx="9" ry="16" fill="#E6B800" transform="rotate(247.5 100 100)"/>
+          <ellipse cx="100" cy="68" rx="9" ry="16" fill="#E6B800" transform="rotate(292.5 100 100)"/>
+          <ellipse cx="100" cy="68" rx="9" ry="16" fill="#E6B800" transform="rotate(337.5 100 100)"/>
+          <!-- Center -->
+          <circle cx="100" cy="100" r="33" fill="#CC8800"/>
+          <circle cx="100" cy="100" r="27" fill="#A86E00"/>
+          <text x="100" y="100" dominant-baseline="central" text-anchor="middle" font-size="34" font-weight="900" font-family="Manrope, sans-serif" fill="white">R</text>
+        </svg>
+      </div>
+    </div>
+
+    <div class="sizes">
+      <div class="sz">
+        <div class="icon-wrap" style="width:80px;height:80px;">
+          <svg width="80" height="80" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+            <rect width="200" height="200" fill="#0057B7"/>
+            <ellipse cx="100" cy="61" rx="12" ry="23" fill="#FCD400"/>
+            <ellipse cx="100" cy="61" rx="12" ry="23" fill="#FCD400" transform="rotate(45 100 100)"/>
+            <ellipse cx="100" cy="61" rx="12" ry="23" fill="#FCD400" transform="rotate(90 100 100)"/>
+            <ellipse cx="100" cy="61" rx="12" ry="23" fill="#FCD400" transform="rotate(135 100 100)"/>
+            <ellipse cx="100" cy="61" rx="12" ry="23" fill="#FCD400" transform="rotate(180 100 100)"/>
+            <ellipse cx="100" cy="61" rx="12" ry="23" fill="#FCD400" transform="rotate(225 100 100)"/>
+            <ellipse cx="100" cy="61" rx="12" ry="23" fill="#FCD400" transform="rotate(270 100 100)"/>
+            <ellipse cx="100" cy="61" rx="12" ry="23" fill="#FCD400" transform="rotate(315 100 100)"/>
+            <ellipse cx="100" cy="68" rx="9" ry="16" fill="#E6B800" transform="rotate(22.5 100 100)"/>
+            <ellipse cx="100" cy="68" rx="9" ry="16" fill="#E6B800" transform="rotate(67.5 100 100)"/>
+            <ellipse cx="100" cy="68" rx="9" ry="16" fill="#E6B800" transform="rotate(112.5 100 100)"/>
+            <ellipse cx="100" cy="68" rx="9" ry="16" fill="#E6B800" transform="rotate(157.5 100 100)"/>
+            <ellipse cx="100" cy="68" rx="9" ry="16" fill="#E6B800" transform="rotate(202.5 100 100)"/>
+            <ellipse cx="100" cy="68" rx="9" ry="16" fill="#E6B800" transform="rotate(247.5 100 100)"/>
+            <ellipse cx="100" cy="68" rx="9" ry="16" fill="#E6B800" transform="rotate(292.5 100 100)"/>
+            <ellipse cx="100" cy="68" rx="9" ry="16" fill="#E6B800" transform="rotate(337.5 100 100)"/>
+            <circle cx="100" cy="100" r="33" fill="#CC8800"/>
+            <circle cx="100" cy="100" r="27" fill="#A86E00"/>
+            <text x="100" y="100" dominant-baseline="central" text-anchor="middle" font-size="34" font-weight="900" font-family="Manrope, sans-serif" fill="white">R</text>
+          </svg>
+        </div>
+        <span class="sz-lbl">80px</span>
+      </div>
+      <div class="sz">
+        <div class="icon-wrap" style="width:48px;height:48px;">
+          <svg width="48" height="48" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+            <rect width="200" height="200" fill="#0057B7"/>
+            <ellipse cx="100" cy="61" rx="12" ry="23" fill="#FCD400"/>
+            <ellipse cx="100" cy="61" rx="12" ry="23" fill="#FCD400" transform="rotate(45 100 100)"/>
+            <ellipse cx="100" cy="61" rx="12" ry="23" fill="#FCD400" transform="rotate(90 100 100)"/>
+            <ellipse cx="100" cy="61" rx="12" ry="23" fill="#FCD400" transform="rotate(135 100 100)"/>
+            <ellipse cx="100" cy="61" rx="12" ry="23" fill="#FCD400" transform="rotate(180 100 100)"/>
+            <ellipse cx="100" cy="61" rx="12" ry="23" fill="#FCD400" transform="rotate(225 100 100)"/>
+            <ellipse cx="100" cy="61" rx="12" ry="23" fill="#FCD400" transform="rotate(270 100 100)"/>
+            <ellipse cx="100" cy="61" rx="12" ry="23" fill="#FCD400" transform="rotate(315 100 100)"/>
+            <ellipse cx="100" cy="68" rx="9" ry="16" fill="#E6B800" transform="rotate(22.5 100 100)"/>
+            <ellipse cx="100" cy="68" rx="9" ry="16" fill="#E6B800" transform="rotate(67.5 100 100)"/>
+            <ellipse cx="100" cy="68" rx="9" ry="16" fill="#E6B800" transform="rotate(112.5 100 100)"/>
+            <ellipse cx="100" cy="68" rx="9" ry="16" fill="#E6B800" transform="rotate(157.5 100 100)"/>
+            <ellipse cx="100" cy="68" rx="9" ry="16" fill="#E6B800" transform="rotate(202.5 100 100)"/>
+            <ellipse cx="100" cy="68" rx="9" ry="16" fill="#E6B800" transform="rotate(247.5 100 100)"/>
+            <ellipse cx="100" cy="68" rx="9" ry="16" fill="#E6B800" transform="rotate(292.5 100 100)"/>
+            <ellipse cx="100" cy="68" rx="9" ry="16" fill="#E6B800" transform="rotate(337.5 100 100)"/>
+            <circle cx="100" cy="100" r="33" fill="#CC8800"/>
+            <circle cx="100" cy="100" r="27" fill="#A86E00"/>
+            <text x="100" y="100" dominant-baseline="central" text-anchor="middle" font-size="34" font-weight="900" font-family="Manrope, sans-serif" fill="white">R</text>
+          </svg>
+        </div>
+        <span class="sz-lbl">48px</span>
+      </div>
+      <div class="sz">
+        <div class="icon-wrap" style="width:32px;height:32px;">
+          <svg width="32" height="32" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+            <rect width="200" height="200" fill="#0057B7"/>
+            <ellipse cx="100" cy="61" rx="12" ry="23" fill="#FCD400"/>
+            <ellipse cx="100" cy="61" rx="12" ry="23" fill="#FCD400" transform="rotate(45 100 100)"/>
+            <ellipse cx="100" cy="61" rx="12" ry="23" fill="#FCD400" transform="rotate(90 100 100)"/>
+            <ellipse cx="100" cy="61" rx="12" ry="23" fill="#FCD400" transform="rotate(135 100 100)"/>
+            <ellipse cx="100" cy="61" rx="12" ry="23" fill="#FCD400" transform="rotate(180 100 100)"/>
+            <ellipse cx="100" cy="61" rx="12" ry="23" fill="#FCD400" transform="rotate(225 100 100)"/>
+            <ellipse cx="100" cy="61" rx="12" ry="23" fill="#FCD400" transform="rotate(270 100 100)"/>
+            <ellipse cx="100" cy="61" rx="12" ry="23" fill="#FCD400" transform="rotate(315 100 100)"/>
+            <ellipse cx="100" cy="68" rx="9" ry="16" fill="#E6B800" transform="rotate(22.5 100 100)"/>
+            <ellipse cx="100" cy="68" rx="9" ry="16" fill="#E6B800" transform="rotate(67.5 100 100)"/>
+            <ellipse cx="100" cy="68" rx="9" ry="16" fill="#E6B800" transform="rotate(112.5 100 100)"/>
+            <ellipse cx="100" cy="68" rx="9" ry="16" fill="#E6B800" transform="rotate(157.5 100 100)"/>
+            <ellipse cx="100" cy="68" rx="9" ry="16" fill="#E6B800" transform="rotate(202.5 100 100)"/>
+            <ellipse cx="100" cy="68" rx="9" ry="16" fill="#E6B800" transform="rotate(247.5 100 100)"/>
+            <ellipse cx="100" cy="68" rx="9" ry="16" fill="#E6B800" transform="rotate(292.5 100 100)"/>
+            <ellipse cx="100" cy="68" rx="9" ry="16" fill="#E6B800" transform="rotate(337.5 100 100)"/>
+            <circle cx="100" cy="100" r="33" fill="#CC8800"/>
+            <circle cx="100" cy="100" r="27" fill="#A86E00"/>
+            <text x="100" y="100" dominant-baseline="central" text-anchor="middle" font-size="34" font-weight="900" font-family="Manrope, sans-serif" fill="white">R</text>
+          </svg>
+        </div>
+        <span class="sz-lbl">32px</span>
+      </div>
+    </div>
+
+    <div class="sep"></div>
+    <div class="lbl">Wordmark</div>
+    <div class="wm light">
+      <div class="icon-wrap" style="width:36px;height:36px;">
+        <svg width="36" height="36" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+          <rect width="200" height="200" fill="#0057B7"/>
+          <ellipse cx="100" cy="61" rx="12" ry="23" fill="#FCD400"/>
+          <ellipse cx="100" cy="61" rx="12" ry="23" fill="#FCD400" transform="rotate(45 100 100)"/>
+          <ellipse cx="100" cy="61" rx="12" ry="23" fill="#FCD400" transform="rotate(90 100 100)"/>
+          <ellipse cx="100" cy="61" rx="12" ry="23" fill="#FCD400" transform="rotate(135 100 100)"/>
+          <ellipse cx="100" cy="61" rx="12" ry="23" fill="#FCD400" transform="rotate(180 100 100)"/>
+          <ellipse cx="100" cy="61" rx="12" ry="23" fill="#FCD400" transform="rotate(225 100 100)"/>
+          <ellipse cx="100" cy="61" rx="12" ry="23" fill="#FCD400" transform="rotate(270 100 100)"/>
+          <ellipse cx="100" cy="61" rx="12" ry="23" fill="#FCD400" transform="rotate(315 100 100)"/>
+          <ellipse cx="100" cy="68" rx="9" ry="16" fill="#E6B800" transform="rotate(22.5 100 100)"/>
+          <ellipse cx="100" cy="68" rx="9" ry="16" fill="#E6B800" transform="rotate(67.5 100 100)"/>
+          <ellipse cx="100" cy="68" rx="9" ry="16" fill="#E6B800" transform="rotate(112.5 100 100)"/>
+          <ellipse cx="100" cy="68" rx="9" ry="16" fill="#E6B800" transform="rotate(157.5 100 100)"/>
+          <ellipse cx="100" cy="68" rx="9" ry="16" fill="#E6B800" transform="rotate(202.5 100 100)"/>
+          <ellipse cx="100" cy="68" rx="9" ry="16" fill="#E6B800" transform="rotate(247.5 100 100)"/>
+          <ellipse cx="100" cy="68" rx="9" ry="16" fill="#E6B800" transform="rotate(292.5 100 100)"/>
+          <ellipse cx="100" cy="68" rx="9" ry="16" fill="#E6B800" transform="rotate(337.5 100 100)"/>
+          <circle cx="100" cy="100" r="33" fill="#CC8800"/>
+          <circle cx="100" cy="100" r="27" fill="#A86E00"/>
+          <text x="100" y="100" dominant-baseline="central" text-anchor="middle" font-size="34" font-weight="900" font-family="Manrope, sans-serif" fill="white">R</text>
+        </svg>
+      </div>
+      <span class="wm-name">RAZOM</span>
+    </div>
+    <div class="wm dark">
+      <div class="icon-wrap" style="width:36px;height:36px;">
+        <svg width="36" height="36" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+          <rect width="200" height="200" fill="#0057B7"/>
+          <ellipse cx="100" cy="61" rx="12" ry="23" fill="#FCD400"/>
+          <ellipse cx="100" cy="61" rx="12" ry="23" fill="#FCD400" transform="rotate(45 100 100)"/>
+          <ellipse cx="100" cy="61" rx="12" ry="23" fill="#FCD400" transform="rotate(90 100 100)"/>
+          <ellipse cx="100" cy="61" rx="12" ry="23" fill="#FCD400" transform="rotate(135 100 100)"/>
+          <ellipse cx="100" cy="61" rx="12" ry="23" fill="#FCD400" transform="rotate(180 100 100)"/>
+          <ellipse cx="100" cy="61" rx="12" ry="23" fill="#FCD400" transform="rotate(225 100 100)"/>
+          <ellipse cx="100" cy="61" rx="12" ry="23" fill="#FCD400" transform="rotate(270 100 100)"/>
+          <ellipse cx="100" cy="61" rx="12" ry="23" fill="#FCD400" transform="rotate(315 100 100)"/>
+          <ellipse cx="100" cy="68" rx="9" ry="16" fill="#E6B800" transform="rotate(22.5 100 100)"/>
+          <ellipse cx="100" cy="68" rx="9" ry="16" fill="#E6B800" transform="rotate(67.5 100 100)"/>
+          <ellipse cx="100" cy="68" rx="9" ry="16" fill="#E6B800" transform="rotate(112.5 100 100)"/>
+          <ellipse cx="100" cy="68" rx="9" ry="16" fill="#E6B800" transform="rotate(157.5 100 100)"/>
+          <ellipse cx="100" cy="68" rx="9" ry="16" fill="#E6B800" transform="rotate(202.5 100 100)"/>
+          <ellipse cx="100" cy="68" rx="9" ry="16" fill="#E6B800" transform="rotate(247.5 100 100)"/>
+          <ellipse cx="100" cy="68" rx="9" ry="16" fill="#E6B800" transform="rotate(292.5 100 100)"/>
+          <ellipse cx="100" cy="68" rx="9" ry="16" fill="#E6B800" transform="rotate(337.5 100 100)"/>
+          <circle cx="100" cy="100" r="33" fill="#CC8800"/>
+          <circle cx="100" cy="100" r="27" fill="#A86E00"/>
+          <text x="100" y="100" dominant-baseline="central" text-anchor="middle" font-size="34" font-weight="900" font-family="Manrope, sans-serif" fill="white">R</text>
+        </svg>
+      </div>
+      <span class="wm-name">RAZOM</span>
+    </div>
+
+    <div class="info">
+      <div class="info-name">Сонях</div>
+      <div class="info-desc">Соняшник — символ України та надії. Теплий, живий, культурний. Передає відчуття спільноти і тепла.</div>
+      <div class="chips">
+        <span class="chip">Теплий</span>
+        <span class="chip">Символічний</span>
+        <span class="chip">Культурний</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ CARD C — СХІД ═══ -->
+  <div class="card">
+    <div class="card-tag">Варіант C · Схід Сонця</div>
+
+    <div class="icon-main">
+      <div class="icon-wrap" style="width:200px;height:200px;">
+        <svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+          <rect width="200" height="200" fill="url(#gradC)"/>
+          <!-- Sun glow halo -->
+          <circle cx="100" cy="214" r="96" fill="#FCD400" opacity="0.10"/>
+          <!-- Sun -->
+          <circle cx="100" cy="214" r="80" fill="#FCD400"/>
+          <!-- Stars -->
+          <circle cx="42" cy="36" r="1.8" fill="white" opacity="0.35"/>
+          <circle cx="160" cy="50" r="1.4" fill="white" opacity="0.25"/>
+          <circle cx="70" cy="60" r="1" fill="white" opacity="0.2"/>
+          <circle cx="138" cy="30" r="1.5" fill="white" opacity="0.3"/>
+          <circle cx="108" cy="50" r="1" fill="white" opacity="0.18"/>
+          <!-- R -->
+          <text x="100" y="68" dominant-baseline="central" text-anchor="middle" font-size="96" font-weight="900" font-family="Manrope, sans-serif" fill="white" filter="url(#glowR)">R</text>
+        </svg>
+      </div>
+    </div>
+
+    <div class="sizes">
+      <div class="sz">
+        <div class="icon-wrap" style="width:80px;height:80px;">
+          <svg width="80" height="80" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+            <rect width="200" height="200" fill="url(#gradC)"/>
+            <circle cx="100" cy="214" r="80" fill="#FCD400"/>
+            <text x="100" y="68" dominant-baseline="central" text-anchor="middle" font-size="96" font-weight="900" font-family="Manrope, sans-serif" fill="white">R</text>
+          </svg>
+        </div>
+        <span class="sz-lbl">80px</span>
+      </div>
+      <div class="sz">
+        <div class="icon-wrap" style="width:48px;height:48px;">
+          <svg width="48" height="48" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+            <rect width="200" height="200" fill="url(#gradC)"/>
+            <circle cx="100" cy="214" r="80" fill="#FCD400"/>
+            <text x="100" y="68" dominant-baseline="central" text-anchor="middle" font-size="96" font-weight="900" font-family="Manrope, sans-serif" fill="white">R</text>
+          </svg>
+        </div>
+        <span class="sz-lbl">48px</span>
+      </div>
+      <div class="sz">
+        <div class="icon-wrap" style="width:32px;height:32px;">
+          <svg width="32" height="32" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+            <rect width="200" height="200" fill="url(#gradC)"/>
+            <circle cx="100" cy="214" r="80" fill="#FCD400"/>
+            <text x="100" y="68" dominant-baseline="central" text-anchor="middle" font-size="96" font-weight="900" font-family="Manrope, sans-serif" fill="white">R</text>
+          </svg>
+        </div>
+        <span class="sz-lbl">32px</span>
+      </div>
+    </div>
+
+    <div class="sep"></div>
+    <div class="lbl">Wordmark</div>
+    <div class="wm light">
+      <div class="icon-wrap" style="width:36px;height:36px;">
+        <svg width="36" height="36" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+          <rect width="200" height="200" fill="url(#gradC)"/>
+          <circle cx="100" cy="214" r="80" fill="#FCD400"/>
+          <text x="100" y="68" dominant-baseline="central" text-anchor="middle" font-size="96" font-weight="900" font-family="Manrope, sans-serif" fill="white">R</text>
+        </svg>
+      </div>
+      <span class="wm-name">RAZOM</span>
+    </div>
+    <div class="wm dark">
+      <div class="icon-wrap" style="width:36px;height:36px;">
+        <svg width="36" height="36" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+          <rect width="200" height="200" fill="url(#gradC)"/>
+          <circle cx="100" cy="214" r="80" fill="#FCD400"/>
+          <text x="100" y="68" dominant-baseline="central" text-anchor="middle" font-size="96" font-weight="900" font-family="Manrope, sans-serif" fill="white">R</text>
+        </svg>
+      </div>
+      <span class="wm-name">RAZOM</span>
+    </div>
+
+    <div class="info">
+      <div class="info-name">Схід Сонця</div>
+      <div class="info-desc">Новий початок. Сонце сходить — як нове життя в новій країні. Поетично, глибоко, незабутньо.</div>
+      <div class="chips">
+        <span class="chip">Надія</span>
+        <span class="chip">Новий початок</span>
+        <span class="chip">Поетичний</span>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ═══════════════════════════════════════ COMPARISON ════════════════════════════════ -->
+<div class="compare">
+  <div class="compare-title">Порівняння при однаковому розмірі</div>
+  <div class="compare-box">
+
+    <!-- A -->
+    <div class="compare-col">
+      <div class="compare-name">A · Прапор</div>
+      <div class="icon-wrap" style="width:120px;height:120px;">
+        <svg width="120" height="120" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+          <rect width="200" height="200" fill="#0057B7"/><rect x="0" y="150" width="200" height="50" fill="#FCD400"/>
+          <text x="100" y="78" dominant-baseline="central" text-anchor="middle" font-size="122" font-weight="900" font-family="Manrope, sans-serif" fill="white">R</text>
+        </svg>
+      </div>
+      <div class="icon-wrap" style="width:60px;height:60px;">
+        <svg width="60" height="60" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+          <rect width="200" height="200" fill="#0057B7"/><rect x="0" y="150" width="200" height="50" fill="#FCD400"/>
+          <text x="100" y="78" dominant-baseline="central" text-anchor="middle" font-size="122" font-weight="900" font-family="Manrope, sans-serif" fill="white">R</text>
+        </svg>
+      </div>
+      <div class="icon-wrap" style="width:40px;height:40px;">
+        <svg width="40" height="40" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+          <rect width="200" height="200" fill="#0057B7"/><rect x="0" y="150" width="200" height="50" fill="#FCD400"/>
+          <text x="100" y="78" dominant-baseline="central" text-anchor="middle" font-size="122" font-weight="900" font-family="Manrope, sans-serif" fill="white">R</text>
+        </svg>
+      </div>
+    </div>
+
+    <!-- B -->
+    <div class="compare-col">
+      <div class="compare-name">B · Сонях</div>
+      <div class="icon-wrap" style="width:120px;height:120px;">
+        <svg width="120" height="120" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+          <rect width="200" height="200" fill="#0057B7"/>
+          <ellipse cx="100" cy="61" rx="12" ry="23" fill="#FCD400"/>
+          <ellipse cx="100" cy="61" rx="12" ry="23" fill="#FCD400" transform="rotate(45 100 100)"/>
+          <ellipse cx="100" cy="61" rx="12" ry="23" fill="#FCD400" transform="rotate(90 100 100)"/>
+          <ellipse cx="100" cy="61" rx="12" ry="23" fill="#FCD400" transform="rotate(135 100 100)"/>
+          <ellipse cx="100" cy="61" rx="12" ry="23" fill="#FCD400" transform="rotate(180 100 100)"/>
+          <ellipse cx="100" cy="61" rx="12" ry="23" fill="#FCD400" transform="rotate(225 100 100)"/>
+          <ellipse cx="100" cy="61" rx="12" ry="23" fill="#FCD400" transform="rotate(270 100 100)"/>
+          <ellipse cx="100" cy="61" rx="12" ry="23" fill="#FCD400" transform="rotate(315 100 100)"/>
+          <ellipse cx="100" cy="68" rx="9" ry="16" fill="#E6B800" transform="rotate(22.5 100 100)"/>
+          <ellipse cx="100" cy="68" rx="9" ry="16" fill="#E6B800" transform="rotate(67.5 100 100)"/>
+          <ellipse cx="100" cy="68" rx="9" ry="16" fill="#E6B800" transform="rotate(112.5 100 100)"/>
+          <ellipse cx="100" cy="68" rx="9" ry="16" fill="#E6B800" transform="rotate(157.5 100 100)"/>
+          <ellipse cx="100" cy="68" rx="9" ry="16" fill="#E6B800" transform="rotate(202.5 100 100)"/>
+          <ellipse cx="100" cy="68" rx="9" ry="16" fill="#E6B800" transform="rotate(247.5 100 100)"/>
+          <ellipse cx="100" cy="68" rx="9" ry="16" fill="#E6B800" transform="rotate(292.5 100 100)"/>
+          <ellipse cx="100" cy="68" rx="9" ry="16" fill="#E6B800" transform="rotate(337.5 100 100)"/>
+          <circle cx="100" cy="100" r="33" fill="#CC8800"/>
+          <circle cx="100" cy="100" r="27" fill="#A86E00"/>
+          <text x="100" y="100" dominant-baseline="central" text-anchor="middle" font-size="34" font-weight="900" font-family="Manrope, sans-serif" fill="white">R</text>
+        </svg>
+      </div>
+      <div class="icon-wrap" style="width:60px;height:60px;">
+        <svg width="60" height="60" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+          <rect width="200" height="200" fill="#0057B7"/>
+          <ellipse cx="100" cy="61" rx="12" ry="23" fill="#FCD400"/>
+          <ellipse cx="100" cy="61" rx="12" ry="23" fill="#FCD400" transform="rotate(45 100 100)"/>
+          <ellipse cx="100" cy="61" rx="12" ry="23" fill="#FCD400" transform="rotate(90 100 100)"/>
+          <ellipse cx="100" cy="61" rx="12" ry="23" fill="#FCD400" transform="rotate(135 100 100)"/>
+          <ellipse cx="100" cy="61" rx="12" ry="23" fill="#FCD400" transform="rotate(180 100 100)"/>
+          <ellipse cx="100" cy="61" rx="12" ry="23" fill="#FCD400" transform="rotate(225 100 100)"/>
+          <ellipse cx="100" cy="61" rx="12" ry="23" fill="#FCD400" transform="rotate(270 100 100)"/>
+          <ellipse cx="100" cy="61" rx="12" ry="23" fill="#FCD400" transform="rotate(315 100 100)"/>
+          <ellipse cx="100" cy="68" rx="9" ry="16" fill="#E6B800" transform="rotate(22.5 100 100)"/>
+          <ellipse cx="100" cy="68" rx="9" ry="16" fill="#E6B800" transform="rotate(67.5 100 100)"/>
+          <ellipse cx="100" cy="68" rx="9" ry="16" fill="#E6B800" transform="rotate(112.5 100 100)"/>
+          <ellipse cx="100" cy="68" rx="9" ry="16" fill="#E6B800" transform="rotate(157.5 100 100)"/>
+          <ellipse cx="100" cy="68" rx="9" ry="16" fill="#E6B800" transform="rotate(202.5 100 100)"/>
+          <ellipse cx="100" cy="68" rx="9" ry="16" fill="#E6B800" transform="rotate(247.5 100 100)"/>
+          <ellipse cx="100" cy="68" rx="9" ry="16" fill="#E6B800" transform="rotate(292.5 100 100)"/>
+          <ellipse cx="100" cy="68" rx="9" ry="16" fill="#E6B800" transform="rotate(337.5 100 100)"/>
+          <circle cx="100" cy="100" r="33" fill="#CC8800"/>
+          <circle cx="100" cy="100" r="27" fill="#A86E00"/>
+          <text x="100" y="100" dominant-baseline="central" text-anchor="middle" font-size="34" font-weight="900" font-family="Manrope, sans-serif" fill="white">R</text>
+        </svg>
+      </div>
+      <div class="icon-wrap" style="width:40px;height:40px;">
+        <svg width="40" height="40" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+          <rect width="200" height="200" fill="#0057B7"/>
+          <ellipse cx="100" cy="61" rx="12" ry="23" fill="#FCD400"/>
+          <ellipse cx="100" cy="61" rx="12" ry="23" fill="#FCD400" transform="rotate(45 100 100)"/>
+          <ellipse cx="100" cy="61" rx="12" ry="23" fill="#FCD400" transform="rotate(90 100 100)"/>
+          <ellipse cx="100" cy="61" rx="12" ry="23" fill="#FCD400" transform="rotate(135 100 100)"/>
+          <ellipse cx="100" cy="61" rx="12" ry="23" fill="#FCD400" transform="rotate(180 100 100)"/>
+          <ellipse cx="100" cy="61" rx="12" ry="23" fill="#FCD400" transform="rotate(225 100 100)"/>
+          <ellipse cx="100" cy="61" rx="12" ry="23" fill="#FCD400" transform="rotate(270 100 100)"/>
+          <ellipse cx="100" cy="61" rx="12" ry="23" fill="#FCD400" transform="rotate(315 100 100)"/>
+          <ellipse cx="100" cy="68" rx="9" ry="16" fill="#E6B800" transform="rotate(22.5 100 100)"/>
+          <ellipse cx="100" cy="68" rx="9" ry="16" fill="#E6B800" transform="rotate(67.5 100 100)"/>
+          <ellipse cx="100" cy="68" rx="9" ry="16" fill="#E6B800" transform="rotate(112.5 100 100)"/>
+          <ellipse cx="100" cy="68" rx="9" ry="16" fill="#E6B800" transform="rotate(157.5 100 100)"/>
+          <ellipse cx="100" cy="68" rx="9" ry="16" fill="#E6B800" transform="rotate(202.5 100 100)"/>
+          <ellipse cx="100" cy="68" rx="9" ry="16" fill="#E6B800" transform="rotate(247.5 100 100)"/>
+          <ellipse cx="100" cy="68" rx="9" ry="16" fill="#E6B800" transform="rotate(292.5 100 100)"/>
+          <ellipse cx="100" cy="68" rx="9" ry="16" fill="#E6B800" transform="rotate(337.5 100 100)"/>
+          <circle cx="100" cy="100" r="33" fill="#CC8800"/>
+          <circle cx="100" cy="100" r="27" fill="#A86E00"/>
+          <text x="100" y="100" dominant-baseline="central" text-anchor="middle" font-size="34" font-weight="900" font-family="Manrope, sans-serif" fill="white">R</text>
+        </svg>
+      </div>
+    </div>
+
+    <!-- C -->
+    <div class="compare-col">
+      <div class="compare-name">C · Схід</div>
+      <div class="icon-wrap" style="width:120px;height:120px;">
+        <svg width="120" height="120" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+          <rect width="200" height="200" fill="url(#gradC)"/>
+          <circle cx="100" cy="214" r="80" fill="#FCD400"/>
+          <text x="100" y="68" dominant-baseline="central" text-anchor="middle" font-size="96" font-weight="900" font-family="Manrope, sans-serif" fill="white">R</text>
+        </svg>
+      </div>
+      <div class="icon-wrap" style="width:60px;height:60px;">
+        <svg width="60" height="60" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+          <rect width="200" height="200" fill="url(#gradC)"/>
+          <circle cx="100" cy="214" r="80" fill="#FCD400"/>
+          <text x="100" y="68" dominant-baseline="central" text-anchor="middle" font-size="96" font-weight="900" font-family="Manrope, sans-serif" fill="white">R</text>
+        </svg>
+      </div>
+      <div class="icon-wrap" style="width:40px;height:40px;">
+        <svg width="40" height="40" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+          <rect width="200" height="200" fill="url(#gradC)"/>
+          <circle cx="100" cy="214" r="80" fill="#FCD400"/>
+          <text x="100" y="68" dominant-baseline="central" text-anchor="middle" font-size="96" font-weight="900" font-family="Manrope, sans-serif" fill="white">R</text>
+        </svg>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+</body>
+</html>

@@ -4,7 +4,11 @@
       "Bash(git add *)",
       "Bash(git commit *)",
       "WebSearch",
-      "WebFetch"
+      "WebFetch",
+      "Bash(git push *)",
+      "Bash(sed -n '220,245p' \"c:\\\\Users\\\\Semirenko\\\\Desktop\\\\english\\\\ClaudeCode\\\\RefugeeApp\\\\Design\\\\Mockups\\\\14_education.html\")",
+      "Bash(sed -n '260,275p' \"c:\\\\Users\\\\Semirenko\\\\Desktop\\\\english\\\\ClaudeCode\\\\RefugeeApp\\\\Design\\\\Mockups\\\\13_article_family.html\")",
+      "Bash(npx skills *)"
     ]
   }
 }

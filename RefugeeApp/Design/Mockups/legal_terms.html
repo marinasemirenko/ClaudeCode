@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Умови використання — RefugeeGuide</title>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #F8F9FA; --card: #FFFFFF; --text: #111827; --muted: #6B7280;
+      --border: #E5E2DA; --blue: #0057B7; --yellow: #FCD400;
+      --accent: #0284C7; --accent-dark: #0369A1; --accent-soft: #E0F2FE;
+      --teal: #0D9488; --teal-soft: #CCFBF1;
+      --red: #DC2626; --red-soft: #FEE2E2;
+      --amber: #D97706; --amber-soft: #FEF3C7;
+    }
+    body { font-family: 'Manrope', sans-serif; background: var(--bg); color: var(--text); max-width: 390px; margin: 0 auto; min-height: 100vh; }
+    .msym { font-family: 'Material Symbols Outlined'; font-variation-settings: 'FILL' 1,'wght' 400,'GRAD' 0,'opsz' 24; font-size: 22px; line-height: 1; }
+    .msym.o { font-variation-settings: 'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 24; }
+    .flag-bar { height: 3px; background: linear-gradient(90deg, var(--blue) 50%, var(--yellow) 50%); }
+    header { background: var(--card); padding: 14px 18px; display: flex; align-items: center; gap: 12px; border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 50; }
+    .back-btn { width: 38px; height: 38px; border-radius: 50%; background: var(--bg); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; cursor: pointer; text-decoration: none; color: var(--text); flex-shrink: 0; }
+    .header-title { font-size: 16px; font-weight: 900; color: var(--text); flex: 1; }
+    main { padding-bottom: 110px; }
+
+    .page-hero { background: linear-gradient(135deg, #0F766E 0%, #0D9488 60%, #2DD4BF 100%); padding: 28px 20px 32px; position: relative; overflow: hidden; }
+    .hero-pattern { position: absolute; inset: 0; pointer-events: none; background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='20' cy='20' r='1.5' fill='%23ffffff' fill-opacity='0.07'/%3E%3C/svg%3E"); background-size: 40px; }
+    .hero-icon { font-size: 36px; margin-bottom: 12px; }
+    .hero-title { font-size: 22px; font-weight: 900; color: #fff; letter-spacing: -0.5px; margin-bottom: 6px; }
+    .hero-sub { font-size: 12px; color: rgba(255,255,255,0.7); font-weight: 500; line-height: 1.5; }
+    .hero-date { margin-top: 12px; display: inline-flex; align-items: center; gap: 6px; background: rgba(255,255,255,0.15); border-radius: 100px; padding: 4px 12px; font-size: 11px; font-weight: 700; color: rgba(255,255,255,0.85); }
+
+    .content { padding: 20px 16px; }
+
+    .age-badge { display: flex; align-items: center; gap: 10px; background: #FEF3C7; border: 1px solid #FDE68A; border-radius: 14px; padding: 12px 14px; margin-bottom: 20px; }
+    .age-badge .msym { color: #D97706; font-size: 20px; flex-shrink: 0; }
+    .age-text { font-size: 12px; font-weight: 700; color: #92400E; line-height: 1.4; }
+    .age-text strong { font-weight: 900; color: #78350F; }
+
+    .doc-section { margin-bottom: 24px; }
+    .doc-section-title { font-size: 13px; font-weight: 900; color: var(--text); margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
+    .doc-section-title .num { width: 22px; height: 22px; border-radius: 6px; background: var(--teal-soft); color: var(--teal); font-size: 11px; font-weight: 900; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .doc-text { font-size: 12px; color: #374151; font-weight: 500; line-height: 1.7; }
+    .doc-text + .doc-text { margin-top: 8px; }
+
+    .highlight-box { border-radius: 14px; padding: 14px 16px; display: flex; gap: 12px; align-items: flex-start; margin-top: 10px; }
+    .highlight-box.warning { background: var(--red-soft); border: 1px solid #FECACA; }
+    .highlight-box.warning .msym { color: var(--red); font-size: 18px; flex-shrink: 0; margin-top: 1px; }
+    .highlight-box.warning .doc-text { color: #991B1B; }
+    .highlight-box.info { background: var(--teal-soft); border: 1px solid #99F6E4; }
+    .highlight-box.info .msym { color: var(--teal); font-size: 18px; flex-shrink: 0; margin-top: 1px; }
+    .highlight-box.info .doc-text { color: #134E4A; }
+    .highlight-box.amber { background: var(--amber-soft); border: 1px solid #FDE68A; }
+    .highlight-box.amber .msym { color: var(--amber); font-size: 18px; flex-shrink: 0; margin-top: 1px; }
+    .highlight-box.amber .doc-text { color: #78350F; }
+
+    .plan-cards { display: flex; gap: 10px; margin-top: 10px; }
+    .plan-card { flex: 1; background: var(--card); border-radius: 14px; border: 1px solid var(--border); padding: 14px 12px; text-align: center; }
+    .plan-card.premium { border-color: #FDE68A; background: #FFFBEB; }
+    .plan-name { font-size: 12px; font-weight: 900; color: var(--text); margin-bottom: 6px; }
+    .plan-price { font-size: 16px; font-weight: 900; color: var(--teal); margin-bottom: 6px; }
+    .plan-card.premium .plan-price { color: var(--amber); }
+    .plan-feature { font-size: 10px; color: var(--muted); font-weight: 600; line-height: 1.5; }
+
+    .rule-list { display: flex; flex-direction: column; gap: 8px; margin-top: 10px; }
+    .rule-item { display: flex; align-items: flex-start; gap: 10px; background: var(--card); border-radius: 12px; border: 1px solid var(--border); padding: 11px 13px; }
+    .rule-item .msym { font-size: 16px; color: var(--teal); flex-shrink: 0; margin-top: 1px; }
+    .rule-item .doc-text { margin: 0; }
+
+    .contact-box { background: var(--teal-soft); border-radius: 16px; padding: 14px 16px; display: flex; gap: 12px; align-items: flex-start; }
+    .contact-box .msym { color: var(--teal); font-size: 20px; flex-shrink: 0; margin-top: 1px; }
+    .contact-text { font-size: 12px; color: #134E4A; font-weight: 600; line-height: 1.5; }
+    .contact-text a { color: var(--teal); font-weight: 800; }
+
+    .other-link { display: flex; align-items: center; gap: 10px; background: var(--card); border-radius: 14px; border: 1px solid var(--border); padding: 14px; text-decoration: none; color: inherit; margin-bottom: 8px; }
+    .other-link-icon { width: 36px; height: 36px; border-radius: 10px; background: #EDE9FE; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .other-link-icon .msym { color: #7C3AED; font-size: 18px; }
+    .other-link-body { flex: 1; }
+    .other-link-title { font-size: 12px; font-weight: 800; color: var(--text); }
+    .other-link-sub { font-size: 11px; color: var(--muted); font-weight: 500; }
+    .other-link-chevron { color: var(--muted); font-family: 'Material Symbols Outlined'; font-variation-settings: 'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 24; font-size: 20px; line-height: 1; }
+
+    .fab { position: fixed; bottom: 90px; right: calc(50% - 185px); width: 52px; height: 52px; background: linear-gradient(145deg, #2DD4BF, #0F766E); border-radius: 18px; display: flex; align-items: center; justify-content: center; box-shadow: 0 6px 20px rgba(13,148,136,0.45); cursor: pointer; z-index: 40; }
+    .fab .msym { color: #fff; font-size: 24px; }
+    nav { position: fixed; bottom: 0; left: 50%; transform: translateX(-50%); width: 100%; max-width: 390px; background: rgba(255,255,255,0.98); backdrop-filter: blur(20px); border-top: 1px solid var(--border); border-radius: 24px 24px 0 0; padding: 10px 8px 24px; display: flex; justify-content: space-around; z-index: 50; }
+    .nav-item { display: flex; flex-direction: column; align-items: center; gap: 4px; text-decoration: none; flex: 1; }
+    .nav-pill { padding: 6px 16px; border-radius: 100px; display: flex; align-items: center; justify-content: center; }
+    .nav-item.active .nav-pill { background: var(--teal-soft); }
+    .nav-item.active .msym { color: var(--teal); font-size: 23px; }
+    .nav-item:not(.active) .msym { color: var(--muted); font-size: 23px; font-variation-settings: 'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 24; }
+    .nav-lbl { font-size: 9px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.06em; }
+    .nav-item.active .nav-lbl { color: var(--teal); }
+    .nav-item:not(.active) .nav-lbl { color: var(--muted); }
+  </style>
+</head>
+<body>
+
+<div class="flag-bar"></div>
+<header>
+  <a href="profile.html" class="back-btn"><span class="msym o" style="font-size:20px">arrow_back</span></a>
+  <div class="header-title">Умови використання</div>
+</header>
+
+<main>
+  <div class="page-hero">
+    <div class="hero-pattern"></div>
+    <div class="hero-icon">📋</div>
+    <div class="hero-title">Умови використання</div>
+    <div class="hero-sub">Правила роботи RefugeeGuide. Прочитай, будь ласка — тут коротко і по суті.</div>
+    <div class="hero-date"><span class="msym" style="font-size:13px;">calendar_today</span> Чинні з 1 червня 2025 р.</div>
+  </div>
+
+  <div class="content">
+
+    <div class="age-badge">
+      <span class="msym">18_up_rating</span>
+      <div class="age-text"><strong>Застосунок призначений для осіб від 16 років.</strong> Реєструючись, ти підтверджуєш, що тобі є 16 або більше.</div>
+    </div>
+
+    <!-- Section 1 -->
+    <div class="doc-section">
+      <div class="doc-section-title"><span class="num">1</span>Що таке RefugeeGuide</div>
+      <p class="doc-text">RefugeeGuide — це інформаційний довідник для українських біженців у Нідерландах. Він створений однією людиною — Мариною Семіренко, яка сама пройшла цей шлях.</p>
+      <p class="doc-text">Застосунок надає довідкову інформацію про права, охорону здоров'я, освіту, роботу та житло. Він <strong>не є юридичною службою</strong> і не замінює консультацію адвоката або офіційних органів.</p>
+    </div>
+
+    <!-- Section 2 -->
+    <div class="doc-section">
+      <div class="doc-section-title"><span class="num">2</span>Важливий дисклеймер</div>
+      <div class="highlight-box warning">
+        <span class="msym">warning</span>
+        <p class="doc-text">Уся інформація в застосунку є довідковою і може застаріти. Перед прийняттям важливих рішень — особливо юридичних або фінансових — завжди звертайся до офіційних джерел або спеціаліста. RefugeeGuide не несе відповідальності за наслідки дій на основі матеріалів застосунку.</p>
+      </div>
+    </div>
+
+    <!-- Section 3 -->
+    <div class="doc-section">
+      <div class="doc-section-title"><span class="num">3</span>Тарифи і підписка</div>
+      <div class="plan-cards">
+        <div class="plan-card">
+          <div class="plan-name">Безкоштовно</div>
+          <div class="plan-price">€0</div>
+          <div class="plan-feature">Базові статті<br>Корисні посилання<br>Перші кроки</div>
+        </div>
+        <div class="plan-card premium">
+          <div class="plan-name">Premium</div>
+          <div class="plan-price">€4,99/міс</div>
+          <div class="plan-feature">Всі статті<br>Юридичні деталі<br>Фінанси і податки</div>
+        </div>
+      </div>
+      <div class="highlight-box info" style="margin-top:12px;">
+        <span class="msym">info</span>
+        <p class="doc-text">Підписку можна скасувати в будь-який момент. Після скасування доступ до Premium залишається до кінця оплаченого місяця. Повернення коштів — за перші 14 днів після першої оплати.</p>
+      </div>
+    </div>
+
+    <!-- Section 4 -->
+    <div class="doc-section">
+      <div class="doc-section-title"><span class="num">4</span>Що ти зобов'язуєшся не робити</div>
+      <div class="rule-list">
+        <div class="rule-item">
+          <span class="msym">person_off</span>
+          <p class="doc-text">Не реєструватись, якщо тобі немає 16 років</p>
+        </div>
+        <div class="rule-item">
+          <span class="msym">share_off</span>
+          <p class="doc-text">Не поширювати платний контент без дозволу — це порушення авторських прав</p>
+        </div>
+        <div class="rule-item">
+          <span class="msym">code_off</span>
+          <p class="doc-text">Не копіювати, не відтворювати і не розбирати код або дизайн застосунку</p>
+        </div>
+        <div class="rule-item">
+          <span class="msym">bug_report</span>
+          <p class="doc-text">Не намагатись обійти систему оплати або отримати Premium без підписки</p>
+        </div>
+        <div class="rule-item">
+          <span class="msym">gavel</span>
+          <p class="doc-text">Не використовувати застосунок для розповсюдження дезінформації або шкідливого контенту</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Section 5 -->
+    <div class="doc-section">
+      <div class="doc-section-title"><span class="num">5</span>Інтелектуальна власність</div>
+      <p class="doc-text">Весь контент застосунку — тексти, дизайн, структура — є інтелектуальною власністю Marina Semirenko і захищений авторським правом.</p>
+      <p class="doc-text">Ти можеш вільно використовувати інформацію для особистих потреб. Комерційне використання або передрук без письмового дозволу заборонені.</p>
+    </div>
+
+    <!-- Section 6 -->
+    <div class="doc-section">
+      <div class="doc-section-title"><span class="num">6</span>Зміни і доступність</div>
+      <p class="doc-text">Ми залишаємо за собою право змінювати, доповнювати або видаляти будь-який контент, функції або умови без попереднього повідомлення.</p>
+      <p class="doc-text">У виняткових ситуаціях ми можемо призупинити або заблокувати доступ до акаунту, якщо виявимо порушення цих Умов.</p>
+      <div class="highlight-box amber">
+        <span class="msym">campaign</span>
+        <p class="doc-text">Про суттєві зміни в Умовах ми повідомляємо за 14 днів — через push або email. Якщо ти не згодна зі змінами — ти можеш видалити акаунт до дати їх набрання чинності.</p>
+      </div>
+    </div>
+
+    <!-- Section 7 -->
+    <div class="doc-section">
+      <div class="doc-section-title"><span class="num">7</span>Юрисдикція і спори</div>
+      <p class="doc-text">Ці Умови регулюються законодавством Нідерландів. У разі будь-яких суперечок застосовується нідерландське право.</p>
+      <p class="doc-text">Якщо виникне спір, ми пропонуємо спочатку вирішити його напряму — напиши нам, і ми розберемося.</p>
+    </div>
+
+    <!-- Section 8 -->
+    <div class="doc-section">
+      <div class="doc-section-title"><span class="num">8</span>Прийняття Умов</div>
+      <p class="doc-text">Реєструючись або продовжуючи використовувати RefugeeGuide, ти підтверджуєш, що ознайомилась з цими Умовами, зрозуміла їх і згодна їх дотримуватись.</p>
+    </div>
+
+    <!-- Contact -->
+    <div class="contact-box" style="margin-bottom:16px;">
+      <span class="msym">mail</span>
+      <div class="contact-text">
+        Питання щодо Умов або скасування підписки? Пишіть на <a href="mailto:support@refugeeguide.nl">support@refugeeguide.nl</a>
+      </div>
+    </div>
+
+    <!-- Link to Privacy Policy -->
+    <a href="legal_privacy.html" class="other-link">
+      <div class="other-link-icon"><span class="msym">lock</span></div>
+      <div class="other-link-body">
+        <div class="other-link-title">Політика конфіденційності</div>
+        <div class="other-link-sub">Як ми обробляємо твої персональні дані (GDPR)</div>
+      </div>
+      <span class="other-link-chevron">chevron_right</span>
+    </a>
+
+  </div>
+</main>
+
+<div class="fab"><span class="msym">chat</span></div>
+
+<nav>
+  <a href="1final_colorful.html" class="nav-item">
+    <div class="nav-pill"><span class="msym o">home</span></div>
+    <span class="nav-lbl">Головна</span>
+  </a>
+  <a href="search.html" class="nav-item">
+    <div class="nav-pill"><span class="msym o">explore</span></div>
+    <span class="nav-lbl">Огляд</span>
+  </a>
+  <a href="saved.html" class="nav-item">
+    <div class="nav-pill"><span class="msym o">bookmark</span></div>
+    <span class="nav-lbl">Збережені</span>
+  </a>
+  <a href="profile.html" class="nav-item active">
+    <div class="nav-pill"><span class="msym">person</span></div>
+    <span class="nav-lbl">Профіль</span>
+  </a>
+</nav>
+
+</body>
+</html>

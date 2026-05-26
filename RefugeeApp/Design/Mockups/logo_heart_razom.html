@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>RAZOM — Heart Logo</title>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@800;900&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Manrope', sans-serif;
+      background: #EAECF4;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 60px 24px;
+      gap: 40px;
+    }
+
+    .row {
+      display: flex;
+      gap: 24px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .card {
+      border-radius: 32px;
+      padding: 52px 44px 44px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 18px;
+    }
+    .on-white  { background: #FFFFFF; box-shadow: 0 10px 48px rgba(0,0,0,0.11); }
+    .on-blue   { background: #0057B7; box-shadow: 0 10px 48px rgba(0,60,160,0.45); }
+    .on-yellow { background: #FFD700; box-shadow: 0 10px 48px rgba(200,160,0,0.40); }
+
+    .razom {
+      font-size: 74px;
+      font-weight: 900;
+      letter-spacing: -4px;
+      line-height: 1;
+    }
+    .on-white  .razom { color: #0057B7; }
+    .on-blue   .razom { color: #FFD700; }
+    .on-yellow .razom { color: #0057B7; }
+
+    /* drop-shadow so the heart stands out on same-colour backgrounds */
+    .on-yellow svg { filter: drop-shadow(0 5px 18px rgba(0,30,100,0.30)); }
+    .on-blue   svg { filter: drop-shadow(0 5px 18px rgba(0,0,0,0.40)); }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════════  MAIN LOGO ROW  ═══════════════════ -->
+<div class="row">
+
+  <!-- on white -->
+  <div class="card on-white">
+    <svg width="280" height="264" viewBox="0 0 200 188" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <!-- Ukrainian flag: BLUE on top, YELLOW on bottom -->
+        <linearGradient id="g1" gradientUnits="userSpaceOnUse" x1="100" y1="16" x2="100" y2="174">
+          <stop offset="0%"   stop-color="#0057B7"/>
+          <stop offset="44%"  stop-color="#0057B7"/>
+          <stop offset="56%"  stop-color="#FFD700"/>
+          <stop offset="100%" stop-color="#FFD700"/>
+        </linearGradient>
+        <clipPath id="c1">
+          <path d="M100,174 C78,152 16,116 16,68 C16,36 42,16 66,16 C81,16 93,24 100,36 C107,24 119,16 134,16 C158,16 184,36 184,68 C184,116 122,152 100,174 Z"/>
+        </clipPath>
+      </defs>
+
+      <!-- Heart -->
+      <path d="M100,174 C78,152 16,116 16,68 C16,36 42,16 66,16 C81,16 93,24 100,36 C107,24 119,16 134,16 C158,16 184,36 184,68 C184,116 122,152 100,174 Z"
+            fill="url(#g1)"/>
+
+      <!-- ── Hands (white, clipped to heart) ── -->
+      <g clip-path="url(#c1)" fill="white">
+
+        <!-- LEFT HAND: upright in local coords, rotated -32° around (58,100) -->
+        <g transform="rotate(-32, 58, 100)">
+          <rect x="22"  y="106" width="72" height="44" rx="15"/> <!-- palm -->
+          <rect x="28"  y="58"  width="15" height="52" rx="7"/>  <!-- index -->
+          <rect x="46"  y="51"  width="15" height="59" rx="7"/>  <!-- middle -->
+          <rect x="64"  y="58"  width="15" height="52" rx="7"/>  <!-- ring -->
+          <rect x="82"  y="68"  width="13" height="42" rx="6"/>  <!-- pinky -->
+          <rect x="84"  y="113" width="30" height="14" rx="7"/>  <!-- thumb →right -->
+        </g>
+
+        <!-- RIGHT HAND: mirror of left, rotated +32° around (142,100) -->
+        <g transform="rotate(32, 142, 100)">
+          <rect x="106" y="106" width="72" height="44" rx="15"/>
+          <rect x="157" y="58"  width="15" height="52" rx="7"/>
+          <rect x="139" y="51"  width="15" height="59" rx="7"/>
+          <rect x="121" y="58"  width="15" height="52" rx="7"/>
+          <rect x="105" y="68"  width="13" height="42" rx="6"/>
+          <rect x="86"  y="113" width="30" height="14" rx="7"/>  <!-- thumb ←left -->
+        </g>
+
+      </g>
+    </svg>
+    <div class="razom">RAZOM</div>
+  </div>
+
+  <!-- on blue -->
+  <div class="card on-blue">
+    <svg width="280" height="264" viewBox="0 0 200 188" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="g2" gradientUnits="userSpaceOnUse" x1="100" y1="16" x2="100" y2="174">
+          <stop offset="0%"   stop-color="#0057B7"/>
+          <stop offset="44%"  stop-color="#0057B7"/>
+          <stop offset="56%"  stop-color="#FFD700"/>
+          <stop offset="100%" stop-color="#FFD700"/>
+        </linearGradient>
+        <clipPath id="c2">
+          <path d="M100,174 C78,152 16,116 16,68 C16,36 42,16 66,16 C81,16 93,24 100,36 C107,24 119,16 134,16 C158,16 184,36 184,68 C184,116 122,152 100,174 Z"/>
+        </clipPath>
+      </defs>
+      <path d="M100,174 C78,152 16,116 16,68 C16,36 42,16 66,16 C81,16 93,24 100,36 C107,24 119,16 134,16 C158,16 184,36 184,68 C184,116 122,152 100,174 Z" fill="url(#g2)"/>
+      <g clip-path="url(#c2)" fill="white">
+        <g transform="rotate(-32, 58, 100)">
+          <rect x="22" y="106" width="72" height="44" rx="15"/>
+          <rect x="28" y="58"  width="15" height="52" rx="7"/>
+          <rect x="46" y="51"  width="15" height="59" rx="7"/>
+          <rect x="64" y="58"  width="15" height="52" rx="7"/>
+          <rect x="82" y="68"  width="13" height="42" rx="6"/>
+          <rect x="84" y="113" width="30" height="14" rx="7"/>
+        </g>
+        <g transform="rotate(32, 142, 100)">
+          <rect x="106" y="106" width="72" height="44" rx="15"/>
+          <rect x="157" y="58"  width="15" height="52" rx="7"/>
+          <rect x="139" y="51"  width="15" height="59" rx="7"/>
+          <rect x="121" y="58"  width="15" height="52" rx="7"/>
+          <rect x="105" y="68"  width="13" height="42" rx="6"/>
+          <rect x="86"  y="113" width="30" height="14" rx="7"/>
+        </g>
+      </g>
+    </svg>
+    <div class="razom">RAZOM</div>
+  </div>
+
+  <!-- on yellow -->
+  <div class="card on-yellow">
+    <svg width="280" height="264" viewBox="0 0 200 188" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="g3" gradientUnits="userSpaceOnUse" x1="100" y1="16" x2="100" y2="174">
+          <stop offset="0%"   stop-color="#0057B7"/>
+          <stop offset="44%"  stop-color="#0057B7"/>
+          <stop offset="56%"  stop-color="#FFD700"/>
+          <stop offset="100%" stop-color="#FFD700"/>
+        </linearGradient>
+        <clipPath id="c3">
+          <path d="M100,174 C78,152 16,116 16,68 C16,36 42,16 66,16 C81,16 93,24 100,36 C107,24 119,16 134,16 C158,16 184,36 184,68 C184,116 122,152 100,174 Z"/>
+        </clipPath>
+      </defs>
+      <path d="M100,174 C78,152 16,116 16,68 C16,36 42,16 66,16 C81,16 93,24 100,36 C107,24 119,16 134,16 C158,16 184,36 184,68 C184,116 122,152 100,174 Z" fill="url(#g3)"/>
+      <g clip-path="url(#c3)" fill="white">
+        <g transform="rotate(-32, 58, 100)">
+          <rect x="22" y="106" width="72" height="44" rx="15"/>
+          <rect x="28" y="58"  width="15" height="52" rx="7"/>
+          <rect x="46" y="51"  width="15" height="59" rx="7"/>
+          <rect x="64" y="58"  width="15" height="52" rx="7"/>
+          <rect x="82" y="68"  width="13" height="42" rx="6"/>
+          <rect x="84" y="113" width="30" height="14" rx="7"/>
+        </g>
+        <g transform="rotate(32, 142, 100)">
+          <rect x="106" y="106" width="72" height="44" rx="15"/>
+          <rect x="157" y="58"  width="15" height="52" rx="7"/>
+          <rect x="139" y="51"  width="15" height="59" rx="7"/>
+          <rect x="121" y="58"  width="15" height="52" rx="7"/>
+          <rect x="105" y="68"  width="13" height="42" rx="6"/>
+          <rect x="86"  y="113" width="30" height="14" rx="7"/>
+        </g>
+      </g>
+    </svg>
+    <div class="razom">RAZOM</div>
+  </div>
+
+</div>
+
+<!-- ═══════════════════  SIZE STRIP  ═══════════════════ -->
+<div style="background:#fff; border-radius:28px; padding:32px 48px; box-shadow:0 8px 36px rgba(0,0,0,0.09); display:flex; align-items:flex-end; gap:32px;">
+
+  <div style="display:flex;flex-direction:column;align-items:center;gap:8px;">
+    <svg width="120" height="114" viewBox="0 0 200 188" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="gs1" gradientUnits="userSpaceOnUse" x1="100" y1="16" x2="100" y2="174">
+          <stop offset="0%" stop-color="#0057B7"/><stop offset="44%" stop-color="#0057B7"/>
+          <stop offset="56%" stop-color="#FFD700"/><stop offset="100%" stop-color="#FFD700"/>
+        </linearGradient>
+        <clipPath id="cs1"><path d="M100,174 C78,152 16,116 16,68 C16,36 42,16 66,16 C81,16 93,24 100,36 C107,24 119,16 134,16 C158,16 184,36 184,68 C184,116 122,152 100,174 Z"/></clipPath>
+      </defs>
+      <path d="M100,174 C78,152 16,116 16,68 C16,36 42,16 66,16 C81,16 93,24 100,36 C107,24 119,16 134,16 C158,16 184,36 184,68 C184,116 122,152 100,174 Z" fill="url(#gs1)"/>
+      <g clip-path="url(#cs1)" fill="white">
+        <g transform="rotate(-32,58,100)"><rect x="22" y="106" width="72" height="44" rx="15"/><rect x="28" y="58" width="15" height="52" rx="7"/><rect x="46" y="51" width="15" height="59" rx="7"/><rect x="64" y="58" width="15" height="52" rx="7"/><rect x="82" y="68" width="13" height="42" rx="6"/><rect x="84" y="113" width="30" height="14" rx="7"/></g>
+        <g transform="rotate(32,142,100)"><rect x="106" y="106" width="72" height="44" rx="15"/><rect x="157" y="58" width="15" height="52" rx="7"/><rect x="139" y="51" width="15" height="59" rx="7"/><rect x="121" y="58" width="15" height="52" rx="7"/><rect x="105" y="68" width="13" height="42" rx="6"/><rect x="86" y="113" width="30" height="14" rx="7"/></g>
+      </g>
+    </svg>
+    <span style="font-size:9px;font-weight:700;color:#B0B8D0;letter-spacing:.5px;">120px</span>
+  </div>
+
+  <div style="display:flex;flex-direction:column;align-items:center;gap:8px;">
+    <svg width="72" height="68" viewBox="0 0 200 188" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="gs2" gradientUnits="userSpaceOnUse" x1="100" y1="16" x2="100" y2="174">
+          <stop offset="0%" stop-color="#0057B7"/><stop offset="44%" stop-color="#0057B7"/>
+          <stop offset="56%" stop-color="#FFD700"/><stop offset="100%" stop-color="#FFD700"/>
+        </linearGradient>
+        <clipPath id="cs2"><path d="M100,174 C78,152 16,116 16,68 C16,36 42,16 66,16 C81,16 93,24 100,36 C107,24 119,16 134,16 C158,16 184,36 184,68 C184,116 122,152 100,174 Z"/></clipPath>
+      </defs>
+      <path d="M100,174 C78,152 16,116 16,68 C16,36 42,16 66,16 C81,16 93,24 100,36 C107,24 119,16 134,16 C158,16 184,36 184,68 C184,116 122,152 100,174 Z" fill="url(#gs2)"/>
+      <g clip-path="url(#cs2)" fill="white">
+        <g transform="rotate(-32,58,100)"><rect x="22" y="106" width="72" height="44" rx="15"/><rect x="28" y="58" width="15" height="52" rx="7"/><rect x="46" y="51" width="15" height="59" rx="7"/><rect x="64" y="58" width="15" height="52" rx="7"/><rect x="82" y="68" width="13" height="42" rx="6"/><rect x="84" y="113" width="30" height="14" rx="7"/></g>
+        <g transform="rotate(32,142,100)"><rect x="106" y="106" width="72" height="44" rx="15"/><rect x="157" y="58" width="15" height="52" rx="7"/><rect x="139" y="51" width="15" height="59" rx="7"/><rect x="121" y="58" width="15" height="52" rx="7"/><rect x="105" y="68" width="13" height="42" rx="6"/><rect x="86" y="113" width="30" height="14" rx="7"/></g>
+      </g>
+    </svg>
+    <span style="font-size:9px;font-weight:700;color:#B0B8D0;letter-spacing:.5px;">72px</span>
+  </div>
+
+  <div style="display:flex;flex-direction:column;align-items:center;gap:8px;">
+    <svg width="48" height="46" viewBox="0 0 200 188" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="gs3" gradientUnits="userSpaceOnUse" x1="100" y1="16" x2="100" y2="174">
+          <stop offset="0%" stop-color="#0057B7"/><stop offset="44%" stop-color="#0057B7"/>
+          <stop offset="56%" stop-color="#FFD700"/><stop offset="100%" stop-color="#FFD700"/>
+        </linearGradient>
+        <clipPath id="cs3"><path d="M100,174 C78,152 16,116 16,68 C16,36 42,16 66,16 C81,16 93,24 100,36 C107,24 119,16 134,16 C158,16 184,36 184,68 C184,116 122,152 100,174 Z"/></clipPath>
+      </defs>
+      <path d="M100,174 C78,152 16,116 16,68 C16,36 42,16 66,16 C81,16 93,24 100,36 C107,24 119,16 134,16 C158,16 184,36 184,68 C184,116 122,152 100,174 Z" fill="url(#gs3)"/>
+      <g clip-path="url(#cs3)" fill="white">
+        <g transform="rotate(-32,58,100)"><rect x="22" y="106" width="72" height="44" rx="15"/><rect x="28" y="58" width="15" height="52" rx="7"/><rect x="46" y="51" width="15" height="59" rx="7"/><rect x="64" y="58" width="15" height="52" rx="7"/><rect x="82" y="68" width="13" height="42" rx="6"/><rect x="84" y="113" width="30" height="14" rx="7"/></g>
+        <g transform="rotate(32,142,100)"><rect x="106" y="106" width="72" height="44" rx="15"/><rect x="157" y="58" width="15" height="52" rx="7"/><rect x="139" y="51" width="15" height="59" rx="7"/><rect x="121" y="58" width="15" height="52" rx="7"/><rect x="105" y="68" width="13" height="42" rx="6"/><rect x="86" y="113" width="30" height="14" rx="7"/></g>
+      </g>
+    </svg>
+    <span style="font-size:9px;font-weight:700;color:#B0B8D0;letter-spacing:.5px;">48px</span>
+  </div>
+
+  <div style="display:flex;flex-direction:column;align-items:center;gap:8px;">
+    <svg width="32" height="30" viewBox="0 0 200 188" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="gs4" gradientUnits="userSpaceOnUse" x1="100" y1="16" x2="100" y2="174">
+          <stop offset="0%" stop-color="#0057B7"/><stop offset="44%" stop-color="#0057B7"/>
+          <stop offset="56%" stop-color="#FFD700"/><stop offset="100%" stop-color="#FFD700"/>
+        </linearGradient>
+        <clipPath id="cs4"><path d="M100,174 C78,152 16,116 16,68 C16,36 42,16 66,16 C81,16 93,24 100,36 C107,24 119,16 134,16 C158,16 184,36 184,68 C184,116 122,152 100,174 Z"/></clipPath>
+      </defs>
+      <path d="M100,174 C78,152 16,116 16,68 C16,36 42,16 66,16 C81,16 93,24 100,36 C107,24 119,16 134,16 C158,16 184,36 184,68 C184,116 122,152 100,174 Z" fill="url(#gs4)"/>
+      <g clip-path="url(#cs4)" fill="white">
+        <g transform="rotate(-32,58,100)"><rect x="22" y="106" width="72" height="44" rx="15"/><rect x="28" y="58" width="15" height="52" rx="7"/><rect x="46" y="51" width="15" height="59" rx="7"/><rect x="64" y="58" width="15" height="52" rx="7"/><rect x="82" y="68" width="13" height="42" rx="6"/><rect x="84" y="113" width="30" height="14" rx="7"/></g>
+        <g transform="rotate(32,142,100)"><rect x="106" y="106" width="72" height="44" rx="15"/><rect x="157" y="58" width="15" height="52" rx="7"/><rect x="139" y="51" width="15" height="59" rx="7"/><rect x="121" y="58" width="15" height="52" rx="7"/><rect x="105" y="68" width="13" height="42" rx="6"/><rect x="86" y="113" width="30" height="14" rx="7"/></g>
+      </g>
+    </svg>
+    <span style="font-size:9px;font-weight:700;color:#B0B8D0;letter-spacing:.5px;">32px</span>
+  </div>
+
+</div>
+
+</body>
+</html>
