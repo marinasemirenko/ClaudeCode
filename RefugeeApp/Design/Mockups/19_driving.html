@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Авто та парковка — RefugeeGuide</title>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing:border-box;margin:0;padding:0; }
+    :root { --bg:#F8F9FA;--card:#FFFFFF;--text:#111827;--muted:#6B7280;--border:#E5E2DA;--blue:#0057B7;--blue-soft:#E8F0FF;--yellow:#FCD400;--orange:#EA580C;--orange-soft:#FFEDD5; }
+    body { font-family:'Manrope',sans-serif;background:var(--bg);color:var(--text);max-width:390px;margin:0 auto;min-height:100vh; }
+    .msym { font-family:'Material Symbols Outlined';font-variation-settings:'FILL' 1,'wght' 400,'GRAD' 0,'opsz' 24;font-size:22px;line-height:1; }
+    .msym.o { font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 24; }
+    .flag-bar { height:3px;background:linear-gradient(90deg,var(--blue) 50%,var(--yellow) 50%); }
+    header { background:var(--card);padding:14px 18px;display:flex;align-items:center;gap:12px;border-bottom:1px solid var(--border);position:sticky;top:0;z-index:50; }
+    .back-btn { width:38px;height:38px;border-radius:50%;background:var(--bg);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;text-decoration:none;color:var(--text);flex-shrink:0; }
+    .back-btn .msym { font-size:20px; }
+    .header-title { font-size:18px;font-weight:900;color:var(--text); }
+    main { padding-bottom:110px; }
+    .hero { background:linear-gradient(135deg,#7C2D12 0%,#EA580C 55%,#FB923C 100%);padding:24px 20px 28px;position:relative;overflow:hidden; }
+    .hero-pattern { position:absolute;inset:0;pointer-events:none;background-image:url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='20' cy='20' r='1.5' fill='%23ffffff' fill-opacity='0.08'/%3E%3C/svg%3E");background-size:40px; }
+    .hero-icon { font-size:32px;margin-bottom:10px; }
+    .hero-title { font-size:22px;font-weight:900;color:#fff;letter-spacing:-0.5px;margin-bottom:6px; }
+    .hero-sub { font-size:12px;color:rgba(255,255,255,0.75);font-weight:500;line-height:1.5; }
+    .content { padding:18px 16px; }
+    .sec-label { font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:0.13em;color:var(--muted);margin-bottom:12px;margin-top:22px; }
+    .sec-label:first-child { margin-top:0; }
+    .cards { display:flex;flex-direction:column;gap:10px; }
+    .card { background:var(--card);border-radius:16px;border:1.5px solid var(--border);padding:14px 15px;display:flex;gap:13px;align-items:flex-start; }
+    .card-icon { width:44px;height:44px;border-radius:13px;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0; }
+    .card-body .title { font-size:13px;font-weight:800;color:var(--text);margin-bottom:4px; }
+    .card-body .desc { font-size:12px;color:#374151;font-weight:500;line-height:1.55; }
+    .tag { display:inline-block;font-size:10px;font-weight:800;border-radius:100px;padding:2px 8px;margin-top:6px; }
+    .tag-free  { background:#DCFCE7;color:#15803D; }
+    .tag-warn  { background:#FEF3C7;color:#92400E; }
+    .tag-red   { background:#FEE2E2;color:#B91C1C; }
+    .tag-blue  { background:var(--blue-soft);color:#1D4ED8; }
+    .tag-orange { background:var(--orange-soft);color:#9A3412; }
+    .steps { background:var(--card);border-radius:16px;border:1.5px solid var(--border);overflow:hidden; }
+    .step-row { display:flex;align-items:flex-start;gap:12px;padding:12px 14px;border-bottom:1px solid var(--border); }
+    .step-row:last-child { border-bottom:none; }
+    .step-num { width:24px;height:24px;border-radius:50%;background:var(--orange);color:#fff;font-size:11px;font-weight:900;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px; }
+    .step-text { font-size:12px;color:#374151;font-weight:600;line-height:1.5;flex:1; }
+    .step-text strong { color:var(--text);font-weight:800; }
+    .info-box { border-radius:14px;padding:13px 14px;display:flex;gap:10px;align-items:flex-start;margin-top:16px; }
+    .info-box.orange { background:var(--orange-soft);border:1px solid #FED7AA; }
+    .info-box.orange .msym { color:var(--orange);font-size:18px;flex-shrink:0;margin-top:1px; }
+    .info-box.orange p { font-size:12px;color:#7C2D12;font-weight:600;line-height:1.5; }
+    .info-box.red { background:#FEE2E2;border:1px solid #FECACA; }
+    .info-box.red .msym { color:#DC2626;font-size:18px;flex-shrink:0;margin-top:1px; }
+    .info-box.red p { font-size:12px;color:#7F1D1D;font-weight:600;line-height:1.5; }
+    .info-box.blue { background:var(--blue-soft);border:1px solid #BFDBFE; }
+    .info-box.blue .msym { color:var(--blue);font-size:18px;flex-shrink:0;margin-top:1px; }
+    .info-box.blue p { font-size:12px;color:#1E3A5F;font-weight:600;line-height:1.5; }
+    .fab { position:fixed;bottom:90px;right:calc(50% - 185px);width:52px;height:52px;background:linear-gradient(145deg,#FB923C,#7C2D12);border-radius:18px;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 20px rgba(234,88,12,0.45);cursor:pointer;z-index:40; }
+    .fab .msym { color:#fff;font-size:24px; }
+    nav { position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:390px;background:rgba(255,255,255,0.98);backdrop-filter:blur(20px);border-top:1px solid var(--border);border-radius:24px 24px 0 0;padding:10px 8px 24px;display:flex;justify-content:space-around;z-index:50; }
+    .nav-item { display:flex;flex-direction:column;align-items:center;gap:4px;text-decoration:none;flex:1; }
+    .nav-pill { padding:6px 16px;border-radius:100px;display:flex;align-items:center;justify-content:center; }
+    .nav-item:not(.active) .msym { color:var(--muted);font-size:23px;font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 24; }
+    .nav-lbl { font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:0.06em;color:var(--muted); }
+  </style>
+</head>
+<body>
+<div class="flag-bar"></div>
+<header>
+  <a href="19_korysne.html" class="back-btn"><span class="msym o">arrow_back</span></a>
+  <div class="header-title">Авто та парковка</div>
+</header>
+<main>
+  <div class="hero">
+    <div class="hero-pattern"></div>
+    <div class="hero-icon">🚗</div>
+    <div class="hero-title">Авто та парковка</div>
+    <div class="hero-sub">Права, реєстрація авто, паркування та штрафи — все що потрібно знати водієві в NL.</div>
+  </div>
+  <div class="content">
+
+    <div class="info-box red">
+      <span class="msym">warning</span>
+      <p>⚠️ Українське посвідчення водія дійсне в NL лише 185 днів з дня першої реєстрації в країні. Після цього потрібно обміняти на нідерландське або не мати права керувати.</p>
+    </div>
+
+    <div class="sec-label" style="margin-top:20px;">Посвідчення водія</div>
+    <div class="steps">
+      <div class="step-row">
+        <div class="step-num">1</div>
+        <div class="step-text"><strong>185 днів.</strong> З моменту реєстрації в gemeente (BRP) — ти маєш право їздити з українськими правами 185 днів. Зберігай документ про дату реєстрації.</div>
+      </div>
+      <div class="step-row">
+        <div class="step-num">2</div>
+        <div class="step-text"><strong>Обмін прав.</strong> Зверніся до CBR (Centraal Bureau Rijvaardigheidsbewijzen) з українськими правами, паспортом і doelgroepenvervoer-formulier. Потрібне фото і сплата збору (~€40).</div>
+      </div>
+      <div class="step-row">
+        <div class="step-num">3</div>
+        <div class="step-text"><strong>Теоретичний іспит.</strong> Якщо обмін неможливий — потрібно здавати іспит заново. Підготовка онлайн на cbr.nl. Теорія коштує ~€30.</div>
+      </div>
+      <div class="step-row">
+        <div class="step-num">4</div>
+        <div class="step-text"><strong>Статус ТЗ.</strong> Якщо ти маєш тимчасовий захист (tijdelijke bescherming) — умови обміну можуть відрізнятись. Перевіряй актуальну інформацію на cbr.nl або в IND.</div>
+      </div>
+    </div>
+
+    <div class="sec-label">Паркування в Нідерландах</div>
+    <div class="cards">
+      <div class="card">
+        <div class="card-icon" style="background:linear-gradient(145deg,#fde68a,#f59e0b);">🅿️</div>
+        <div class="card-body">
+          <div class="title">Платне паркування</div>
+          <div class="desc">У більшості міст паркування платне в центрі і жилих районах. Ціни: від €1.50 до €7/год залежно від міста. Без оплати — штраф від €65 (naheffingsaanslag). Завжди перевіряй знаки і час дії.</div>
+          <span class="tag tag-warn">Перевіряй знаки біля кожного місця</span>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-icon" style="background:linear-gradient(145deg,#bfdbfe,#0057b7);">📱</div>
+        <div class="card-body">
+          <div class="title">Parkmobile — оплата з телефону</div>
+          <div class="desc">Найзручніший спосіб платити за паркування в більшості нідерландських міст. Завантажуй застосунок, вводи зону (номер на знаку) і номер авто. Можна зупинити будь-коли — платиш тільки за реальний час.</div>
+          <span class="tag tag-blue">Безкоштовний застосунок</span>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-icon" style="background:linear-gradient(145deg,#ddd6fe,#7c3aed);">🔵</div>
+        <div class="card-body">
+          <div class="title">Blauwe zone — синя зона</div>
+          <div class="desc">У деяких районах паркування безкоштовне, але обмежене часом (1–2 години). Потрібен синій картонний диск (parkeerschijf) — стрілка вказує на час прибуття. Диск купи в будь-якому автомагазині (~€2).</div>
+          <span class="tag tag-free">Безкоштовно з диском</span>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-icon" style="background:linear-gradient(145deg,#bbf7d0,#16a34a);">🚗</div>
+        <div class="card-body">
+          <div class="title">P+R — Parkeer en Reis</div>
+          <div class="desc">Безкоштовне або дуже дешеве паркування на окраїні міста + квиток на громадський транспорт до центру. Є у більшості великих міст. Ідеально якщо їдеш у центр — не трать гроші на дороге паркування там.</div>
+          <span class="tag tag-free">Часто від €1–3 на весь день</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="sec-label">Реєстрація авто та техогляд</div>
+    <div class="cards">
+      <div class="card">
+        <div class="card-icon" style="background:linear-gradient(145deg,#fde68a,#f59e0b);">📋</div>
+        <div class="card-body">
+          <div class="title">APK — технічний огляд</div>
+          <div class="desc">Аналог українського техогляду. Автомобілі старше 4 років проходять APK щороку. Термін вказаний на кентекенбевіс (свідоцтво). Якщо термін минув — їздити заборонено. Вартість: ~€30–60 залежно від станції.</div>
+          <span class="tag tag-warn">Перевір термін у kentekenpro.nl</span>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-icon" style="background:linear-gradient(145deg,#bbf7d0,#16a34a);">📄</div>
+        <div class="card-body">
+          <div class="title">Wegenbelasting — дорожній податок</div>
+          <div class="desc">Щоквартальний або річний податок за право користування авто на дорогах NL. Залежить від маси і типу авто. Нараховується автоматично через RDW. Не сплатив — штраф і можливе вилучення номерів.</div>
+          <span class="tag tag-orange">belastingdienst.nl</span>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-icon" style="background:linear-gradient(145deg,#fecaca,#dc2626);">🚔</div>
+        <div class="card-body">
+          <div class="title">Штрафи (CJIB)</div>
+          <div class="desc">Нідерландська система штрафів — автоматична і невблаганна. Камери фіксують перевищення швидкості, проїзд на червоне, недотримання смуг. Штраф приходить листом від CJIB. Ігнорування — додаткові збори.</div>
+          <span class="tag tag-red">Оплати вчасно: cjib.nl</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="sec-label">Правила дорожнього руху — різниця</div>
+    <div class="cards">
+      <div class="card">
+        <div class="card-icon" style="background:linear-gradient(145deg,#fde68a,#f59e0b);">⚠️</div>
+        <div class="card-body">
+          <div class="title">Право пріоритету (rechts heeft voorrang)</div>
+          <div class="desc">У Нідерландах транспорт справа має пріоритет — навіть якщо ти на головній дорозі, а він на боковій. Виняток: знак B1 (жовтий ромб) означає що ти на головній. Це найчастіша причина аварій серед нових водіїв.</div>
+          <span class="tag tag-red">Важлива відмінність від UA</span>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-icon" style="background:linear-gradient(145deg,#ccfbf1,#0d9488);">🚲</div>
+        <div class="card-body">
+          <div class="title">Пріоритет велосипедистів</div>
+          <div class="desc">Велосипедисти мають пріоритет на позначених переїздах (fietspad). При повороті — обов'язково перевіряй велодоріжку, вони не зупиняються. Збив велосипедиста — автоматично визнаєшся винним.</div>
+          <span class="tag tag-warn">Завжди поступайся</span>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-icon" style="background:linear-gradient(145deg,#bfdbfe,#0057b7);">🚦</div>
+        <div class="card-body">
+          <div class="title">Обмеження швидкості</div>
+          <div class="desc">Місто: 30 або 50 км/год. Поза містом: 80 км/год. Автострада: 100 км/год (вдень) або 130 км/год (вночі). Знаки і знаки — вони змінюються. Перевищення навіть на 1 км/год — штраф.</div>
+          <span class="tag tag-orange">Камери скрізь</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="sec-label">Корисні застосунки</div>
+    <div class="cards">
+      <div class="card">
+        <div class="card-icon" style="background:linear-gradient(145deg,#bfdbfe,#0057b7);">📱</div>
+        <div class="card-body">
+          <div class="title">Parkmobile</div>
+          <div class="desc">Оплата паркування в реальному часі — без паркомата. Є в більшості міст NL.</div>
+          <span class="tag tag-free">Безкоштовно</span>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-icon" style="background:linear-gradient(145deg,#fde68a,#f59e0b);">🔶</div>
+        <div class="card-body">
+          <div class="title">ANWB Wegenkaart / ANWB app</div>
+          <div class="desc">Нідерландська асоціація автомобілістів. Застосунок показує дорожню ситуацію, пробки, дорожні роботи. При поломці — ANWB Wegenwacht (дорожня допомога): тел. 0800-0888.</div>
+          <span class="tag tag-orange">anwb.nl</span>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-icon" style="background:linear-gradient(145deg,#bbf7d0,#16a34a);">🔍</div>
+        <div class="card-body">
+          <div class="title">RDW Voertuigen</div>
+          <div class="desc">Офіційний реєстр транспортних засобів NL. Перевір будь-яке авто за номерним знаком: термін APK, тип пального, маса, кількість власників. Незамінно перед купівлею вживаного авто.</div>
+          <span class="tag tag-free">voertuigen.rdw.nl</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="info-box orange">
+      <span class="msym">info</span>
+      <p>Якщо купуєш авто в NL — перереєструй його в RDW на своє ім'я протягом 5 робочих днів. Доки авто на старому власнику — він отримує штрафи і дорожній податок на твої дії.</p>
+    </div>
+
+    <div class="info-box blue">
+      <span class="msym">school</span>
+      <p>⚠️ Правила та ціни регулярно змінюються. Перевіряй актуальну інформацію на rdw.nl, cbr.nl і overheid.nl.</p>
+    </div>
+
+  </div>
+</main>
+<div class="fab"><span class="msym">chat_bubble</span></div>
+<nav>
+  <a href="1final_colorful.html" class="nav-item"><div class="nav-pill"><span class="msym o">home</span></div><span class="nav-lbl">Головна</span></a>
+  <a href="search.html" class="nav-item"><div class="nav-pill"><span class="msym o">explore</span></div><span class="nav-lbl">Огляд</span></a>
+  <a href="saved.html" class="nav-item"><div class="nav-pill"><span class="msym o">bookmark</span></div><span class="nav-lbl">Збережені</span></a>
+  <a href="profile.html" class="nav-item"><div class="nav-pill"><span class="msym o">person</span></div><span class="nav-lbl">Профіль</span></a>
+</nav>
+</body>
+</html>

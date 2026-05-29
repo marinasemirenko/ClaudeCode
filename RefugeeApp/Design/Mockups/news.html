@@ -429,10 +429,6 @@
 
   <div class="filter-bar">
     <button class="filter-tab active" data-filter="all" onclick="setFilter('all')">&#127760; &#1042;&#1089;&#1110;</button>
-    <button class="filter-tab" data-filter="status" onclick="setFilter('status')">
-      &#128737;&#65039; &#1047;&#1072;&#1093;&#1080;&#1089;&#1090;
-      <span class="health-dot" id="health-status"></span>
-    </button>
     <button class="filter-tab" data-filter="ukraine" onclick="setFilter('ukraine')">
       &#127482;&#127462; &#1059;&#1082;&#1088;&#1072;&#1111;&#1085;&#1072;
       <span class="health-dot" id="health-ukraine"></span>
@@ -445,24 +441,8 @@
 
   <main>
     <div id="articles-container"></div>
-    <div id="premium-banner" style="display:none;" class="premium-banner">
-      <div class="pb-icon">&#128275;</div>
-      <div class="pb-title">&#1063;&#1080;&#1090;&#1072;&#1081;&#1090;&#1077; &#1087;&#1086;&#1074;&#1085;&#1110; &#1089;&#1090;&#1072;&#1090;&#1090;&#1110;</div>
-      <div class="pb-sub">&#1042;&#1110;&#1076;&#1082;&#1088;&#1080;&#1081;&#1090;&#1077; &#1076;&#1086;&#1089;&#1090;&#1091;&#1087; &#1076;&#1086; &#1074;&#1089;&#1110;&#1093; &#1085;&#1086;&#1074;&#1080;&#1085;<br>&#1090;&#1072; &#1087;&#1077;&#1088;&#1096;&#1086;&#1076;&#1078;&#1077;&#1088;&#1077;&#1083; &#1073;&#1077;&#1079; &#1086;&#1073;&#1084;&#1077;&#1078;&#1077;&#1085;&#1100;</div>
-      <a href="profile.html" class="pb-btn">&#1040;&#1082;&#1090;&#1080;&#1074;&#1091;&#1074;&#1072;&#1090;&#1080; &#1087;&#1088;&#1077;&#1084;&#1110;&#1091;&#1084; &#8212; &#8364;4.99/&#1084;&#1110;&#1089;</a>
-    </div>
   </main>
 
-  <!-- PREMIUM MODAL -->
-  <div class="modal-overlay" id="premium-modal" style="display:none;" onclick="handleModalOverlayClick(event)">
-    <div class="modal-card">
-      <div class="modal-icon">&#128274;</div>
-      <div class="modal-title">&#1055;&#1088;&#1077;&#1084;&#1110;&#1091;&#1084; &#1082;&#1086;&#1085;&#1090;&#1077;&#1085;&#1090;</div>
-      <div class="modal-text">&#1063;&#1080;&#1090;&#1072;&#1081;&#1090;&#1077; &#1087;&#1086;&#1074;&#1085;&#1110; &#1089;&#1090;&#1072;&#1090;&#1090;&#1110; &#1090;&#1072; &#1087;&#1077;&#1088;&#1077;&#1093;&#1086;&#1076;&#1100;&#1090;&#1077; &#1076;&#1086; &#1087;&#1077;&#1088;&#1096;&#1086;&#1076;&#1078;&#1077;&#1088;&#1077;&#1083; &#1085;&#1077;&#1086;&#1073;&#1084;&#1077;&#1078;&#1077;&#1085;&#1086;. &#1042;&#1089;&#1110; &#1085;&#1086;&#1074;&#1080;&#1085;&#1080;, &#1097;&#1086; &#1089;&#1090;&#1086;&#1089;&#1091;&#1102;&#1090;&#1100;&#1089;&#1103; &#1089;&#1072;&#1084;&#1077; &#1074;&#1072;&#1089;.</div>
-      <a href="profile.html" class="modal-cta">&#1054;&#1090;&#1088;&#1080;&#1084;&#1072;&#1090;&#1080; &#1076;&#1086;&#1089;&#1090;&#1091;&#1087; &#8212; &#8364;4.99/&#1084;&#1110;&#1089;</a>
-      <button class="modal-close" onclick="closePremiumModal()">&#1053;&#1077; &#1079;&#1072;&#1088;&#1072;&#1079;</button>
-    </div>
-  </div>
 
   <div class="fab"><span class="msym">chat_bubble</span></div>
 
@@ -558,12 +538,6 @@
     // Sample articles shown when all live sources fail
     var t = Date.now();
     var SAMPLES = {
-      status: [
-        { title: "IND: tijdelijke bescherming voor Oekraïners verlengd tot 2027",        link: "https://ind.nl/nl/nieuws",           pubDate: new Date(t - 3*3600000).toUTCString(),  author: "IND",              description: "" },
-        { title: "COA opent extra opvanglocaties voor Oekraïense vluchtelingen",          link: "https://coa.nl/nl/nieuws",           pubDate: new Date(t - 6*3600000).toUTCString(),  author: "COA",              description: "" },
-        { title: "VluchtelingenWerk: rechten van Oekraïners in Nederland in 2026",        link: "https://vluchtelingenwerk.nl",       pubDate: new Date(t - 9*3600000).toUTCString(),  author: "VluchtelingenWerk",description: "" },
-        { title: "Oekraïense tijdelijke bescherming: wat verandert er dit jaar?",         link: "https://government.nl",             pubDate: new Date(t - 12*3600000).toUTCString(), author: "Government.nl",    description: "" }
-      ],
       ukraine: [
         { title: "Ситуація на фронті: оперативна зведення",                        link: "https://suspilne.media", pubDate: new Date(t - 2*3600000).toUTCString(),  author: "Суспільне", description: "" },
         { title: "Переговори щодо безпекових гарантій для України",  link: "https://suspilne.media", pubDate: new Date(t - 5*3600000).toUTCString(),  author: "Суспільне", description: "" },
@@ -625,19 +599,6 @@
     }
 
     var FEEDS = {
-      status: {
-        id: 'status',
-        label: 'VluchtelingenWerk',
-        accentColor: '#0057B7',
-        keywords: ['oekrain','bescherming','ind','coa','vluchtelingen','refugee','tijdelijke','ukraine','displaced','asiel'],
-        guardianQuery: 'ukraine refugees netherlands protection status',
-        workerSources: [
-          // NOS — Dutch public broadcaster, covers refugee policy
-          'https://feeds.nos.nl/nosnieuwsalgemeen',
-          // NL Times — English Netherlands news
-          'https://nltimes.nl/rss.xml'
-        ]
-      },
       ukraine: {
         id: 'ukraine',
         label: 'BBC Україна',
@@ -674,10 +635,9 @@
     // STATE
     // =====================================================
     var allArticles  = [];
-    var feedHealth   = { status: null, ukraine: null, netherlands: null };
+    var feedHealth   = { ukraine: null, netherlands: null };
     var activeFilter = 'all';
     var isLoading    = false;
-    var isPremium    = localStorage.getItem('isPremium') === 'true';
 
     // =====================================================
     // HTTP — fetch with timeout (broad browser compatibility)
@@ -778,15 +738,6 @@
       return ok;
     }
 
-    // Agent E: Freemium gate — correct state after render
-    function agentE_freemiumGate() {
-      var readBtns = document.querySelectorAll('.article-read-btn').length;
-      var locks    = document.querySelectorAll('.article-lock').length;
-      var ok = isPremium ? (readBtns > 0 && locks === 0) : (locks > 0 && readBtns === 0);
-      console.log('[Agent E — Freemium gate] ' + (ok ? '✅' : '❌') + ' isPremium=' + isPremium + ' readBtns=' + readBtns + ' locks=' + locks);
-      return ok;
-    }
-
     // Run Agents A-D in parallel, return aggregate health label
     function runValidationAgents(feedId, result) {
       return Promise.all([
@@ -842,7 +793,6 @@
         updateHealthIndicators();
         updateStatusText();
         renderArticles();
-        setTimeout(agentE_freemiumGate, 150);
       });
     }
 
@@ -864,7 +814,6 @@
 
     function renderArticles() {
       var container = document.getElementById('articles-container');
-      var banner    = document.getElementById('premium-banner');
 
       var filtered = activeFilter === 'all'
         ? allArticles
@@ -881,15 +830,12 @@
             : 'Спробуйте іншу категорію або оновіть пізніше') + '</div>' +
           '<button class="error-retry" onclick="loadAllFeeds()">Спробувати знову</button>' +
           '</div>';
-        banner.style.display = 'none';
         return;
       }
 
       container.innerHTML = filtered.map(function(item, i) {
         return renderArticleCard(item, i === 0 && activeFilter === 'all');
       }).join('');
-
-      banner.style.display = isPremium ? 'none' : 'block';
     }
 
     function renderArticleCard(item, isFeatured) {
@@ -908,18 +854,11 @@
         '</div>' +
         '<div class="article-title">' + title + '</div>';
 
-      if (isPremium) {
-        return '<a href="' + item.link + '" target="_blank" rel="noopener noreferrer" ' +
-          'class="article-card article-unlocked' + featured + '">' +
-          meta +
-          '<div class="article-read-btn">Читати <span class="msym">arrow_forward</span></div>' +
-          '</a>';
-      } else {
-        return '<div class="article-card article-locked' + featured + '" onclick="showPremiumModal()">' +
-          meta +
-          '<div class="article-lock"><span class="msym">lock</span> Преміум</div>' +
-          '</div>';
-      }
+      return '<a href="' + item.link + '" target="_blank" rel="noopener noreferrer" ' +
+        'class="article-card article-unlocked' + featured + '">' +
+        meta +
+        '<div class="article-read-btn">Читати <span class="msym">arrow_forward</span></div>' +
+        '</a>';
     }
 
     // =====================================================
@@ -1000,18 +939,6 @@
     }
 
     function triggerRefresh() { loadAllFeeds(); }
-
-    function showPremiumModal() {
-      document.getElementById('premium-modal').style.display = 'flex';
-    }
-
-    function closePremiumModal() {
-      document.getElementById('premium-modal').style.display = 'none';
-    }
-
-    function handleModalOverlayClick(e) {
-      if (e.target === document.getElementById('premium-modal')) closePremiumModal();
-    }
 
     // =====================================================
     // INIT + AUTO-REFRESH every 10 minutes
