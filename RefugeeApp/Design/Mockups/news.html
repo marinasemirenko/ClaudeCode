@@ -257,6 +257,17 @@
     }
     .article-lock .msym { font-size: 13px; }
 
+    .transl-badge {
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--blue);
+      background: var(--blue-soft);
+      border-radius: 100px;
+      padding: 2px 7px;
+      flex-shrink: 0;
+      white-space: nowrap;
+    }
+
     /* SKELETON */
     .skeleton-card {
       background: var(--card);
@@ -567,6 +578,36 @@
       ]
     };
 
+    // =====================================================
+    // AUTO-TRANSLATION — unofficial Google Translate, CORS-enabled, no key needed
+    // =====================================================
+    function isUkrainian(text) {
+      // Cyrillic range — BBC Ukrainian, Ukrinform, Suspilne are already in Ukrainian
+      return /[Ѐ-ӿ]/.test(text || '');
+    }
+
+    function translateToUA(text) {
+      if (!text || isUkrainian(text)) return Promise.resolve(text);
+      var url = 'https://translate.googleapis.com/translate_a/single?client=gtx&sl=auto&tl=uk&dt=t&q='
+                + encodeURIComponent(text);
+      return fetchWithTimeout(url, 7000)
+        .then(function(r) { return r.json(); })
+        .then(function(data) {
+          return data[0].map(function(x) { return x[0]; }).join('');
+        })
+        .catch(function() { return text; });
+    }
+
+    function translateFeedItems(items) {
+      if (!items || !items.length) return Promise.resolve(items);
+      return Promise.all(items.map(function(item) {
+        if (isUkrainian(item.title)) return Promise.resolve(item);
+        return translateToUA(item.title).then(function(translated) {
+          return Object.assign({}, item, { title: translated, translated: true });
+        });
+      }));
+    }
+
     // Cloudflare Worker — твой персональный CORS-прокси, обходит все блокировки
     var WORKER = 'https://rss-proxy.marina-semirenko21.workers.dev/?url=';
 
@@ -663,19 +704,25 @@
       return workerAttempt
         .then(function(items) {
           console.log('[Worker loaded ✅]', feedCfg.id);
-          return { items: items, health: 'green', usedFallback: false };
+          return translateFeedItems(items).then(function(tItems) {
+            return { items: tItems, health: 'green', usedFallback: false };
+          });
         })
         .catch(function(workerErr) {
           console.warn('[Worker failed for ' + feedCfg.id + ']', workerErr.message, '— trying Guardian');
           // Worker failed — try Guardian API (English, always works)
           return fetchGuardian(feedCfg.guardianQuery)
             .then(function(items) {
-              return { items: items, health: 'amber', usedFallback: true };
+              return translateFeedItems(items).then(function(tItems) {
+                return { items: tItems, health: 'amber', usedFallback: true };
+              });
             })
             .catch(function() {
               // Both failed — show sample articles
               console.warn('[Using samples for ' + feedCfg.id + ']');
-              return { items: SAMPLES[feedCfg.id] || [], health: 'amber', usedFallback: true };
+              return translateFeedItems(SAMPLES[feedCfg.id] || []).then(function(tItems) {
+                return { items: tItems, health: 'amber', usedFallback: true };
+              });
             });
         });
     }
@@ -857,6 +904,7 @@
         '<span class="cat-dot" style="background:' + feed.accentColor + '"></span>' +
         '<span class="article-source">' + source + '</span>' +
         '<span class="article-time">' + timeStr + '</span>' +
+        (item.translated ? '<span class="transl-badge">🇺🇦</span>' : '') +
         '</div>' +
         '<div class="article-title">' + title + '</div>';
 
