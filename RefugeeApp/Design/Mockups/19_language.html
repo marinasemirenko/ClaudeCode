@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Вчи нідерландську — RefugeeGuide</title>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing:border-box;margin:0;padding:0; }
+    :root { --bg:#F8F9FA;--card:#FFFFFF;--text:#111827;--muted:#6B7280;--border:#E5E2DA;--blue:#0057B7;--blue-soft:#E8F0FF;--blue-dark:#003DA6;--yellow:#FCD400; }
+    body { font-family:'Manrope',sans-serif;background:var(--bg);color:var(--text);max-width:390px;margin:0 auto;min-height:100vh; }
+    .msym { font-family:'Material Symbols Outlined';font-variation-settings:'FILL' 1,'wght' 400,'GRAD' 0,'opsz' 24;font-size:22px;line-height:1; }
+    .msym.o { font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 24; }
+    .flag-bar { height:3px;background:linear-gradient(90deg,var(--blue) 50%,var(--yellow) 50%); }
+    header { background:var(--card);padding:14px 18px;display:flex;align-items:center;gap:12px;border-bottom:1px solid var(--border);position:sticky;top:0;z-index:50; }
+    .back-btn { width:38px;height:38px;border-radius:50%;background:var(--bg);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;text-decoration:none;color:var(--text);flex-shrink:0; }
+    .back-btn .msym { font-size:20px; }
+    .header-title { font-size:18px;font-weight:900;color:var(--text); }
+    main { padding-bottom:110px; }
+    .hero { background:linear-gradient(135deg,#1E3A5F 0%,#0057B7 55%,#3B82F6 100%);padding:24px 20px 28px;position:relative;overflow:hidden; }
+    .hero-pattern { position:absolute;inset:0;pointer-events:none;background-image:url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='20' cy='20' r='1.5' fill='%23ffffff' fill-opacity='0.08'/%3E%3C/svg%3E");background-size:40px; }
+    .hero-icon { font-size:32px;margin-bottom:10px; }
+    .hero-title { font-size:22px;font-weight:900;color:#fff;letter-spacing:-0.5px;margin-bottom:6px; }
+    .hero-sub { font-size:12px;color:rgba(255,255,255,0.75);font-weight:500;line-height:1.5; }
+    .content { padding:18px 16px; }
+    .sec-label { font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:0.13em;color:var(--muted);margin-bottom:12px;margin-top:22px; }
+    .sec-label:first-child { margin-top:0; }
+    .cards { display:flex;flex-direction:column;gap:10px; }
+    .card { background:var(--card);border-radius:16px;border:1.5px solid var(--border);padding:14px 15px;display:flex;gap:13px;align-items:flex-start; }
+    .card-icon { width:44px;height:44px;border-radius:13px;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0; }
+    .card-body .title { font-size:13px;font-weight:800;color:var(--text);margin-bottom:4px; }
+    .card-body .desc { font-size:12px;color:#374151;font-weight:500;line-height:1.55; }
+    .tag { display:inline-block;font-size:10px;font-weight:800;border-radius:100px;padding:2px 8px;margin-top:6px; }
+    .tag-free  { background:#DCFCE7;color:#15803D; }
+    .tag-paid  { background:var(--blue-soft);color:#1D4ED8; }
+    .tag-warn  { background:#FEF3C7;color:#92400E; }
+    .info-box { border-radius:14px;padding:13px 14px;display:flex;gap:10px;align-items:flex-start;margin-top:16px; }
+    .info-box.blue { background:var(--blue-soft);border:1px solid #BFDBFE; }
+    .info-box.blue .msym { color:var(--blue);font-size:18px;flex-shrink:0;margin-top:1px; }
+    .info-box.blue p { font-size:12px;color:#1E3A5F;font-weight:600;line-height:1.5; }
+    .info-box.warn { background:#FEF3C7;border:1px solid #FDE68A; }
+    .info-box.warn .msym { color:#D97706; }
+    .info-box.warn p { font-size:12px;color:#78350F;font-weight:600;line-height:1.5; }
+    .fab { position:fixed;bottom:90px;right:calc(50% - 185px);width:52px;height:52px;background:linear-gradient(145deg,#3B82F6,#1E3A5F);border-radius:18px;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 20px rgba(0,87,183,0.45);cursor:pointer;z-index:40; }
+    .fab .msym { color:#fff;font-size:24px; }
+    nav { position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:390px;background:rgba(255,255,255,0.98);backdrop-filter:blur(20px);border-top:1px solid var(--border);border-radius:24px 24px 0 0;padding:10px 8px 24px;display:flex;justify-content:space-around;z-index:50; }
+    .nav-item { display:flex;flex-direction:column;align-items:center;gap:4px;text-decoration:none;flex:1; }
+    .nav-pill { padding:6px 16px;border-radius:100px;display:flex;align-items:center;justify-content:center; }
+    .nav-item:not(.active) .msym { color:var(--muted);font-size:23px;font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 24; }
+    .nav-lbl { font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:0.06em;color:var(--muted); }
+  </style>
+</head>
+<body>
+<div class="flag-bar"></div>
+<header>
+  <a href="19_korysne.html" class="back-btn"><span class="msym o">arrow_back</span></a>
+  <div class="header-title">Вчи нідерландську</div>
+</header>
+<main>
+  <div class="hero">
+    <div class="hero-pattern"></div>
+    <div class="hero-icon">🇳🇱</div>
+    <div class="hero-title">Вчи нідерландську</div>
+    <div class="hero-sub">Безкоштовні курси, корисні застосунки і розмовні клуби — де і як почати вчити мову.</div>
+  </div>
+  <div class="content">
+
+    <div class="info-box warn">
+      <span class="msym">info</span>
+      <p>Знання нідерландської відкриває двері до роботи, спілкування і самостійності. Навіть базовий рівень суттєво полегшує повсякденне життя.</p>
+    </div>
+
+    <div class="sec-label" style="margin-top:20px;">Офіційні курси</div>
+    <div class="cards">
+      <div class="card">
+        <div class="card-icon" style="background:linear-gradient(145deg,#bfdbfe,#0057b7);">🎓</div>
+        <div class="card-body">
+          <div class="title">NT2 — Nederlands als tweede taal</div>
+          <div class="desc">Офіційні державні курси нідерландської для іноземців. Рівні від A1 до B2. Проводяться в ROC (регіональних навчальних центрах). Для деяких категорій — безкоштовно або зі знижкою.</div>
+          <span class="tag tag-warn">⚠️ Умови залежать від статусу</span>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-icon" style="background:linear-gradient(145deg,#bbf7d0,#16a34a);">🏛️</div>
+        <div class="card-body">
+          <div class="title">Gemeentelijke taalcursussen</div>
+          <div class="desc">Багато міст організують безкоштовні або дуже дешеві мовні курси для жителів. Запитай у бібліотеці, в gemeente або в соціального працівника — вони знають що є у твоєму місті.</div>
+          <span class="tag tag-free">Часто безкоштовно</span>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-icon" style="background:linear-gradient(145deg,#ccfbf1,#0d9488);">☕</div>
+        <div class="card-body">
+          <div class="title">Taalcafé — розмовний клуб</div>
+          <div class="desc">Неформальні зустрічі де практикують нідерландську в живому спілкуванні. Є в бібліотеках, кафе, культурних центрах. Атмосфера дружня — всі приходять вчитись, не оцінюють.</div>
+          <span class="tag tag-free">Безкоштовно</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="sec-label">Застосунки та онлайн</div>
+    <div class="cards">
+      <div class="card">
+        <div class="card-icon" style="background:linear-gradient(145deg,#bbf7d0,#16a34a);">🦉</div>
+        <div class="card-body">
+          <div class="title">Duolingo</div>
+          <div class="desc">Безкоштовний застосунок для вивчення мов через короткі ігрові уроки. Є нідерландська. Ідеально для початківців і для щоденної практики по 10–15 хвилин.</div>
+          <span class="tag tag-free">Безкоштовно, iOS/Android</span>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-icon" style="background:linear-gradient(145deg,#bfdbfe,#0057b7);">💬</div>
+        <div class="card-body">
+          <div class="title">Babbel</div>
+          <div class="desc">Платний але якісний застосунок з акцентом на розмовну практику і реальні ситуації. Краще структурований ніж Duolingo, підходить для серйознішого навчання.</div>
+          <span class="tag tag-paid">~€7/міс</span>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-icon" style="background:linear-gradient(145deg,#fde68a,#f59e0b);">🌐</div>
+        <div class="card-body">
+          <div class="title">NT2.nl та Oefenen.nl</div>
+          <div class="desc">Безкоштовні сайти з вправами для різних рівнів нідерландської. Граматика, аудіювання, читання — можна займатись самостійно без викладача.</div>
+          <span class="tag tag-free">Безкоштовно онлайн</span>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-icon" style="background:linear-gradient(145deg,#fecaca,#dc2626);">📺</div>
+        <div class="card-body">
+          <div class="title">NPO Start — дивись нідерландське ТБ</div>
+          <div class="desc">Безкоштовний стрімінг нідерландського телебачення. Вмикай субтитри і дивись — це один з найефективніших способів звикнути до звучання мови і вбудувати її в побут.</div>
+          <span class="tag tag-free">npostart.nl</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="info-box blue">
+      <span class="msym">school</span>
+      <p>Регулярність важливіша за тривалість. 15 хвилин щодня дають більше ніж 2 години раз на тиждень. Постав нагадування і займайся в транспорті або вранці за кавою.</p>
+    </div>
+
+  </div>
+</main>
+<div class="fab"><span class="msym">chat_bubble</span></div>
+<nav>
+  <a href="1final_colorful.html" class="nav-item"><div class="nav-pill"><span class="msym o">home</span></div><span class="nav-lbl">Головна</span></a>
+  <a href="search.html" class="nav-item"><div class="nav-pill"><span class="msym o">explore</span></div><span class="nav-lbl">Огляд</span></a>
+  <a href="saved.html" class="nav-item"><div class="nav-pill"><span class="msym o">bookmark</span></div><span class="nav-lbl">Збережені</span></a>
+  <a href="profile.html" class="nav-item"><div class="nav-pill"><span class="msym o">person</span></div><span class="nav-lbl">Профіль</span></a>
+</nav>
+</body>
+</html>
