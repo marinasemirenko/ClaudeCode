@@ -5,6 +5,9 @@
 .env.local
 .env.*.local
 
+# Chat file contains hardcoded API key — keep local only
+RefugeeApp/Design/Mockups/chat.html
+
 # ============================================================
 # Dependencies
 # ============================================================

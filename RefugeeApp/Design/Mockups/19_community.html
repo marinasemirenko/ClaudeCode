@@ -43,6 +43,17 @@
     .info-box.blue { background:var(--blue-soft);border:1px solid #BFDBFE; }
     .info-box.blue .msym { color:var(--blue);font-size:18px;flex-shrink:0;margin-top:1px; }
     .info-box.blue p { font-size:12px;color:#1E3A5F;font-weight:600;line-height:1.5; }
+    .house-card { background:var(--card);border-radius:18px;border:1.5px solid var(--border);overflow:hidden;margin-bottom:10px; }
+    .house-header { padding:13px 14px 10px;display:flex;gap:12px;align-items:flex-start; }
+    .house-icon { width:46px;height:46px;border-radius:13px;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0; }
+    .house-body .house-name { font-size:13px;font-weight:900;color:var(--text);margin-bottom:3px; }
+    .house-body .house-city { font-size:11px;color:var(--muted);font-weight:600; }
+    .house-details { border-top:1px solid #F3F4F6;padding:10px 14px;display:flex;flex-direction:column;gap:7px; }
+    .house-row { display:flex;align-items:flex-start;gap:8px; }
+    .house-row .msym { font-size:15px;color:var(--muted);flex-shrink:0;margin-top:1px; }
+    .house-row span { font-size:11px;color:#374151;font-weight:500;line-height:1.45; }
+    .house-row span strong { color:var(--text);font-weight:700; }
+    .house-tags { padding:0 14px 12px;display:flex;gap:6px;flex-wrap:wrap; }
     .fab { position:fixed;bottom:90px;right:calc(50% - 185px);width:52px;height:52px;background:linear-gradient(145deg,#F472B6,#831843);border-radius:18px;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 20px rgba(219,39,119,0.45);cursor:pointer;z-index:40; }
     .fab .msym { color:#fff;font-size:24px; }
     nav { position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:390px;background:rgba(255,255,255,0.98);backdrop-filter:blur(20px);border-top:1px solid var(--border);border-radius:24px 24px 0 0;padding:10px 8px 24px;display:flex;justify-content:space-around;z-index:50; }
@@ -66,6 +77,112 @@
     <div class="hero-sub">Де знайти своїх — чати, спільноти, церкви, суботні школи і українські магазини в NL.</div>
   </div>
   <div class="content">
+
+    <div class="sec-label">Українські доми по містах</div>
+
+    <!-- ROTTERDAM -->
+    <div class="house-card">
+      <div class="house-header">
+        <div class="house-icon" style="background:linear-gradient(145deg,#bfdbfe,#0057b7);">🏠</div>
+        <div class="house-body">
+          <div class="house-name">Oekraïens Huis — Ukrainian House</div>
+          <div class="house-city">📍 Роттердам</div>
+        </div>
+      </div>
+      <div class="house-details">
+        <div class="house-row"><span class="msym o">location_on</span><span><strong>Pleinweg 196-A, 3083 EV Rotterdam</strong></span></div>
+        <div class="house-row"><span class="msym o">schedule</span><span>Пн / Вт / Чт: 10:00–17:30 · Ср: 10:00–19:30 · Сб: 12:00–16:00</span></div>
+        <div class="house-row"><span class="msym o">groups</span><span>Консультації з роботи, права та здоров'я. Вживаний одяг безкоштовно. Ігровий куточок для дітей. Понад 10 заходів щотижня.</span></div>
+        <div class="house-row"><span class="msym o">work</span><span>Консультанти із зайнятості від gemeente Rotterdam — прямо тут, на місці.</span></div>
+      </div>
+      <div class="house-tags">
+        <span class="tag tag-blue">ukrainianhouse.nl</span>
+        <span class="tag tag-free">Безкоштовно</span>
+      </div>
+    </div>
+
+    <!-- UTRECHT -->
+    <div class="house-card">
+      <div class="house-header">
+        <div class="house-icon" style="background:linear-gradient(145deg,#fce7f3,#db2777);">🏡</div>
+        <div class="house-body">
+          <div class="house-name">Vital'nya — «Вітальня»</div>
+          <div class="house-city">📍 Утрехт</div>
+        </div>
+      </div>
+      <div class="house-details">
+        <div class="house-row"><span class="msym o">location_on</span><span>Veemarktplein 41, 3521 BD Utrecht <strong>⚠️ уточни актуальну адресу на сайті</strong></span></div>
+        <div class="house-row"><span class="msym o">groups</span><span>Простір від українців для українців. Курси нідерландської та англійської, підтримка ментального здоров'я, майстер-класи, культурні заходи, гуманітарна допомога.</span></div>
+        <div class="house-row"><span class="msym o">favorite</span><span>Засновано у червні 2022. Всі заходи — за участі самої спільноти.</span></div>
+      </div>
+      <div class="house-tags">
+        <span class="tag tag-pink">vitalnya.nl</span>
+        <span class="tag tag-free">Безкоштовно</span>
+      </div>
+    </div>
+
+    <!-- AMSTERDAM -->
+    <div class="house-card">
+      <div class="house-header">
+        <div class="house-icon" style="background:linear-gradient(145deg,#fde68a,#f59e0b);">🌆</div>
+        <div class="house-body">
+          <div class="house-name">Stichting Oekraïners in Nederland</div>
+          <div class="house-city">📍 Амстердам та по всій країні</div>
+        </div>
+      </div>
+      <div class="house-details">
+        <div class="house-row"><span class="msym o">location_on</span><span>Активна по всій країні, у т.ч. в Амстердамі. Поточну адресу заходів дивись на сайті.</span></div>
+        <div class="house-row"><span class="msym o">phone</span><span><strong>+31 10 200-56-61</strong> · Пн–Пт 09:00–18:00</span></div>
+        <div class="house-row"><span class="msym o">groups</span><span>Перша офіційна українська організація в NL (засновано 2014). Культурні події, виставки, гуманітарна допомога, 30+ пунктів збору по країні.</span></div>
+      </div>
+      <div class="house-tags">
+        <span class="tag tag-warn">ukrainians.nl</span>
+        <span class="tag tag-blue">support@ukrainians.nl</span>
+      </div>
+    </div>
+
+    <!-- DEN HAAG -->
+    <div class="house-card">
+      <div class="house-header">
+        <div class="house-icon" style="background:linear-gradient(145deg,#ddd6fe,#7c3aed);">🏛️</div>
+        <div class="house-body">
+          <div class="house-name">Посольство України + підтримка</div>
+          <div class="house-city">📍 Гаага</div>
+        </div>
+      </div>
+      <div class="house-details">
+        <div class="house-row"><span class="msym o">location_on</span><span><strong>Zeestraat 78, 2518 AD Den Haag</strong> — Посольство України</span></div>
+        <div class="house-row"><span class="msym o">language</span><span>netherlands.mfa.gov.ua — консульські питання, документи, легалізація</span></div>
+        <div class="house-row"><span class="msym o">volunteer_activism</span><span>Волонтерська допомога українцям у Гаазі: denhaagdoet.nl/oekraine — заходи, підтримка, зустрічі.</span></div>
+      </div>
+      <div class="house-tags">
+        <span class="tag tag-blue">netherlands.mfa.gov.ua</span>
+        <span class="tag tag-free">denhaagdoet.nl</span>
+      </div>
+    </div>
+
+    <!-- NATIONAL ORG -->
+    <div class="house-card">
+      <div class="house-header">
+        <div class="house-icon" style="background:linear-gradient(145deg,#bbf7d0,#16a34a);">🇺🇦</div>
+        <div class="house-body">
+          <div class="house-name">Oekraïense Gemeenschap in Nederland</div>
+          <div class="house-city">📍 Роттердам — представляє всю країну</div>
+        </div>
+      </div>
+      <div class="house-details">
+        <div class="house-row"><span class="msym o">location_on</span><span><strong>Doklaan 21, 3081 AD Rotterdam</strong></span></div>
+        <div class="house-row"><span class="msym o">groups</span><span>Асоціація українців у NL — захист прав, культура, зв'язок з діаспорою і Україною. Нова локація після переїзду.</span></div>
+      </div>
+      <div class="house-tags">
+        <span class="tag tag-free">oekraine-diaspora.nl</span>
+      </div>
+    </div>
+
+    <div class="info-box blue" style="margin-bottom:6px;">
+      <span class="msym">info</span>
+      <p>В Нідерландах існує понад 20 українських домів. Повний список і нові відкриття — на сайті ukrainianhouse.nl. Адреси варто перевіряти — деякі організації переїжджали.</p>
+    </div>
 
     <div class="sec-label">Онлайн-спільноти</div>
     <div class="cards">
@@ -215,7 +332,7 @@
 
   </div>
 </main>
-<div class="fab"><span class="msym">chat_bubble</span></div>
+<a href="chat.html" class="fab"><span class="msym">chat_bubble</span></a>
 <nav>
   <a href="1final_colorful.html" class="nav-item"><div class="nav-pill"><span class="msym o">home</span></div><span class="nav-lbl">Головна</span></a>
   <a href="search.html" class="nav-item"><div class="nav-pill"><span class="msym o">explore</span></div><span class="nav-lbl">Огляд</span></a>
