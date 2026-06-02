@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Налаштування — RefugeeGuide</title>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #F8F9FA; --card: #FFFFFF; --text: #111827; --muted: #6B7280;
+      --border: #E5E2DA; --blue: #0057B7; --blue-soft: #E8F0FF;
+      --yellow: #FCD400; --green: #16A34A; --green-soft: #DCFCE7;
+    }
+    body { font-family: 'Manrope', sans-serif; background: var(--bg); color: var(--text); max-width: 390px; margin: 0 auto; min-height: 100vh; }
+    .msym { font-family: 'Material Symbols Outlined'; font-variation-settings: 'FILL' 1,'wght' 400,'GRAD' 0,'opsz' 24; font-size: 22px; line-height: 1; }
+    .msym.o { font-variation-settings: 'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 24; }
+    .flag-bar { height: 3px; background: linear-gradient(90deg, var(--blue) 50%, var(--yellow) 50%); }
+    header { background: var(--card); padding: 14px 18px; display: flex; align-items: center; gap: 12px; border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 50; }
+    .back-btn { width: 38px; height: 38px; border-radius: 50%; background: var(--bg); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; text-decoration: none; color: var(--text); flex-shrink: 0; }
+    .back-btn .msym { font-size: 20px; }
+    .header-title { font-size: 18px; font-weight: 900; color: var(--text); }
+    main { padding: 0 0 100px; }
+
+    /* PROFILE CARD */
+    .profile-card { background: linear-gradient(135deg, #0057B7 0%, #1D4ED8 50%, #3B82F6 100%); margin: 16px; border-radius: 22px; padding: 22px 18px; display: flex; align-items: center; gap: 16px; position: relative; overflow: hidden; }
+    .profile-card::before { content: ''; position: absolute; inset: 0; background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='20' cy='20' r='1.5' fill='%23ffffff' fill-opacity='0.08'/%3E%3C/svg%3E"); background-size: 40px; pointer-events: none; }
+    .profile-avatar { width: 58px; height: 58px; border-radius: 50%; background: rgba(255,255,255,0.2); border: 2px solid rgba(255,255,255,0.4); display: flex; align-items: center; justify-content: center; font-size: 28px; flex-shrink: 0; }
+    .profile-info { flex: 1; }
+    .profile-name { font-size: 17px; font-weight: 900; color: #fff; margin-bottom: 3px; }
+    .profile-sub  { font-size: 12px; color: rgba(255,255,255,0.75); font-weight: 500; }
+    .plan-badge { background: var(--yellow); color: #111; font-size: 10px; font-weight: 900; border-radius: 100px; padding: 3px 10px; display: inline-block; margin-top: 6px; }
+
+    /* SECTION */
+    .section { padding: 0 16px; margin-top: 20px; }
+    .sec-label { font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.13em; color: var(--muted); margin-bottom: 10px; }
+
+    /* SETTINGS GROUP */
+    .group { background: var(--card); border-radius: 18px; border: 1.5px solid var(--border); overflow: hidden; }
+    .setting-row { display: flex; align-items: center; gap: 13px; padding: 14px 15px; border-bottom: 1px solid #F3F4F6; cursor: pointer; transition: background 0.15s; }
+    .setting-row:last-child { border-bottom: none; }
+    .setting-row:active { background: var(--bg); }
+    .setting-icon { width: 36px; height: 36px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
+    .setting-body { flex: 1; }
+    .setting-label { font-size: 13px; font-weight: 700; color: var(--text); }
+    .setting-desc  { font-size: 11px; color: var(--muted); font-weight: 500; margin-top: 2px; }
+    .setting-right { color: var(--muted); font-size: 20px; }
+    .setting-value { font-size: 12px; font-weight: 700; color: var(--blue); }
+
+    /* TOGGLE */
+    .toggle { width: 44px; height: 24px; background: #D1D5DB; border-radius: 100px; position: relative; cursor: pointer; transition: background 0.2s; flex-shrink: 0; }
+    .toggle.on { background: var(--green); }
+    .toggle::after { content: ''; position: absolute; width: 18px; height: 18px; background: #fff; border-radius: 50%; top: 3px; left: 3px; transition: left 0.2s; box-shadow: 0 1px 4px rgba(0,0,0,0.2); }
+    .toggle.on::after { left: 23px; }
+
+    /* API KEY SECTION */
+    .api-box { background: var(--card); border-radius: 18px; border: 1.5px solid var(--border); overflow: hidden; }
+    .api-header { padding: 14px 15px 10px; display: flex; gap: 12px; align-items: flex-start; border-bottom: 1px solid #F3F4F6; }
+    .api-header-icon { width: 38px; height: 38px; border-radius: 11px; background: linear-gradient(145deg, #F472B6, #831843); display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
+    .api-header-body { flex: 1; }
+    .api-header-title { font-size: 13px; font-weight: 800; color: var(--text); }
+    .api-header-sub { font-size: 11px; color: var(--muted); font-weight: 500; margin-top: 2px; }
+    .api-body { padding: 14px 15px; }
+    .api-field-wrap { position: relative; display: flex; align-items: center; }
+    .api-field { width: 100%; background: var(--bg); border: 1.5px solid var(--border); border-radius: 12px; padding: 10px 40px 10px 13px; font-family: 'Manrope', sans-serif; font-size: 12px; font-weight: 600; color: var(--text); outline: none; transition: border-color 0.2s; }
+    .api-field:focus { border-color: var(--blue); }
+    .api-field::placeholder { color: var(--muted); font-weight: 500; }
+    .api-toggle-vis { position: absolute; right: 10px; background: none; border: none; cursor: pointer; color: var(--muted); display: flex; align-items: center; }
+    .api-toggle-vis .msym { font-size: 18px; }
+    .api-status { display: flex; align-items: center; gap: 6px; margin-top: 8px; }
+    .api-status-dot { width: 7px; height: 7px; border-radius: 50%; }
+    .api-status-text { font-size: 11px; font-weight: 700; }
+    .api-actions { display: flex; gap: 8px; margin-top: 12px; }
+    .btn-save { flex: 1; background: linear-gradient(145deg, #F472B6, #831843); color: #fff; border: none; border-radius: 12px; padding: 11px; font-family: 'Manrope', sans-serif; font-size: 13px; font-weight: 800; cursor: pointer; transition: opacity 0.2s; }
+    .btn-save:active { opacity: 0.85; }
+    .btn-clear { width: 44px; background: var(--bg); border: 1.5px solid var(--border); border-radius: 12px; display: flex; align-items: center; justify-content: center; cursor: pointer; color: var(--muted); }
+    .btn-clear .msym { font-size: 18px; }
+    .api-hint { background: #F0F9FF; border: 1px solid #BAE6FD; border-radius: 10px; padding: 10px 12px; margin-top: 10px; font-size: 11px; color: #0369A1; font-weight: 600; line-height: 1.5; }
+    .api-hint a { color: var(--blue); }
+
+    /* PREMIUM BANNER */
+    .premium-banner { background: linear-gradient(135deg, #F59E0B 0%, #D97706 100%); border-radius: 18px; padding: 16px 18px; display: flex; align-items: center; gap: 14px; }
+    .premium-icon { font-size: 28px; }
+    .premium-body { flex: 1; }
+    .premium-title { font-size: 14px; font-weight: 900; color: #fff; margin-bottom: 3px; }
+    .premium-sub { font-size: 11px; color: rgba(255,255,255,0.8); font-weight: 500; }
+    .btn-upgrade { background: #fff; color: #92400E; border: none; border-radius: 10px; padding: 8px 14px; font-family: 'Manrope', sans-serif; font-size: 12px; font-weight: 900; cursor: pointer; flex-shrink: 0; }
+
+    /* ABOUT */
+    .about-row { display: flex; justify-content: space-between; align-items: center; padding: 13px 15px; border-bottom: 1px solid #F3F4F6; }
+    .about-row:last-child { border-bottom: none; }
+    .about-key { font-size: 12px; font-weight: 600; color: var(--muted); }
+    .about-val { font-size: 12px; font-weight: 800; color: var(--text); }
+
+    /* NAV */
+    nav { position: fixed; bottom: 0; left: 50%; transform: translateX(-50%); width: 100%; max-width: 390px; background: rgba(255,255,255,0.98); backdrop-filter: blur(20px); border-top: 1px solid var(--border); border-radius: 24px 24px 0 0; padding: 10px 8px 24px; display: flex; justify-content: space-around; z-index: 50; }
+    .nav-item { display: flex; flex-direction: column; align-items: center; gap: 4px; text-decoration: none; flex: 1; }
+    .nav-pill { padding: 6px 16px; border-radius: 100px; display: flex; align-items: center; justify-content: center; }
+    .nav-item.active .nav-pill { background: var(--blue-soft); }
+    .nav-item.active .msym { color: var(--blue); font-size: 23px; }
+    .nav-item:not(.active) .msym { color: var(--muted); font-size: 23px; font-variation-settings: 'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 24; }
+    .nav-lbl { font-size: 9px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.06em; }
+    .nav-item.active .nav-lbl { color: var(--blue); }
+    .nav-item:not(.active) .nav-lbl { color: var(--muted); }
+  </style>
+</head>
+<body>
+<div class="flag-bar"></div>
+<header>
+  <a href="javascript:history.back()" class="back-btn"><span class="msym o">arrow_back</span></a>
+  <div class="header-title">Налаштування</div>
+</header>
+<main>
+
+  <!-- PROFILE -->
+  <div class="profile-card">
+    <div class="profile-avatar">👤</div>
+    <div class="profile-info">
+      <div class="profile-name">Мій профіль</div>
+      <div class="profile-sub">RefugeeGuide · Безкоштовний план</div>
+      <div class="plan-badge">FREE</div>
+    </div>
+  </div>
+
+  <!-- APP SETTINGS -->
+  <div class="section">
+    <div class="sec-label">Застосунок</div>
+    <div class="group">
+      <div class="setting-row" onclick="cycleLang()">
+        <div class="setting-icon" style="background:#EDE9FE;">🌐</div>
+        <div class="setting-body">
+          <div class="setting-label">Мова інтерфейсу</div>
+          <div class="setting-desc">Мова кнопок та підказок</div>
+        </div>
+        <span class="setting-value" id="lang-val">Українська</span>
+      </div>
+      <div class="setting-row">
+        <div class="setting-icon" style="background:#FEF3C7;">🔔</div>
+        <div class="setting-body">
+          <div class="setting-label">Сповіщення</div>
+          <div class="setting-desc">Важливі оновлення та новини</div>
+        </div>
+        <div class="toggle on" id="toggle-notif" onclick="toggleSwitch(this)"></div>
+      </div>
+      <div class="setting-row">
+        <div class="setting-icon" style="background:#DCFCE7;">📥</div>
+        <div class="setting-body">
+          <div class="setting-label">Зберігати офлайн</div>
+          <div class="setting-desc">Завантажити контент для читання без інтернету</div>
+        </div>
+        <div class="toggle" id="toggle-offline" onclick="toggleSwitch(this)"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PREMIUM -->
+  <div class="section">
+    <div class="sec-label">Підписка</div>
+    <div class="premium-banner">
+      <div class="premium-icon">⭐</div>
+      <div class="premium-body">
+        <div class="premium-title">RefugeeGuide Premium</div>
+        <div class="premium-sub">Весь контент, без реклами, пріоритетний чат</div>
+      </div>
+      <button class="btn-upgrade">€4.99/міс</button>
+    </div>
+  </div>
+
+  <!-- SUPPORT -->
+  <div class="section">
+    <div class="sec-label">Підтримка</div>
+    <div class="group">
+      <div class="setting-row" onclick="window.location.href='chat.html'">
+        <div class="setting-icon" style="background:#FCE7F3;">💬</div>
+        <div class="setting-body">
+          <div class="setting-label">AI-помічник</div>
+          <div class="setting-desc">Відкрити чат з помічником</div>
+        </div>
+        <span class="msym o setting-right">chevron_right</span>
+      </div>
+      <div class="setting-row">
+        <div class="setting-icon" style="background:#E0F2FE;">📧</div>
+        <div class="setting-body">
+          <div class="setting-label">Написати нам</div>
+          <div class="setting-desc">marina.semirenko21@gmail.com</div>
+        </div>
+        <span class="msym o setting-right">chevron_right</span>
+      </div>
+      <div class="setting-row">
+        <div class="setting-icon" style="background:#DCFCE7;">⭐</div>
+        <div class="setting-body">
+          <div class="setting-label">Оцінити застосунок</div>
+          <div class="setting-desc">Допоможи нам стати кращими</div>
+        </div>
+        <span class="msym o setting-right">chevron_right</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ABOUT -->
+  <div class="section">
+    <div class="sec-label">Про застосунок</div>
+    <div class="group" style="overflow:hidden;">
+      <div class="about-row"><span class="about-key">Версія</span><span class="about-val">1.0.0 beta</span></div>
+      <div class="about-row"><span class="about-key">Зроблено</span><span class="about-val">Мариною, для українців 🇺🇦</span></div>
+      <div class="about-row"><span class="about-key">Країна</span><span class="about-val">Нідерланди 🇳🇱</span></div>
+      <div class="about-row"><span class="about-key">Контакт</span><span class="about-val">refugeeguide.nl</span></div>
+    </div>
+  </div>
+
+  <!-- DANGER ZONE -->
+  <div class="section" style="margin-top:20px;margin-bottom:10px;">
+    <div class="group">
+      <div class="setting-row" style="cursor:pointer;" onclick="if(confirm('Очистити всі дані застосунку?')){localStorage.clear();alert('Дані видалено.');}">
+        <div class="setting-icon" style="background:#FEE2E2;">🗑️</div>
+        <div class="setting-body">
+          <div class="setting-label" style="color:#DC2626;">Очистити всі дані</div>
+          <div class="setting-desc">Видалити ключ, налаштування, збережене</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<nav>
+  <a href="1final_colorful.html" class="nav-item"><div class="nav-pill"><span class="msym o">home</span></div><span class="nav-lbl">Головна</span></a>
+  <a href="search.html" class="nav-item"><div class="nav-pill"><span class="msym o">explore</span></div><span class="nav-lbl">Огляд</span></a>
+  <a href="saved.html" class="nav-item"><div class="nav-pill"><span class="msym o">bookmark</span></div><span class="nav-lbl">Збережені</span></a>
+  <a href="settings.html" class="nav-item active"><div class="nav-pill"><span class="msym">person</span></div><span class="nav-lbl">Профіль</span></a>
+</nav>
+
+<script>
+  const LANGS = ['Українська', 'Nederlands', 'English'];
+  let langIdx = 0;
+
+  function cycleLang() {
+    langIdx = (langIdx + 1) % LANGS.length;
+    document.getElementById('lang-val').textContent = LANGS[langIdx];
+    localStorage.setItem('rg_lang', LANGS[langIdx]);
+  }
+
+  function toggleSwitch(el) {
+    el.classList.toggle('on');
+  }
+
+  function toggleVisibility() {
+    const field = document.getElementById('api-key-input');
+    const icon = document.getElementById('vis-icon');
+    if (field.type === 'password') {
+      field.type = 'text';
+      icon.textContent = 'visibility_off';
+    } else {
+      field.type = 'password';
+      icon.textContent = 'visibility';
+    }
+  }
+
+  function updateStatus() {
+    const key = localStorage.getItem('rg_api_key') || '';
+    const dot = document.getElementById('status-dot');
+    const txt = document.getElementById('status-text');
+    if (key && key.startsWith('sk-ant')) {
+      dot.style.background = '#16A34A';
+      txt.style.color = '#15803D';
+      txt.textContent = 'Ключ збережено ✓';
+    } else if (key) {
+      dot.style.background = '#F59E0B';
+      txt.style.color = '#92400E';
+      txt.textContent = 'Ключ вказано (перевір формат)';
+    } else {
+      dot.style.background = '#D1D5DB';
+      txt.style.color = 'var(--muted)';
+      txt.textContent = 'Ключ не вказано';
+    }
+  }
+
+  function saveApiKey() {
+    const val = document.getElementById('api-key-input').value.trim();
+    if (!val) { alert('Введи API ключ'); return; }
+    localStorage.setItem('rg_api_key', val);
+    updateStatus();
+    // brief visual feedback
+    const btn = document.querySelector('.btn-save');
+    btn.textContent = 'Збережено ✓';
+    setTimeout(() => { btn.textContent = 'Зберегти ключ'; }, 2000);
+  }
+
+  function clearApiKey() {
+    if (!confirm('Видалити збережений ключ?')) return;
+    localStorage.removeItem('rg_api_key');
+    document.getElementById('api-key-input').value = '';
+    updateStatus();
+  }
+
+  window.addEventListener('load', () => {
+    const saved = localStorage.getItem('rg_api_key') || '';
+    if (saved) document.getElementById('api-key-input').value = saved;
+    updateStatus();
+    const lang = localStorage.getItem('rg_lang');
+    if (lang) {
+      langIdx = LANGS.indexOf(lang);
+      if (langIdx < 0) langIdx = 0;
+      document.getElementById('lang-val').textContent = LANGS[langIdx];
+    }
+  });
+</script>
+</body>
+</html>
