@@ -1,0 +1,46 @@
+{
+  "name": "RefugeeGuide",
+  "short_name": "RefugeeGuide",
+  "description": "Довідник для українських біженців у Нідерландах",
+  "start_url": "/ClaudeCode/RefugeeApp/Design/Mockups/1final_colorful.html",
+  "scope": "/ClaudeCode/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "theme_color": "#0057B7",
+  "background_color": "#F8F9FA",
+  "lang": "uk",
+  "categories": ["lifestyle", "utilities"],
+  "icons": [
+    {
+      "src": "/ClaudeCode/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/ClaudeCode/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/ClaudeCode/icons/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "screenshots": [],
+  "shortcuts": [
+    {
+      "name": "Перші кроки",
+      "url": "/ClaudeCode/RefugeeApp/Design/Mockups/firststeps.html",
+      "icons": [{ "src": "/ClaudeCode/icons/icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Новини",
+      "url": "/ClaudeCode/RefugeeApp/Design/Mockups/news.html",
+      "icons": [{ "src": "/ClaudeCode/icons/icon-192.png", "sizes": "192x192" }]
+    }
+  ]
+}
