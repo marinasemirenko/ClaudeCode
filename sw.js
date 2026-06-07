@@ -1,4 +1,4 @@
-const CACHE = 'refugeeguide-v1';
+const CACHE = 'refugeeguide-v2';
 
 const CORE = [
   '/ClaudeCode/',
