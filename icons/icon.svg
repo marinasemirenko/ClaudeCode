@@ -4,17 +4,9 @@
   </defs>
   <!-- Ukrainian flag: blue top, yellow bottom -->
   <rect width="512" height="512" fill="#0057B7" clip-path="url(#r)"/>
-  <rect y="256" width="512" height="256" fill="#FCD400" clip-path="url(#r)"/>
-  <!-- White house icon -->
-  <g fill="white" clip-path="url(#r)">
-    <!-- Roof -->
-    <polygon points="256,90 110,230 402,230"/>
-    <!-- Walls -->
-    <rect x="148" y="228" width="216" height="175" rx="4"/>
-    <!-- Door (blue cutout) -->
-    <rect x="218" y="310" width="76" height="93" rx="6" fill="#0057B7"/>
-    <!-- Windows -->
-    <rect x="165" y="255" width="58" height="50" rx="6" fill="#0057B7"/>
-    <rect x="289" y="255" width="58" height="50" rx="6" fill="#0057B7"/>
-  </g>
+  <rect y="384" width="512" height="128" fill="#FCD400" clip-path="url(#r)"/>
+  <!-- Letter R -->
+  <text x="256" y="328" text-anchor="middle" transform="scale(1.08 1.06)" transform-origin="256 328"
+        font-family="-apple-system, system-ui, 'Segoe UI', Helvetica, Arial, sans-serif"
+        font-weight="700" font-size="318" fill="white">R</text>
 </svg>
