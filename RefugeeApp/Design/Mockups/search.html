@@ -54,6 +54,12 @@
     .chip { background: var(--card); border: 1px solid var(--border); border-radius: 100px; padding: 7px 14px; font-size: 12px; font-weight: 700; color: var(--text); cursor: pointer; text-decoration: none; white-space: nowrap; }
     .chip:hover { background: var(--blue-soft); border-color: var(--blue); color: var(--blue); }
 
+    /* No results */
+    .no-results { display: none; text-align: center; padding: 60px 24px; }
+    .no-results .msym { font-size: 40px; color: var(--muted); margin-bottom: 12px; }
+    .no-results-title { font-size: 14px; font-weight: 800; color: var(--text); margin-bottom: 6px; }
+    .no-results-text { font-size: 12px; font-weight: 500; color: var(--muted); line-height: 1.5; }
+
     /* FAB */
     .fab { position: fixed; bottom: 90px; right: calc(50% - 185px); width: 52px; height: 52px; background: linear-gradient(145deg, #1270D8, #003DA6); border-radius: 18px; display: flex; align-items: center; justify-content: center; box-shadow: 0 6px 20px rgba(0,87,183,0.45); cursor: pointer; z-index: 40; text-decoration: none; }
     .fab .msym { color: #fff; font-size: 24px; }
@@ -80,13 +86,13 @@
   </div>
   <div class="search-wrap">
     <span class="search-icon">search</span>
-    <input class="search-input" type="text" placeholder="Пошук по всіх темах..." />
+    <input class="search-input" type="text" id="searchInput" placeholder="Пошук по всіх темах..." />
   </div>
 </header>
 
 <main>
 
-  <div class="section">
+  <div class="section" id="chips-section">
     <div class="sec-label">Популярні теми</div>
     <div class="chips">
       <a href="firststeps.html" class="chip">📋 Перші кроки</a>
@@ -102,7 +108,7 @@
     </div>
   </div>
 
-  <div class="section" style="margin-top:24px;">
+  <div class="section" id="cat-section" style="margin-top:24px;">
     <div class="sec-label">Всі категорії</div>
     <div class="cat-list">
 
@@ -172,6 +178,12 @@
     </div>
   </div>
 
+  <div class="no-results" id="no-results">
+    <span class="msym o">search_off</span>
+    <div class="no-results-title">Нічого не знайдено</div>
+    <div class="no-results-text">Спробуй ввести інше слово<br/>або перевір написання.</div>
+  </div>
+
 </main>
 
 <a href="chat.html" class="fab"><span class="msym">chat_bubble</span></a>
@@ -194,6 +206,37 @@
     <span class="nav-lbl">Профіль</span>
   </a>
 </nav>
+
+<script>
+  const searchInput = document.getElementById('searchInput');
+  const chipsSection = document.getElementById('chips-section');
+  const catSection = document.getElementById('cat-section');
+  const noResults = document.getElementById('no-results');
+  const chips = chipsSection.querySelectorAll('.chip');
+  const catRows = catSection.querySelectorAll('.cat-row');
+
+  searchInput.addEventListener('input', () => {
+    const q = searchInput.value.trim().toLowerCase();
+    let chipsFound = 0;
+    let catsFound = 0;
+
+    chips.forEach(chip => {
+      const match = !q || chip.textContent.toLowerCase().includes(q);
+      chip.style.display = match ? '' : 'none';
+      if (match) chipsFound++;
+    });
+
+    catRows.forEach(row => {
+      const match = !q || row.textContent.toLowerCase().includes(q);
+      row.style.display = match ? '' : 'none';
+      if (match) catsFound++;
+    });
+
+    chipsSection.style.display = chipsFound ? '' : 'none';
+    catSection.style.display = catsFound ? '' : 'none';
+    noResults.style.display = (chipsFound + catsFound === 0) ? 'block' : 'none';
+  });
+</script>
 
 </body>
 </html>
