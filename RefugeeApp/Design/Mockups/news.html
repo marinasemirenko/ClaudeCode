@@ -840,9 +840,10 @@
 
     function renderArticleCard(item, isFeatured) {
       var feed      = FEEDS[item.feedId];
-      var title     = strip(item.title);
-      var timeStr   = timeAgo(item.pubDate);
-      var source    = strip(item.author || feed.label);
+      var title     = escapeHtml(strip(item.title));
+      var timeStr   = escapeHtml(timeAgo(item.pubDate));
+      var source    = escapeHtml(strip(item.author || feed.label));
+      var link      = escapeHtml(item.link);
       var featured  = isFeatured ? ' featured' : '';
 
       var meta =
@@ -854,7 +855,7 @@
         '</div>' +
         '<div class="article-title">' + title + '</div>';
 
-      return '<a href="' + item.link + '" target="_blank" rel="noopener noreferrer" ' +
+      return '<a href="' + link + '" target="_blank" rel="noopener noreferrer" ' +
         'class="article-card article-unlocked' + featured + '">' +
         meta +
         '<div class="article-read-btn">Читати <span class="msym">arrow_forward</span></div>' +
@@ -874,6 +875,17 @@
         .replace(/&#39;/g,  "'")
         .replace(/&nbsp;/g, ' ')
         .trim();
+    }
+
+    // Escape text for safe insertion into innerHTML — must run AFTER strip(),
+    // since strip() decodes entities back into literal characters.
+    function escapeHtml(text) {
+      return (text || '')
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
     }
 
     function timeAgo(dateStr) {
