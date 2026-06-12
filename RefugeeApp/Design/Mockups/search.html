@@ -54,6 +54,11 @@
     .chip { background: var(--card); border: 1px solid var(--border); border-radius: 100px; padding: 7px 14px; font-size: 12px; font-weight: 700; color: var(--text); cursor: pointer; text-decoration: none; white-space: nowrap; }
     .chip:hover { background: var(--blue-soft); border-color: var(--blue); color: var(--blue); }
 
+    /* Search results */
+    .c-result .cat-row-icon { background: linear-gradient(145deg, #D8DEE8, #94A8C4); }
+    .c-result .cat-row-icon .msym { color: #fff; }
+    .results-path { font-size: 10px; font-weight: 700; color: var(--blue); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 2px; }
+
     /* No results */
     .no-results { display: none; text-align: center; padding: 60px 24px; }
     .no-results .msym { font-size: 40px; color: var(--muted); margin-bottom: 12px; }
@@ -178,6 +183,11 @@
     </div>
   </div>
 
+  <div class="section" id="results-section" style="display:none;">
+    <div class="sec-label">Результати пошуку</div>
+    <div class="cat-list" id="results-list"></div>
+  </div>
+
   <div class="no-results" id="no-results">
     <span class="msym o">search_off</span>
     <div class="no-results-title">Нічого не знайдено</div>
@@ -207,34 +217,103 @@
   </a>
 </nav>
 
+<script src="search-index.js"></script>
 <script>
   const searchInput = document.getElementById('searchInput');
   const chipsSection = document.getElementById('chips-section');
   const catSection = document.getElementById('cat-section');
+  const resultsSection = document.getElementById('results-section');
+  const resultsList = document.getElementById('results-list');
   const noResults = document.getElementById('no-results');
-  const chips = chipsSection.querySelectorAll('.chip');
-  const catRows = catSection.querySelectorAll('.cat-row');
+
+  function renderResults(query) {
+    const q = query.toLowerCase();
+
+    const scored = SEARCH_INDEX.map(entry => {
+      const title = (entry.title || '').toLowerCase();
+      const category = (entry.category || '').toLowerCase();
+      const desc = (entry.desc || '').toLowerCase();
+      const sections = (entry.sections || []).join(' ').toLowerCase();
+
+      let score = 0;
+      if (title.includes(q)) score += 10;
+      if (category.includes(q)) score += 5;
+      if (desc.includes(q)) score += 3;
+      if (sections.includes(q)) score += 1;
+
+      return { entry, score };
+    })
+    .filter(item => item.score > 0)
+    .sort((a, b) => b.score - a.score)
+    .slice(0, 30);
+
+    resultsList.innerHTML = '';
+
+    scored.forEach(({ entry }) => {
+      const row = document.createElement('a');
+      row.href = entry.url;
+      row.className = 'cat-row c-result';
+
+      const iconDiv = document.createElement('div');
+      iconDiv.className = 'cat-row-icon';
+      if (entry.msymIcon) {
+        iconDiv.innerHTML = '<span class="msym">' + entry.msymIcon + '</span>';
+      } else {
+        iconDiv.textContent = entry.icon || '📄';
+      }
+
+      const info = document.createElement('div');
+      info.className = 'cat-row-info';
+
+      if (entry.category) {
+        const pathDiv = document.createElement('div');
+        pathDiv.className = 'results-path';
+        pathDiv.textContent = entry.category;
+        info.appendChild(pathDiv);
+      }
+
+      const titleDiv = document.createElement('div');
+      titleDiv.className = 'cat-row-title';
+      titleDiv.textContent = entry.title;
+      info.appendChild(titleDiv);
+
+      if (entry.desc) {
+        const subDiv = document.createElement('div');
+        subDiv.className = 'cat-row-sub';
+        subDiv.textContent = entry.desc;
+        info.appendChild(subDiv);
+      }
+
+      const arrow = document.createElement('span');
+      arrow.className = 'cat-row-arrow';
+      arrow.textContent = 'chevron_right';
+
+      row.appendChild(iconDiv);
+      row.appendChild(info);
+      row.appendChild(arrow);
+      resultsList.appendChild(row);
+    });
+
+    return scored.length;
+  }
 
   searchInput.addEventListener('input', () => {
-    const q = searchInput.value.trim().toLowerCase();
-    let chipsFound = 0;
-    let catsFound = 0;
+    const q = searchInput.value.trim();
 
-    chips.forEach(chip => {
-      const match = !q || chip.textContent.toLowerCase().includes(q);
-      chip.style.display = match ? '' : 'none';
-      if (match) chipsFound++;
-    });
+    if (!q) {
+      chipsSection.style.display = '';
+      catSection.style.display = '';
+      resultsSection.style.display = 'none';
+      noResults.style.display = 'none';
+      return;
+    }
 
-    catRows.forEach(row => {
-      const match = !q || row.textContent.toLowerCase().includes(q);
-      row.style.display = match ? '' : 'none';
-      if (match) catsFound++;
-    });
+    chipsSection.style.display = 'none';
+    catSection.style.display = 'none';
 
-    chipsSection.style.display = chipsFound ? '' : 'none';
-    catSection.style.display = catsFound ? '' : 'none';
-    noResults.style.display = (chipsFound + catsFound === 0) ? 'block' : 'none';
+    const count = renderResults(q);
+    resultsSection.style.display = count ? '' : 'none';
+    noResults.style.display = count ? 'none' : 'block';
   });
 </script>
 
