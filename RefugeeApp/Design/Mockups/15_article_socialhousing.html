@@ -51,7 +51,7 @@
     .wait-bar-fill { height: 100%; border-radius: 100px; }
     .wait-years { font-size: 13px; font-weight: 900; color: var(--text); width: 44px; text-align: right; flex-shrink: 0; }
     .platform-list { display: flex; flex-direction: column; gap: 8px; }
-    .platform-item { background: var(--card); border-radius: 14px; padding: 13px 14px; border: 1px solid var(--border); display: flex; gap: 10px; align-items: flex-start; }
+    .platform-item { background: var(--card); border-radius: 14px; padding: 13px 14px; border: 1px solid var(--border); display: flex; gap: 10px; align-items: flex-start; cursor: pointer; text-decoration: none; color: inherit; }
     .platform-emoji { font-size: 20px; flex-shrink: 0; }
     .platform-name { font-size: 13px; font-weight: 800; color: var(--text); margin-bottom: 2px; }
     .platform-desc { font-size: 12px; color: var(--muted); font-weight: 500; line-height: 1.4; }
@@ -129,34 +129,34 @@
     <div class="mt24">
       <div class="sec-label">Де реєструватись — по регіонах</div>
       <div class="platform-list">
-        <div class="platform-item">
+        <a href="https://www.woningnet.nl" class="platform-item" target="_blank">
           <div class="platform-emoji">🏙️</div>
           <div>
             <div class="platform-name">Woningnet.nl</div>
             <div class="platform-desc">Амстердам, Утрехт, Алмере, Північ Голландії. Найбільша платформа.</div>
           </div>
-        </div>
-        <div class="platform-item">
+        </a>
+        <a href="https://www.woonmatch.nl" class="platform-item" target="_blank">
           <div class="platform-emoji">🌊</div>
           <div>
             <div class="platform-name">Woonmatch.nl</div>
             <div class="platform-desc">Роттердам, Ден Хааг, Лейден, Південь Голландії</div>
           </div>
-        </div>
-        <div class="platform-item">
+        </a>
+        <a href="https://www.entree.nu" class="platform-item" target="_blank">
           <div class="platform-emoji">🏘️</div>
           <div>
             <div class="platform-name">Entree.nu</div>
             <div class="platform-desc">Різні муніципалітети — перевір, чи є твоє місто</div>
           </div>
-        </div>
-        <div class="platform-item">
+        </a>
+        <a href="https://www.overheid.nl/gemeenten" class="platform-item" target="_blank">
           <div class="platform-emoji">🔎</div>
           <div>
             <div class="platform-name">Сайт твого gemeente</div>
             <div class="platform-desc">Найнадійніший варіант — кожен муніципалітет має свою або пов'язану платформу</div>
           </div>
-        </div>
+        </a>
       </div>
     </div>
 

@@ -52,7 +52,7 @@
     .price-range { font-size: 15px; font-weight: 900; color: var(--text); line-height: 1.2; }
     .price-sub { font-size: 10px; color: var(--muted); font-weight: 600; margin-top: 2px; }
     .platform-list { display: flex; flex-direction: column; gap: 8px; }
-    .platform-item { background: var(--card); border-radius: 14px; padding: 12px 14px; border: 1px solid var(--border); display: flex; gap: 10px; align-items: center; }
+    .platform-item { background: var(--card); border-radius: 14px; padding: 12px 14px; border: 1px solid var(--border); display: flex; gap: 10px; align-items: center; cursor: pointer; text-decoration: none; color: inherit; }
     .platform-emoji { font-size: 22px; flex-shrink: 0; }
     .platform-name { font-size: 13px; font-weight: 800; color: var(--text); }
     .platform-desc { font-size: 11px; color: var(--muted); font-weight: 500; margin-top: 2px; }
@@ -136,27 +136,27 @@
     <div class="mt24">
       <div class="sec-label">Надійні платформи для пошуку</div>
       <div class="platform-list">
-        <div class="platform-item">
+        <a href="https://www.funda.nl" class="platform-item" target="_blank">
           <div class="platform-emoji">🏠</div>
           <div>
             <div class="platform-name">Funda.nl</div>
             <div class="platform-desc">Найбільша платформа Нідерландів. Квартири від агентів.</div>
           </div>
-        </div>
-        <div class="platform-item">
+        </a>
+        <a href="https://www.pararius.nl" class="platform-item" target="_blank">
           <div class="platform-emoji">🔑</div>
           <div>
             <div class="platform-name">Pararius.nl</div>
             <div class="platform-desc">Квартири від приватних власників та агентів.</div>
           </div>
-        </div>
-        <div class="platform-item">
+        </a>
+        <a href="https://www.kamernet.nl" class="platform-item" target="_blank">
           <div class="platform-emoji">🛏️</div>
           <div>
             <div class="platform-name">Kamernet.nl</div>
             <div class="platform-desc">Кімнати та спільне житло — дешевший варіант</div>
           </div>
-        </div>
+        </a>
       </div>
     </div>
 

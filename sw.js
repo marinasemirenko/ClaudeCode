@@ -1,4 +1,4 @@
-const CACHE = 'razom-v7';
+const CACHE = 'razom-v8';
 
 const CORE = [
   '/ClaudeCode/',

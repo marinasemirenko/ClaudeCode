@@ -41,7 +41,7 @@
     .info-box-title { font-size: 12px; font-weight: 900; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 6px; }
     /* Link cards */
     .link-list { display: flex; flex-direction: column; gap: 8px; }
-    .link-card { background: var(--card); border-radius: 16px; padding: 14px 16px; border: 1px solid var(--border); display: flex; gap: 12px; align-items: center; cursor: pointer; }
+    .link-card { background: var(--card); border-radius: 16px; padding: 14px 16px; border: 1px solid var(--border); display: flex; gap: 12px; align-items: center; cursor: pointer; text-decoration: none; color: inherit; }
     .link-icon { width: 44px; height: 44px; border-radius: 12px; background: var(--accent-soft); display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 22px; }
     .link-name { font-size: 13px; font-weight: 900; color: var(--text); margin-bottom: 2px; }
     .link-url { font-size: 11px; font-weight: 700; color: var(--accent); margin-bottom: 3px; }
@@ -80,7 +80,7 @@
     <div class="mt20">
       <div class="sec-label">Імміграція і статус</div>
       <div class="link-list">
-        <div class="link-card">
+        <a href="https://www.ind.nl" class="link-card" target="_blank">
           <div class="link-icon">🛂</div>
           <div style="flex:1;">
             <div class="link-name">IND — Immigratie- en Naturalisatiedienst</div>
@@ -88,8 +88,8 @@
             <div class="link-desc">Статус TPD, дозволи на проживання, W-document</div>
           </div>
           <span class="link-arrow">open_in_new</span>
-        </div>
-        <div class="link-card">
+        </a>
+        <a href="https://www.coa.nl" class="link-card" target="_blank">
           <div class="link-icon">🏠</div>
           <div style="flex:1;">
             <div class="link-name">COA — Centraal Orgaan opvang Asielzoekers</div>
@@ -97,8 +97,8 @@
             <div class="link-desc">Прийом, GOO-розміщення, виїзд до власного житла</div>
           </div>
           <span class="link-arrow">open_in_new</span>
-        </div>
-        <div class="link-card">
+        </a>
+        <a href="https://www.government.nl/ukraine" class="link-card" target="_blank">
           <div class="link-icon">🏛️</div>
           <div style="flex:1;">
             <div class="link-name">Government.nl — Ukraine hub</div>
@@ -106,14 +106,14 @@
             <div class="link-desc">Офіційний інформаційний портал для українців (англ.)</div>
           </div>
           <span class="link-arrow">open_in_new</span>
-        </div>
+        </a>
       </div>
     </div>
 
     <div class="mt24">
       <div class="sec-label">Зайнятість і доходи</div>
       <div class="link-list">
-        <div class="link-card">
+        <a href="https://www.uwv.nl" class="link-card" target="_blank">
           <div class="link-icon">💼</div>
           <div style="flex:1;">
             <div class="link-name">UWV — Uitvoeringsinstituut Werknemersverzekeringen</div>
@@ -121,8 +121,8 @@
             <div class="link-desc">WW (допомога), реєстрація безробітного, TWV-дозволи</div>
           </div>
           <span class="link-arrow">open_in_new</span>
-        </div>
-        <div class="link-card">
+        </a>
+        <a href="https://www.belastingdienst.nl" class="link-card" target="_blank">
           <div class="link-icon">💰</div>
           <div style="flex:1;">
             <div class="link-name">Belastingdienst — Податкова служба</div>
@@ -130,8 +130,8 @@
             <div class="link-desc">Декларація, toeslagen (huurtoeslag, zorgtoeslag, kinderopvangtoeslag)</div>
           </div>
           <span class="link-arrow">open_in_new</span>
-        </div>
-        <div class="link-card">
+        </a>
+        <a href="https://www.kvk.nl" class="link-card" target="_blank">
           <div class="link-icon">🏢</div>
           <div style="flex:1;">
             <div class="link-name">KvK — Kamer van Koophandel</div>
@@ -139,14 +139,14 @@
             <div class="link-desc">Реєстрація підприємства (ZZP), перевірка компаній</div>
           </div>
           <span class="link-arrow">open_in_new</span>
-        </div>
+        </a>
       </div>
     </div>
 
     <div class="mt24">
       <div class="sec-label">Інші держорганізації</div>
       <div class="link-list">
-        <div class="link-card">
+        <a href="https://www.rdw.nl" class="link-card" target="_blank">
           <div class="link-icon">🚗</div>
           <div style="flex:1;">
             <div class="link-name">RDW / CBR — Водійське посвідчення</div>
@@ -154,8 +154,8 @@
             <div class="link-desc">Обмін водійського, реєстрація авто, перевірка</div>
           </div>
           <span class="link-arrow">open_in_new</span>
-        </div>
-        <div class="link-card">
+        </a>
+        <a href="https://www.digid.nl" class="link-card" target="_blank">
           <div class="link-icon">🪪</div>
           <div style="flex:1;">
             <div class="link-name">DigiD — Цифровий підпис</div>
@@ -163,8 +163,8 @@
             <div class="link-desc">Реєстрація, відновлення, DigiD app</div>
           </div>
           <span class="link-arrow">open_in_new</span>
-        </div>
-        <div class="link-card">
+        </a>
+        <a href="https://www.overheid.nl/gemeenten" class="link-card" target="_blank">
           <div class="link-icon">🏙️</div>
           <div style="flex:1;">
             <div class="link-name">Gemeente — Ратуша вашого міста</div>
@@ -172,7 +172,7 @@
             <div class="link-desc">BRP-реєстрація, sofi/BSN, stadspas, lokale uitkeringen</div>
           </div>
           <span class="link-arrow">open_in_new</span>
-        </div>
+        </a>
       </div>
     </div>
 

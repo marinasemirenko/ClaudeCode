@@ -42,7 +42,7 @@
     .info-box.red { background: var(--red-soft); color: var(--red); border: 1px solid #FECACA; }
     .info-box-title { font-size: 12px; font-weight: 900; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 6px; }
     .link-list { display: flex; flex-direction: column; gap: 8px; }
-    .link-card { background: var(--card); border-radius: 16px; padding: 14px 16px; border: 1px solid var(--border); display: flex; gap: 12px; align-items: center; cursor: pointer; }
+    .link-card { background: var(--card); border-radius: 16px; padding: 14px 16px; border: 1px solid var(--border); display: flex; gap: 12px; align-items: center; cursor: pointer; text-decoration: none; color: inherit; }
     .link-icon { width: 44px; height: 44px; border-radius: 12px; background: var(--accent-soft); display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 22px; }
     .link-name { font-size: 13px; font-weight: 900; color: var(--text); margin-bottom: 2px; }
     .link-url { font-size: 11px; font-weight: 700; color: var(--accent); margin-bottom: 3px; }
@@ -108,7 +108,7 @@
     <div class="mt24">
       <div class="sec-label">Підтримка біженців</div>
       <div class="link-list">
-        <div class="link-card">
+        <a href="https://www.vluchtelingenwerk.nl" class="link-card" target="_blank">
           <div class="link-icon">🤝</div>
           <div style="flex:1;">
             <div class="link-name">Vluchtelingenwerk Nederland</div>
@@ -116,8 +116,8 @@
             <div class="link-desc">Юридична порада, інтеграційна підтримка, адвокати — безкоштовно</div>
           </div>
           <span class="link-arrow">open_in_new</span>
-        </div>
-        <div class="link-card">
+        </a>
+        <a href="https://www.refugeehelp.nl" class="link-card" target="_blank">
           <div class="link-icon">🛟</div>
           <div style="flex:1;">
             <div class="link-name">RefugeeHelp.nl</div>
@@ -125,8 +125,8 @@
             <div class="link-desc">Практичний гайд для біженців у Нідерландах — українською</div>
           </div>
           <span class="link-arrow">open_in_new</span>
-        </div>
-        <div class="link-card">
+        </a>
+        <a href="https://www.nidos.nl" class="link-card" target="_blank">
           <div class="link-icon">👶</div>
           <div style="flex:1;">
             <div class="link-name">Nidos — Опіка над неповнолітніми</div>
@@ -134,14 +134,14 @@
             <div class="link-desc">Для дітей без батьків і неповнолітніх біженців</div>
           </div>
           <span class="link-arrow">open_in_new</span>
-        </div>
+        </a>
       </div>
     </div>
 
     <div class="mt24">
       <div class="sec-label">Юридична допомога</div>
       <div class="link-list">
-        <div class="link-card">
+        <a href="https://www.juridischloket.nl" class="link-card" target="_blank">
           <div class="link-icon">⚖️</div>
           <div style="flex:1;">
             <div class="link-name">Juridisch Loket</div>
@@ -149,8 +149,8 @@
             <div class="link-desc">Безкоштовна юридична консультація — 30 хв. безкоштовно</div>
           </div>
           <span class="link-arrow">open_in_new</span>
-        </div>
-        <div class="link-card">
+        </a>
+        <a href="https://www.rechtwijzer.nl" class="link-card" target="_blank">
           <div class="link-icon">📋</div>
           <div style="flex:1;">
             <div class="link-name">Rechtwijzer.nl</div>
@@ -158,7 +158,7 @@
             <div class="link-desc">Онлайн путівник з правових питань — зрозумілою мовою</div>
           </div>
           <span class="link-arrow">open_in_new</span>
-        </div>
+        </a>
       </div>
     </div>
 

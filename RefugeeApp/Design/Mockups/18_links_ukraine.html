@@ -41,7 +41,7 @@
     .info-box.blue { background: #EFF6FF; color: #1D4ED8; border: 1px solid #BFDBFE; }
     .info-box-title { font-size: 12px; font-weight: 900; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 6px; }
     .link-list { display: flex; flex-direction: column; gap: 8px; }
-    .link-card { background: var(--card); border-radius: 16px; padding: 14px 16px; border: 1px solid var(--border); display: flex; gap: 12px; align-items: center; cursor: pointer; }
+    .link-card { background: var(--card); border-radius: 16px; padding: 14px 16px; border: 1px solid var(--border); display: flex; gap: 12px; align-items: center; cursor: pointer; text-decoration: none; color: inherit; }
     .link-icon { width: 44px; height: 44px; border-radius: 12px; background: var(--accent-soft); display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 22px; }
     .link-name { font-size: 13px; font-weight: 900; color: var(--text); margin-bottom: 2px; }
     .link-url { font-size: 11px; font-weight: 700; color: var(--accent); margin-bottom: 3px; }
@@ -80,7 +80,7 @@
     <div class="mt20">
       <div class="sec-label">Офіційні українські служби</div>
       <div class="link-list">
-        <div class="link-card">
+        <a href="https://netherlands.mfa.gov.ua" class="link-card" target="_blank">
           <div class="link-icon">🏛️</div>
           <div style="flex:1;">
             <div class="link-name">Посольство України в Нідерландах</div>
@@ -88,8 +88,8 @@
             <div class="link-desc">Паспорти, нотаріальні дії, консульські послуги — запис онлайн</div>
           </div>
           <span class="link-arrow">open_in_new</span>
-        </div>
-        <div class="link-card">
+        </a>
+        <a href="https://diia.gov.ua" class="link-card" target="_blank">
           <div class="link-icon">📱</div>
           <div style="flex:1;">
             <div class="link-name">Дія — державні послуги онлайн</div>
@@ -97,8 +97,8 @@
             <div class="link-desc">Документи, довідки, е-паспорт — доступні для українців за кордоном</div>
           </div>
           <span class="link-arrow">open_in_new</span>
-        </div>
-        <div class="link-card">
+        </a>
+        <a href="https://registry.diia.gov.ua" class="link-card" target="_blank">
           <div class="link-icon">🟡</div>
           <div style="flex:1;">
             <div class="link-name">Єдиний реєстр ВПО</div>
@@ -106,14 +106,14 @@
             <div class="link-desc">⚠️ Тільки для тих, хто залишився в Україні. Люди за кордоном не є ВПО за законом України і не реєструються в цьому реєстрі</div>
           </div>
           <span class="link-arrow">open_in_new</span>
-        </div>
+        </a>
       </div>
     </div>
 
     <div class="mt24">
       <div class="sec-label">Громади і підтримка в Нідерландах</div>
       <div class="link-list">
-        <div class="link-card">
+        <a href="https://www.ukrainenl.nl" class="link-card" target="_blank">
           <div class="link-icon">🤝</div>
           <div style="flex:1;">
             <div class="link-name">UkraineNL — спільнота українців</div>
@@ -121,8 +121,8 @@
             <div class="link-desc">Портал для українців у Нідерландах — події, новини, підтримка</div>
           </div>
           <span class="link-arrow">open_in_new</span>
-        </div>
-        <div class="link-card">
+        </a>
+        <a href="https://web.telegram.org" class="link-card" target="_blank">
           <div class="link-icon">💬</div>
           <div style="flex:1;">
             <div class="link-name">Telegram-групи українців у НЛ</div>
@@ -130,8 +130,8 @@
             <div class="link-desc">Активні чати по містах — Amsterdam, Rotterdam, Den Haag, Eindhoven та ін.</div>
           </div>
           <span class="link-arrow">open_in_new</span>
-        </div>
-        <div class="link-card">
+        </a>
+        <a href="https://www.pravda.com.ua" class="link-card" target="_blank">
           <div class="link-icon">📰</div>
           <div style="flex:1;">
             <div class="link-name">Українська правда / Суспільне</div>
@@ -139,14 +139,14 @@
             <div class="link-desc">Надійні українськомовні новини — без дезінформації</div>
           </div>
           <span class="link-arrow">open_in_new</span>
-        </div>
+        </a>
       </div>
     </div>
 
     <div class="mt24">
       <div class="sec-label">Допомога з України</div>
       <div class="link-list">
-        <div class="link-card">
+        <a href="https://www.helpua.nl" class="link-card" target="_blank">
           <div class="link-icon">🌐</div>
           <div style="flex:1;">
             <div class="link-name">HelpUA.nl</div>
@@ -154,8 +154,8 @@
             <div class="link-desc">Практична допомога від волонтерів — переклад, супровід, поради</div>
           </div>
           <span class="link-arrow">open_in_new</span>
-        </div>
-        <div class="link-card">
+        </a>
+        <a href="https://www.facebook.com" class="link-card" target="_blank">
           <div class="link-icon">🎨</div>
           <div style="flex:1;">
             <div class="link-name">Культурні та громадські заходи</div>
@@ -163,7 +163,7 @@
             <div class="link-desc">Виставки, концерти, зустрічі — підтримка рідної культури за кордоном</div>
           </div>
           <span class="link-arrow">open_in_new</span>
-        </div>
+        </a>
       </div>
     </div>
 
