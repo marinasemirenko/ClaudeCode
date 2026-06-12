@@ -88,6 +88,7 @@
       padding: 12px 18px;
       display: flex; align-items: center; gap: 10px;
       cursor: pointer;
+      text-decoration: none;
     }
     .es-icon { font-size: 18px; }
     .es-text { flex: 1; font-size: 13px; font-weight: 800; color: #fff; }
@@ -209,6 +210,8 @@
       padding: 13px 18px;
       display: flex; align-items: center; gap: 10px;
       box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+      text-decoration: none;
+      cursor: pointer;
     }
     .hl-dot {
       width: 8px; height: 8px; border-radius: 50%;
@@ -346,22 +349,22 @@
 
     <!-- HOTLINE -->
     <div class="section" style="margin-top:14px;">
-      <div class="hotline">
+      <a href="tel:0900-8844" class="hotline">
         <div class="hl-dot"></div>
         <div class="hl-label">Медична гаряча лінія 24/7</div>
         <div class="hl-num">
           <span class="msym">call</span>0900-8844
         </div>
-      </div>
+      </a>
     </div>
 
     <!-- EMERGENCY (moved from top) -->
     <div class="section" style="margin-top:10px;">
-      <div class="emergency-strip" style="border-radius:16px;">
+      <a href="tel:112" class="emergency-strip" style="border-radius:16px;">
         <div class="es-icon">🚨</div>
         <div class="es-text">Екстрена допомога</div>
         <div class="es-num">112</div>
-      </div>
+      </a>
     </div>
 
   </main>
