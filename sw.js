@@ -1,4 +1,6 @@
-const CACHE = 'razom-v9';
+const CACHE = 'razom-v11';
+
+const OFFLINE_URL = '/ClaudeCode/RefugeeApp/Design/Mockups/offline.html';
 
 const CORE = [
   '/ClaudeCode/',
@@ -9,6 +11,7 @@ const CORE = [
   '/ClaudeCode/RefugeeApp/Design/Mockups/saved.html',
   '/ClaudeCode/RefugeeApp/Design/Mockups/profile.html',
   '/ClaudeCode/RefugeeApp/Design/Mockups/19_korysne.html',
+  OFFLINE_URL,
   '/ClaudeCode/manifest.json'
 ];
 
@@ -28,6 +31,10 @@ self.addEventListener('activate', e => {
 
 self.addEventListener('fetch', e => {
   e.respondWith(
-    caches.match(e.request).then(cached => cached || fetch(e.request).catch(() => cached))
+    caches.match(e.request).then(cached => cached || fetch(e.request).catch(() => {
+      if (e.request.mode === 'navigate') {
+        return caches.match(OFFLINE_URL);
+      }
+    }))
   );
 });
