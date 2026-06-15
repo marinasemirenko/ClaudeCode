@@ -246,7 +246,7 @@ const SEARCH_INDEX = [
   {
     "url": "14_article_childcare.html",
     "title": "Дитячий садок",
-    "desc": "Kinderopvang, субсидія від держави і пеутерспеелзал",
+    "desc": "Kinderopvang, субсидія від держави і peuterspeelzaal (групи для малюків)",
     "icon": "",
     "msymIcon": "child_care",
     "category": "Освіта",
@@ -858,7 +858,7 @@ const SEARCH_INDEX = [
     "msymIcon": "",
     "category": "Корисне",
     "sections": [
-      "OV-chipkaart — основна карта",
+      "OV-chipkaart — основна картка",
       "Велосипед — головний транспорт",
       "Застосунки для транспорту"
     ]
@@ -931,7 +931,7 @@ const SEARCH_INDEX = [
       "Заповніть анкету онлайн",
       "Очікуйте лист з активаційним кодом",
       "Активуйте DigiD на сайті",
-      "Завантажте додаток DigiD та підвищте рівень"
+      "Завантажте додаток DigiD та підвищіть рівень"
     ]
   },
   {
