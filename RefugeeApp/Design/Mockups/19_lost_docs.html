@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Втрата документів — RAZOM</title>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --blue: #0057B7; --yellow: #FCD400; --bg: #EFECE5; --card: #fff;
+      --text: #111827; --muted: #6B7280; --border: #DDD9D0;
+      --accent: #4F46E5; --accent-dark: #3730A3; --accent-soft: #EEF2FF;
+      --green: #15803D; --green-soft: #DCFCE7;
+      --amber: #B45309; --amber-soft: #FEF3C7;
+      --red: #B91C1C; --red-soft: #FEE2E2;
+      --premium: #D97706; --premium-soft: #FEF3C7;
+    }
+    body { font-family: 'Manrope', sans-serif; background: var(--bg); color: var(--text); max-width: 390px; margin: 0 auto; min-height: 100vh; }
+    .msym { font-family: 'Material Symbols Outlined'; font-variation-settings: 'FILL' 1,'wght' 400,'GRAD' 0,'opsz' 24; font-size: 22px; line-height: 1; }
+    .msym.o { font-variation-settings: 'FILL' 0,'wght' 400,'GRAD' 0,'opsz' 24; }
+    .flag-bar { height: 3px; background: linear-gradient(90deg, var(--blue) 50%, var(--yellow) 50%); }
+    header { background: var(--card); padding: 13px 18px; display: flex; align-items: center; gap: 12px; border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 50; }
+    .back-btn { width: 36px; height: 36px; border-radius: 50%; background: var(--bg); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; cursor: pointer; text-decoration: none; color: var(--text); flex-shrink: 0; }
+    .header-title { font-size: 15px; font-weight: 800; color: var(--text); flex: 1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .bookmark-btn { width: 36px; height: 36px; border-radius: 50%; background: var(--bg); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; cursor: pointer; color: var(--muted); flex-shrink: 0; }
+    main { padding-bottom: 100px; }
+    .hero { background: #1E1B4B; padding: 28px 20px 32px; position: relative; overflow: hidden; }
+    .hero-pattern { position: absolute; inset: 0; pointer-events: none; background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='20' cy='20' r='1.5' fill='%23ffffff' fill-opacity='0.06'/%3E%3C/svg%3E"); background-size: 40px; }
+    .hero-breadcrumb { display: flex; align-items: center; gap: 6px; font-size: 11px; font-weight: 700; color: rgba(255,255,255,0.4); margin-bottom: 14px; }
+    .hero-icon { width: 56px; height: 56px; border-radius: 18px; background: rgba(255,255,255,0.12); display: flex; align-items: center; justify-content: center; margin-bottom: 14px; }
+    .hero-icon .msym { font-size: 30px; color: #fff; }
+    .hero-title { font-size: 26px; font-weight: 900; color: #fff; letter-spacing: -0.7px; line-height: 1.2; margin-bottom: 8px; }
+    .hero-sub { font-size: 13px; color: rgba(255,255,255,0.55); font-weight: 500; line-height: 1.5; }
+    .hero-badge { display: inline-flex; align-items: center; gap: 5px; background: var(--premium-soft); border-radius: 100px; padding: 4px 10px; font-size: 10px; font-weight: 800; color: var(--premium); margin-top: 12px; }
+    .content { padding: 0 18px; }
+    .mt16 { margin-top: 16px; } .mt20 { margin-top: 20px; } .mt24 { margin-top: 24px; }
+    .sec-label { font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.12em; color: var(--muted); margin-bottom: 12px; }
+    .info-box { border-radius: 16px; padding: 16px 18px; font-size: 13px; font-weight: 600; line-height: 1.6; }
+    .info-box.green { background: var(--green-soft); color: var(--green); border: 1px solid #BBF7D0; }
+    .info-box.amber { background: var(--amber-soft); color: var(--amber); border: 1px solid #FDE68A; }
+    .info-box.red { background: var(--red-soft); color: var(--red); border: 1px solid #FECACA; }
+    .info-box.accent { background: var(--accent-soft); color: var(--accent-dark); border: 1px solid #C7D2FE; }
+    .info-box-title { font-size: 12px; font-weight: 900; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 6px; }
+    .steps { background: var(--card); border-radius: 16px; border: 1px solid var(--border); overflow: hidden; }
+    .step-row { display: flex; align-items: flex-start; gap: 12px; padding: 13px 15px; }
+    .step-row + .step-row { border-top: 1px solid var(--border); }
+    .step-num { width: 24px; height: 24px; border-radius: 50%; background: var(--accent); color: #fff; font-size: 11px; font-weight: 900; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px; }
+    .step-text { font-size: 12px; color: #374151; font-weight: 600; line-height: 1.55; flex: 1; }
+    .step-text strong { color: var(--text); font-weight: 800; }
+    .tip-list { display: flex; flex-direction: column; gap: 8px; }
+    .tip-item { background: var(--card); border-radius: 14px; padding: 14px 16px; border: 1px solid var(--border); display: flex; gap: 12px; align-items: flex-start; }
+    .tip-emoji { font-size: 24px; flex-shrink: 0; margin-top: 2px; }
+    .tip-title { font-size: 13px; font-weight: 800; color: var(--text); margin-bottom: 3px; }
+    .tip-desc { font-size: 12px; color: var(--muted); font-weight: 500; line-height: 1.5; }
+    .tip-tag { display: inline-block; font-size: 10px; font-weight: 800; border-radius: 100px; padding: 2px 8px; margin-top: 6px; }
+    .tag-green { background: var(--green-soft); color: var(--green); }
+    .tag-amber { background: var(--amber-soft); color: var(--amber); }
+    .tag-accent { background: var(--accent-soft); color: var(--accent-dark); }
+    .tag-red { background: var(--red-soft); color: var(--red); }
+    .contacts-box { background: var(--card); border-radius: 16px; border: 1px solid var(--border); overflow: hidden; }
+    .contacts-row { display: flex; align-items: center; gap: 12px; padding: 13px 16px; }
+    .contacts-row + .contacts-row { border-top: 1px solid var(--border); }
+    .contacts-icon { width: 36px; height: 36px; border-radius: 12px; background: var(--accent-soft); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .contacts-icon .msym { font-size: 18px; color: var(--accent-dark); }
+    .contacts-body { flex: 1; }
+    .contacts-name { font-size: 12px; font-weight: 800; color: var(--text); }
+    .contacts-detail { font-size: 11px; color: var(--muted); font-weight: 500; margin-top: 1px; }
+    /* Premium gate */
+    .premium-gate { position: relative; }
+    .premium-blur { filter: blur(4px); pointer-events: none; user-select: none; }
+    .premium-overlay { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; background: linear-gradient(to bottom, rgba(239,236,229,0) 0%, rgba(239,236,229,0.97) 30%); padding: 24px 20px; }
+    .premium-card { background: #fff; border-radius: 20px; padding: 22px 20px; box-shadow: 0 8px 32px rgba(217,119,6,0.15); border: 1px solid var(--premium-soft); width: 100%; text-align: center; }
+    .lock-icon { width: 48px; height: 48px; border-radius: 16px; background: var(--premium-soft); display: flex; align-items: center; justify-content: center; margin: 0 auto 12px; }
+    .lock-icon .msym { color: var(--premium); font-size: 26px; }
+    .premium-title { font-size: 16px; font-weight: 900; color: var(--text); margin-bottom: 6px; }
+    .premium-desc { font-size: 12px; color: var(--muted); font-weight: 500; line-height: 1.5; margin-bottom: 16px; }
+    .premium-price { font-size: 11px; color: var(--muted); font-weight: 500; margin-top: 8px; }
+    .bottom-nav { position: fixed; bottom: 0; left: 50%; transform: translateX(-50%); width: 100%; max-width: 390px; background: var(--card); border-top: 1px solid var(--border); display: flex; z-index: 100; }
+    .nav-item { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 10px 0 8px; gap: 3px; text-decoration: none; color: var(--muted); }
+    .nav-item span.label { font-size: 10px; font-weight: 700; }
+    .nav-item .msym { font-size: 24px; }
+    .fab { position: fixed; bottom: 72px; right: calc(50% - 195px + 14px); width: 52px; height: 52px; border-radius: 18px; background: var(--accent); box-shadow: 0 4px 16px rgba(79,70,229,0.35); display: flex; align-items: center; justify-content: center; z-index: 99; text-decoration: none; }
+    .fab .msym { color: #fff; font-size: 26px; }
+  </style>
+</head>
+<body>
+<div class="flag-bar"></div>
+<header>
+  <a href="19_korysne.html" class="back-btn"><span class="msym o" style="font-size:20px;">arrow_back</span></a>
+  <span class="header-title">Втрата документів</span>
+  <button class="bookmark-btn"><span class="msym o">bookmark</span></button>
+</header>
+<main>
+  <div class="hero">
+    <div class="hero-pattern"></div>
+    <div class="hero-breadcrumb">
+      <span>Корисне</span>
+      <span class="msym o" style="font-size:13px;">chevron_right</span>
+      <span>Документи</span>
+    </div>
+    <div class="hero-icon"><span class="msym">badge</span></div>
+    <div class="hero-title">Втратила документ?</div>
+    <div class="hero-sub">Посвідка, паспорт, BSN, DigiD — що робити в кожному випадку, крок за кроком</div>
+    <div class="hero-badge"><span class="msym" style="font-size:14px;">lock</span> Преміум</div>
+  </div>
+
+  <div class="content">
+
+    <!-- Orientation -->
+    <div class="mt20">
+      <div class="sec-label">Який документ ти втратила?</div>
+      <div class="tip-list">
+
+        <div class="tip-item">
+          <div class="tip-emoji">🪪</div>
+          <div>
+            <div class="tip-title">O-document (посвідка тимчасового захисту)</div>
+            <div class="tip-desc">Пластикова картка від IND — доказ твого TPD-статусу в Нідерландах. Якщо загубила — дій негайно. Заміна безкоштовна.</div>
+            <span class="tip-tag tag-red">Найважливіший документ в NL</span>
+          </div>
+        </div>
+
+        <div class="tip-item">
+          <div class="tip-emoji">🔢</div>
+          <div>
+            <div class="tip-title">BSN — це просто номер, його не можна "загубити"</div>
+            <div class="tip-desc">BSN (Burgerservicenummer — громадський сервісний номер) — це 9-значний номер, назавжди закріплений за тобою. Він є в муніципальній базі і нікуди не зникає. Потрібно лише знайти де він записаний.</div>
+            <span class="tip-tag tag-green">Де знайти — нижче ↓</span>
+          </div>
+        </div>
+
+        <div class="tip-item">
+          <div class="tip-emoji">📱</div>
+          <div>
+            <div class="tip-title">DigiD — відновлюється онлайн</div>
+            <div class="tip-desc">DigiD — твій цифровий підпис для держпослуг. Якщо забула пароль або змінила телефон — відновити можна на digid.nl без відвідування офісу.</div>
+            <span class="tip-tag tag-accent">digid.nl</span>
+          </div>
+        </div>
+
+        <div class="tip-item">
+          <div class="tip-emoji">📗</div>
+          <div>
+            <div class="tip-title">Закордонний паспорт — окрема процедура</div>
+            <div class="tip-desc">Видається Посольством України. Процес займає до 3 місяців. Є важливі обмеження для чоловіків 18–65 років. Детальна інструкція — в Преміум.</div>
+            <span class="tip-tag tag-amber">Детально в Преміум ↓</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Section: O-document lost -->
+    <div class="mt24">
+      <div class="sec-label">O-document загублено або вкрадено</div>
+      <div class="info-box green" style="margin-bottom:12px;">
+        <div class="info-box-title">Заміна — безкоштовна</div>
+        Для тримачів тимчасового захисту (TPD) заміна посвідки в IND не коштує нічого. Не плути з іншими дозволами на проживання, де заміна коштує €253 — до тебе це не відноситься.
+      </div>
+      <div class="steps">
+        <div class="step-row">
+          <div class="step-num">1</div>
+          <div class="step-text"><strong>Повідом поліцію — особисто, не онлайн.</strong> Прийди до найближчого поліцейського відділку і подай заяву: загублено (verlies) або вкрадено (diefstal). Онлайн-система для іноземних документів не працює. Отримай копію протоколу (proces-verbaal) — вона потрібна для IND.</div>
+        </div>
+        <div class="step-row">
+          <div class="step-num">2</div>
+          <div class="step-text"><strong>Запишись до IND.</strong> Зайди на ind.nl/uk/ukraine та запишись на прийом для заміни посвідки. Принеси з собою копію поліцейського протоколу. IND знімає відбитки пальців і видає новий документ.</div>
+        </div>
+        <div class="step-row">
+          <div class="step-num">3</div>
+          <div class="step-text"><strong>Можеш продовжувати працювати.</strong> Поліцейський протокол і будь-яка попередня переписка з IND підтверджують твій статус до отримання нової посвідки. Роботодавцю можна показати ці документи.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Section: BSN -->
+    <div class="mt24">
+      <div class="sec-label">Де знайти BSN</div>
+      <div class="tip-list">
+        <div class="tip-item">
+          <div class="tip-emoji">💻</div>
+          <div>
+            <div class="tip-title">Через MijnOverheid (онлайн)</div>
+            <div class="tip-desc">Зайди на mijnoverheid.nl з DigiD → розділ "Identiteit" → там є твій BSN та всі персональні дані з муніципального реєстру.</div>
+          </div>
+        </div>
+        <div class="tip-item">
+          <div class="tip-emoji">💳</div>
+          <div>
+            <div class="tip-title">На картці медичного страхування</div>
+            <div class="tip-desc">Zorgverzekeringspas (картка медичної страховки) зазвичай містить BSN. Перевір також листи від Belastingdienst, SVB, DUO — BSN є майже скрізь.</div>
+          </div>
+        </div>
+        <div class="tip-item">
+          <div class="tip-emoji">🏛️</div>
+          <div>
+            <div class="tip-title">В муніципалітеті (gemeente) — особисто</div>
+            <div class="tip-desc">Якщо немає DigiD і немає жодного документа з BSN — прийди до gemeente з паспортом або O-документом. Там знайдуть тебе в реєстрі BRP і скажуть номер.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Section: DigiD -->
+    <div class="mt24">
+      <div class="sec-label">Відновлення DigiD</div>
+      <div class="steps">
+        <div class="step-row">
+          <div class="step-num">1</div>
+          <div class="step-text"><strong>Забула пароль або логін?</strong> На сайті digid.nl є опції "Забула логін" і "Забула пароль". Відновлення — через email або номер телефону, який ти вказувала при реєстрації.</div>
+        </div>
+        <div class="step-row">
+          <div class="step-num">2</div>
+          <div class="step-text"><strong>Змінила телефон?</strong> Завантаж застосунок DigiD на новий телефон і увійди з логіном і паролем — застосунок перелінкується знову. Якщо телефон вкрали — перейди на digid.nl і деактивуй старий пристрій.</div>
+        </div>
+        <div class="step-row">
+          <div class="step-num">3</div>
+          <div class="step-text"><strong>Втратила все і потрібна нова реєстрація.</strong> Зареєструйся заново на digid.nl. BSN ти знайдеш у муніципалітеті (крок вище). Нова реєстрація безкоштовна, код активації приходить листом через ~5 днів.</div>
+        </div>
+        <div class="step-row">
+          <div class="step-num">4</div>
+          <div class="step-text"><strong>Підозра на шахрайство?</strong> Зателефонуй на гарячу лінію DigiD: <strong>088 123 65 55</strong>. Вони можуть заблокувати твій акаунт і допомогти з відновленням.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PREMIUM GATE -->
+    <div class="premium-gate mt24" style="min-height:500px;">
+      <div class="premium-blur">
+        <div class="sec-label">Закордонний паспорт — процедура відновлення</div>
+        <div class="steps">
+          <div class="step-row">
+            <div class="step-num">1</div>
+            <div class="step-text"><strong>Повідом поліцію (обов'язково)</strong> — та сама процедура, що й для O-документа. Консульство вимагає копію протоколу.</div>
+          </div>
+          <div class="step-row">
+            <div class="step-num">2</div>
+            <div class="step-text"><strong>Запис до консульства через eConsul</strong> — онлайн-система МЗС. Потрібен Дія.Підпис або BankID. Особиста явка обов'язкова.</div>
+          </div>
+          <div class="step-row">
+            <div class="step-num">3</div>
+            <div class="step-text"><strong>Термін очікування: до 3 місяців</strong> — вартість і перелік документів у Преміум.</div>
+          </div>
+        </div>
+        <div class="info-box red" style="margin-top:12px;">
+          <div class="info-box-title">⚠️ Чоловіки 18–65 років — важливо</div>
+          З квітня 2024 консульські послуги для чоловіків цієї вікової групи суттєво обмежені. Що саме можливо, а що ні — детально в Преміум.
+        </div>
+        <div class="info-box amber" style="margin-top:8px;">
+          <div class="info-box-title">Подорожі без документів</div>
+          Що можна і не можна до отримання заміни, і як отримати свідоцтво для повернення в Україну — теж у Преміум.
+        </div>
+      </div>
+      <div class="premium-overlay">
+        <div class="premium-card">
+          <div class="lock-icon"><span class="msym">lock</span></div>
+          <div class="premium-title">Повна інструкція з відновлення</div>
+          <div class="premium-desc">Закордонний паспорт, обмеження для чоловіків, подорожі без документів і точні контакти консульства</div>
+          <div class="premium-price">Повний доступ з'явиться незабаром</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Useful contacts (free) -->
+    <div class="sec-label mt16">Корисні контакти</div>
+    <div class="contacts-box" style="margin-bottom:20px;">
+      <div class="contacts-row">
+        <div class="contacts-icon"><span class="msym">local_police</span></div>
+        <div class="contacts-body">
+          <div class="contacts-name">Поліція — неекстрені дзвінки</div>
+          <div class="contacts-detail">0900-8844 (€0.10/хв, цілодобово)</div>
+        </div>
+      </div>
+      <div class="contacts-row">
+        <div class="contacts-icon"><span class="msym">assignment_ind</span></div>
+        <div class="contacts-body">
+          <div class="contacts-name">IND — запис на прийом (Україна)</div>
+          <div class="contacts-detail">ind.nl/uk/ukraine · тел. 088 043 04 30</div>
+        </div>
+      </div>
+      <div class="contacts-row">
+        <div class="contacts-icon"><span class="msym">fingerprint</span></div>
+        <div class="contacts-body">
+          <div class="contacts-name">DigiD — гаряча лінія</div>
+          <div class="contacts-detail">088 123 65 55 | digid.nl</div>
+        </div>
+      </div>
+      <div class="contacts-row">
+        <div class="contacts-icon"><span class="msym">language</span></div>
+        <div class="contacts-body">
+          <div class="contacts-name">MijnOverheid — знайти BSN</div>
+          <div class="contacts-detail">mijnoverheid.nl (потрібен DigiD)</div>
+        </div>
+      </div>
+      <div class="contacts-row">
+        <div class="contacts-icon"><span class="msym">flag</span></div>
+        <div class="contacts-body">
+          <div class="contacts-name">Посольство України в Гаазі</div>
+          <div class="contacts-detail">Zeestraat 78, Den Haag · netherlands.mfa.gov.ua</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</main>
+<a href="chat.html" class="fab"><span class="msym">chat</span></a>
+<nav class="bottom-nav">
+  <a href="1final_colorful.html" class="nav-item"><span class="msym o">home</span><span class="label">Головна</span></a>
+  <a href="search.html" class="nav-item"><span class="msym o">explore</span><span class="label">Пошук</span></a>
+  <a href="saved.html" class="nav-item"><span class="msym o">bookmark</span><span class="label">Збережені</span></a>
+  <a href="profile.html" class="nav-item"><span class="msym o">person</span><span class="label">Профіль</span></a>
+</nav>
+</body>
+</html>
