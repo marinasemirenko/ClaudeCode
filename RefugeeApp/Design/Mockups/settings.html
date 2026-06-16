@@ -109,7 +109,7 @@
 <div class="flag-bar"></div>
 <header>
   <a href="javascript:history.back()" class="back-btn"><span class="msym o">arrow_back</span></a>
-  <div class="header-title">Налаштування</div>
+  <div class="header-title" data-i18n="settings.title">Налаштування</div>
 </header>
 <main>
 
@@ -125,29 +125,29 @@
 
   <!-- APP SETTINGS -->
   <div class="section">
-    <div class="sec-label">Застосунок</div>
+    <div class="sec-label" data-i18n="settings.sec.app">Застосунок</div>
     <div class="group">
-      <div class="setting-row" onclick="cycleLang()">
+      <div class="setting-row" onclick="RAZOM_I18N.openPicker()" style="cursor:pointer;">
         <div class="setting-icon" style="background:#EDE9FE;">🌐</div>
         <div class="setting-body">
-          <div class="setting-label">Мова інтерфейсу</div>
-          <div class="setting-desc">Мова кнопок та підказок</div>
+          <div class="setting-label" data-i18n="settings.lang.label">Мова інтерфейсу</div>
+          <div class="setting-desc" data-i18n="settings.lang.desc">Мова кнопок та підказок</div>
         </div>
-        <span class="setting-value" id="lang-val">Українська</span>
+        <span class="setting-value lang-full-display">Українська</span>
       </div>
       <div class="setting-row">
         <div class="setting-icon" style="background:#FEF3C7;">🔔</div>
         <div class="setting-body">
-          <div class="setting-label">Сповіщення</div>
-          <div class="setting-desc">Важливі оновлення та новини</div>
+          <div class="setting-label" data-i18n="settings.notif.label">Сповіщення</div>
+          <div class="setting-desc" data-i18n="settings.notif.desc">Важливі оновлення та новини</div>
         </div>
         <div class="toggle on" id="toggle-notif" onclick="toggleSwitch(this)"></div>
       </div>
       <div class="setting-row">
         <div class="setting-icon" style="background:#DCFCE7;">📥</div>
         <div class="setting-body">
-          <div class="setting-label">Зберігати офлайн</div>
-          <div class="setting-desc">Завантажити контент для читання без інтернету</div>
+          <div class="setting-label" data-i18n="settings.offline.label">Зберігати офлайн</div>
+          <div class="setting-desc" data-i18n="settings.offline.desc">Завантажити контент для читання без інтернету</div>
         </div>
         <div class="toggle" id="toggle-offline" onclick="toggleSwitch(this)"></div>
       </div>
@@ -156,33 +156,33 @@
 
   <!-- PREMIUM -->
   <div class="section">
-    <div class="sec-label">Підписка</div>
+    <div class="sec-label" data-i18n="settings.sec.subscription">Підписка</div>
     <div class="premium-banner">
       <div class="premium-icon">⭐</div>
       <div class="premium-body">
-        <div class="premium-title">RAZOM Premium</div>
-        <div class="premium-sub">Весь контент, без реклами, пріоритетний чат</div>
+        <div class="premium-title" data-i18n="settings.premium.title">RAZOM Premium</div>
+        <div class="premium-sub" data-i18n="settings.premium.sub">Весь контент, без реклами, пріоритетний чат</div>
       </div>
-      <button class="btn-upgrade">Скоро</button>
+      <button class="btn-upgrade" data-i18n="settings.premium.btn">Скоро</button>
     </div>
   </div>
 
   <!-- SUPPORT -->
   <div class="section">
-    <div class="sec-label">Підтримка</div>
+    <div class="sec-label" data-i18n="settings.sec.support">Підтримка</div>
     <div class="group">
       <div class="setting-row" onclick="window.location.href='chat.html'">
         <div class="setting-icon" style="background:#FCE7F3;">💬</div>
         <div class="setting-body">
-          <div class="setting-label">AI-помічник</div>
-          <div class="setting-desc">Відкрити чат з помічником</div>
+          <div class="setting-label" data-i18n="settings.chat.label">AI-помічник</div>
+          <div class="setting-desc" data-i18n="settings.chat.desc">Відкрити чат з помічником</div>
         </div>
         <span class="msym o setting-right">chevron_right</span>
       </div>
       <div class="setting-row">
         <div class="setting-icon" style="background:#E0F2FE;">📧</div>
         <div class="setting-body">
-          <div class="setting-label">Написати нам</div>
+          <div class="setting-label" data-i18n="settings.email.label">Написати нам</div>
           <div class="setting-desc">marina.semirenko21@gmail.com</div>
         </div>
         <span class="msym o setting-right">chevron_right</span>
@@ -190,8 +190,8 @@
       <div class="setting-row">
         <div class="setting-icon" style="background:#DCFCE7;">⭐</div>
         <div class="setting-body">
-          <div class="setting-label">Оцінити застосунок</div>
-          <div class="setting-desc">Допоможи нам стати кращими</div>
+          <div class="setting-label" data-i18n="settings.rate.label">Оцінити застосунок</div>
+          <div class="setting-desc" data-i18n="settings.rate.desc">Допоможи нам стати кращими</div>
         </div>
         <span class="msym o setting-right">chevron_right</span>
       </div>
@@ -200,11 +200,11 @@
 
   <!-- ABOUT -->
   <div class="section">
-    <div class="sec-label">Про застосунок</div>
+    <div class="sec-label" data-i18n="settings.sec.about">Про застосунок</div>
     <div class="group" style="overflow:hidden;">
-      <div class="about-row"><span class="about-key">Версія</span> <span class="about-val">1.0.0 beta</span></div>
-      <div class="about-row"><span class="about-key">Зроблено</span> <span class="about-val">Мариною, для українців 🇺🇦</span></div>
-      <div class="about-row"><span class="about-key">Країна</span> <span class="about-val">Нідерланди 🇳🇱</span></div>
+      <div class="about-row"><span class="about-key" data-i18n="settings.about.version.key">Версія</span> <span class="about-val">1.0.0 beta</span></div>
+      <div class="about-row"><span class="about-key" data-i18n="settings.about.made.key">Зроблено</span> <span class="about-val" data-i18n="settings.about.made.val">Мариною, для українців 🇺🇦</span></div>
+      <div class="about-row"><span class="about-key" data-i18n="settings.about.country.key">Країна</span> <span class="about-val" data-i18n="settings.about.country.val">Нідерланди 🇳🇱</span></div>
     </div>
   </div>
 
@@ -214,8 +214,8 @@
       <div class="setting-row" style="cursor:pointer;" onclick="if(confirm('Очистити всі дані застосунку?')){localStorage.clear();alert('Дані видалено.');}">
         <div class="setting-icon" style="background:#FEE2E2;">🗑️</div>
         <div class="setting-body">
-          <div class="setting-label" style="color:#DC2626;">Очистити всі дані</div>
-          <div class="setting-desc">Видалити ключ, налаштування, збережене</div>
+          <div class="setting-label" style="color:#DC2626;" data-i18n="settings.clear.label">Очистити всі дані</div>
+          <div class="setting-desc" data-i18n="settings.clear.desc">Видалити ключ, налаштування, збережене</div>
         </div>
       </div>
     </div>
@@ -224,86 +224,18 @@
 </main>
 
 <nav>
-  <a href="1final_colorful.html" class="nav-item"><div class="nav-pill"><span class="msym o">home</span></div><span class="nav-lbl">Головна</span></a>
-  <a href="search.html" class="nav-item"><div class="nav-pill"><span class="msym o">explore</span></div><span class="nav-lbl">Огляд</span></a>
-  <a href="saved.html" class="nav-item"><div class="nav-pill"><span class="msym o">bookmark</span></div><span class="nav-lbl">Збережені</span></a>
-  <a href="settings.html" class="nav-item active"><div class="nav-pill"><span class="msym">person</span></div><span class="nav-lbl">Профіль</span></a>
+  <a href="1final_colorful.html" class="nav-item"><div class="nav-pill"><span class="msym o">home</span></div><span class="nav-lbl" data-i18n="nav.home">Головна</span></a>
+  <a href="search.html" class="nav-item"><div class="nav-pill"><span class="msym o">explore</span></div><span class="nav-lbl" data-i18n="nav.explore">Огляд</span></a>
+  <a href="saved.html" class="nav-item"><div class="nav-pill"><span class="msym o">bookmark</span></div><span class="nav-lbl" data-i18n="nav.saved">Збережені</span></a>
+  <a href="settings.html" class="nav-item active"><div class="nav-pill"><span class="msym">person</span></div><span class="nav-lbl" data-i18n="nav.profile">Профіль</span></a>
 </nav>
 
+<script src="js/translations.js"></script>
+<script src="js/i18n.js"></script>
 <script>
-  const LANGS = ['Українська', 'Nederlands', 'English'];
-  let langIdx = 0;
-
-  function cycleLang() {
-    langIdx = (langIdx + 1) % LANGS.length;
-    document.getElementById('lang-val').textContent = LANGS[langIdx];
-    localStorage.setItem('rg_lang', LANGS[langIdx]);
-  }
-
   function toggleSwitch(el) {
     el.classList.toggle('on');
   }
-
-  function toggleVisibility() {
-    const field = document.getElementById('api-key-input');
-    const icon = document.getElementById('vis-icon');
-    if (field.type === 'password') {
-      field.type = 'text';
-      icon.textContent = 'visibility_off';
-    } else {
-      field.type = 'password';
-      icon.textContent = 'visibility';
-    }
-  }
-
-  function updateStatus() {
-    const key = localStorage.getItem('rg_api_key') || '';
-    const dot = document.getElementById('status-dot');
-    const txt = document.getElementById('status-text');
-    if (key && key.startsWith('sk-ant')) {
-      dot.style.background = '#16A34A';
-      txt.style.color = '#15803D';
-      txt.textContent = 'Ключ збережено ✓';
-    } else if (key) {
-      dot.style.background = '#F59E0B';
-      txt.style.color = '#92400E';
-      txt.textContent = 'Ключ вказано (перевір формат)';
-    } else {
-      dot.style.background = '#D1D5DB';
-      txt.style.color = 'var(--muted)';
-      txt.textContent = 'Ключ не вказано';
-    }
-  }
-
-  function saveApiKey() {
-    const val = document.getElementById('api-key-input').value.trim();
-    if (!val) { alert('Введи API ключ'); return; }
-    localStorage.setItem('rg_api_key', val);
-    updateStatus();
-    // brief visual feedback
-    const btn = document.querySelector('.btn-save');
-    btn.textContent = 'Збережено ✓';
-    setTimeout(() => { btn.textContent = 'Зберегти ключ'; }, 2000);
-  }
-
-  function clearApiKey() {
-    if (!confirm('Видалити збережений ключ?')) return;
-    localStorage.removeItem('rg_api_key');
-    document.getElementById('api-key-input').value = '';
-    updateStatus();
-  }
-
-  window.addEventListener('load', () => {
-    const saved = localStorage.getItem('rg_api_key') || '';
-    if (saved) document.getElementById('api-key-input').value = saved;
-    updateStatus();
-    const lang = localStorage.getItem('rg_lang');
-    if (lang) {
-      langIdx = LANGS.indexOf(lang);
-      if (langIdx < 0) langIdx = 0;
-      document.getElementById('lang-val').textContent = LANGS[langIdx];
-    }
-  });
 </script>
 </body>
 </html>
