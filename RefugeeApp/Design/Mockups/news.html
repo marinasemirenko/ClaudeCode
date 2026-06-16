@@ -834,7 +834,7 @@
       }
 
       container.innerHTML = filtered.map(function(item, i) {
-        return renderArticleCard(item, i === 0 && activeFilter === 'all');
+        return renderArticleCard(item, false);
       }).join('');
     }
 
