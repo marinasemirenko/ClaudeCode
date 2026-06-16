@@ -4,6 +4,13 @@
 .env
 .env.local
 .env.*.local
+*.keystore
+signing-key-info.txt
+
+# ============================================================
+# Claude Code runtime files
+# ============================================================
+.claude/scheduled_tasks.lock
 
 # ============================================================
 # Dependencies

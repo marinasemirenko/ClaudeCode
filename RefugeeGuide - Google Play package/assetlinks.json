@@ -1,0 +1,8 @@
+[{
+      "relation": ["delegate_permission/common.handle_all_urls"],
+      "target": {
+        "namespace": "android_app",
+        "package_name": "io.github.marinasemirenko.twa",
+        "sha256_cert_fingerprints": ["C2:C4:DE:ED:C4:21:F9:C1:A5:D0:C0:E9:06:8B:D7:CF:BE:BA:BC:57:A1:44:2A:55:C2:A5:65:58:38:62:2D:F3"]
+      }
+    }]
