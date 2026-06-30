@@ -102,10 +102,11 @@
   <div class="flag-bar"></div>
   <header>
     <a href="12_healthcare.html" class="back-btn"><span class="msym o" style="font-size:20px">arrow_back</span></a>
-    <div class="header-title">Медичне страхування</div>
+    <div class="header-title" data-i18n="health.art.insurance.h">Медичне страхування</div>
     <button class="bookmark-btn"><span class="msym o" style="font-size:20px">bookmark</span></button>
   </header>
   <main>
+  <div data-lang-block="uk">
     <div class="hero">
       <div class="hero-pattern"></div>
       <div class="hero-breadcrumb">
@@ -240,13 +241,152 @@
         </div>
       </div>
     </div>
+  </div><!-- /data-lang-block="uk" -->
+
+  <div data-lang-block="en" style="display:none">
+    <div class="hero">
+      <div class="hero-pattern"></div>
+      <div class="hero-breadcrumb">
+        <span class="msym" style="font-size:13px">medical_services</span>
+        Healthcare
+        <span class="msym o" style="font-size:13px">chevron_right</span>
+        Insurance
+      </div>
+      <div class="hero-icon"><span class="msym">health_and_safety</span></div>
+      <div class="hero-title">Medical<br>Insurance</div>
+      <div class="hero-sub">Zorgverzekering — how to set it up and what is covered</div>
+      <div class="hero-badge"><span class="msym" style="font-size:13px">check_circle</span> Free content</div>
+    </div>
+
+    <div class="content mt20">
+      <div class="alert-box">
+        <span class="msym">warning</span>
+        <div class="alert-text"><strong>Important:</strong> If you live in an AZC, COA arranges insurance for you. If you have your own housing — you must arrange insurance yourself within 4 months of receiving your status.</div>
+      </div>
+    </div>
+
+    <div class="content mt24">
+      <div class="sec-label">Where are you now?</div>
+      <div class="table-wrap">
+        <table class="tbl">
+          <thead><tr><th>Situation</th><th>Insurance</th></tr></thead>
+          <tbody>
+            <tr><td class="highlight">In AZC (COA)</td><td><span class="chip chip-green">COA arranges it</span></td></tr>
+            <tr><td class="highlight">Own housing (VVTVb)</td><td><span class="chip chip-amber">Arrange yourself</span></td></tr>
+            <tr><td class="highlight">Refugee status</td><td><span class="chip chip-amber">Arrange yourself</span></td></tr>
+            <tr><td class="highlight">Tourist / work visa</td><td><span class="chip chip-red">Separate type</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="content mt24">
+      <div class="sec-label">How to arrange it yourself</div>
+      <div class="info-card">
+        <div class="steps">
+          <div class="step">
+            <div class="step-num">1</div>
+            <div class="step-body">
+              <div class="step-title">Get a BSN number</div>
+              <div class="step-desc">Without a BSN you cannot get insurance. Register at the gemeente (municipality) where you live.</div>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">2</div>
+            <div class="step-body">
+              <div class="step-title">Choose a provider</div>
+              <div class="step-desc">Compare on zorgwijzer.nl or independer.nl. Most recommended for refugees: CZ, Zilveren Kruis, VGZ, Menzis.</div>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">3</div>
+            <div class="step-body">
+              <div class="step-title">Get the basic package</div>
+              <div class="step-desc">The basic package (basispakket) is the same with all providers — the difference is only price (~€130–150/month) and add-ons.</div>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">4</div>
+            <div class="step-body">
+              <div class="step-title">Apply for zorgtoeslag</div>
+              <div class="step-desc">The government may reimburse up to ~€120/month. Apply at mijn.toeslagen.nl — you need DigiD.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="content mt16">
+      <div class="tip">
+        <span class="msym">lightbulb</span>
+        <div class="tip-text"><strong>Zorgtoeslag</strong> — a government subsidy for your insurance. With a low income you get back €60–120 per month. Don't forget to apply!</div>
+      </div>
+    </div>
+
+    <div class="content mt24">
+      <div class="sec-label">What is covered for free</div>
+      <div class="table-wrap">
+        <table class="tbl">
+          <thead><tr><th>Service</th><th>Out-of-pocket</th></tr></thead>
+          <tbody>
+            <tr><td class="highlight">Huisarts (doctor)</td><td><span class="chip chip-green">Free</span></td></tr>
+            <tr><td class="highlight">Emergency (HAP)</td><td><span class="chip chip-green">Free</span></td></tr>
+            <tr><td>Hospital (ziekenhuis)</td><td><span class="chip chip-amber">Eigen risico</span></td></tr>
+            <tr><td>Prescription drugs</td><td><span class="chip chip-amber">Partly</span></td></tr>
+            <tr><td>Psychologist (GGZ basic)</td><td><span class="chip chip-amber">Eigen risico</span></td></tr>
+            <tr><td>Dentist (18+)</td><td><span class="chip chip-red">Not covered</span></td></tr>
+            <tr><td>Dentist (under 18)</td><td><span class="chip chip-green">Free</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="content mt16">
+      <div class="info-card">
+        <div class="info-card-title"><span class="msym">euro</span>Eigen risico — what is it?</div>
+        <div class="divider"></div>
+        <div class="row-item">
+          <div class="row-label">Amount for 2024</div>
+          <div class="row-val">€385 / year</div>
+        </div>
+        <div class="row-item">
+          <div class="row-label">Huisarts (doctor)</div>
+          <div class="row-val">Not counted</div>
+        </div>
+        <div class="row-item">
+          <div class="row-label">Hospital, tests</div>
+          <div class="row-val">Counted</div>
+        </div>
+        <div style="padding-top:10px; font-size:12px; color:var(--muted); font-weight:500; line-height:1.5;">You pay the first €385 per year yourself. After that, the insurer covers everything.</div>
+      </div>
+    </div>
+
+    <div class="content mt24">
+      <div class="sec-label">Premium content</div>
+      <div class="premium-gate">
+        <div class="premium-blur">
+          <div class="pitem"><div class="pitem-dot"></div><div class="pitem-text">Insurance provider comparison for refugees — prices, ratings, what to choose</div></div>
+          <div class="pitem"><div class="pitem-dot"></div><div class="pitem-text">Step-by-step guide: how to apply for zorgtoeslag from scratch</div></div>
+          <div class="pitem"><div class="pitem-dot"></div><div class="pitem-text">What to do if your insurer refuses coverage — complaint script</div></div>
+          <div class="pitem"><div class="pitem-dot"></div><div class="pitem-text">Aanvullende verzekering — when it's worth paying for an extended package</div></div>
+        </div>
+        <div class="premium-overlay">
+          <div class="premium-icon"><span class="msym">lock</span></div>
+          <div class="premium-title">Premium content</div>
+          <div class="premium-sub">Provider comparison, step-by-step guides and letter templates</div>
+          <div class="premium-price">Full access coming soon</div>
+        </div>
+      </div>
+    </div>
+  </div><!-- /data-lang-block="en" -->
+
   </main>
 
   <nav>
-    <a href="1final_colorful.html" class="nav-item active"><div class="nav-pill"><span class="msym">home</span></div><span class="nav-lbl">Головна</span></a>
-    <a href="search.html" class="nav-item"><div class="nav-pill"><span class="msym o">explore</span></div><span class="nav-lbl">Огляд</span></a>
-    <a href="saved.html" class="nav-item"><div class="nav-pill"><span class="msym o">bookmark</span></div><span class="nav-lbl">Збережені</span></a>
-    <a href="profile.html" class="nav-item"><div class="nav-pill"><span class="msym o">person</span></div><span class="nav-lbl">Профіль</span></a>
+    <a href="1final_colorful.html" class="nav-item active"><div class="nav-pill"><span class="msym">home</span></div><span class="nav-lbl" data-i18n="nav.home">Головна</span></a>
+    <a href="search.html" class="nav-item"><div class="nav-pill"><span class="msym o">explore</span></div><span class="nav-lbl" data-i18n="nav.explore">Огляд</span></a>
+    <a href="saved.html" class="nav-item"><div class="nav-pill"><span class="msym o">bookmark</span></div><span class="nav-lbl" data-i18n="nav.saved">Збережені</span></a>
+    <a href="profile.html" class="nav-item"><div class="nav-pill"><span class="msym o">person</span></div><span class="nav-lbl" data-i18n="nav.profile">Профіль</span></a>
   </nav>
 
   <script src="js/translations.js"></script>
