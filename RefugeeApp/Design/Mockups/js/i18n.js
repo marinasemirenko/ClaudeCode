@@ -71,6 +71,13 @@
       }
     }
 
+    // Show/hide language content blocks (data-lang-block="uk" / "en")
+    var langBlocks = document.querySelectorAll('[data-lang-block]');
+    for (var lb = 0; lb < langBlocks.length; lb++) {
+      langBlocks[lb].style.display =
+        langBlocks[lb].getAttribute('data-lang-block') === lang ? '' : 'none';
+    }
+
     // Update html lang attribute
     document.documentElement.lang = lang;
 
