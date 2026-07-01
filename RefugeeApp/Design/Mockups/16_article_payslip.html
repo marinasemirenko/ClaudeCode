@@ -77,10 +77,11 @@
 <div class="flag-bar"></div>
 <header>
   <a href="16_work.html" class="back-btn"><span class="msym o" style="font-size:20px;">arrow_back</span></a>
-  <span class="header-title">Розрахунковий листок</span>
+  <span class="header-title" data-i18n="work.art.payslip.h">Розрахунковий листок</span>
   <button class="bookmark-btn"><span class="msym o">bookmark</span></button>
 </header>
 <main>
+<div data-lang-block="uk">
   <div class="hero">
     <div class="hero-pattern"></div>
     <div class="hero-breadcrumb">
@@ -206,6 +207,135 @@
       Для дорослих (21+): €14.06 за годину. Роботодавець не може платити менше — незалежно від договору. Перевірити поточну ставку: rijksoverheid.nl/minimumloon
     </div>
   </div>
+</div>
+
+<div data-lang-block="en" style="display:none">
+  <div class="hero">
+    <div class="hero-pattern"></div>
+    <div class="hero-breadcrumb">
+      <span>Work</span>
+      <span class="msym o" style="font-size:13px;">chevron_right</span>
+      <span>Salary</span>
+    </div>
+    <div class="hero-icon"><span class="msym">receipt_long</span></div>
+    <div class="hero-title">Pay Slip</div>
+    <div class="hero-sub">What all those numbers mean — and why net is less than gross</div>
+    <div class="hero-badge"><span class="msym" style="font-size:14px;">check_circle</span> Free</div>
+    <div class="fact-grid">
+      <div class="fact-item">
+        <div class="fact-label">Minimum wage</div>
+        <div class="fact-value">€14.06/hr</div>
+      </div>
+      <div class="fact-item">
+        <div class="fact-label">Holiday pay</div>
+        <div class="fact-value">8% gross</div>
+      </div>
+      <div class="fact-item">
+        <div class="fact-label">Income tax</div>
+        <div class="fact-value">loonheffing</div>
+      </div>
+      <div class="fact-item">
+        <div class="fact-label">Holiday pay paid</div>
+        <div class="fact-value">May / monthly</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="content">
+    <div class="mt20">
+      <div class="sec-label">Key terms</div>
+      <div class="term-list">
+        <div class="term-row">
+          <div class="term-tag"><span class="msym">arrow_upward</span></div>
+          <div>
+            <div class="term-name-nl">Brutoloon</div>
+            <div class="term-name">Gross salary</div>
+            <div class="term-desc">What is written in the contract. Before all deductions.</div>
+          </div>
+        </div>
+        <div class="term-row">
+          <div class="term-tag"><span class="msym">percent</span></div>
+          <div>
+            <div class="term-name-nl">Loonheffing</div>
+            <div class="term-name">Income tax</div>
+            <div class="term-desc">Automatically withheld by the employer. Rate depends on income — usually 9–37% for lower salaries.</div>
+          </div>
+        </div>
+        <div class="term-row">
+          <div class="term-tag"><span class="msym">arrow_downward</span></div>
+          <div>
+            <div class="term-name-nl">Nettoloon</div>
+            <div class="term-name">Net salary</div>
+            <div class="term-desc">What actually arrives in your account — gross minus all deductions.</div>
+          </div>
+        </div>
+        <div class="term-row">
+          <div class="term-tag"><span class="msym">beach_access</span></div>
+          <div>
+            <div class="term-name-nl">Vakantiegeld (8%)</div>
+            <div class="term-name">Holiday pay</div>
+            <div class="term-desc">8% of annual gross salary. Paid either monthly or in one payment in May.</div>
+          </div>
+        </div>
+        <div class="term-row">
+          <div class="term-tag"><span class="msym">savings</span></div>
+          <div>
+            <div class="term-name-nl">Loonheffingskorting</div>
+            <div class="term-name">Tax credit</div>
+            <div class="term-desc">Reduces the loonheffing amount. Apply at only ONE employer — otherwise you will have to pay extra at year end.</div>
+          </div>
+        </div>
+        <div class="term-row">
+          <div class="term-tag"><span class="msym">work</span></div>
+          <div>
+            <div class="term-name-nl">Arbeidskorting</div>
+            <div class="term-name">Employment allowance</div>
+            <div class="term-desc">Automatic reduction for everyone who works. In 2025 — up to €5,685 per year. Applied when filing the tax return.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="mt24">
+      <div class="sec-label">Example pay slip</div>
+      <div class="salary-card">
+        <div class="salary-row">
+          <div class="salary-label">Brutoloon (gross)</div>
+          <div class="salary-val">€2,200.00</div>
+        </div>
+        <div class="salary-row">
+          <div class="salary-label sub">— Loonheffing (tax)</div>
+          <div class="salary-val red">−€390.00</div>
+        </div>
+        <div class="salary-row">
+          <div class="salary-label sub">— Pensioen (pension)</div>
+          <div class="salary-val red">−€55.00</div>
+        </div>
+        <div class="salary-row total">
+          <div class="salary-label" style="font-weight:900;">Nettoloon (net)</div>
+          <div class="salary-val green">€1,755.00</div>
+        </div>
+        <div class="salary-row">
+          <div class="salary-label sub">Vakantiegeld 8% (reserve)</div>
+          <div class="salary-val">+€176.00</div>
+        </div>
+      </div>
+      <div style="margin-top:8px; font-size:11px; color:var(--muted); font-weight:600; padding:0 2px;">
+        Illustrative example. Real figures depend on salary and deductions.
+      </div>
+    </div>
+
+    <div class="info-box amber mt20">
+      <div class="info-box-title">⚠️ Multiple jobs</div>
+      If you work in two places — loonheffingskorting can only be applied at ONE employer. Tell your second employer not to apply the credit, otherwise at year end you will receive a bill from the belastingdienst.
+    </div>
+
+    <div class="info-box green mt16" style="margin-bottom:16px;">
+      <div class="info-box-title">Minimum wage 2025</div>
+      For adults (21+): €14.06 per hour. An employer cannot pay less — regardless of the contract. Check the current rate: rijksoverheid.nl/minimumloon
+    </div>
+  </div>
+</div>
 </main>
 <a href="chat.html" class="fab"><span class="msym">chat</span></a>
 <nav class="bottom-nav">
