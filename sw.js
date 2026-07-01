@@ -1,4 +1,4 @@
-const CACHE = 'razom-v22';
+const CACHE = 'razom-v24';
 
 const OFFLINE_URL = '/ClaudeCode/RefugeeApp/Design/Mockups/offline.html';
 

@@ -70,105 +70,208 @@
 <div class="flag-bar"></div>
 <header>
   <a href="15_housing.html" class="back-btn"><span class="msym o" style="font-size:20px;">arrow_back</span></a>
-  <span class="header-title">Права орендаря</span>
+  <span class="header-title" data-i18n="housing.art.tenants.h">Права орендаря</span>
   <button class="bookmark-btn"><span class="msym o">bookmark</span></button>
 </header>
 <main>
-  <div class="hero">
-    <div class="hero-pattern"></div>
-    <div class="hero-breadcrumb">
-      <span>Житло</span>
-      <span class="msym o" style="font-size:13px;">chevron_right</span>
-      <span>Права</span>
+  <div data-lang-block="uk">
+    <div class="hero">
+      <div class="hero-pattern"></div>
+      <div class="hero-breadcrumb">
+        <span>Житло</span>
+        <span class="msym o" style="font-size:13px;">chevron_right</span>
+        <span>Права</span>
+      </div>
+      <div class="hero-icon"><span class="msym">gavel</span></div>
+      <div class="hero-title">Права орендаря</div>
+      <div class="hero-sub">Депозит, виселення, ремонт і суперечки — що каже нідерландський закон</div>
+      <div class="hero-badge"><span class="msym" style="font-size:14px;">check_circle</span> Безкоштовно</div>
     </div>
-    <div class="hero-icon"><span class="msym">gavel</span></div>
-    <div class="hero-title">Права орендаря</div>
-    <div class="hero-sub">Депозит, виселення, ремонт і суперечки — що каже нідерландський закон</div>
-    <div class="hero-badge"><span class="msym" style="font-size:14px;">check_circle</span> Безкоштовно</div>
+
+    <div class="content">
+      <div class="info-box green mt20">
+        <div class="info-box-title">Ти захищений законом</div>
+        Нідерланди мають одне з найсильніших законодавств щодо захисту орендарів у Європі. Твої права однакові незалежно від національності та статусу.
+      </div>
+
+      <div class="mt24">
+        <div class="sec-label">Ключові права орендаря</div>
+        <div class="info-card">
+          <div class="right-row">
+            <div class="right-icon">💰</div>
+            <div>
+              <div class="right-title">Депозит — максимум 2 місяці</div>
+              <div class="right-desc">За договорами з 1 липня 2023: орендодавець не може вимагати більше 2 місяців базової орендної плати. Якщо вимагають більше — це незаконно.</div>
+            </div>
+          </div>
+          <div class="right-row">
+            <div class="right-icon">⏱️</div>
+            <div>
+              <div class="right-title">Депозит — повернення за 14 днів</div>
+              <div class="right-desc">Після виселення орендодавець зобов'язаний повернути депозит протягом 14 днів, або 30 днів якщо є утримання. Він може утримати тільки за несплачену оренду або справжні пошкодження — не за звичайний знос.</div>
+            </div>
+          </div>
+          <div class="right-row">
+            <div class="right-icon">🔒</div>
+            <div>
+              <div class="right-title">Виселення тільки через суд</div>
+              <div class="right-desc">Орендодавець не може виселити тебе самостійно — це незаконно. Навіть якщо ти не платиш, потрібне рішення суду. Якщо тебе намагаються виселити незаконно — зателефонуй до поліції або Juridisch Loket.</div>
+            </div>
+          </div>
+          <div class="right-row">
+            <div class="right-icon">🔧</div>
+            <div>
+              <div class="right-title">Серйозний ремонт — обов'язок власника</div>
+              <div class="right-desc">Дах, труби, опалення, структурні проблеми — за рахунок орендодавця. Ти відповідаєш тільки за дрібний ремонт (лампочки, замки, дрібниці до ~€300).</div>
+            </div>
+          </div>
+          <div class="right-row">
+            <div class="right-icon">📈</div>
+            <div>
+              <div class="right-title">Збільшення орендної плати — є обмеження</div>
+              <div class="right-desc">З 2025 всі нові договори оренди прив'язані до системи балів WWS. Якщо нарахована оренда завищена — можна оскаржити в Huurcommissie протягом 6 місяців після підписання.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="mt24">
+        <div class="sec-label">Ремонт — хто за що відповідає</div>
+        <div class="compare-grid">
+          <div class="compare-card" style="background:var(--green-soft);">
+            <div class="compare-title" style="color:var(--green);">🏠 Власник</div>
+            <div class="compare-item" style="color:var(--green);">✔ Дах та стіни</div>
+            <div class="compare-item" style="color:var(--green);">✔ Опалення та бойлер</div>
+            <div class="compare-item" style="color:var(--green);">✔ Труби та каналізація</div>
+            <div class="compare-item" style="color:var(--green);">✔ Вікна та двері (великий ремонт)</div>
+          </div>
+          <div class="compare-card" style="background:var(--amber-soft);">
+            <div class="compare-title" style="color:var(--amber);">🔑 Орендар</div>
+            <div class="compare-item" style="color:var(--amber);">✔ Лампочки</div>
+            <div class="compare-item" style="color:var(--amber);">✔ Замки та ручки</div>
+            <div class="compare-item" style="color:var(--amber);">✔ Дрібний ремонт ~€300</div>
+            <div class="compare-item" style="color:var(--amber);">✔ Власні пошкодження</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="mt24">
+        <div class="sec-label">Суперечка з орендодавцем?</div>
+        <div class="contact-card">
+          <div class="contact-name">Huurcommissie</div>
+          <div class="contact-desc">Незалежний орган для вирішення суперечок між орендарями та власниками. Обов'язкові рішення. Вартість для орендаря: €25.</div>
+          <div class="contact-row"><span class="msym">language</span><div class="contact-val">huurcommissie.nl</div></div>
+          <div class="contact-row"><span class="msym">checklist</span><div class="contact-val" style="font-size:12px; color:var(--muted); font-weight:600;">Безкоштовна перевірка орендної плати: "Huurprijscheck"</div></div>
+        </div>
+      </div>
+
+      <div class="info-box accent mt20" style="margin-bottom:16px;">
+        <div class="info-box-title">Безкоштовна юридична допомога</div>
+        <div style="margin-top:4px; display:flex; flex-direction:column; gap:4px;">
+          <div>⚖️ <strong>Juridisch Loket</strong> — 0900-8020 · juridischloket.nl</div>
+          <div>🤝 <strong>VluchtelingenWerk</strong> — допомога з житловими питаннями</div>
+        </div>
+      </div>
+    </div>
   </div>
 
-  <div class="content">
-    <div class="info-box green mt20">
-      <div class="info-box-title">Ти захищений законом</div>
-      Нідерланди мають одне з найсильніших законодавств щодо захисту орендарів у Європі. Твої права однакові незалежно від національності та статусу.
+  <div data-lang-block="en" style="display:none">
+    <div class="hero">
+      <div class="hero-pattern"></div>
+      <div class="hero-breadcrumb">
+        <span>Housing</span>
+        <span class="msym o" style="font-size:13px;">chevron_right</span>
+        <span>Rights</span>
+      </div>
+      <div class="hero-icon"><span class="msym">gavel</span></div>
+      <div class="hero-title">Tenant Rights</div>
+      <div class="hero-sub">Deposit, eviction, repairs and disputes — what Dutch law says</div>
+      <div class="hero-badge"><span class="msym" style="font-size:14px;">check_circle</span> Free</div>
     </div>
 
-    <div class="mt24">
-      <div class="sec-label">Ключові права орендаря</div>
-      <div class="info-card">
-        <div class="right-row">
-          <div class="right-icon">💰</div>
-          <div>
-            <div class="right-title">Депозит — максимум 2 місяці</div>
-            <div class="right-desc">За договорами з 1 липня 2023: орендодавець не може вимагати більше 2 місяців базової орендної плати. Якщо вимагають більше — це незаконно.</div>
+    <div class="content">
+      <div class="info-box green mt20">
+        <div class="info-box-title">You are protected by law</div>
+        The Netherlands has one of the strongest tenant protection laws in Europe. Your rights are the same regardless of nationality and status.
+      </div>
+
+      <div class="mt24">
+        <div class="sec-label">Key tenant rights</div>
+        <div class="info-card">
+          <div class="right-row">
+            <div class="right-icon">💰</div>
+            <div>
+              <div class="right-title">Deposit — maximum 2 months</div>
+              <div class="right-desc">For contracts from 1 July 2023: the landlord cannot demand more than 2 months of basic rent. If they demand more — it's illegal.</div>
+            </div>
           </div>
-        </div>
-        <div class="right-row">
-          <div class="right-icon">⏱️</div>
-          <div>
-            <div class="right-title">Депозит — повернення за 14 днів</div>
-            <div class="right-desc">Після виселення орендодавець зобов'язаний повернути депозит протягом 14 днів, або 30 днів якщо є утримання. Він може утримати тільки за несплачену оренду або справжні пошкодження — не за звичайний знос.</div>
+          <div class="right-row">
+            <div class="right-icon">⏱️</div>
+            <div>
+              <div class="right-title">Deposit — returned within 14 days</div>
+              <div class="right-desc">After moving out the landlord must return the deposit within 14 days, or 30 days if deductions apply. They may only deduct for unpaid rent or actual damage — not for normal wear and tear.</div>
+            </div>
           </div>
-        </div>
-        <div class="right-row">
-          <div class="right-icon">🔒</div>
-          <div>
-            <div class="right-title">Виселення тільки через суд</div>
-            <div class="right-desc">Орендодавець не може виселити тебе самостійно — це незаконно. Навіть якщо ти не платиш, потрібне рішення суду. Якщо тебе намагаються виселити незаконно — зателефонуй до поліції або Juridisch Loket.</div>
+          <div class="right-row">
+            <div class="right-icon">🔒</div>
+            <div>
+              <div class="right-title">Eviction only through court</div>
+              <div class="right-desc">The landlord cannot evict you on their own — it is illegal. Even if you don't pay, a court order is required. If someone tries to evict you illegally — call the police or Juridisch Loket.</div>
+            </div>
           </div>
-        </div>
-        <div class="right-row">
-          <div class="right-icon">🔧</div>
-          <div>
-            <div class="right-title">Серйозний ремонт — обов'язок власника</div>
-            <div class="right-desc">Дах, труби, опалення, структурні проблеми — за рахунок орендодавця. Ти відповідаєш тільки за дрібний ремонт (лампочки, замки, дрібниці до ~€300).</div>
+          <div class="right-row">
+            <div class="right-icon">🔧</div>
+            <div>
+              <div class="right-title">Major repairs — the owner's responsibility</div>
+              <div class="right-desc">Roof, pipes, heating, structural problems — at the landlord's expense. You are responsible only for minor repairs (lightbulbs, locks, items up to ~€300).</div>
+            </div>
           </div>
-        </div>
-        <div class="right-row">
-          <div class="right-icon">📈</div>
-          <div>
-            <div class="right-title">Збільшення орендної плати — є обмеження</div>
-            <div class="right-desc">З 2025 всі нові договори оренди прив'язані до системи балів WWS. Якщо нарахована оренда завищена — можна оскаржити в Huurcommissie протягом 6 місяців після підписання.</div>
+          <div class="right-row">
+            <div class="right-icon">📈</div>
+            <div>
+              <div class="right-title">Rent increases — there are limits</div>
+              <div class="right-desc">From 2025 all new rental contracts are tied to the WWS points system. If the charged rent is too high — you can challenge it at Huurcommissie within 6 months of signing.</div>
+            </div>
           </div>
         </div>
       </div>
-    </div>
 
-    <div class="mt24">
-      <div class="sec-label">Ремонт — хто за що відповідає</div>
-      <div class="compare-grid">
-        <div class="compare-card" style="background:var(--green-soft);">
-          <div class="compare-title" style="color:var(--green);">🏠 Власник</div>
-          <div class="compare-item" style="color:var(--green);">✔ Дах та стіни</div>
-          <div class="compare-item" style="color:var(--green);">✔ Опалення та бойлер</div>
-          <div class="compare-item" style="color:var(--green);">✔ Труби та каналізація</div>
-          <div class="compare-item" style="color:var(--green);">✔ Вікна та двері (великий ремонт)</div>
-        </div>
-        <div class="compare-card" style="background:var(--amber-soft);">
-          <div class="compare-title" style="color:var(--amber);">🔑 Орендар</div>
-          <div class="compare-item" style="color:var(--amber);">✔ Лампочки</div>
-          <div class="compare-item" style="color:var(--amber);">✔ Замки та ручки</div>
-          <div class="compare-item" style="color:var(--amber);">✔ Дрібний ремонт ~€300</div>
-          <div class="compare-item" style="color:var(--amber);">✔ Власні пошкодження</div>
+      <div class="mt24">
+        <div class="sec-label">Repairs — who is responsible</div>
+        <div class="compare-grid">
+          <div class="compare-card" style="background:var(--green-soft);">
+            <div class="compare-title" style="color:var(--green);">🏠 Owner</div>
+            <div class="compare-item" style="color:var(--green);">✔ Roof and walls</div>
+            <div class="compare-item" style="color:var(--green);">✔ Heating and boiler</div>
+            <div class="compare-item" style="color:var(--green);">✔ Pipes and drainage</div>
+            <div class="compare-item" style="color:var(--green);">✔ Windows and doors (major repair)</div>
+          </div>
+          <div class="compare-card" style="background:var(--amber-soft);">
+            <div class="compare-title" style="color:var(--amber);">🔑 Tenant</div>
+            <div class="compare-item" style="color:var(--amber);">✔ Lightbulbs</div>
+            <div class="compare-item" style="color:var(--amber);">✔ Locks and handles</div>
+            <div class="compare-item" style="color:var(--amber);">✔ Minor repairs ~€300</div>
+            <div class="compare-item" style="color:var(--amber);">✔ Own damage</div>
+          </div>
         </div>
       </div>
-    </div>
 
-    <div class="mt24">
-      <div class="sec-label">Суперечка з орендодавцем?</div>
-      <div class="contact-card">
-        <div class="contact-name">Huurcommissie</div>
-        <div class="contact-desc">Незалежний орган для вирішення суперечок між орендарями та власниками. Обов'язкові рішення. Вартість для орендаря: €25.</div>
-        <div class="contact-row"><span class="msym">language</span><div class="contact-val">huurcommissie.nl</div></div>
-        <div class="contact-row"><span class="msym">checklist</span><div class="contact-val" style="font-size:12px; color:var(--muted); font-weight:600;">Безкоштовна перевірка орендної плати: "Huurprijscheck"</div></div>
+      <div class="mt24">
+        <div class="sec-label">Dispute with your landlord?</div>
+        <div class="contact-card">
+          <div class="contact-name">Huurcommissie</div>
+          <div class="contact-desc">Independent body for resolving disputes between tenants and landlords. Binding decisions. Cost for tenant: €25.</div>
+          <div class="contact-row"><span class="msym">language</span><div class="contact-val">huurcommissie.nl</div></div>
+          <div class="contact-row"><span class="msym">checklist</span><div class="contact-val" style="font-size:12px; color:var(--muted); font-weight:600;">Free rent check: "Huurprijscheck"</div></div>
+        </div>
       </div>
-    </div>
 
-    <div class="info-box accent mt20" style="margin-bottom:16px;">
-      <div class="info-box-title">Безкоштовна юридична допомога</div>
-      <div style="margin-top:4px; display:flex; flex-direction:column; gap:4px;">
-        <div>⚖️ <strong>Juridisch Loket</strong> — 0900-8020 · juridischloket.nl</div>
-        <div>🤝 <strong>VluchtelingenWerk</strong> — допомога з житловими питаннями</div>
+      <div class="info-box accent mt20" style="margin-bottom:16px;">
+        <div class="info-box-title">Free legal advice</div>
+        <div style="margin-top:4px; display:flex; flex-direction:column; gap:4px;">
+          <div>⚖️ <strong>Juridisch Loket</strong> — 0900-8020 · juridischloket.nl</div>
+          <div>🤝 <strong>VluchtelingenWerk</strong> — help with housing matters</div>
+        </div>
       </div>
     </div>
   </div>
