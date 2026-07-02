@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="uk">
 <head>
   <meta charset="UTF-8" />
@@ -56,6 +56,12 @@
     .empty-btn { margin-top: 24px; background: var(--blue); color: #fff; font-family: inherit; font-size: 13px; font-weight: 800; padding: 12px 24px; border-radius: 14px; border: none; cursor: pointer; display: flex; align-items: center; gap: 6px; text-decoration: none; }
     .empty-btn .msym { font-size: 18px; }
 
+    /* Remove button */
+    .saved-card { position: relative; }
+    .remove-btn { position: absolute; top: 10px; right: 10px; width: 26px; height: 26px; border-radius: 50%; background: var(--bg); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; cursor: pointer; color: var(--muted); font-family: 'Material Symbols Outlined'; font-size: 14px; font-variation-settings: 'FILL' 0,'wght' 400,'GRAD' 0,'opsz' 24; line-height: 1; padding: 0; }
+    .remove-btn:hover { background: #FEE2E2; border-color: #FECACA; color: #B91C1C; }
+    .saved-card .saved-bm { margin-right: 28px; }
+
     /* FAB */
     .fab { position: fixed; bottom: 90px; right: calc(50% - 185px); width: 52px; height: 52px; background: linear-gradient(145deg, #1270D8, #003DA6); border-radius: 18px; display: flex; align-items: center; justify-content: center; box-shadow: 0 6px 20px rgba(0,87,183,0.45); cursor: pointer; z-index: 40; text-decoration: none; }
     .fab .msym { color: #fff; font-size: 24px; }
@@ -77,18 +83,18 @@
 <div class="flag-bar"></div>
 
 <header>
-  <div class="header-title">Збережені</div>
-  <span class="header-count">3 статті</span>
+  <div class="header-title" data-i18n="saved.title">Збережені</div>
+  <span class="header-count" data-i18n="saved.count">3 статті</span>
 </header>
 
 <main>
 
   <div class="filter-bar">
-    <div class="filter-tab active">Всі</div>
-    <div class="filter-tab">Закони</div>
-    <div class="filter-tab">Робота</div>
-    <div class="filter-tab">Здоров'я</div>
-    <div class="filter-tab">Житло</div>
+    <div class="filter-tab active" data-i18n="saved.filter.all">Всі</div>
+    <div class="filter-tab" data-i18n="saved.filter.laws">Закони</div>
+    <div class="filter-tab" data-i18n="saved.filter.work">Робота</div>
+    <div class="filter-tab" data-i18n="saved.filter.health">Здоров'я</div>
+    <div class="filter-tab" data-i18n="saved.filter.housing">Житло</div>
   </div>
 
   <div class="section">
@@ -97,9 +103,9 @@
       <a href="13_article_protection.html" class="saved-card c-blue">
         <div class="saved-icon">🛡️</div>
         <div class="saved-info">
-          <div class="saved-cat">Закони та права</div>
-          <div class="saved-title">Тимчасовий захист (TPD) — що це і скільки діє</div>
-          <div class="saved-meta">Збережено 3 дні тому</div>
+          <div class="saved-cat" data-i18n="saved.article1.cat">Закони та права</div>
+          <div class="saved-title" data-i18n="saved.article1.title">Тимчасовий захист (TPD) — що це і скільки діє</div>
+          <div class="saved-meta" data-i18n="saved.article1.date">Збережено 3 дні тому</div>
         </div>
         <span class="saved-bm">bookmark</span>
       </a>
@@ -107,9 +113,9 @@
       <a href="16_article_contracts.html" class="saved-card c-amber">
         <div class="saved-icon">📄</div>
         <div class="saved-info">
-          <div class="saved-cat">Робота</div>
-          <div class="saved-title">Типи контрактів — vast, tijdelijk, oproep</div>
-          <div class="saved-meta">Збережено тиждень тому</div>
+          <div class="saved-cat" data-i18n="saved.article2.cat">Робота</div>
+          <div class="saved-title" data-i18n="saved.article2.title">Типи контрактів — vast, tijdelijk, oproep</div>
+          <div class="saved-meta" data-i18n="saved.article2.date">Збережено тиждень тому</div>
         </div>
         <span class="saved-bm">bookmark</span>
       </a>
@@ -117,9 +123,9 @@
       <a href="15_article_huurtoeslag.html" class="saved-card c-purple">
         <div class="saved-icon">💸</div>
         <div class="saved-info">
-          <div class="saved-cat">Житло</div>
-          <div class="saved-title">Huurtoeslag — субсидія на оренду</div>
-          <div class="saved-meta">Збережено 2 тижні тому</div>
+          <div class="saved-cat" data-i18n="saved.article3.cat">Житло</div>
+          <div class="saved-title" data-i18n="saved.article3.title">Huurtoeslag — субсидія на оренду</div>
+          <div class="saved-meta" data-i18n="saved.article3.date">Збережено 2 тижні тому</div>
         </div>
         <span class="saved-bm">bookmark</span>
       </a>
@@ -127,14 +133,12 @@
     </div>
   </div>
 
-  <!-- Shown when no items: uncomment to preview empty state
-  <div class="empty-state">
+  <div class="empty-state" style="display:none">
     <div class="empty-icon">🔖</div>
-    <div class="empty-title">Поки нічого немає</div>
-    <div class="empty-sub">Зберігай статті, щоб повертатися до них без пошуку. Натисни 🔖 на будь-якій сторінці.</div>
-    <a href="search.html" class="empty-btn"><span class="msym">explore</span>Переглянути статті</a>
+    <div class="empty-title" data-i18n="saved.empty">Поки нічого не збережено</div>
+    <div class="empty-sub" data-i18n="saved.empty.sub">Натисни 🔖 на будь-якій статті, щоб зберегти її сюди</div>
+    <a href="search.html" class="empty-btn"><span class="msym">explore</span><span data-i18n="saved.browse">Переглянути статті</span></a>
   </div>
-  -->
 
 </main>
 
@@ -162,5 +166,6 @@
 
   <script src="js/translations.js"></script>
   <script src="js/i18n.js"></script>
+  <script src="js/saved.js"></script>
 </body>
 </html>

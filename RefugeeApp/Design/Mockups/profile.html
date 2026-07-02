@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="uk">
 <head>
   <meta charset="UTF-8" />
@@ -114,7 +114,7 @@
 <div class="flag-bar"></div>
 
 <header>
-  <div class="header-title">Профіль</div>
+  <div class="header-title" data-i18n="profile.title">Профіль</div>
   <a href="settings.html" class="settings-btn"><span class="msym o" style="font-size:20px;">settings</span></a>
 </header>
 
@@ -123,25 +123,25 @@
   <div class="profile-hero">
     <div class="hero-pattern"></div>
     <div class="avatar"><span class="msym o" style="font-size:32px;">person</span></div>
-    <div class="profile-name">Привіт! 👋</div>
-    <div class="profile-email">Раді бачити тебе в RAZOM</div>
+    <div class="profile-name" data-i18n="profile.greeting">Привіт! 👋</div>
+    <div class="profile-email" data-i18n="profile.welcome">Раді бачити вас у RAZOM</div>
     <div class="profile-badges">
-      <span class="badge-chip badge-free">Безкоштовний план</span>
+      <span class="badge-chip badge-free" data-i18n="profile.badge.free">Безкоштовний план</span>
     </div>
   </div>
 
   <div class="stats-row">
     <div class="stat-item">
       <div class="stat-num">3</div>
-      <div class="stat-lbl">Збережено</div>
+      <div class="stat-lbl" data-i18n="profile.stat.saved">Збережено</div>
     </div>
     <div class="stat-item">
       <div class="stat-num">12</div>
-      <div class="stat-lbl">Прочитано</div>
+      <div class="stat-lbl" data-i18n="profile.stat.read">Прочитано</div>
     </div>
     <div class="stat-item">
       <div class="stat-num">7</div>
-      <div class="stat-lbl">Тижнів</div>
+      <div class="stat-lbl" data-i18n="profile.stat.weeks">Тижнів</div>
     </div>
   </div>
 
@@ -151,26 +151,26 @@
       <div class="premium-row">
         <div class="premium-icon-wrap"><span class="msym">workspace_premium</span></div>
         <div class="premium-body">
-          <div class="premium-title">Отримай повний доступ</div>
-          <div class="premium-sub">Податки, бюджет, юридичні деталі та більше</div>
+          <div class="premium-title" data-i18n="profile.premium.title">Отримай повний доступ</div>
+          <div class="premium-sub" data-i18n="profile.premium.sub">Податки, бюджет, юридичні деталі та більше</div>
         </div>
-        <div class="premium-btn">Скоро</div>
+        <div class="premium-btn" data-i18n="settings.premium.btn">Скоро</div>
       </div>
     </div>
   </div>
 
   <div class="section" style="margin-top:20px;">
-    <div class="sec-label">Мова застосунку</div>
+    <div class="sec-label" data-i18n="profile.lang.label">Мова застосунку</div>
     <div class="lang-row">
-      <div class="lang-opt active">
+      <div class="lang-opt active" onclick="RAZOM_I18N.setLang('uk')">
         <span class="lang-flag">🇺🇦</span>
         <div class="lang-label">Українська</div>
       </div>
-      <div class="lang-opt">
+      <div class="lang-opt" onclick="RAZOM_I18N.setLang('nl')">
         <span class="lang-flag">🇳🇱</span>
         <div class="lang-label">Nederlands</div>
       </div>
-      <div class="lang-opt">
+      <div class="lang-opt" onclick="RAZOM_I18N.setLang('en')">
         <span class="lang-flag">🇬🇧</span>
         <div class="lang-label">English</div>
       </div>
@@ -178,29 +178,29 @@
   </div>
 
   <div class="section" style="margin-top:20px;">
-    <div class="sec-label">Налаштування</div>
+    <div class="sec-label" data-i18n="profile.settings.label">Налаштування</div>
     <div class="settings-list">
       <a href="settings.html" class="settings-row">
         <div class="row-icon" style="background:linear-gradient(145deg,#DDD6FE,#7C3AED);"><span class="msym" style="font-size:18px;color:#fff;">settings</span></div>
         <div class="row-info">
-          <div class="row-title">Налаштування</div>
-          <div class="row-sub">API-ключ, мова, підписка</div>
+          <div class="row-title" data-i18n="profile.settings.row.title">Налаштування</div>
+          <div class="row-sub" data-i18n="profile.settings.row.sub">API-ключ, мова, підписка</div>
         </div>
         <span class="row-right">chevron_right</span>
       </a>
       <div class="settings-row">
         <div class="row-icon blue"><span class="msym" style="font-size:18px;">notifications</span></div>
         <div class="row-info">
-          <div class="row-title">Сповіщення</div>
-          <div class="row-sub">Оновлення законів і нагадування</div>
+          <div class="row-title" data-i18n="profile.notif.title">Сповіщення</div>
+          <div class="row-sub" data-i18n="profile.notif.sub">Оновлення законів і нагадування</div>
         </div>
         <div class="toggle on"></div>
       </div>
       <div class="settings-row">
         <div class="row-icon green"><span class="msym" style="font-size:18px;">location_on</span></div>
         <div class="row-info">
-          <div class="row-title">Місто</div>
-          <div class="row-sub">Для локальних послуг і gemeente</div>
+          <div class="row-title" data-i18n="profile.city.title">Місто</div>
+          <div class="row-sub" data-i18n="profile.city.sub">Для локальних послуг і gemeente</div>
         </div>
         <span class="row-value">Amsterdam</span>
         <span class="row-right">chevron_right</span>
@@ -209,29 +209,29 @@
   </div>
 
   <div class="section" style="margin-top:20px;">
-    <div class="sec-label">Підтримка</div>
+    <div class="sec-label" data-i18n="profile.support.label">Підтримка</div>
     <div class="settings-list">
       <div class="settings-row">
         <div class="row-icon blue"><span class="msym" style="font-size:18px;">chat</span></div>
         <div class="row-info">
-          <div class="row-title">Повідомити про помилку</div>
-          <div class="row-sub">Застарілий факт або неробоче посилання</div>
+          <div class="row-title" data-i18n="profile.bug.title">Повідомити про помилку</div>
+          <div class="row-sub" data-i18n="profile.bug.sub">Застарілий факт або неробоче посилання</div>
         </div>
         <span class="row-right">chevron_right</span>
       </div>
       <div class="settings-row">
         <div class="row-icon amber"><span class="msym" style="font-size:18px;">star</span></div>
         <div class="row-info">
-          <div class="row-title">Оцінити застосунок</div>
-          <div class="row-sub">Допоможи іншим українцям знайти нас</div>
+          <div class="row-title" data-i18n="profile.rate.title">Оцінити застосунок</div>
+          <div class="row-sub" data-i18n="profile.rate.sub">Допоможи іншим українцям знайти нас</div>
         </div>
         <span class="row-right">chevron_right</span>
       </div>
       <div class="settings-row">
         <div class="row-icon gray"><span class="msym" style="font-size:18px;">info</span></div>
         <div class="row-info">
-          <div class="row-title">Про застосунок</div>
-          <div class="row-sub">RAZOM v1.0 — зроблено Мариною</div>
+          <div class="row-title" data-i18n="profile.about.title">Про застосунок</div>
+          <div class="row-sub" data-i18n="profile.about.sub">RAZOM v1.0 — зроблено Мариною</div>
         </div>
         <span class="row-right">chevron_right</span>
       </div>
@@ -239,21 +239,21 @@
   </div>
 
   <div class="section" style="margin-top:20px;">
-    <div class="sec-label">Правові документи</div>
+    <div class="sec-label" data-i18n="profile.legal.label">Правові документи</div>
     <div class="settings-list">
       <a href="legal_privacy.html" class="settings-row">
         <div class="row-icon" style="background:#EDE9FE;"><span class="msym" style="font-size:18px;color:#7C3AED;">lock</span></div>
         <div class="row-info">
-          <div class="row-title">Політика конфіденційності</div>
-          <div class="row-sub">Як ми збираємо і захищаємо твої дані (GDPR)</div>
+          <div class="row-title" data-i18n="profile.privacy.title">Політика конфіденційності</div>
+          <div class="row-sub" data-i18n="profile.privacy.sub">Як ми збираємо і захищаємо твої дані (GDPR)</div>
         </div>
         <span class="row-right">chevron_right</span>
       </a>
       <a href="legal_terms.html" class="settings-row">
         <div class="row-icon" style="background:#CCFBF1;"><span class="msym" style="font-size:18px;color:#0D9488;">gavel</span></div>
         <div class="row-info">
-          <div class="row-title">Умови використання</div>
-          <div class="row-sub">Правила застосунку · Застосунок 16+</div>
+          <div class="row-title" data-i18n="profile.terms.title">Умови використання</div>
+          <div class="row-sub" data-i18n="profile.terms.sub">Правила застосунку · Застосунок 16+</div>
         </div>
         <span class="row-right">chevron_right</span>
       </a>
@@ -261,10 +261,10 @@
   </div>
 
   <div class="section" style="margin-top:20px; margin-bottom:8px;">
-    <button class="logout-btn"><span class="msym" style="font-size:18px;">logout</span>Вийти з акаунту</button>
+    <button class="logout-btn"><span class="msym" style="font-size:18px;">logout</span><span data-i18n="profile.logout">Вийти з акаунту</span></button>
   </div>
 
-  <div class="version">RAZOM · Версія 1.0.0</div>
+  <div class="version" data-i18n="profile.version">RAZOM · Версія 1.0.0</div>
 
 </main>
 

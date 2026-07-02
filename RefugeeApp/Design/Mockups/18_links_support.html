@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="uk">
 <head>
   <meta charset="UTF-8" />
@@ -65,10 +65,11 @@
 <div class="flag-bar"></div>
 <header>
   <a href="18_links.html" class="back-btn"><span class="msym o" style="font-size:20px;">arrow_back</span></a>
-  <span class="header-title">Допомога і підтримка</span>
+  <span class="header-title" data-i18n="links.art.support.h">Допомога і підтримка</span>
   <button class="bookmark-btn"><span class="msym o">bookmark</span></button>
 </header>
 <main>
+  <div data-lang-block="uk">
   <div class="hero">
     <div class="hero-pattern"></div>
     <div class="hero-breadcrumb">
@@ -163,9 +164,110 @@
     </div>
 
     <div class="info-box amber mt20" style="margin-bottom:16px;">
-      <div class="info-box-title">Якщо тебе дискримінують</div>
+      <div class="info-box-title">Якщо вас дискримінують</div>
       Повідом на Melding.nl (discrimination reporting) або в College voor de Rechten van de Mens (collegevoorderechtenvandemens.nl). Безкоштовно і анонімно.
     </div>
+  </div>
+  </div>
+  <div data-lang-block="en" style="display:none">
+  <div class="hero">
+    <div class="hero-pattern"></div>
+    <div class="hero-breadcrumb">
+      <span>Links</span>
+      <span class="msym o" style="font-size:13px;">chevron_right</span>
+      <span>Support</span>
+    </div>
+    <div class="hero-icon"><span class="msym">volunteer_activism</span></div>
+    <div class="hero-title">Help and Support</div>
+    <div class="hero-sub">Organisations that help for free — legal advice, crisis help and more</div>
+    <div class="hero-badge"><span class="msym" style="font-size:14px;">check_circle</span> Free</div>
+  </div>
+
+  <div class="content">
+    <div class="mt20">
+      <div class="sec-label">Crisis help — call now</div>
+      <div class="hotline-card">
+        <div>
+          <div class="hotline-num">112</div>
+        </div>
+        <div>
+          <div class="hotline-label">Emergency services</div>
+          <div class="hotline-desc">Police, fire, ambulance — 24/7, free</div>
+        </div>
+      </div>
+      <div class="hotline-card" style="margin-top:8px; border-color:#FDE68A;">
+        <div>
+          <div class="hotline-num" style="color:var(--amber);">113</div>
+        </div>
+        <div>
+          <div class="hotline-label">Crisis line (suicide prevention)</div>
+          <div class="hotline-desc">113.nl — round the clock, anonymous, support available for non-residents</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="mt24">
+      <div class="sec-label">Refugee support</div>
+      <div class="link-list">
+        <a href="https://www.vluchtelingenwerk.nl" class="link-card" target="_blank">
+          <div class="link-icon">🤝</div>
+          <div style="flex:1;">
+            <div class="link-name">Vluchtelingenwerk Nederland</div>
+            <div class="link-url">vluchtelingenwerk.nl</div>
+            <div class="link-desc">Legal advice, integration support, advocates — free of charge</div>
+          </div>
+          <span class="link-arrow">open_in_new</span>
+        </a>
+        <a href="https://www.refugeehelp.nl" class="link-card" target="_blank">
+          <div class="link-icon">🛟</div>
+          <div style="flex:1;">
+            <div class="link-name">RefugeeHelp.nl</div>
+            <div class="link-url">refugeehelp.nl</div>
+            <div class="link-desc">Practical guide for refugees in the Netherlands — available in Ukrainian</div>
+          </div>
+          <span class="link-arrow">open_in_new</span>
+        </a>
+        <a href="https://www.nidos.nl" class="link-card" target="_blank">
+          <div class="link-icon">👶</div>
+          <div style="flex:1;">
+            <div class="link-name">Nidos — Guardianship for minors</div>
+            <div class="link-url">nidos.nl</div>
+            <div class="link-desc">For unaccompanied children and minor refugees</div>
+          </div>
+          <span class="link-arrow">open_in_new</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="mt24">
+      <div class="sec-label">Legal advice</div>
+      <div class="link-list">
+        <a href="https://www.juridischloket.nl" class="link-card" target="_blank">
+          <div class="link-icon">⚖️</div>
+          <div style="flex:1;">
+            <div class="link-name">Juridisch Loket</div>
+            <div class="link-url">juridischloket.nl · 0900-8020</div>
+            <div class="link-desc">Free legal consultation — first 30 minutes free</div>
+          </div>
+          <span class="link-arrow">open_in_new</span>
+        </a>
+        <a href="https://www.rechtwijzer.nl" class="link-card" target="_blank">
+          <div class="link-icon">📋</div>
+          <div style="flex:1;">
+            <div class="link-name">Rechtwijzer.nl</div>
+            <div class="link-url">rechtwijzer.nl</div>
+            <div class="link-desc">Online guide to legal questions — explained in plain language</div>
+          </div>
+          <span class="link-arrow">open_in_new</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="info-box amber mt20" style="margin-bottom:16px;">
+      <div class="info-box-title">If you face discrimination</div>
+      Report at Melding.nl (discrimination reporting) or to the College voor de Rechten van de Mens (collegevoorderechtenvandemens.nl). Free and anonymous.
+    </div>
+  </div>
   </div>
 </main>
 <a href="chat.html" class="fab"><span class="msym">chat</span></a>
@@ -176,6 +278,7 @@
   <a href="profile.html" class="nav-item"><span class="msym o">person</span><span class="label">Профіль</span></a>
 </nav>
 
+  <script src="js/bookmark.js"></script>
   <script src="js/translations.js"></script>
   <script src="js/i18n.js"></script>
 </body>

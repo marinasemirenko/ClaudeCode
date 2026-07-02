@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="uk">
 <head>
   <meta charset="UTF-8" />
@@ -71,10 +71,11 @@
 <div class="flag-bar"></div>
 <header>
   <a href="19_korysne.html" class="back-btn"><span class="msym o" style="font-size:20px;">arrow_back</span></a>
-  <span class="header-title">Банківський рахунок</span>
+  <span class="header-title" data-i18n="tips.art.bank.h">Банківський рахунок</span>
   <button class="bookmark-btn"><span class="msym o">bookmark</span></button>
 </header>
 <main>
+  <div data-lang-block="uk">
   <div class="hero">
     <div class="hero-pattern"></div>
     <div class="hero-breadcrumb">
@@ -233,14 +234,184 @@
     </div>
 
     <div class="info-box amber mt20">
-      <div class="info-box-title">Якщо ти в COA/GOO</div>
-      Якщо ти ще не маєш постійної адреси реєстрації — запитай свого COA-менеджера. Деякі gemeente надають тимчасові prepaid-картки для основних витрат до відкриття рахунку.
+      <div class="info-box-title">Якщо ви в COA/GOO</div>
+      Якщо ви ще не маєте постійної адреси реєстрації — запитайте свого COA-менеджера. Деякі gemeente надають тимчасові prepaid-картки для основних витрат до відкриття рахунку.
     </div>
 
     <div class="info-box green mt16" style="margin-bottom:16px;">
       <div class="info-box-title">IBAN — для зарплати і toeslagen</div>
-      Як тільки рахунок відкрито — повідом IBAN роботодавцю і belastingdienst (для toeslagen). Без IBAN зарплата і субсидії не можуть бути перераховані.
+      Як тільки рахунок відкрито — повідомте IBAN роботодавцю і belastingdienst (для toeslagen). Без IBAN зарплата і субсидії не можуть бути перераховані.
     </div>
+  </div>
+  </div>
+  <div data-lang-block="en" style="display:none">
+  <div class="hero">
+    <div class="hero-pattern"></div>
+    <div class="hero-breadcrumb">
+      <span>Tips</span>
+      <span class="msym o" style="font-size:13px;">chevron_right</span>
+      <span>Bank</span>
+    </div>
+    <div class="hero-icon"><span class="msym">account_balance</span></div>
+    <div class="hero-title">Bank Account</div>
+    <div class="hero-sub">Which banks accept refugees and what you need to open an account</div>
+    <div class="hero-badge"><span class="msym" style="font-size:14px;">check_circle</span> Free</div>
+  </div>
+
+  <div class="content">
+    <div class="info-box green mt20">
+      <div class="info-box-title">You have the right</div>
+      Under the EU Payment Accounts Directive (PAD), every EU resident — including refugees — has the right to a basic bank account. A bank cannot refuse solely because of refugee status.
+    </div>
+
+    <div class="mt24">
+      <div class="sec-label">What you need to open an account</div>
+      <div class="doc-list">
+        <div class="doc-row">
+          <span class="doc-check">badge</span>
+          <div>
+            <div class="doc-text">Valid identity document</div>
+            <div class="doc-sub">Passport or IND O-document / W-document</div>
+          </div>
+        </div>
+        <div class="doc-row">
+          <span class="doc-check">home</span>
+          <div>
+            <div class="doc-text">Dutch address</div>
+            <div class="doc-sub">BRP registration address (gemeente)</div>
+          </div>
+        </div>
+        <div class="doc-row">
+          <span class="doc-check">tag</span>
+          <div>
+            <div class="doc-text">BSN (for most banks)</div>
+            <div class="doc-sub">Issued automatically at gemeente</div>
+          </div>
+        </div>
+        <div class="doc-row">
+          <span class="doc-check">email</span>
+          <div>
+            <div class="doc-text">Email address</div>
+            <div class="doc-sub">For confirmation and online banking</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="mt24">
+      <div class="sec-label">Banks for refugees</div>
+      <div class="bank-list">
+
+        <div class="bank-card">
+          <div class="bank-header">
+            <div>
+              <div class="bank-name">bunq</div>
+              <span class="bank-tag green">Easiest to start with</span>
+            </div>
+          </div>
+          <div class="bank-desc">Opens an account with just a passport or W-document — no BSN, no branch visit needed. Fully online, with an app available in Ukrainian.</div>
+          <div class="bank-fee">From €0/month (Easy Bank) or €2.99/month (Easy Money)</div>
+        </div>
+
+        <div class="bank-card">
+          <div class="bank-header">
+            <div>
+              <div class="bank-name">ASN Bank</div>
+              <span class="bank-tag green">Free and online</span>
+            </div>
+          </div>
+          <div class="bank-desc">Ethical bank that accepts W-document. Account opens online without BSN. Free to maintain. Less well-known but convenient for refugees.</div>
+          <div class="bank-fee">€0/month</div>
+        </div>
+
+        <div class="bank-card">
+          <div class="bank-header">
+            <div>
+              <div class="bank-name">Rabobank</div>
+              <span class="bank-tag amber">BSN usually required</span>
+            </div>
+          </div>
+          <div class="bank-desc">Large cooperative bank with branches across the country. Usually requires BSN, but some branches may open an account with a W-document — depends on the adviser.</div>
+          <div class="bank-fee">€1.20/month</div>
+        </div>
+
+        <div class="bank-card">
+          <div class="bank-header">
+            <div>
+              <div class="bank-name">ING</div>
+              <span class="bank-tag amber">BSN required</span>
+            </div>
+          </div>
+          <div class="bank-desc">One of the largest banks in NL. Requires BSN and a Dutch address. Online registration available once you have your BSN. Basic account is free.</div>
+          <div class="bank-fee">€0/month (basic account)</div>
+        </div>
+
+        <div class="bank-card">
+          <div class="bank-header">
+            <div>
+              <div class="bank-name">ABN AMRO</div>
+              <span class="bank-tag amber">BSN required</span>
+            </div>
+          </div>
+          <div class="bank-desc">Traditional large bank. Requires BSN and a personal visit to a branch to open an account. Good option once you have all your documents.</div>
+          <div class="bank-fee">€1.95/month</div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="mt24">
+      <div class="sec-label">Quick comparison</div>
+      <div style="background:var(--card);border-radius:16px;border:1px solid var(--border);overflow:hidden;">
+        <div style="display:grid;grid-template-columns:1fr 80px 70px 70px;background:#F3F4F6;padding:9px 14px;gap:4px;">
+          <div style="font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:0.08em;color:var(--muted);">Bank</div>
+          <div style="font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:0.08em;color:var(--muted);text-align:center;">No BSN</div>
+          <div style="font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:0.08em;color:var(--muted);text-align:center;">Online</div>
+          <div style="font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:0.08em;color:var(--muted);text-align:right;">Price/mo</div>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 80px 70px 70px;padding:10px 14px;gap:4px;border-top:1px solid var(--border);">
+          <div style="font-size:12px;font-weight:800;color:var(--text);">bunq</div>
+          <div style="text-align:center;font-size:16px;">✅</div>
+          <div style="text-align:center;font-size:16px;">✅</div>
+          <div style="font-size:12px;font-weight:700;color:#15803D;text-align:right;">€0–2.99</div>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 80px 70px 70px;padding:10px 14px;gap:4px;border-top:1px solid var(--border);background:#FAFAFA;">
+          <div style="font-size:12px;font-weight:800;color:var(--text);">ASN Bank</div>
+          <div style="text-align:center;font-size:16px;">✅</div>
+          <div style="text-align:center;font-size:16px;">✅</div>
+          <div style="font-size:12px;font-weight:700;color:#15803D;text-align:right;">€0</div>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 80px 70px 70px;padding:10px 14px;gap:4px;border-top:1px solid var(--border);">
+          <div style="font-size:12px;font-weight:800;color:var(--text);">Rabobank</div>
+          <div style="text-align:center;font-size:14px;color:#B45309;">〜</div>
+          <div style="text-align:center;font-size:14px;color:#B45309;">〜</div>
+          <div style="font-size:12px;font-weight:700;color:var(--text);text-align:right;">€1.20</div>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 80px 70px 70px;padding:10px 14px;gap:4px;border-top:1px solid var(--border);background:#FAFAFA;">
+          <div style="font-size:12px;font-weight:800;color:var(--text);">ING</div>
+          <div style="text-align:center;font-size:16px;">❌</div>
+          <div style="text-align:center;font-size:16px;">❌</div>
+          <div style="font-size:12px;font-weight:700;color:var(--text);text-align:right;">€1.95</div>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 80px 70px 70px;padding:10px 14px;gap:4px;border-top:1px solid var(--border);">
+          <div style="font-size:12px;font-weight:800;color:var(--text);">ABN AMRO</div>
+          <div style="text-align:center;font-size:16px;">❌</div>
+          <div style="text-align:center;font-size:16px;">❌</div>
+          <div style="font-size:12px;font-weight:700;color:var(--text);text-align:right;">€1.95</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="info-box amber mt20">
+      <div class="info-box-title">If you're in COA/GOO</div>
+      If you don't yet have a permanent registered address — ask your COA manager. Some municipalities provide temporary prepaid cards for basic expenses until you can open an account.
+    </div>
+
+    <div class="info-box green mt16" style="margin-bottom:16px;">
+      <div class="info-box-title">IBAN — for salary and toeslagen</div>
+      Once your account is open — share your IBAN with your employer and belastingdienst (for toeslagen). Without an IBAN, your salary and benefits cannot be transferred.
+    </div>
+  </div>
   </div>
 </main>
 <a href="chat.html" class="fab"><span class="msym">chat</span></a>
@@ -251,6 +422,7 @@
   <a href="profile.html" class="nav-item"><span class="msym o">person</span><span class="label">Профіль</span></a>
 </nav>
 
+  <script src="js/bookmark.js"></script>
   <script src="js/translations.js"></script>
   <script src="js/i18n.js"></script>
 </body>

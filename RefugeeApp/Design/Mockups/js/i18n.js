@@ -59,6 +59,13 @@
       if (vh !== undefined) htmlEls[j].innerHTML = vh;
     }
 
+    // Input placeholder attributes
+    var phEls = document.querySelectorAll('[data-i18n-placeholder]');
+    for (var p = 0; p < phEls.length; p++) {
+      var vph = t[phEls[p].getAttribute('data-i18n-placeholder')];
+      if (vph !== undefined) phEls[p].setAttribute('placeholder', vph);
+    }
+
     // Auto-translate nav labels by their link href (no data-i18n needed on each page)
     var navLinks = document.querySelectorAll('nav a[href], .bottom-nav a[href]');
     for (var k = 0; k < navLinks.length; k++) {
