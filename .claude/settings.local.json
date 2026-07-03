@@ -104,7 +104,8 @@
       "Read(//c/c/Users/Semirenko/Desktop/english/ClaudeCode/**)",
       "Bash(cp /tmp/old_04.png \"/c/Users/Semirenko/Desktop/english/ClaudeCode/store-assets/_old_04.png\")",
       "Bash(cp /tmp/old_03.png \"/c/Users/Semirenko/Desktop/english/ClaudeCode/store-assets/_old_03.png\")",
-      "Bash(git status *)"
+      "Bash(git status *)",
+      "Bash(git commit -m 'Fix text-decoration underline on settings button in profile.html *)"
     ],
     "additionalDirectories": [
       "\\tmp",

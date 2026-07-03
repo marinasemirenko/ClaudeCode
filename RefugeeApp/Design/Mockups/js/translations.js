@@ -74,10 +74,17 @@ window.T = {
     'firststeps.stat1.lbl':   'кроків',
     'firststeps.stat2.num':   '30',
     'firststeps.stat2.lbl':   'днів',
-    'firststeps.alert':       '⚠️ Цей список не офіційний порядок — кожна ситуація різна. Деякі кроки залежать від твого статусу.',
+    'firststeps.alert':       '⚠️ Цей список не офіційний порядок — кожна ситуація різна. Деякі кроки залежать від вашого статусу.',
     'firststeps.sec.steps':   'Кроки',
     'firststeps.progress.of': 'з',
     'firststeps.progress.done': 'виконано',
+    'fs.brp.h':             'Реєстрація BRP та BSN',
+    'fs.ind.h':             'Тимчасовий захист (IND)',
+    'fs.bank.h':            'Банківський рахунок',
+    'fs.digid.h':           'DigiD — Цифровий ID',
+    'fs.lang.h':            'Курси нідерландської',
+    'fs.school.h':          'Школа для дітей',
+    'fs.work.h':            'Пошук роботи',
 
     // ── SEARCH (search.html) ──────────────────────────────────────────
     'search.placeholder':     'Пошук по всьому застосунку...',
@@ -132,7 +139,7 @@ window.T = {
     'laws.right2.title':      'Право на безкоштовного перекладача',
     'laws.right2.desc':       'В судах, IND і лікарнях держава зобов\'язана надати перекладача безкоштовно. При медичних консультаціях — просто попроси.',
     'laws.right3.title':      'Права орендаря — дуже сильні',
-    'laws.right3.desc':       'Виселити тебе без судового рішення — неможливо. Орендодавець не може підвищити ціну понад законний ліміт. Huurcommissie розглядає суперечки безкоштовно.',
+    'laws.right3.desc':       'Виселити вас без судового рішення — неможливо. Орендодавець не може підвищити ціну понад законний ліміт. Huurcommissie розглядає суперечки безкоштовно.',
     'laws.right4.title':      'Право на екстрену медичну допомогу',
     'laws.right4.desc':       'Навіть без страховки — лікарня зобов\'язана надати екстрену допомогу. Не відмовляйся від лікування через страх витрат у кризовій ситуації.',
     'laws.right5.title':      'Тишина після 23:00',
@@ -219,7 +226,7 @@ window.T = {
 
     'work.title':           'Робота',
     'work.strip.text':      'Платформа для Ukrainian біженців',
-    'work.hero.sub':        'Пошук роботи, договори, зарплата і твої права',
+    'work.hero.sub':        'Пошук роботи, договори, зарплата і ваші права',
     'work.badge.free':      'Безкоштовно',
     'work.badge.premium':   'Преміум',
     'work.card1.title':     'Як знайти роботу',
@@ -374,7 +381,7 @@ window.T = {
 
     // ── PROFILE (profile.html) ────────────────────────────────────────────
     'profile.greeting':           'Привіт! 👋',
-    'profile.welcome':            'Раді бачити тебе в RAZOM',
+    'profile.welcome':            'Раді бачити вас у RAZOM',
     'profile.badge.free':         'Безкоштовний план',
     'profile.stat.saved':         'Збережено',
     'profile.stat.read':          'Прочитано',
@@ -398,7 +405,7 @@ window.T = {
     'profile.about.sub':          'RAZOM v1.0 — зроблено Мариною',
     'profile.legal.label':        'Правові документи',
     'profile.privacy.title':      'Політика конфіденційності',
-    'profile.privacy.sub':        'Як ми збираємо і захищаємо твої дані (GDPR)',
+    'profile.privacy.sub':        'Як ми збираємо і захищаємо ваші дані (GDPR)',
     'profile.terms.title':        'Умови використання',
     'profile.terms.sub':          'Правила застосунку · Застосунок 16+',
     'profile.logout':             'Вийти з акаунту',
@@ -477,6 +484,13 @@ window.T = {
     'firststeps.sec.steps':   'Steps',
     'firststeps.progress.of': 'of',
     'firststeps.progress.done': 'done',
+    'fs.brp.h':             'BRP & BSN Registration',
+    'fs.ind.h':             'Temporary Protection (IND)',
+    'fs.bank.h':            'Bank Account',
+    'fs.digid.h':           'DigiD — Digital ID',
+    'fs.lang.h':            'Dutch Language',
+    'fs.school.h':          'School for Children',
+    'fs.work.h':            'Job Search',
 
     // ── SEARCH ────────────────────────────────────────────────────────
     'search.placeholder':     'Search across the app...',
