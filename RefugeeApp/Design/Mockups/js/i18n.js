@@ -220,6 +220,11 @@
     }
 
     apply(current());
+
+    // Register service worker for offline support
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('./sw.js').catch(function () {});
+    }
   }
 
   // Safe init: works whether DOM is ready or not yet
