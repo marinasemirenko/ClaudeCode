@@ -315,6 +315,19 @@ window.T = {
     'tips.art.insurance.h':      'Медична страховка',
     'tips.art.budget.h':         'Де заощадити',
 
+    'useful.art.lifehacks.h':    'Лайфхаки',
+    'useful.art.transport.h':    'Транспорт',
+    'useful.art.shopping.h':     'Шопінг',
+    'useful.art.leisure.h':      'Дозвілля',
+    'useful.art.subsidies.h':    'Субсидії та знижки',
+    'useful.art.language.h':     'Вчи нідерландську',
+    'useful.art.community.h':    'Українська спільнота',
+    'useful.art.driving.h':      'Авто та парковка',
+    'useful.art.citypas.h':      'Міська картка',
+    'useful.art.pets.h':         'Домашні тварини',
+    'useful.art.lostdocs.h':     'Втрата документів',
+    'useful.art.apps.h':         'Корисні додатки',
+
     // ── EXPLORE / SEARCH (search.html) ────────────────────────────────────
     'search.popular.topics':      'Популярні теми',
     'search.chip.firststeps':     '📋 Перші кроки',
@@ -700,6 +713,19 @@ window.T = {
     'tips.art.driving.h':        'Driving Licence',
     'tips.art.insurance.h':      'Health Insurance',
     'tips.art.budget.h':         'Where to Save Money',
+
+    'useful.art.lifehacks.h':    'Life Hacks',
+    'useful.art.transport.h':    'Transport in NL',
+    'useful.art.shopping.h':     'Shopping',
+    'useful.art.leisure.h':      'Things to Do',
+    'useful.art.subsidies.h':    'Subsidies & Discounts',
+    'useful.art.language.h':     'Learn Dutch',
+    'useful.art.community.h':    'Community',
+    'useful.art.driving.h':      'Car & Parking',
+    'useful.art.citypas.h':      'City Pass',
+    'useful.art.pets.h':         'Pets in NL',
+    'useful.art.lostdocs.h':     'Lost Documents',
+    'useful.art.apps.h':         'Useful Apps',
 
     // ── EXPLORE / SEARCH (search.html) ────────────────────────────────────
     'search.popular.topics':      'Popular Topics',
