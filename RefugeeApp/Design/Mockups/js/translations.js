@@ -91,6 +91,12 @@ window.T = {
     // ── PROFILE / CHAT (profile.html) ────────────────────────────────
     'profile.title':          'Профіль',
     'chat.title':             'AI-помічник',
+    'chat.sub':               'RAZOM · відповідає українською',
+    'chat.welcome.title':     'Привіт! Я AI-помічник RAZOM',
+    'chat.welcome.text':      'Допоможу з питаннями про документи, права, медицину, роботу і житло в Нідерландах. Просто напишіть своє питання.',
+    'chat.placeholder':       'Напишіть питання...',
+    'chat.error.reply':       'Вибачте, сталася помилка. Спробуйте ще раз.',
+    'chat.error.network':     'Немає з\'єднання з інтернетом. Перевірте мережу і спробуйте ще раз.',
 
     // ── COMMON ARTICLE ELEMENTS ───────────────────────────────────────
     'article.back':           'Назад',
@@ -471,6 +477,12 @@ window.T = {
     // ── PROFILE / CHAT ────────────────────────────────────────────────
     'profile.title':          'Profile',
     'chat.title':             'AI Assistant',
+    'chat.sub':               'RAZOM · responds in English',
+    'chat.welcome.title':     'Hi! I\'m RAZOM\'s AI assistant',
+    'chat.welcome.text':      'I can help with questions about documents, rights, healthcare, work and housing in the Netherlands. Just type your question.',
+    'chat.placeholder':       'Type your question...',
+    'chat.error.reply':       'Sorry, something went wrong. Please try again.',
+    'chat.error.network':     'No internet connection. Check your network and try again.',
 
     // ── COMMON ARTICLE ELEMENTS ───────────────────────────────────────
     'article.back':           'Back',

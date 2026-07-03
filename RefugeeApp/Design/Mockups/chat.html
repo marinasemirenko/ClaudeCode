@@ -219,8 +219,8 @@
 <header>
   <a href="javascript:history.back()" class="back-btn"><span class="msym o">arrow_back</span></a>
   <div class="header-info">
-    <div class="header-title">AI-помічник</div>
-    <div class="header-sub">RAZOM · відповідає українською</div>
+    <div class="header-title" data-i18n="chat.title">AI-помічник</div>
+    <div class="header-sub" data-i18n="chat.sub">RAZOM · відповідає українською</div>
   </div>
   <div class="status-dot"></div>
 </header>
@@ -228,13 +228,25 @@
 <div class="chat-area" id="chatArea">
   <div class="welcome">
     <div class="welcome-icon">🤖</div>
-    <div class="welcome-title">Привіт! Я AI-помічник RAZOM</div>
-    <div class="welcome-text">Допоможу з питаннями про документи, права, медицину, роботу і житло в Нідерландах. Просто напиши своє питання.</div>
-    <div class="welcome-chips">
-      <span class="chip" onclick="sendChip(this)">Як отримати BSN?</span>
-      <span class="chip" onclick="sendChip(this)">Що таке zorgtoeslag?</span>
-      <span class="chip" onclick="sendChip(this)">Як знайти роботу?</span>
-      <span class="chip" onclick="sendChip(this)">Права біженців</span>
+    <div data-lang-block="uk">
+      <div class="welcome-title">Привіт! Я AI-помічник RAZOM</div>
+      <div class="welcome-text">Допоможу з питаннями про документи, права, медицину, роботу і житло в Нідерландах. Просто напишіть своє питання.</div>
+      <div class="welcome-chips">
+        <span class="chip" onclick="sendChip(this)">Як отримати BSN?</span>
+        <span class="chip" onclick="sendChip(this)">Що таке zorgtoeslag?</span>
+        <span class="chip" onclick="sendChip(this)">Як знайти роботу?</span>
+        <span class="chip" onclick="sendChip(this)">Права біженців</span>
+      </div>
+    </div>
+    <div data-lang-block="en">
+      <div class="welcome-title">Hi! I'm RAZOM's AI assistant</div>
+      <div class="welcome-text">I can help with questions about documents, rights, healthcare, work and housing in the Netherlands. Just type your question.</div>
+      <div class="welcome-chips">
+        <span class="chip" onclick="sendChip(this)">How to get a BSN?</span>
+        <span class="chip" onclick="sendChip(this)">What is zorgtoeslag?</span>
+        <span class="chip" onclick="sendChip(this)">How to find a job?</span>
+        <span class="chip" onclick="sendChip(this)">Refugee rights</span>
+      </div>
     </div>
   </div>
 </div>
@@ -243,7 +255,8 @@
   <div class="input-wrap">
     <textarea
       id="msgInput"
-      placeholder="Напиши питання..."
+      data-i18n-placeholder="chat.placeholder"
+      placeholder="Напишіть питання..."
       rows="1"
       onkeydown="handleKey(event)"
       oninput="autoResize(this)"
@@ -312,6 +325,10 @@
     const text = msgInput.value.trim();
     if (!text) return;
 
+    const lang = window.RAZOM_I18N ? window.RAZOM_I18N.current() : 'uk';
+    const t = (window.T && window.T[lang]) || {};
+    const apiMsg = lang === 'en' ? '[Reply in English] ' + text : text;
+
     msgInput.value = '';
     msgInput.style.height = 'auto';
     sendBtn.disabled = true;
@@ -323,7 +340,7 @@
       const res = await fetch(WORKER_URL, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ message: text })
+        body: JSON.stringify({ message: apiMsg, lang: lang })
       });
 
       const data = await res.json();
@@ -332,13 +349,13 @@
       if (data.reply) {
         addMessage(data.reply, 'ai');
       } else {
-        addMessage('Вибач, сталася помилка. Спробуй ще раз.', 'ai');
+        addMessage(t['chat.error.reply'] || 'Sorry, something went wrong.', 'ai');
       }
     } catch (err) {
       removeTyping();
       const errDiv = document.createElement('div');
       errDiv.className = 'error-msg';
-      errDiv.textContent = 'Немає з\'єднання з інтернетом. Перевір мережу і спробуй ще раз.';
+      errDiv.textContent = t['chat.error.network'] || 'No connection.';
       chatArea.appendChild(errDiv);
     }
 

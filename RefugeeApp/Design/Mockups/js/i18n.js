@@ -155,6 +155,7 @@
     // Inject CSS (uses explicit top/left/right/bottom for max browser compat)
     var style = document.createElement('style');
     style.textContent =
+      'a.fab{text-decoration:none;}' +
       '#rz-lang-picker{display:none;position:fixed;top:0;left:0;right:0;bottom:0;z-index:9999;-webkit-box-align:end;align-items:flex-end;-webkit-justify-content:center;justify-content:center;}' +
       '#rz-lang-picker .rz-lp-bd{position:absolute;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0);-webkit-transition:background .25s;transition:background .25s;}' +
       '#rz-lang-picker.rz-lp-open .rz-lp-bd{background:rgba(0,0,0,0.45);}' +
