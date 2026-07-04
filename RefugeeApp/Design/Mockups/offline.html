@@ -31,10 +31,21 @@
 
 <main>
   <div class="offline-icon"><span class="msym">wifi_off</span></div>
-  <div class="offline-title">Немає з'єднання з інтернетом</div>
-  <div class="offline-desc">Перевір Wi-Fi або мобільний інтернет і спробуй ще раз.</div>
-  <button class="retry-btn" onclick="location.reload()"><span class="msym">refresh</span>Спробувати знову</button>
+  <div id="offline-title" class="offline-title">Немає з'єднання з інтернетом</div>
+  <div id="offline-desc" class="offline-desc">Перевір Wi-Fi або мобільний інтернет і спробуй ще раз.</div>
+  <button class="retry-btn" onclick="location.reload()"><span class="msym">refresh</span><span id="offline-btn">Спробувати знову</span></button>
 </main>
+
+<script>
+  try {
+    if (localStorage.getItem('rg_lang') === 'en') {
+      document.getElementById('offline-title').textContent = 'No internet connection';
+      document.getElementById('offline-desc').textContent  = 'Check your Wi-Fi or mobile data and try again.';
+      document.getElementById('offline-btn').textContent   = 'Try again';
+      document.documentElement.lang = 'en';
+    }
+  } catch(e) {}
+</script>
 
 </body>
 </html>

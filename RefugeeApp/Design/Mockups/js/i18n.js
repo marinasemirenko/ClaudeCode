@@ -74,6 +74,12 @@
       var key  = NAV_MAP[file];
       if (key && t[key]) {
         var lbl = navLinks[k].querySelector('.nav-lbl, .label');
+        if (!lbl) {
+          var ch = navLinks[k].children;
+          for (var s = ch.length - 1; s >= 0; s--) {
+            if (ch[s].tagName === 'SPAN') { lbl = ch[s]; break; }
+          }
+        }
         if (lbl) lbl.textContent = t[key];
       }
     }
